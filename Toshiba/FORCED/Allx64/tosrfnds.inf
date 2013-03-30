@@ -1,0 +1,115 @@
+; TOSRFNDS.INF
+;
+; Toshiba Bluetooth LAN Emulation 2
+;
+; Copyright 1999-2009, Toshiba Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = Net
+ClassGUID = {4d36e972-e325-11ce-bfc1-08002be10318}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TSB%
+DriverPackageDisplayName = %TOSRFNDS.Service.DispName%
+DriverVer = 07/24/2009, 6.00.0724
+CatalogFile = tosrfnds.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksNames.x86]
+3426 = windows cd
+
+[SourceDisksFiles]
+tosrfnds.sys = 3426
+
+[SourceDisksFiles.x86]
+tosrfnds.sys = 3426
+
+[Manufacturer]
+%StdMfg% = TOSHIBA, NTamd64
+
+[SignatureAttributes]
+tosrfnds.sys = SignatureAttributes.DRM
+
+[TOSHIBA]
+; DisplayName           Section       DeviceId
+; -----------           -------       --------
+%TOSRFNDS.DeviceDesc% = TOSRFNDS.ndi, Bluetooth\0004&0007
+
+[TOSHIBA.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSRFNDS.DeviceDesc% = TOSRFNDS.ndi, Bluetooth\0004&0007
+
+[ControlFlags]
+ExcludeFromSelect = Bluetooth\0004&0007
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+TOSRFNDS.CopyFiles = 12
+
+[TOSRFNDS.ndi]
+CopyFiles       = TOSRFNDS.CopyFiles
+AddReg          = TOSRFNDS.reg, RFNDSCONFIG.reg
+Characteristics = 0x81
+
+[TOSRFNDS.ndi.NT]
+CopyFiles       = TOSRFNDS.CopyFiles
+;AddReg          = TOSRFNDS.reg.NT, RFNDSCONFIG.reg
+AddReg          = TOSRFNDS.reg.NT
+Characteristics = 0x81
+
+[TOSRFNDS.ndi.NT.Services]
+AddService = tosrfnds, 2, TOSRFNDS.AddService, TOSRFNDS.AddEventLog
+
+[TOSRFNDS.CopyFiles]
+tosrfnds.sys,,,2
+;;tosrfnds.sys,,,0x100
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+[TOSRFNDS.reg]
+HKR,,DeviceVxDs,, tosrfnds.sys
+HKR,,DevLoader,, *ndis
+HKR,,EnumPropPages,, "netdi.dll,EnumPropPages"
+HKR,,OsType,, "0"
+HKR,Ndi,DeviceID,, "Bluetooth\0004&0007"
+HKR,Ndi\Interfaces, DefUpper,, "ndis3,ndis4,ndis5"
+HKR,Ndi\Interfaces, DefLower,, "ethernet"
+HKR,Ndi\Interfaces, UpperRange,, "ndis3,ndis4,ndis5"
+HKR,Ndi\Interfaces, LowerRange,, "ethernet"
+HKR,Ndi\Install,, TOSRFNDS.ndi
+HKR,NDIS,LogDriverName,, "TOSRFNDS"
+HKR,NDIS,MajorNdisVersion, 1, 05
+HKR,NDIS,MinorNdisVersion, 1, 00
+
+[TOSRFNDS.reg.NT]
+HKR,,OsType, 0, "1"
+HKR,Ndi, Service, 0, "TOSRFNDS"
+HKR,Ndi\Interfaces, UpperRange, 0, "ndis5"
+HKR,Ndi\Interfaces, LowerRange, 0, "ethernet"
+
+[TOSRFNDS.AddService]
+DisplayName    = %TOSRFNDS.Service.DispName%
+ServiceType    = 1 ; %SERVICE_KERNEL_DRIVER%
+StartType      = 3 ; %SERVICE_DEMAND_START%
+ErrorControl   = 1 ; %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\tosrfnds.sys
+LoadOrderGroup = NDIS
+
+[TOSRFNDS.AddEventLog]
+AddReg = TOSRFNDS.AddEventLog.reg
+
+[TOSRFNDS.AddEventLog.reg]
+HKR,, EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR,, TypesSupported,   0x00010001, 7
+
+[strings]
+TSB = "TOSHIBA"
+StdMfg = "Toshiba"
+TOSRFNDS.Service.DispName = "Bluetooth Personal Area Network"
+TOSRFNDS.DeviceDesc  = "Bluetooth Personal Area Network"

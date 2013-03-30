@@ -1,0 +1,106 @@
+;-------------------------------------------------------------------------------
+; BTATHHCRP.INF
+;
+; Bluetooth HCRP
+;
+; Copyright (c) Atheros  , Inc.  All rights reserved.
+
+[version]
+Signature	= "$WINDOWS NT$"
+Class       = USB
+ClassGUID   = {36FC9E60-C465-11CF-8056-444553540000}
+;Class=BlueManager
+;ClassGUID={28762833-BE87-445e-8631-18677EF5A9B0}
+
+Provider    = %Atheros%
+DriverVer=07/16/2010,6.9.0716.0101
+CatalogFile=btathHcrp.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%Atheros% = Atheros,NTx86
+
+[SourceDisksFiles]
+btathHcrp.sys=99
+
+[SourceDisksNames]
+99=%DISK_NAME%,
+
+[DestinationDirs]
+DefaultDestDir=12
+
+[Atheros]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%btathhcrp.DeviceDesc% = btathhcrp, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathhcrp
+
+; For XP and later
+[Atheros.NTx86]
+%btathhcrp.DeviceDesc% = btathhcrp, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathhcrp
+
+[btathhcrp.NT]
+CopyFiles=btathhcrp.CopyFiles
+
+[btathhcrp.CopyFiles]
+btathHcrp.sys
+
+
+[btathhcrp.NT.Services]
+AddService=btathhcrp,0x00000002,btathhcrp_Service_Inst, btathhcrp_Logging_Inst 
+
+[btathhcrp_Service_Inst]
+DisplayName    = %btathhcrp.SvcDesc%                            
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btathHcrp.sys                            
+AddReg         = btathhcrp_Parameters_AddReg
+
+[btathhcrp_Parameters_AddReg]
+HKR, Parameters\Wdf, VerboseOn,       0x00010001, 1
+HKR, Parameters\Wdf, VerifierOn,      0x00010001, 1
+HKR, Parameters\Wdf, DbgBreakOnError, 0x00010001, 1
+
+
+[btathhcrp_Logging_Inst]
+AddReg = btathhcrp_Logging_Inst_AddReg
+
+[btathhcrp_Logging_Inst_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\btathHcrp.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[Strings]
+Atheros			= "Atheros"                      
+DISK_NAME			= "Bluetooth Driver Disk"
+btathhcrp.SvcDesc		= "Bluetooth HCRP Device Driver"
+btathhcrp.DeviceDesc	= "Bluetooth Hard Copy Cable Replacement Device"
+
+
+;
+;--- WDF Coinstaller installation ------
+;
+[DestinationDirs]
+btathhcrp_CoInstaller_CopyFiles = 11
+
+[btathhcrp.NT.CoInstallers]
+AddReg=btathhcrp_CoInstaller_AddReg
+CopyFiles=btathhcrp_CoInstaller_CopyFiles
+
+[btathhcrp_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01005.dll,WdfCoInstaller"
+
+[btathhcrp_CoInstaller_CopyFiles]
+wdfcoinstaller01005.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01005.dll=99 ; make sure the number matches with SourceDisksNames
+
+[btathhcrp.NT.Wdf]
+KmdfService = btathhcrp, btathhcrp_wdfsect
+
+[btathhcrp_wdfsect]
+KmdfLibraryVersion = 1.5
+
+

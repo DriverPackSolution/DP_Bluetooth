@@ -1,0 +1,124 @@
+;****************************************************************************************
+;
+; RTBTH.INF
+;
+;   This installation script supports for the
+;   Ralink RT3290 series Card.
+;
+;   Copyright (C) 2002-2010 Ralink Technology Corporation. All Rights Reserved.
+;   Developed by RaLink Technology, Corp. -- http://www.ralinktech.com
+;
+;****************************************************************************************
+
+[Version]
+Signature       = "$Chicago$"
+Class           = Bluetooth Device
+ClassGUID       = {D2DE069D-7286-420b-BAF8-225D700CE748}
+Provider        = %Ralink%
+CatalogFile     = rtbth.cat
+DriverVer       = 12/06/2011,1.08.08.00
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%Ralink%        = Ralink
+
+
+[Ralink]
+; DisplayName               Section                 DeviceID
+; -----------               -------                 --------
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298
+
+;AzureWave
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_2D871A3B
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_2F871A3B
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_210B1A3B
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_27871A3B
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_29871A3B
+
+;ASKEY
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_8010144F
+
+;Foxconn
+%Generic.DeviceDesc%        =RTBTH.Dev,             PCI\VEN_1814&DEV_3298&SUBSYS_E056105B
+
+;*******************************************************************************************
+; NT specific entries
+;*******************************************************************************************
+[RTBTH.Dev.NT]
+AddReg                  = RT3298.reg
+CopyFiles               = NT.CopyFiles
+
+;*******************************************************************************************
+; NT services sections
+;*******************************************************************************************
+[RTBTH.Dev.NT.Services]
+AddService              = rtbth, 2, General.Service, common_eventlog_inst
+
+;*******************************************************************************************
+; Registry for Windows
+;*******************************************************************************************
+[RT3298.reg]
+HKR, Ndi,                       Service,    0, "rtbth"
+
+;*******************************************************************************************
+; DestinationDirs
+;*******************************************************************************************
+[DestinationDirs]
+NT.CopyFiles            = 12    ; system32\drivers subdirectory
+
+[NT.CopyFiles]
+rtbth.sys
+rt3298.bin
+
+[SourceDisksNames]
+1                       = %INSTALL_DISK_STR%,,,
+
+[SourceDisksFiles]
+rtbth.sys               = 1
+rt3298.bin              = 1
+
+
+[ClassInstall32]
+AddReg                  = HidePCIe.reg
+
+[HidePCIe.reg]
+HKR,,,0,%BtPCIeDevClassName%
+HKR,,SilentInstall,,1
+HKR,,NoInstallClass,,1
+HKR,,NoDisplayClass,,1
+
+;*******************************************************************************************
+; NT specific
+;*******************************************************************************************
+[General.Service]
+DisplayName    = %General.Service.DispName%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\rtbth.sys
+LoadOrderGroup = Base
+
+[common_eventlog_inst]
+AddReg=common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\IoLogMsg.dll,%%SystemRoot%%\System32\drivers\rtbth.sys"
+HKR, , TypesSupported,   0x00010001, 7
+
+;*******************************************************************************************
+; Strings
+;*******************************************************************************************
+[Strings]
+Ralink                      = "Ralink Technology Corp."
+
+General.Service.DispName    = "RTBTH Bluetooth Device Driver"
+
+INSTALL_DISK_STR            = "Ralink Bluetooth Device Installation Disk"
+
+;*******************************************************************************************
+; Device description
+;*******************************************************************************************
+Generic.DeviceDesc          = "Ralink Bluetooth PCIe Adapter"
+BtPCIeDevClassName          = "Bluetooth Device"

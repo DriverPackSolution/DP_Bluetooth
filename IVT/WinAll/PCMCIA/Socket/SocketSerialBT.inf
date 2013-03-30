@@ -1,0 +1,499 @@
+;
+;<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+;<>********************************************************<>
+;<>*                                                      *<>
+;<>*            Socket Communications, Inc.               *<>
+;<>*                                                      *<>
+;<>********************************************************<>
+;<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+;
+; Copyright (c) 2002-2004, Socket Communications, Inc.
+;
+; 37400 Central Court
+; Newwark, CA 94560
+; 510-744-2700(voice)
+; 510-744-2727(fax)
+; www.socketcom.com
+;
+; File: SocketBt.INF
+;
+;-------------------------------------------------------------------------------
+; File Description and General Information
+;-------------------------------------------------------------------------------
+;
+;  This setup information file is used to install Socket Communications, Inc.
+;  Bluetooth PC/CF Card devices on x86 computers running any of the following
+;  operating systems from Microsoft: Windows 9x, ME, Windows 2000 and XP.
+;
+;  Socket Bluetooth CF Card support software:
+; 
+;  SKTSIOBT.sys  - Windows 2000 and XP high Speed (921kbps) device driver
+;  sktsio9x.vxd  - Windows 9x and ME high speed (921kbps) device driver
+;
+;  Microsoft support Software:
+;
+;  serenum.sys	 - Windows 2000/Xp upper-level device filter driver	
+;  MsPorts.dll	 - Windows 2000/Xp PC/CF card property page
+;
+;  serenum.vxd	 - Windows 9x/Me   upper-level device filter driver		
+;  serialui.dll  - Windows 9x/Me   PC/CF card property page
+;
+;---------------------------------------------------------------------------------
+; History Section
+;---------------------------------------------------------------------------------
+;
+; Created  3/15/2004   rlk
+;
+;---------------------------------------------------------------------------------
+;---------------------------------------------------------------------------------
+;
+[version]
+LayoutFile  = layout.inf
+signature	= "$WINDOWS NT$"
+Provider   	= %Socket%
+Class      	= Ports
+ClassGuid	= {4D36E978-E325-11CE-BFC1-08002BE10318}
+DriverVer	= 03/23/2004, 1.0.3.7
+;CatalogFile	= socketbt.CAT			; Digital Signature file
+
+;
+;---------------------------------------------------------------------------------
+; Install Disk Section
+;---------------------------------------------------------------------------------
+;
+[DestinationDirs]
+
+DefaultDestDir 	= 11     ; Windows\System32
+CopyNtDriver    = 12     ; Windows\System32\Drivers
+CopyNtPropPage  = 11     ; Windows\System32
+;
+CopyW9xDriver	= 11     ; Windows\system
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+SKTBt2k.sys	= 1,,
+SktSio9x.vxd	= 1,,
+
+;
+;---------------------------------------------------------------------------------
+; Class Installer section - Windows 9x and ME
+;---------------------------------------------------------------------------------
+;
+[ClassInstall]
+AddReg=PortsClass.AddReg
+
+[PortsClass.AddReg]
+HKR,,,,%PortsClassName%
+HKR,,Icon,,-23
+
+;
+;--------------------------------------------------------------------------------
+; Class32 Installer section - Windows 2000 and Xp 
+;--------------------------------------------------------------------------------
+;
+[ClassInstall32.NT]
+AddReg=PortsClass.NT.AddReg
+
+[PortsClass.NT.AddReg]
+HKR,,,,%PortsClassName%
+HKR,,Icon,,"-23"
+HKR,,Installer32,,"MsPorts.Dll,PortsClassInstaller"
+
+;
+;--------------------------------------------------------------------------------
+; Exclude List Section 
+;--------------------------------------------------------------------------------
+;
+[ControlFlags]
+ExcludeFromSelect =	 PCMCIA\Socket-CF+_Bluetooth_Card_CIS_Rev_2.5-DD63
+
+;
+;--------------------------------------------------------------------------------
+; Device Selection Section
+;--------------------------------------------------------------------------------
+;
+[Manufacturer]
+%Socket% = BtIdList
+
+[BtIdList]
+%BT.DeviceDesc%   = BtCOM,PCMCIA\Socket-CF+_Bluetooth_Card_CIS_Rev_2.5-DD63
+
+;
+;--------------------------------------------------------------------------------
+; Windows 9x and ME Driver Install Section
+;--------------------------------------------------------------------------------
+;
+[BtCOM]
+CopyFiles = CopyW9xDriver
+AddReg    = SetupRegW9x,W9xOverRides
+
+[CopyW9xDriver]
+sktsio9x.vxd
+
+[SetupRegW9x]
+HKR,,PortSubClass,1,01			   ; Type 01 = serial
+HKR,,DevLoader,0,*vcomm			   ; Loads device driver as needed.
+HKR,,Enumerator,0,serenum.vxd	   ; Enumerator
+HKR,,PortDriver,0,sktsio9x.vxd	   ; Device driver
+HKR,,Contention,0,*vcd			   ; Static VxD that handles contention and virtualization for the device
+HKR,,ConfigDialog,0,serialui.dll   ; DLL called to service comm API functions 
+HKR,,EnumPropPages,,"serialui.dll,EnumPropPages"
+
+; HKLM,%PowerMgr%,"EnablePowerManagement",1,0
+; HKR,,EnableIRQSharing,1,01,00,00,00
+
+; Reponse to SetDefaultCommConfig() by COMMCONFIG
+HKR,,DCB,3,1c,00,00,00,80,25,00,00,11,33,00,00,00,00,0a,00,0a,00,08,00,00,11,13,00,00,00  
+;  
+; This following are the default register setting for the serial device (16C950/HIS-2)
+; and entries are in hex.
+;
+HKR,,CfgHIS2,1,\
+ 
+; (Byte 1)     - Uart Type 950 =0, Not95x = F0
+    0,\
+; (Byte 2)     - Chip revision level 0 = "A", 1 = "B", 2 ="C"  
+    2,\ 
+; (Byte 3)     - Clock prescaler register value              (CPR)	 range 1 - 31 7/8 step 1/8 frequency 
+   20,\
+; (Byte 4)     - N-Times clock register value                (TCR)	 range 0 - 3 = 16 clock samples 4 - 15 = clock samples 
+   0,\
+; (Byte 5)     - Transmitter Interrupt Trigger Level         (TTL)  range 0 - 127 
+   4,\
+; (Byte 6)     - Receiver Interrupt Trigger Level            (RTL)  range 0 - 127 
+   64,\
+; (Byte 7)     - Automatic Flow Control Lower Trigger level  (FCL)	 range 0 - 127
+   10,\
+; (Byte 8)     - Automatic Flow Control Higher Trigger level (FCH)  range 0 - 127
+   70,\
+; (Byte 9)     - Special  RHR Trigger level if 550/750 mode set
+   1,\
+; (Byte 10,11) - Clock divisor                               (DLMDLL) range 1 - 65535 
+   1,0,\
+; (Byte 12)    - Auto flow control flags:  CTS = 1, RTS = 2, DTR = 4 DSR = 8, Xon/Xoff = 16
+   10,\
+; (Byte 13)    - Force an option flag: Force450 =1, Force550 = 2, Force a baud = 16; Force Non 950 = 3;
+   0,\
+
+;------------------------------------------------------------------------------------------------------
+; (Byte 14)    - Flag for Baudrate mapping 0 = No mapping, 1 = mapping 
+   0,\
+;------------------------------------------------------------------------------------------------------
+; The following are expanded BaudRates that can be mapped to the standard PC BaudRates.
+; The mappings will be used by the device driver if the mapping flag is set to true (1).
+;   
+; 75    =0,  110   =1,  134    =2,  150    =3,  300    =4,  600   =5,  1200  =6,  1800  =7, 2000  =8,
+; 2400  =9,  3600  =10, 4800   =11, 7200   =12, 9600   =13, 12800 =14, 14400 =15, 19200 =16 23040 =17,
+; 28800 =18, 38400 =19, 57600  =20, 115200 =21, 230400 =22, 460800 =23, 921600 =24
+;------------------------------------------------------------------------------------------------------
+;
+; (Byte 15)    - Baud 110	 Standard PC BaudRate selections that can be re-mapped
+   1,\
+; (Byte 16)	   - Baud 300
+   4,\
+; (Byte 17)    - Baud 600
+   5,\     
+; (Byte 18)    - Baud 1200
+   6,\
+; (Byte 19)    - Baud 2400
+   9,\
+; (Byte 20)    - Baud 4800
+   b,\
+; (Byte 21)    - Baud 9600
+   d,\
+; (Byte 22)    - Baud 19200
+   10,\
+; (Byte 23)    - Baud 38400
+   13,\
+; (Byte 24)    - Baud 57600
+   14,\
+; (Byte 25)    - Baud 115200
+   15,\
+; (Byte 26,27,28)    - Socket Communication, Inc. Options
+   0,0,0
+
+;
+;----------------------------------------------------------------------
+;  Windows 9x and ME Logical Configuration  list
+;----------------------------------------------------------------------
+; Section name format meaning:
+; Char 1 = c (COM port)
+; Char 2 = I/O config: 1 (3f8), 2 (2f8), 3 (3e8), 4 (2e8), a (any)
+; Char 3 = IRQ config: #, a (any)
+;----------------------------------------------------------------------
+;
+;
+;-----------------------------------------------------------------------------
+; OverRide Parameter Tables Windows 9x and Me
+;-----------------------------------------------------------------------------
+;
+
+[W9xOverRides]
+;
+;
+; OVERRIDE for (xxxx / xxxx)
+;
+HKR,Override,0000,1, \
+;
+; CONFIGMG_VERSION
+;
+00,04,00,00, \
+;
+; PRIORITY
+;
+00,00,00,00, \
+;
+; I/O Resource Descriptor 0:
+;
+24,00,00,00, \ ; Total length of I/O Resource Descriptor
+02,00,00,00, \ ; ResType_IO = 0x00000002
+01,00, \       ; IOD_Count;
+0C,00, \       ; IOD_Type;         // IOType_Range = 0x000C
+00,00, \       ; IOD_Alloc_Base;
+00,00, \       ; IOD_Alloc_End;
+00,00, \       ; IOD_DesFlags;
+00, \          ; IOD_Alloc_Alias;
+00, \          ; IOD_Alloc_Decode;
+F8,FF, \       ; IOR_Align;        // Mask for base alignment
+08,00, \       ; IOR_nPorts;       // Number of ports
+00,01, \       ; IOR_Min;          // Min port address
+FF,FF, \       ; IOR_Max;          // Max port address
+00,00, \       ; IOR_RangeFlags;   // Flags
+00, \          ; IOR_Alias;        // Alias offset
+00, \          ; IOR_Decode;       // Address specified
+40,00,00,00, \ ; PCCARD flags, 0x40 = 16-bit port
+
+; IRQ Resource Descriptor
+;
+14,00,00,00, \ ; Total length of IRQ Resource Descriptor
+04,00,00,00, \ ; ResType_IRQ = 0x00000004
+00,00, \       ; IRQD_Flags;
+00,00, \       ; IRQD_Alloc_Num;   // Allocated IRQ number
+ff,ff, \       ; IRQD_Req_Mask;    // Mask of possible IRQs
+00,00, \       ; IRQD_Reserved;
+20,00,00,00, \ ; PCCARD flags, 0x20 = Level mode interrupts
+;
+; REQUEST_CONFIG_PKT Descriptor
+; Same as PCMCIA Card Services RequestConfiguration argument structure.
+; The Socket field in this structure does not need to be filled in.
+;
+19,00,00,00, \ ; Total length of REQUEST_CONFIG_PKT Descriptor
+7C,89,00,00, \ ; (ResType_Ignored_Bit + PCCARD_DEVICE_ID) = 0x897C
+00,00, \       ; Socket;
+02,00, \       ; Attributes;
+21, \          ; Vcc;
+00, \          ; Vpp1
+00, \          ; Vpp2
+02, \          ; IntType;
+00,04,00,00, \ ; ConfigBase;
+00, \          ; Status;
+00, \          ; Pin;
+00, \          ; Copy;
+2D, \          ; ConfigIndex;
+03, \          ; Present;
+;
+; TERMINATOR
+;
+00,00,00,00
+;
+; OVERRIDE for (xxxx / xxxx)
+;
+HKR,Override,0001,1, \
+;
+; CONFIGMG_VERSION
+;
+00,04,00,00, \
+;
+; PRIORITY
+;
+00,00,00,00, \
+;
+; I/O Resource Descriptor 0:
+;
+24,00,00,00, \ ; Total length of I/O Resource Descriptor
+02,00,00,00, \ ; ResType_IO = 0x00000002
+01,00, \       ; IOD_Count;
+0C,00, \       ; IOD_Type;         // IOType_Range = 0x000C
+00,00, \       ; IOD_Alloc_Base;
+00,00, \       ; IOD_Alloc_End;
+00,00, \       ; IOD_DesFlags;
+00, \          ; IOD_Alloc_Alias;
+00, \          ; IOD_Alloc_Decode;
+F8,FF, \       ; IOR_Align;        // Mask for base alignment
+08,00, \       ; IOR_nPorts;       // Number of ports
+00,01, \       ; IOR_Min;          // Min port address
+FF,FF, \       ; IOR_Max;          // Max port address
+00,00, \       ; IOR_RangeFlags;   // Flags
+00, \          ; IOR_Alias;        // Alias offset
+00, \          ; IOR_Decode;       // Address specified
+40,00,00,00, \ ; PCCARD flags, 0x40 = 16-bit port
+
+; IRQ Resource Descriptor
+;
+14,00,00,00, \ ; Total length of IRQ Resource Descriptor
+04,00,00,00, \ ; ResType_IRQ = 0x00000004
+00,00, \       ; IRQD_Flags;
+00,00, \       ; IRQD_Alloc_Num;   // Allocated IRQ number
+ff,ff, \       ; IRQD_Req_Mask;    // Mask of possible IRQs
+00,00, \       ; IRQD_Reserved;
+20,00,00,00, \ ; PCCARD flags, 0x20 = Level mode interrupts
+;
+; REQUEST_CONFIG_PKT Descriptor
+; Same as PCMCIA Card Services RequestConfiguration argument structure.
+; The Socket field in this structure does not need to be filled in.
+;
+19,00,00,00, \ ; Total length of REQUEST_CONFIG_PKT Descriptor
+7C,89,00,00, \ ; (ResType_Ignored_Bit + PCCARD_DEVICE_ID) = 0x897C
+00,00, \       ; Socket;
+02,00, \       ; Attributes;
+32, \          ; Vcc;
+00, \          ; Vpp1
+00, \          ; Vpp2
+02, \          ; IntType;
+00,04,00,00, \ ; ConfigBase;
+00, \          ; Status;
+00, \          ; Pin;
+00, \          ; Copy;
+2D, \          ; ConfigIndex;
+03, \          ; Present;
+;
+; TERMINATOR
+;
+00,00,00,00
+
+;
+;--------------------------------------------------------------------------------
+; Windows 2000/Xp Device Driver Section
+;--------------------------------------------------------------------------------
+;
+[BtCOM.NT]
+CopyFiles = CopyNtDriver
+
+[CopyNtDriver]
+%DeviceDriver%,,,2
+
+;
+;--------------------------------------------------------------------------------
+; Windows 2000/Xp Device Driver Hardware Section
+;--------------------------------------------------------------------------------
+;
+[BtCOM.NT.HW]
+AddReg = SetupNtHw
+
+[SetupNtHw]
+HKR,,"UpperFilters",0x00010000,"serenum"
+HKR,,"95xSpecific",0x00000001,01,00,00,00,00,00,c9,16,20,00,01,00,04,64,10,70,08,00,00,00,00,00,00,10
+HKR,,"ClockRate",0x00010001, 1843200
+HKR,,"EnablePowerManagement",0x00010001,0
+; single serial port card
+HKR,,"CardType",0x00010001, 1 
+HKR,,"DriverName", 0x00000000,"%DeviceDriver%"
+;HKR,,"DriverName", 0x00000000,"SktBt2k"
+HKR,,SktIndex,0x00010001,1	           ; UART 1 
+HKR,,"NoDisplayInUI",0x00010001, 0	   ; Display COM port assignment
+
+;HKR,,FixBaudRate,0x00010001,0	           ; Fixed Baudrate Selections are 110 thru 921600
+			                   ; Entry of 0 means override is disabled
+
+;  %DeviceDriver%
+;--------------------------------------------------------------------------------
+; Windows 2000/XP Service Section 
+
+;--------------------------------------------------------------------------------
+;
+[BtCOM.NT.Services]
+AddService = SocketBtCOM, 0x00000002, Serial_Service_Inst, Serial_EventLog_Inst
+AddService = Serenum,,Serenum_Service_Inst
+
+[Serial_Service_Inst]
+DisplayName    = %BT.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\%DeviceDriver%
+LoadOrderGroup = Extended base
+
+[Serenum_Service_Inst]
+DisplayName    = %Serenum.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\serenum.sys
+LoadOrderGroup = PNP Filter
+
+[Serial_EventLog_Inst]
+AddReg = Serial_EventLog_AddReg
+
+[Serial_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\%DeviceDriver%"
+HKR,,TypesSupported,0x00010001,7
+
+;
+;--------------------------------------------------------------------------------
+; Windows 2000 and XP OverRide Section
+;--------------------------------------------------------------------------------
+;
+[ComPort.NT.LogConfigOverride]
+LogConfig    =    Override0
+LogConfig    =    Override1
+LogConfig    =    Override2
+LogConfig    =    Override3
+LogConfig    =    Override4
+
+;--------------------------------------------------------------------------------
+; Windows 2000 and XP Override list
+;--------------------------------------------------------------------------------
+;
+[Override0]
+ConfigPriority=DESIRED
+IOConfig     = 3E8-3EF                  ; COM3                 
+IRQConfig    = 3,4,5,7,9,10,11,12,15     
+MfCardConfig = 400:1D:0
+
+[Override1]
+ConfigPriority=DESIRED
+IOConfig     = 2E8-2EF                  ; COM4               
+IRQConfig    = 3,4,5,7,9,10,11,12,15     
+MfCardConfig = 400:25:0
+
+[Override2]
+ConfigPriority=DESIRED
+IOConfig     = 2F8-2FF                  ; COM2                 
+IRQConfig    = 3,4,5,7,9,10,11,12,15     
+MfCardConfig = 400:15:0
+
+[Override3]
+ConfigPriority=DESIRED
+IOConfig     = 8@100-3F0%FFF8(FFFF::)  ; Any where between 100 and 3f0                
+IRQConfig    = 3,4,5,7,9,10,11,12,15     
+MfCardConfig = 400:2D:0
+
+[Override4]
+ConfigPriority = DESIRED
+MemConfig    = 1000@00000000-FFFFFFFF%1000(RW)
+IRQConfig    = 3,4,5,7,9,10,11,12,15     
+MfCardConfig = 400:2D:0
+PcCardConfig = 0:0(A)
+
+;
+;--------------------------------------------------------------------------------
+; Strings Section
+;--------------------------------------------------------------------------------
+;
+[Strings]
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+
+DiskId1           = "Socket Installation Disk #1"
+PortsClassName    = "Ports (COM & LPT)"
+Socket            = "Socket Communications, Inc."
+Serenum.SVCDESC   = "Serenum Filter Driver"
+BT.SVCDESC        = "Socket Bluetooth Port Driver"
+BT.DeviceDesc	  = "Socket Bluetooth CF Card Adapter"
+PowerMgr          =  "System\CurrentControlSet\Services\VXD\VCOMM"
+DeviceDriver      = "SktBt2K.sys"

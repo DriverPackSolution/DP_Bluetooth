@@ -1,0 +1,22 @@
+<01/05/2012>
+Move download FW from DX->D0 to SX->S0 to fix Seletive Suspend bug which will cause device from Dx->D0 also.
+Driver Pass WHQL
+
+<12/5/2011>
+Driver Pass WHQL
+
+<11/9/2011>
+Don't delete wdfdevice in its cleanup callback, otherwise it will hang system when DV enabled
+
+<11/1/2011>
+Change Install execution file from /MD to /MT, otherwise some platform lack of MS Visual pack will fail to install
+Time costs to Download F/W successfully has been shorten to 1.5s
+
+<10/31/2011>
+Add WinXP Support of Class Filter Driver for Toshiba to Download F/W
+
+<10/28/2011>
+First Version of Class Filter Driver For Toshiba to Download F/W
+
+<10/24/2011>
+First Version of Device Filter Driver For Toshiba to Download F/W

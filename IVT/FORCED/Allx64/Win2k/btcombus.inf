@@ -1,0 +1,73 @@
+;------------------------------------------------------------------------
+; btcombus.inf
+; IVT Corporation Bluetooth COM Bus Device Installation Script
+; For Windows 2000/XP/2003/Vista/Win7/Win8
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2013, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+Signature	= "$Windows NT$"
+Class		= Bluetooth Device
+ClassGUID	= {D2DE069D-7286-420b-BAF8-225D700CE748}
+Provider	= %ProviderName%
+CatalogFile	= btcombus.cat
+DriverVer	= 01/04/2013,6.2.84.265
+
+[SourceDisksNames]
+1 = %DiskName%, "",,,
+
+[SourceDisksFiles]
+btcombus.sys = 1,,
+
+[DestinationDirs]
+DefaultDestDir = 10,System32\Drivers
+BtBus_Files = 10,System32\Drivers
+
+[ClassInstall32]
+AddReg=BSOL.NT.AddReg
+
+[BSOL.NT.AddReg]
+HKR,,,0,%BtBusClassName%
+HKR,,SilentInstall,,1
+HKR,,NoInstallClass,,1
+HKR,,NoDisplayClass,,1
+
+[Manufacturer]
+%ProviderName%=IVT, NTamd64
+
+[IVT]
+%DeviceDesc%=BtBus_DDI, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTCOMBUS
+
+[IVT.NTamd64]
+%DeviceDesc%=BtBus_DDI, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTCOMBUS
+
+[BtBus_DDI.NT]
+CopyFiles=BtBus_Files
+
+[BtBus_DDI.NT.Services]
+Addservice = %ServiceName%, 0x00000002, BtBus_Service_Install
+
+[BtBus_Service_Install]
+DisplayName    = %ServiceName%
+Description    = %ServiceDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\btcombus.sys
+
+[BtBus_Files]
+btcombus.sys
+
+;--------- Strings Section ---------------------------------------------------
+[Strings]
+ProviderName="IVT Corporation"
+DiskName  = "IVT Bluetooth COM Bus Driver Disk"
+DeviceDesc="IVT Bluetooth COM Bus Driver"
+ServiceName  = "IvtComBusSrv"
+ServiceDesc = "IVT Bluetooth COM Bus Driver Service"
+BtBusClassName="Bluetooth Device"

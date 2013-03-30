@@ -1,0 +1,122 @@
+;; wp_pcmcia.inf
+
+;; *********  PLEASE READ ***********
+;; The wizard cannot create exact INF files for all buses and device types.
+;; You may have to make changes to this file in order to get your device to
+;; install. In particular, hardware IDs and logical configurations require
+;; intervention.
+;;
+;; The Win2K DDK documentation contains an excellent INF reference.
+
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Provider=%ProviderName%
+
+; If device fits one of the standard classes, use the name and GUID here,
+; otherwise create your own device class and GUID as this example shows.
+
+Class=Wpbtpcc
+ClassGUID={C0CF0641-5F6E-11d2-B677-00C0DFE4C1F3}
+
+;--------- SourceDiskNames and SourceDiskFiles Section -----------------------
+
+; These sections identify source disks and files for installation.  They are
+; shown here as an example, but commented out.
+
+;[SourceDisksNames]
+;1 = "WavePlus Bluetooth Card Installation Diskette",Disk1,,
+
+;[SourceDisksFiles]
+;wppcmcia.sys = 1,,
+
+;--------- ClassInstall/ClassInstall32 Section -------------------------------
+
+; Not necessary if using a standard class
+
+; 9X Style
+[ClassInstall]
+Addreg=Class_AddReg
+
+; NT Style
+[ClassInstall32]
+Addreg=Class_AddReg
+
+[Class_AddReg]
+HKR,,,,%DeviceClassName%
+HKR,,Icon,,"-11"
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+Pcmcia_Files_Driver = 10,System32\Drivers
+
+;--------- Manufacturer and Models Sections ----------------------------------
+
+[Manufacturer]
+%MfgName%=Mfg0
+
+[Mfg0]
+%DeviceDesc%=Pcmcia_DDI, PCMCIA\WAVEPLUS-BT-7716
+
+;---------- DDInstall Sections -----------------------------------------------
+; --------- Windows 9X -----------------
+
+; Experimentation has shown that DDInstall root names greater than 19 characters
+; cause problems in Windows 98
+
+[Pcmcia_DDI]
+CopyFiles=Pcmcia_Files_Driver
+AddReg=Pcmcia_9X_AddReg
+LogConfig=Pcmcia.LogConfig
+
+[Pcmcia_9X_AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,wppcmcia.sys
+HKR, "Parameters", "BreakOnEntry", 0x00010001, 0
+
+; --------- Windows NT -----------------
+
+[Pcmcia_DDI.NT]
+CopyFiles=Pcmcia_Files_Driver
+AddReg=Pcmcia_NT_AddReg
+
+[Pcmcia_DDI.NT.Services]
+Addservice = wpbtsrv, 0x00000002, Pcmcia_AddService
+
+[Pcmcia_DDI.NT.LogConfigOverride]
+LogConfig=Pcmcia.LogConfig
+
+[Pcmcia_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\wppcmcia.sys
+
+[Pcmcia_NT_AddReg]
+HKLM, "System\CurrentControlSet\Services\Pcmcia\Parameters",\
+	"BreakOnEntry", 0x00010001, 0
+
+[Pcmcia.LogConfig]
+ConfigPriority=DESIRED
+;ConfigPriority=NORMAL
+IOConfig=368-36f
+;IOConfig=4@300-3ff(3ff::)
+IRQConfig = 2,3,4,5,7,9,10,11,12,13,15
+
+
+; --------- Files (common) -------------
+
+[Pcmcia_Files_Driver]
+wppcmcia.sys
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+ProviderName="IVT Corporation"
+MfgName="Waveplus"
+DeviceDesc="WavePlus Bluetooth PCMCIA Card"
+DeviceClassName="WavePlus Bluetooth Devices"
+SvcDesc="WavePlus Bluetooth PCMCIA Card Service"

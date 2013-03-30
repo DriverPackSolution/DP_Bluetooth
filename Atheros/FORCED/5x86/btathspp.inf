@@ -1,0 +1,114 @@
+;-------------------------------------------------------------------------------
+; btathspp.INF
+;
+; Bluetooth Serial Port (KMDF)
+;
+; Copyright (c) Atheros , Inc.  All rights reserved.
+
+[version]
+Signature	= "$WINDOWS NT$"
+Class		= Ports
+ClassGuid	= {4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider    = %Atheros%
+DriverVer=07/16/2010,6.10.0716.0101
+CatalogFile = btathspp.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%Atheros% = Atheros,NTx86
+
+[SourceDisksFiles]
+btathspp.sys=99
+
+[SourceDisksNames]
+99=%DISK_NAME%,
+
+[DestinationDirs]
+DefaultDestDir=12
+
+; For Win2K
+[Atheros]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%btathSPP.DeviceDesc% = btathSPP, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathspp
+
+; For XP and later
+[Atheros.NTx86]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%btathSPP.DeviceDesc% = btathSPP, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathspp
+
+
+
+
+[btathSPP.NT]
+CopyFiles=btathSPP.CopyFiles
+
+[btathSPP.CopyFiles]
+btathspp.sys
+
+[btathSPP.NT.Services]
+AddService=btathspp,0x00000002,btathSPP_Service_Inst, btathSPP_Logging_Inst 
+
+[btathSPP_Service_Inst]
+DisplayName    = %btathSPP.SvcDesc%                            
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btathspp.sys                            
+AddReg         = btathSPP_Parameters_AddReg
+
+[btathSPP_Parameters_AddReg]
+HKR, Parameters\Wdf, VerboseOn,       0x00010001, 1
+HKR, Parameters\Wdf, VerifierOn,      0x00010001, 1
+HKR, Parameters\Wdf, DbgBreakOnError, 0x00010001, 1
+
+[btathSPP_Logging_Inst]
+AddReg = btathSPP_Logging_Inst_AddReg
+
+[btathSPP_Logging_Inst_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\btathspp.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[btathSPP.NT.HW]
+AddReg=btathSPP_HW_AddReg
+
+[btathSPP_HW_AddReg]
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[Strings]
+Atheros			= "Atheros"                      
+DISK_NAME			= "Bluetooth Driver Disk"
+btathSPP.SvcDesc		= "Bluetooth Serial Port Device"
+btathSPP.DeviceDesc	= "Bluetooth SPP Serial Port"
+
+
+;
+;--- WDF Coinstaller installation ------
+;
+[DestinationDirs]
+btathSPP_CoInstaller_CopyFiles = 11
+
+[btathSPP.NT.CoInstallers]
+AddReg=btathSPP_CoInstaller_AddReg
+CopyFiles=btathSPP_CoInstaller_CopyFiles
+
+[btathSPP_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01005.dll,WdfCoInstaller"
+
+[btathSPP_CoInstaller_CopyFiles]
+wdfcoinstaller01005.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01005.dll=99 ; make sure the number matches with SourceDisksNames
+
+[btathSPP.NT.Wdf]
+KmdfService = btathspp, btathspp_wdfsect
+
+[btathspp_wdfsect]
+KmdfLibraryVersion = 1.5
+
+
+

@@ -1,0 +1,170 @@
+;-------------------------------------------------------------------------------
+; btathsco.INF
+;
+; Bluetooth SCO Audio Device
+;
+; Copyright (c) Atheros, Inc.  All rights reserved.
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=MEDIA
+Provider=%Atheros%
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+DriverVer=09/27/2010,6.11.0927.0102
+CatalogFile=btathsco.cat
+
+[SourceDisksNames]
+1=%DISK_NAME%,
+
+[SourceDisksFiles]
+btathsco.sys=1
+
+[Manufacturer]
+%MfgName%=Atheros,NTAMD64
+
+[Atheros]
+%Atheros_btAudio_hf.DeviceDesc%=Atheros_btAudio_hf,{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathscohf
+%Atheros_btAudio_ag.DeviceDesc%=Atheros_btAudio_ag,{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathscoag
+
+[Atheros.NTAMD64]
+%Atheros_btAudio_hf.DeviceDesc%=Atheros_btAudio_hf,{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathscohf
+%Atheros_btAudio_ag.DeviceDesc%=Atheros_btAudio_ag,{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathscoag
+
+[DestinationDirs]
+Atheros_btAudio.CopyList=10,system32\drivers
+
+[Atheros_btAudio.CopyList]
+btathsco.sys
+
+[Atheros_btAudio_hf.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,btathsco.sys
+HKR,,NTMPDriver,,"btathsco.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%Atheros_btAudio_hf.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%ianyvad_MIDI_hf%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%Atheros_btAudio_hf.DeviceDesc%
+
+[Atheros_btAudio_ag.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,btathsco.sys
+HKR,,NTMPDriver,,"btathsco.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%Atheros_btAudio_ag.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%ianyvad_MIDI_ag%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%Atheros_btAudio_ag.DeviceDesc%
+
+;======================================================
+; COMMON
+;======================================================
+[ianyvad_hf.I.Wave]
+AddReg=ianyvad_hf.I.Wave.AddReg
+[ianyvad_hf.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ianyvad_hf.Wave.szPname%
+
+[ianyvad_ag.I.Wave]
+AddReg=ianyvad_ag.I.Wave.AddReg
+[ianyvad_ag.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ianyvad_ag.Wave.szPname%
+
+[ianyvad_hf.I.Topo]
+AddReg=ianyvad_hf.I.Topo.AddReg
+[ianyvad_hf.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ianyvad_hf.Topo.szPname%
+
+[ianyvad_ag.I.Topo]
+AddReg=ianyvad_ag.I.Topo.AddReg
+[ianyvad_ag.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%ianyvad_ag.Topo.szPname%
+
+;======================================================
+; Atheros_btAudio
+;======================================================
+[Atheros_btAudio_hf.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Atheros_btAudio.CopyList
+AddReg = Atheros_btAudio_hf.AddReg
+
+[Atheros_btAudio_ag.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=Atheros_btAudio.CopyList
+AddReg = Atheros_btAudio_ag.AddReg
+
+[Atheros_btAudio_hf.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ianyvad_hf.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ianyvad_hf.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ianyvad_hf.I.Wave
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ianyvad_hf.I.Topo
+; Jasper AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ianyvad_hf.I.Topo
+
+[Atheros_btAudio_ag.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,ianyvad_ag.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,ianyvad_ag.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,ianyvad_ag.I.Wave
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,ianyvad_ag.I.Topo
+; Jasper AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,ianyvad_ag.I.Topo
+
+[Atheros_btAudio_hf.NT.Services]
+include=wdmaudio.inf
+needs=wdmaudio.registration.services
+AddService=Atheros_btAudio,0x00000002,Atheros_btAudio_Service_Inst
+
+[Atheros_btAudio_ag.NT.Services]
+include=wdmaudio.inf
+needs=wdmaudio.registration.services
+AddService=Atheros_btAudio,0x00000002,Atheros_btAudio_Service_Inst
+
+[Atheros_btAudio_Service_Inst]
+DisplayName=%Atheros_btAudio.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\btathsco.sys
+
+[Strings]
+Atheros="Atheros"
+MfgName="Atheros Bluetooth Audio"
+Atheros_btAudio_hf.DeviceDesc="Bluetooth Audio Gateway"
+Atheros_btAudio_ag.DeviceDesc="Bluetooth Hands-free Audio"
+DISK_NAME="Bluetooth Driver Disk"
+
+ianyvad_hf.Wave.szPname="Bluetooth Audio Gateway"
+ianyvad_hf.Topo.szPname="Bluetooth Audio Gateway Mixer"
+ianyvad_MIDI_hf="ianyvad -> WDM Midi Device"
+ianyvad_ag.Wave.szPname="Bluetooth Hands-free Audio"
+ianyvad_ag.Topo.szPname="Bluetooth Hands-free Audio Mixer"
+ianyvad_MIDI_ag="ianyvad -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+Atheros_btAudio.SvcDesc="Bluetooth Virtual SCO Driver"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+REG_DWORD              = 0x00010001

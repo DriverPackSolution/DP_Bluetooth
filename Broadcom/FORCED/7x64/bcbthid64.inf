@@ -1,0 +1,48 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider="Broadcom"
+DriverVer=09/11/2009,6.3.0.1500
+CatalogFile=Bcbthid64.CAT
+ 
+[Manufacturer]
+Broadcom=Broadcom, NTamd64...1
+
+[Broadcom.NTamd64...1]
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8153  ; Hardrock keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8154     ; Hardrock mouse
+
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8157  ; Littlerock keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8158     ; Littlerock mouse
+
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8161  ; Littlestone keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8162     ; Littlestone mouse
+
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8165  ; Stardust2 keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8166     ; Stardust2 mouse
+
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8175  ; Blackstone keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_413C&PID_8176     ; Blackstone mouse
+
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_044E&PID_3013  ; SONY keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_044E&PID_3012     ; SONY mouse
+
+%Keyboard.DeviceDesc%=HIDINSTALL, USB\VID_0A5C&PID_4502  ; Generic BRCM keyboard
+%Mouse.DeviceDesc%=HIDINSTALL, USB\VID_0A5C&PID_4503     ; Generic BRCM mouse
+
+[HIDINSTALL.NT]
+Include=input.inf
+Needs=HID_SelSus_Inst.NT
+Copyfiles=HID_Inst.CopyFiles.NT
+
+[HIDINSTALL.NT.HW]
+Needs=HID_SelSus_Inst.NT.HW
+
+[HIDINSTALL.NT.Services]
+Needs=HID_SelSus_Inst.NT.Services
+
+[Strings]
+Broadcom="Broadcom Corporation"
+Keyboard.DeviceDesc = "USB Human Interface Device"
+Mouse.DeviceDesc = "USB Human Interface Device"

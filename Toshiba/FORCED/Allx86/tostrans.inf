@@ -1,0 +1,119 @@
+
+; TOSTRANS.INF
+;
+; TOSHIBA SD Card Controller device install information file.
+;
+; (c) Copyright 2001-2003 Toshiba Corporation
+;
+;	M.Tada (PS5)
+;
+
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1
+Provider = %ProviderName%
+;;ClassGUID={0212A498-0383-4b45-884B-CBE664BC4CDE}
+ClassGuid={7240100F-6512-4548-8418-9EBB5C6A1A94}
+Class=BLUETOOTH
+;;CatalogFile=tostrans.cat
+DriverVer=07/01/2003, 2.0.0.030701
+
+
+;--------- SourceDisksNames Section ------------------------------------------
+
+[SourceDisksNames]
+1="TOSHIBA Bluetooth SD Card Installation Disk",,,
+
+[SourceDisksNames.x86]
+1="Toshiba Bluetooth SD Card Installation Disk",,,
+
+
+;--------- SourceDisksFiles Section ------------------------------------------
+
+[SourceDisksFiles]
+tostrans.sys = 1
+
+[SourceDisksFiles.x86]
+tostrans.sys = 1
+
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+TRANSP.copy.files = 10,System32\Drivers
+TRANSP.copy.files.NT = 12
+
+
+;--------- Manufacturer Section ----------------------------------------------
+
+[Manufacturer]
+%ProviderName% = BluetoothSD_TRANSP
+
+
+;--------- Models Section ----------------------------------------------------
+
+[BluetoothSD_TRANSP]
+%DeviceDesc% = TRANSP_DDI, Bluetooth\tostrans
+
+
+;--------- ControlFlags Section ----------------------------------------------
+
+[ControlFlags]
+ExcludeFromSelect = Bluetooth\tostrans
+
+
+;--------- DDInstall Section -------------------------------------------------
+
+[TRANSP_DDI]
+;CopyFiles = TRANSP.copy.files
+AddReg = TRANSP.addregs
+
+[TRANSP_DDI.NT]
+;CopyFiles = TRANSP.copy.files.NT
+AddReg = TRANSP.addregs
+
+
+;--------- CopyFIles Section -------------------------------------------------
+
+[TRANSP.copy.files]
+tostrans.sys,,,2
+
+[TRANSP.copy.files.NT]
+tostrans.sys,,,2
+
+
+;--------- AddReg Section ----------------------------------------------------
+
+[TRANSP.addregs]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,tostrans.sys
+HKLM, "System\CurrentControlSet\Services\Tostrans\Parameters", "DeviceMode", 0x00010001, 0
+HKLM, "System\CurrentControlSet\Services\Tostrans\Parameters", "Enumerate", 0x00010001, 1
+HKLM, "System\CurrentControlSet\Services\Tostrans\Parameters", "CISAvail", 0x00010001, 1
+
+
+;--------- DDInstall.Service Section -----------------------------------------
+
+[TRANSP_DDI.NT.Services]
+AddService = Tostrans, 0x00000002, TRANSP_AddService
+
+
+;--------- AddService Section ------------------------------------------------
+
+[TRANSP_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tostrans.sys
+LoadOrderGroup = Extended Base
+
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+ProviderName	= "TOSHIBA"
+DeviceDesc      = "Bluetooth Transport from TOSHIBA"
+SvcDesc         = "Bluetooth Transport from TOSHIBA"

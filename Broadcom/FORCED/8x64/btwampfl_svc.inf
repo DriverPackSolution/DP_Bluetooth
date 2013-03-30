@@ -1,0 +1,59 @@
+;
+; AMP BT filter driver x64 INF
+;
+; Copyright (c) 2009-2011 Broadcom Corporation
+;
+[Version]
+Signature   = "$Windows NT$"
+Class=BTW
+ClassGUID={95C7A0A0-3094-11D7-A202-00508B9D7D5A}
+Provider    = %BRCM%
+DriverVer   = 10/05/2012,12.0.0.3101
+CatalogFile=btwampfl_svc64.cat
+
+[SourceDisksNames]
+1 = %DISK_1%,,,
+
+[SourceDisksFiles]
+btwampfl.sys = 1
+
+[DestinationDirs]
+DefaultDestDir       = 10,system32\drivers  ;%windir%\system32\drivers
+btwampfl.DriverFiles = 12                   ;%windir%\system32\drivers
+
+[DefaultInstall]
+OptionDesc          = %ServiceDescription%
+CopyFiles           = btwampfl.DriverFiles
+; AddReg              = btwampfl.AddReg
+
+[DefaultInstall.Services]
+AddService          = %ServiceName%,,btwampfl.Service
+AddReg           = btwampfl.AddServiceRegistry
+
+[DefaultUninstall]
+DelFiles   = btwampfl.DriverFiles
+
+[DefaultUninstall.Services]
+DelService = %ServiceName%,0x200      ;Ensure service is stopped before deleting
+
+[btwampfl.Service]
+DisplayName      = %ServiceName%
+Description      = %ServiceDescription%
+ServiceBinary    = %12%\%DriverName%.sys        ;%windir%\system32\drivers\
+ServiceType      = 1                            ;SERVICE_KERNEL_DRIVER
+StartType        = 3                            ;SERVICE_DEMAND_START
+ErrorControl     = 1                            ;SERVICE_ERROR_NORMAL
+LoadOrderGroup   = PNP Filter
+
+[btwampfl.DriverFiles]
+btwampfl.sys
+
+[btwampfl.AddServiceRegistry]
+HKR,"BTWAMPFL","EnableAMP",0x00010001,0x00000001
+
+[Strings]
+BRCM                    = "Broadcom"
+ServiceDescription      = "btwampfl Bluetooth filter driver"
+ServiceName             = "btwampfl"
+DriverName              = "btwampfl"
+DISK_1                  = "WIDCOMM Installation Media"

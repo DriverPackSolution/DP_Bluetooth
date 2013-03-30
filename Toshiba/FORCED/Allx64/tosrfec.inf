@@ -1,0 +1,117 @@
+; tosrfec.inf
+;
+; Toshiba Bluetooth EC (ACPI) Driver
+;
+; Copyright 2000-2011, Toshiba Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = System
+ClassGuid = {4D36E97D-E325-11CE-BFC1-08002BE10318}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %MSFT%
+DriverPackageDisplayName = %busenum.SVCDESC%
+DriverVer = 07/12/2011,7.00.1912.0
+CatalogFile = tosrfec.cat
+
+[SourceDisksNames]
+3426=windows cd
+
+[SourceDisksNames.x86]
+3426=windows cd
+
+[SourceDisksFiles]
+tosrfec.sys = 3426
+
+[SourceDisksFiles.x86]
+tosrfec.sys = 3426
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+TOSRFECNT.CopyFiles = 12
+
+;*****************************************
+; ToasterBus  Install Section
+;*****************************************
+
+[Manufacturer]
+%StdMfg%=Standard, NTamd64
+
+[SignatureAttributes]
+tosrfec.sys = SignatureAttributes.DRM
+
+;
+; These are the toaster bus pnp ids
+;
+[Standard]
+; DisplayName         Section        DeviceId
+; -----------         -------        --------
+%Rfacpi.DeviceDesc% = Rfacpi_Device, ACPI\INTC1234
+%Rfacpi.DeviceDesc% = Rfacpi_Device, ACPI\TOS6205
+
+[Standard.NTamd64]
+; DisplayName         Section        DeviceId
+; -----------         -------        --------
+%Rfacpi.DeviceDesc% = Rfacpi_Device, ACPI\INTC1234
+%Rfacpi.DeviceDesc% = Rfacpi_Device, ACPI\TOS6205
+
+[ControlFlags]
+ExcludeFromSelect = ACPI\INTC1234
+ExcludeFromSelect = ACPI\TOS6205
+
+[Rfacpi_Device]
+CopyFiles = TOSRFEC_CopyFiles
+AddReg = Rfacpi.AddReg
+
+[Rfacpi_Device.HW]
+AddReg = TOSRFECHW.AddReg
+
+[TOSRFECHW.AddReg]
+HKR,,ConfigFlags,1,00,40,00,00
+
+[Rfacpi_Device.NT]
+CopyFiles = TOSRFECNT.CopyFiles
+AddReg = Rfacpi.AddReg
+
+[Rfacpi.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,TOSRFEC.SYS
+HKR,,EnumPropPages,,"sysclass.dll,EnumPropPages"
+
+[TOSRFEC.CopyFiles]
+tosrfec.sys,,,2
+;;tosrfec.sys,,,0x100
+
+[TOSRFECNT.CopyFiles]
+tosrfec.sys,,,2
+;;tosrfec.sys,,,0x100
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+;-------------- Service installation
+[Rfacpi_Device.NT.Services]
+AddService = tosrfec, %SPSVCINST_ASSOCSERVICE%, busenum_Service_Inst
+
+; -------------- busenum driver install sections
+[busenum_Service_Inst]
+DisplayName    = %busenum.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tosrfec.sys
+LoadOrderGroup = System Bus Extender
+AddReg = busenum_Service_Inst_AddReg
+
+[busenum_Service_Inst_AddReg] 
+HKLM,System\CurrentControlSet\Services\tosrfec\Parameters,"Bluetooth", 0x00000003, 0
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+MSFT = "TOSHIBA"
+StdMfg = "Toshiba"
+Rfacpi.DeviceDesc = "Bluetooth ACPI"
+busenum.SVCDESC = "Bluetooth ACPI"
+

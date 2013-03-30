@@ -1,0 +1,117 @@
+; TOSRFHID.INF
+;
+; Toshiba Bluetooth RFHID Driver
+;
+; Copyright (c) 2002-2010 TOSHIBA Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = BLUETOOTH
+ClassGuid = {7240100F-6512-4548-8418-9EBB5C6A1A94}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %PROVIDER_NAME%
+DriverPackageDisplayName = %Tosrfhid.SVCDESC%
+DriverVer = 03/18/2010,6.00.3918.0
+CatalogFile = tosrfhid.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksNames.x86]
+3426 = windows cd
+
+[SourceDisksFiles]
+Tosrfhid.sys = 3426
+TosBtCi.dll = 3426
+
+[SourceDisksFiles.x86]
+Tosrfhid.sys = 3426
+TosBtCi.dll = 3426
+
+[ClassInstall32]
+Addreg=BluetoothClassReg
+CopyFiles=BluetoothClassFiles
+
+[BluetoothClassFiles]
+TosBtCi.dll
+
+[BluetoothClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,"100"
+HKR,,Installer32,,"TosBtCi.dll,BluetoothClassInstaller"
+
+;*****************************************
+; Tosrfhid Install Section
+;*****************************************
+
+[Manufacturer]
+%StdMfg%=TOSHIBA, NTamd64
+
+[SignatureAttributes]
+Tosrfhid.sys=SignatureAttributes.DRM
+
+[TOSHIBA]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%Tosrfhid.DeviceDesc%=TosRfHid_Device, Bluetooth\0004&0004
+
+[TOSHIBA.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%Tosrfhid.DeviceDesc%=TosRfHid_Device, Bluetooth\0004&0004
+
+[ControlFlags]
+ExcludeFromSelect = Bluetooth\0004&0004
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+TOSRFHID_CopyFiles = 12
+BluetoothClassFiles = 11
+
+[TosRfHid_Device]
+CopyFiles = Tosrfhid_CopyFiles
+AddReg = RFHID.AddReg
+
+[TosRfHid_Device.NT]
+CopyFiles = Tosrfhid_CopyFiles
+AddReg = RFHID.AddReg
+
+[TOSRFHID_CopyFiles]
+Tosrfhid.sys,,,2
+;;Tosrfhid.sys,,,0x100
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+
+[RFHID.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,tosrfhid.sys
+
+;-------------- Service installation
+[TosRfHid_Device.NT.Services]
+AddService = Tosrfhid,%SPSVCINST_ASSOCSERVICE%, Tosrfhid_Service_Inst
+
+; -------------- Tosrfhid driver install sections
+[Tosrfhid_Service_Inst]
+DisplayName    = %Tosrfhid.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Tosrfhid.sys
+LoadOrderGroup = Extended Base
+AddReg = Tosrfhid_Service_Inst_AddReg
+
+[Tosrfhid_Service_Inst_AddReg]
+HKR,"Parameters","SwitchRole",0x10001, 1
+HKR,"Parameters","LinkSupervisionTimeout",0x10001, 1
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+PROVIDER_NAME = "TOSHIBA"
+StdMfg = "TOSHIBA"
+Tosrfhid.DeviceDesc = "Bluetooth RFHID"
+Tosrfhid.SVCDESC = "Bluetooth RFHID"
+ClassName = "Bluetooth"

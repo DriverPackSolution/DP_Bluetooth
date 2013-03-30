@@ -1,0 +1,83 @@
+;-------------------------------------------------------------------------------
+; btath_hid.INF
+;
+; Bluetooth HID Device
+;
+; Copyright (c) Atheros Bluetooth Solutions, Inc.  All rights reserved.
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=BluetoothVirtual
+ClassGuid={C7C038AD-1F2D-44d4-B2FE-D912BE20E6D5}
+Provider=%ATHR%
+;LayoutFile=layout.inf
+DriverVer=12/18/2012,8.0.0000.0218
+CatalogFile=btath_hid.cat
+
+;
+;   Layout.inf (etc.) list all files shipped with the operating system so the 
+;   source description sections are only needed if other files are needed.
+;
+
+[SourceDisksFiles]
+btath_hid.sys = 99
+
+[SourceDisksNames]
+99 = %DISK_NAME%,,,
+
+[DestinationDirs]
+CopyFilesSYS = 12     
+
+[Manufacturer]
+%ATHR%=Standard, NTx86
+
+
+; For XP and later
+[Standard.NTx86]
+%BTATH_HID%    = BTATH_HID.Inst, BTHENUM\{E8AD5CB4-FB2B-4a43-8FD7-A28367D00E0A}
+
+
+;===============================================================
+;   (Root Enumerated Hid Device) install section
+;===============================================================
+[BTATH_HID.Inst.NT]
+CopyFiles = CopyFilesSYS
+
+[BTATH_HID.Inst.NT.Services]
+AddService = BTATH_HID,0x00000002,BTATH_HID_Service_Inst,
+
+[CopyFilesSYS]
+btath_hid.sys
+
+[BTATH_HID_Service_Inst]
+DisplayName    = %BTATH_HID%
+ServiceType    = %SERVICE_KERNEL_DRIVER% 
+StartType      = %SERVICE_DEMAND_START% 
+ErrorControl   = %SERVICE_ERROR_IGNORE% 
+ServiceBinary  = %12%\btath_hid.sys 
+
+;================================================================
+[Strings] 
+;  *******Localizable Strings******* 
+ATHR         = "Qualcomm Atheros Communications" 
+BTATH_HID    = "Bluetooth HID Device" 
+DISK_NAME      = "Blue Manager Install Disk"
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START     = 0x0 
+SERVICE_SYSTEM_START   = 0x1 
+SERVICE_AUTO_START     = 0x2 
+SERVICE_DEMAND_START   = 0x3 
+SERVICE_DISABLED       = 0x4 
+
+SERVICE_KERNEL_DRIVER  = 0x1 
+SERVICE_ERROR_IGNORE   = 0x0 
+SERVICE_ERROR_NORMAL   = 0x1 
+SERVICE_ERROR_SEVERE   = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ          = 0x00020000 
+REG_DWORD              = 0x00010001 
+REG_MULTI_SZ           = 0x00010000
+REG_BINARY             = 0x00000001
+REG_SZ                 = 0x00000000

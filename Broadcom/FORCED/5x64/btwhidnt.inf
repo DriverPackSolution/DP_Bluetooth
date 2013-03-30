@@ -1,0 +1,741 @@
+;
+; Widcomm BTW Virtual HID Minidriver Installation Script
+; for the 64-bit Windows
+;
+; Copyright (c) 2004, Broadcom Corp.
+;
+[version]
+signature="$Windows NT$"
+Class=HIDClass
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%V_WIDCOMM%
+CatalogFile=btwhidnt.cat
+DriverVer=11/17/2009,5.6.0.3000
+
+[DestinationDirs]
+CopyFiles.amd64 = 12
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+btwhid.sys = 1
+
+[Manufacturer] 
+%V_WIDCOMM%=WIDCOMM, NTamd64
+
+[WIDCOMM.NTamd64]
+%WC_KEYB_DESCRIPTION%=WC_KEYB, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\HID_KEYBOARD
+%WC_MOUSE_DESCRIPTION%=WC_MOUSE, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\HID_MOUSE
+%WC_AVCONTROL_DESCRIPTION%=WC_AVCONTROL, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\HIDAVCONTROL
+
+;
+; Virtual keyboard device
+;
+[WC_KEYB.NTamd64.hw]
+AddReg=WC_KEYB.hw.reg
+
+[WC_KEYB.hw.reg]
+HKR,,"Usage",0x10001,%HID_USAGE_GENERIC_KEYBOARD%
+
+[WC_KEYB.NTamd64]
+CopyFiles = CopyFiles.amd64
+Include=input.inf
+Copyfiles=HID_Inst.CopyFiles.NT
+
+[WC_KEYB.NTamd64.Services]
+AddService = btwhid,0x00000002,BTWHID_Serv_Instx86, 
+
+;
+; Virtual mouse device
+;
+[WC_MOUSE.NTamd64.hw]
+AddReg=WC_MOUSE.hw.reg
+
+[WC_MOUSE.hw.reg]
+HKR,,"Usage",0x10001,%HID_USAGE_GENERIC_MOUSE%
+
+[WC_MOUSE.NTamd64]
+CopyFiles = CopyFiles.amd64
+Include=input.inf
+Copyfiles=HID_Inst.CopyFiles.NT
+
+[WC_MOUSE.NTamd64.Services]
+AddService = btwhid,0x00000002,BTWHID_Serv_Instx86, 
+
+;
+; Virtual AV control device
+;
+[WC_AVCONTROL.NTamd64.hw]
+AddReg=WC_AVCONTROL.hw.reg
+
+[WC_AVCONTROL.hw.reg]
+HKR,,"Usage",0x10001,%HID_USAGE_GENERIC_AVCONTROL%
+
+[WC_AVCONTROL.NTamd64]
+CopyFiles = CopyFiles.amd64
+Include=input.inf
+Copyfiles=HID_Inst.CopyFiles.NT
+
+[WC_AVCONTROL.NTamd64.Services]
+AddService = btwhid,0x00000002,BTWHID_Serv_Instx86, 
+
+[BTWHID_Serv_Instx86] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_DEMAND_START% 
+ErrorControl = %SERVICE_ERROR_IGNORE% 
+ServiceBinary = %12%\btwhid.sys 
+
+[CopyFiles.amd64] 
+btwhid.sys
+
+[Strings] 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM Installation Media"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth Virtual HID Device"
+WC_MOUSE_DESCRIPTION= "Bluetooth Virtual HID Device"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+
+[Strings.0404] ; Chinese Traditional 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM ¶w∏À¥C≈È"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "¬≈™ﬁµÍ¿¿ HID"
+WC_MOUSE_DESCRIPTION= "¬≈™ﬁµÍ¿¿ HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0406] ; Danish 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM-installationsmedie"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth virtuelt HID"
+WC_MOUSE_DESCRIPTION= "Bluetooth virtuel HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0407] ; German 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM-Installationsmedien"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Virtuelle Bluetooth-HID"
+WC_MOUSE_DESCRIPTION= "Virtuelle Bluetooth-HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.040a] ; Spanish
+;  *******Localizable Strings******* 
+Source_Description="Medios de instalaciÛn de WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "HID virtual Bluetooth"
+WC_MOUSE_DESCRIPTION= "HID Virtual Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.040b] ; Finnish 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM-asennuslevy"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth HID"
+WC_MOUSE_DESCRIPTION= "Bluetooth HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.040c] ; French 
+;  *******Localizable Strings******* 
+Source_Description="Support d'installation WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "HID virtuel Bluetooth"
+WC_MOUSE_DESCRIPTION= "HID virtuelle Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0410] ; Italian 
+;  *******Localizable Strings******* 
+Source_Description="Supporto di installazione WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "HID virtuale Bluetooth"
+WC_MOUSE_DESCRIPTION= "HID virtuale Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0411] ; Japanese 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM ÉCÉìÉXÉgÅ[Éã ÉÅÉfÉBÉA"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth âºëz HID"
+WC_MOUSE_DESCRIPTION= "Bluetooth âºëz HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0412] ; Korean 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM º≥ƒ° πÃµæÓ"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth ∞°ªÛ HID"
+WC_MOUSE_DESCRIPTION= "Bluetooth ∞°ªÛ HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0413] ; Dutch 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM-installatiemedia"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth virtueel HID"
+WC_MOUSE_DESCRIPTION= "Bluetooth virtuele HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0416] ; Brazilian Portuguese 
+;  *******Localizable Strings******* 
+Source_Description="MÌdia de instalaÁ„o WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "HID virtual Bluetooth"
+WC_MOUSE_DESCRIPTION= "HID virtual Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.041d] ; Swedish 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM-installationsskiva"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Virtuellt Bluetooth"
+WC_MOUSE_DESCRIPTION= "Virtuell Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0415] ; Polish 
+;  *******Localizable Strings******* 
+Source_Description="Noúnik instalacyjny WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Wirtualna HID Bluetooth"
+WC_MOUSE_DESCRIPTION= "Wirtualna HID Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0419] ; Russian 
+;  *******Localizable Strings******* 
+Source_Description="ÕÓÒËÚÂÎ¸ ‰Îˇ ÛÒÚ‡ÌÓ‚ÍË WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "¬ËÚÛ‡Î¸Ì‡ˇ HID Bluetooth"
+WC_MOUSE_DESCRIPTION= "¬ËÚÛ‡Î¸Ì‡ˇ HID Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0414] ; Norwegian 
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM-installasjonsmedier"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Virtuelt Bluetooth-HID"
+WC_MOUSE_DESCRIPTION= "Virtuell Bluetooth-HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0804] ; ChineseSimplified
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM ∞≤◊∞ΩÈ÷ "
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "¿∂—¿–Èƒ‚ HID"
+WC_MOUSE_DESCRIPTION= "¿∂—¿–Èƒ‚ HID"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Remote Control"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0401] ; Arabic
+;  *******Localizable Strings******* 
+Source_Description="Ê”«∆ÿ  À»Ì  WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "ÃÂ«“ Bluetooth Ÿ«Â—Ì ·Ê«ÃÂ… HID"
+WC_MOUSE_DESCRIPTION= "ÃÂ«“ Bluetooth Ÿ«Â—Ì ·Ê«ÃÂ… HID"
+WC_AVCONTROL_DESCRIPTION= "ÃÂ«“  Õﬂ„ „‰ »⁄œ Bluetooth"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0405] ; Czech
+;  *******Localizable Strings******* 
+Source_Description="InstalaËnÌ mÈdia WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Virtu·lnÌ za¯ÌzenÌ HID Bluetooth"
+WC_MOUSE_DESCRIPTION= "Virtu·lnÌ za¯ÌzenÌ HID Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "D·lkovÈ ovl·d·nÌ Bluetooth"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0408] ; Greek
+;  *******Localizable Strings******* 
+Source_Description="–ÔÎıÏ›Û· Â„Í·Ù‹ÛÙ·ÛÁÚ WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "”ıÛÍÂıﬁ Bluetooth ÏÂ ‰ıÌ·Ù¸ÙÁÙ· ÂÈÍÔÌÈÍﬁÚ ‰È·Û˝Ì‰ÂÛÁÚ ˜ÒﬁÛÙÁ (HID)"
+WC_MOUSE_DESCRIPTION= "”ıÛÍÂıﬁ Bluetooth ÏÂ ‰ıÌ·Ù¸ÙÁÙ· ÂÈÍÔÌÈÍﬁÚ ‰È·Û˝Ì‰ÂÛÁÚ ˜ÒﬁÛÙÁ (HID)"
+WC_AVCONTROL_DESCRIPTION= "¡ÔÏ·ÍÒıÛÏ›ÌÔÚ ›ÎÂ„˜ÔÚ Ï›Û˘ Bluetooth"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.040D] ; Hebrew
+;  *******Localizable Strings******* 
+Source_Description="Ó„È˙ ‰˙˜‰ WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "‰˙˜Ô ÓÓ˘˜ ‡Â˘È ÂÈ¯ËÂ‡ÏÈ ˘Ï Bluetooth"
+WC_MOUSE_DESCRIPTION= "‰˙˜Ô ÓÓ˘˜ ‡Â˘È ÂÈ¯ËÂ‡ÏÈ ˘Ï Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "˘ÏË ¯ÁÂ˜ ˘ÏBluetooth "
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.041A] ; Croatian
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM mediji za instalaciju"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth virtualni HID ureaj"
+WC_MOUSE_DESCRIPTION= "Bluetooth virtualni HID ureaj"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth daljinski upravljaË"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.040E] ; Hungarian
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM Installation Media"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth virtu·lis HID-eszkˆz"
+WC_MOUSE_DESCRIPTION= "Bluetooth virtu·lis HID-eszkˆz"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth t·vir·nyÌtÛ"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0816] ; Iberian Portuguese
+;  *******Localizable Strings******* 
+Source_Description="Suporte de instalaÁ„o WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Dispositivo HID virtual Bluetooth"
+WC_MOUSE_DESCRIPTION= "Dispositivo HID virtual Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Controlo remoto Bluetooth"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.0418] ; Romanian
+;  *******Localizable Strings******* 
+Source_Description="Suport de instalare WIDCOMM"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Dispozitiv HID virtual Bluetooth"
+WC_MOUSE_DESCRIPTION= "Dispozitiv HID virtual Bluetooth"
+WC_AVCONTROL_DESCRIPTION= "Telecomand„ Bluetooth"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20
+
+[Strings.041F] ; Turkish
+;  *******Localizable Strings******* 
+Source_Description="WIDCOMM Y¸kleme Ortam˝"
+V_WIDCOMM="Broadcom"
+WC_KEYB_DESCRIPTION= "Bluetooth Sanal HID Ayg˝t˝"
+WC_MOUSE_DESCRIPTION= "Bluetooth Sanal HID Ayg˝t˝"
+WC_AVCONTROL_DESCRIPTION= "Bluetooth Uzaktan Kumanda"
+
+;  *******Non Localizable Strings******* 
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+HID_USAGE_GENERIC_MOUSE = 0x80
+HID_USAGE_GENERIC_KEYBOARD = 0x40
+HID_USAGE_GENERIC_AVCONTROL = 0x20

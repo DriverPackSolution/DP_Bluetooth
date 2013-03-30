@@ -1,0 +1,114 @@
+;------------------------------------------------------------------------
+; BlueletFAXMDM.INF
+; IVT Corporation Bluetooth FAX Modem Installation Script
+; For Windows 2000/XP/2003/Vista
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2010, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=Modem
+ClassGUID={4D36E96D-E325-11CE-BFC1-08002BE10318}
+Provider=%IVT%
+CatalogFile=blueletfaxmdm.cat
+DriverVer=08/26/2010,6.2.78.221
+
+[Manufacturer]
+%IVT% = IVT, NTamd64
+
+[IVT]
+%BlueletModem%  = Modemreg, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\MDMBTFAX
+
+[IVT.NTamd64]
+%BlueletModem%  = Modemreg, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\MDMBTFAX
+
+[Modemreg]
+AddReg=All, BTFAXModem, External
+
+[All]
+HKR,,ConfigDialog,,modemui.dll
+HKR,,DevLoader,,*vcomm
+HKR,,EnumPropPages,,"modemui.dll,EnumPropPages"
+HKR,,FriendlyDriver,,unimodem.vxd
+HKR,,PortSubClass,1,02
+HKR,,CompatibilityFlags, 1, 01, 00, 00, 00
+HKR,,DCB, 1, 1C,00,00,00, 00,C2,01,00, 15,20,00,00, 00,00,0A,00, 0A,00,08,00, 00,11,13,00, 00,00
+HKR,, Properties, 1, 00,00,00,00, FF,00,00,00, 00,00,00,00, 07,00,00,00, 07,00,00,00, 00,03,00,00, 00,C2,01,00, 00,F4,01,00
+
+HKR, Init, 1,, "AT<cr>"
+HKR, Init, 2,, "ATE0V1&D2<cr>"
+
+
+HKR, Settings, CallSetupFailTimer,, "S7=<#>" 
+HKR,,InactivityScale,1,0a,00,00,00
+
+HKR, Monitor, 1,, "ATS0=0<cr>"
+HKR, Monitor, 2,, "None"
+HKR, Answer, 1,, "ATA<cr>"
+HKR, Hangup, 1,, "ATH<cr>"
+HKR,, Reset,, "AT&F<cr>"
+HKR, Settings, Prefix,, "AT"
+HKR, Settings, Terminator,, "<cr>"
+HKR, Settings, DialPrefix,, "D"
+HKR, Settings, DialSuffix,, ""
+HKR, Settings, Blind_Off,, "X3"
+HKR, Settings, Blind_On,, "X1"
+HKR, Settings, Pulse,, "P"
+HKR, Settings, Tone,, "T"
+;HKR, Settings, SpeakerVolume_Low,, "L0"
+HKR, Settings, SpeakerVolume_Low,, "L1"
+HKR, Settings, SpeakerVolume_Med,, "L2"
+HKR, Settings, SpeakerVolume_High,, "L3"
+HKR, Settings, SpeakerMode_Off,, "M0"
+HKR, Settings, SpeakerMode_Dial,, "M1"
+HKR, Settings, SpeakerMode_On,, "M2"
+
+
+;HKR, Responses, "<cr>",     1,01,0,0,0,0,0,0,0,0,0
+;HKR, Responses, "<lf>",     1,01,0,0,0,0,0,0,0,0,0
+HKR, Responses, "0<cr>",    1,00,0,0,0,0,0,0,0,0,0   ; OK
+HKR, Responses, "1<cr>",    1,02,0,0,0,0,0,0,0,0,0   ; CONNECT
+HKR, Responses, "2<cr>",    1,08,0,0,0,0,0,0,0,0,0   ; RING
+HKR, Responses, "3<cr>",    1,04,0,0,0,0,0,0,0,0,0   ; NO CARRIER
+HKR, Responses, "4<cr>",    1,03,0,0,0,0,0,0,0,0,0   ; ERROR
+HKR, Responses, "5<cr>",    1,02,0,B0,04,0,0,0,0,0,0 ; CONNECT 1200
+HKR, Responses, "6<cr>",    1,05,0,0,0,0,0,0,0,0,0   ; NO DIALTONE
+HKR, Responses, "7<cr>",    1,06,0,0,0,0,0,0,0,0,0   ; BUSY
+HKR, Responses, "8<cr>",    1,07,0,0,0,0,0,0,0,0,0   ; NO ANSWER
+HKR, Responses, "10<cr>", 1, 02, 00, 60,09,00,00, 00,00,00,00
+HKR, Responses, "11<cr>", 1, 02, 00, c0,12,00,00, 00,00,00,00
+
+HKR, Responses,"<cr><lf>BUSY<cr><lf>",        1,6,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>ERROR<cr><lf>",       1,3,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>NO ANSWER<cr><lf>",   1,7,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>NO CARRIER<cr><lf>",  1,4,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>NO DIAL TONE<cr><lf>",1,5,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>NO DIALTONE<cr><lf>", 1,5,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>OK<cr><lf>",          1,0,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>RING<cr><lf>",        1,8,0,0,0,0,0,0,0,0,0
+HKR, Responses,"<cr><lf>CONNECT<cr><lf>",1,02,0,00,00,00,00,00,00,00,00
+
+
+[BTFAXModem]
+;HKR,, VoiceProfile, 1, 00,00,00,00
+HKR, Fax, HighestSendSpeed,,0
+HKR, Fax, LowestSendSpeed,,0
+HKR, Fax, EnableV17Send,,1
+HKR, Fax, EnableV17Recv,,1
+HKR, Fax, FixModemClass,, "1"
+HKR, Fax, ResetCommand,, "AT&FS0=0E0V1"
+HKR, Fax, SetupCommand,, "AT&D2"
+
+[External]
+HKR,,DeviceType,1,01
+
+[Strings]
+IVT = "IVT Corporation"
+BlueletModem= "Bluetooth Fax Modem"
+
+

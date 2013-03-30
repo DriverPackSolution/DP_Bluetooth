@@ -1,0 +1,110 @@
+;
+; Copyright (c) 2002 Microsoft Corporation
+;
+; Module Name:
+;
+;    bthpan.inx
+;
+; Abstract:
+;
+;     The INX file for the Bluetooth PAN driver
+;
+
+[Version]
+Provider    = %ATHR%
+Signature        = "$Windows NT$"
+Class            = Net
+ClassGuid        = {4d36e972-e325-11ce-bfc1-08002be10318}
+DriverVer=12/18/2012,8.0.0000.0218
+CatalogFile = btath_pan.cat
+
+[Manufacturer]
+%ATHR% = Standard,NTx86, NTamd64
+
+[SourceDisksFiles]
+btath_pan.sys=99
+
+[SourceDisksNames]
+99=%DISK_NAME%,
+
+
+[DestinationDirs]
+DefaultDestDir     = %WINDOWS_DIR%
+BthPan.CopyFiles   = %DRIVERS_DIR%
+
+[Standard]
+%BthPan.DisplayName% = BthPan.Install, BTHENUM\{BC21181D-AFAB-49A0-8DD9-EFFA9268E98F}
+
+[Standard.NTx86]
+%BthPan.DisplayName% = BthPan.Install, BTHENUM\{BC21181D-AFAB-49A0-8DD9-EFFA9268E98F}
+
+[Standard.NTamd64]
+%BthPan.DisplayName% = BthPan.Install, BTHENUM\{BC21181D-AFAB-49A0-8DD9-EFFA9268E98F}
+
+[BthPan.Install]
+Characteristics    = %NCF_VIRTUAL%
+CopyFiles          = BthPan.CopyFiles
+AddReg             = BthPan.AddReg
+*IfType            = 6                  ; IF_TYPE_ETHERNET_CSMACD
+*MediaType         = 0                  ; NdisMedium802_3
+*PhysicalMediaType = 0xa                ; NdisPhysicalMediumBluetooth
+
+[BthPan.CopyFiles]
+btath_pan.sys
+
+;[ControlFlags]
+;ExcludeFromSelect = *
+
+[BthPan.Install.Services]
+AddService = BthPan, %SPSVCINST_ASSOCSERVICE%, BthPan.AddService
+
+[BthPan.AddService]
+DisplayName    = %BthPan.DisplayName%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\btath_pan.sys
+LoadOrderGroup = NDIS
+Description    = %BthPan.DisplayName%
+
+[BthPan.AddReg]
+; Clsss Information
+;HKR, Ndi,             HelpText,     0,  %BthPan.HelpText%
+HKR, Ndi,             Service,      0,  "Btath_pan"
+
+; Interfaces
+HKR, Ndi\Interfaces,  UpperRange,   0,  "ndis5, ndis5_ip6"
+HKR, Ndi\Interfaces,  LowerRange,   0,  "nolower"
+
+; Static configuration parameters
+;HKR, , ServiceId,   0x00010001,  %Bthpan.DefaultServiceId%
+;HKR, , ServiceLangT,0x00000000,  %Bthpan.DefaultServiceLang%
+;HKR, , ServiceName, 0x00000000,  %Bthpan.DefaultServiceName%
+;HKR, , ServiceDesc, 0x00000000,  %Bthpan.DefaultServiceDesc%
+
+[strings]
+; Non-localizable
+WINDOWS_DIR            = 10 ; %windir%
+DRIVERS_DIR            = 12 ; %windir%\system32\drivers
+SYSTEM32_DIR           = 11 ; %windir%\system32
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
+SPSVCINST_ASSOCSERVICE = 0x00000002
+COPYFLG_WARN_IF_SKIP   = 0x00000001
+COPYFLG_NOSKIP         = 0x00000002
+NCF_VIRTUAL            = 0x1
+; Localizable
+
+ATHR                   = "Qualcomm Atheros Communications"
+DISK_NAME	       = "BlueManager Driver Disk"
+BthPan.DisplayName     = "Bluetooth PAN Device"
+;BthPan.HelpText        = "Bluetooth PAN HelpText"
+
+; Configurable
+;Non-localizable
+;BthPan.DefaultServiceId   = 0x3   
+;Localizable
+;BthPan.DefaultServiceLang = "en"  
+;Bthpan.DefaultServiceName = "Personal Ad Hoc User Service"
+;Bthpan.DefaultServiceDesc = "Personal Ad Hoc User Service"

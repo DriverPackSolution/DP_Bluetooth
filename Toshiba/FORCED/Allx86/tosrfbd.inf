@@ -1,0 +1,199 @@
+; TOSRFBD.INF
+;
+; Bluetooth Bus Driver
+;
+; Copyright 1999-2012, TOSHIBA CORPORATION
+[Version]
+Signature = "$WINDOWS NT$"
+Class = BLUETOOTH
+ClassGuid = {7240100F-6512-4548-8418-9EBB5C6A1A94}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TSB%
+DriverPackageDisplayName = %TosRFBD.SvcDesc%
+DriverVer = 01/30/2012,9.00.1330.1
+CatalogFile = tosrfbd.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksNames.x86]
+3426 = windows cd
+
+[SourceDisksFiles]
+tosrfbd.sys = 3426
+TosBtCi.dll = 3426
+
+[SourceDisksFiles.x86]
+tosrfbd.sys = 3426
+TosBtCi.dll = 3426
+
+[ClassInstall32]
+Addreg=BluetoothClassReg
+CopyFiles=BluetoothClassFiles
+
+[BluetoothClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,"100"
+HKR,,Installer32,,"TosBtCi.dll,BluetoothClassInstaller"
+
+[BluetoothClassFiles]
+TosBtCi.dll
+
+[DestinationDirs]
+;
+;  Specify destination directories for groups of files.
+;  '12' indicates the Windows System directory.
+;
+;;TosRFBD_CopyFiles=10,System32\Drivers
+;;INF_Dir = 17
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+TosRFBD_CopyFiles = 12
+BluetoothClassFiles = 11
+
+[Manufacturer]
+;
+;  Specify a name and devices section for each supported manufacturer that
+;  makes products of this class.
+;
+%TOSHIBA%=TOS_Devices, NTamd64
+
+[SignatureAttributes]
+tosrfbd.sys = SignatureAttributes.DRM
+
+[ControlFlags]
+ExcludeFromSelect = Bluetooth\tosrfbd
+
+;
+;  This section describes the devices of this class made by a particular
+;  manufacturer.
+;  The first descriptor, delimited by '%', is a symbolic string whose actual
+;  value is given in the [Strings] section below.
+;
+[TOS_Devices]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TosRFBD.DevDesc% = TosRFBD_inst,     Bluetooth\tosrfbd
+
+[TOS_Devices.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TosRFBD.DevDesc% = TosRFBD_inst,     Bluetooth\tosrfbd
+
+[TosRFBD_inst]
+CopyFiles = TosRFBD_CopyFiles
+;;AddReg = TosRFBD_Addreg, TosRFCOM_Addreg
+AddReg = TosRFBD_Addreg
+
+[TosRFBD_inst.NT]
+CopyFiles = TosRFBD_CopyFiles
+;;AddReg = TosRFBD_Addreg, TosRFCOM_Addreg.NT
+AddReg = TosRFBD_Addreg
+
+[TosRFBD_inst.NT.HW]
+AddReg=TosRFBD_inst.HW.AddReg
+
+[TosRFBD_inst.HW.AddReg]
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","HardwareID",0x00010000,ROOT\BLUETOOTH
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","DeviceDESC",0x00000000,"Bluetooth RFCOMM from TOSHIBA"
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","ClassGuid",0x00000000,{7240100F-6512-4548-8418-9EBB5C6A1A94}
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Mfg",0x00000000,TOSHIBA
+
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Capabilities",0x00000001,0x14,0x00,0x00,0x00
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Class",0x00010000,BLUETOOTH
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","ConfigFlags",0x00000001,0x00,0x00,0x00,0x00
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Driver",0x00010000,BLUETOOTH\9999
+
+[TosRFBD_Addreg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,tosrfbd.sys
+
+[TosRFBD_CopyFiles]
+tosrfbd.sys,,,2
+;;tosrfbd.sys,,,0x100
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+;-------------- Service installation
+[TosRFBD_inst.NT.Services]
+AddService = tosrfbd, %SPSVCINST_ASSOCSERVICE%, tosrfbd_Service_Inst, tosrfbd_Event_Inst
+
+; -------------- tosrfbd driver install sections
+[tosrfbd_Service_Inst]
+DisplayName    = %TosRFBD.SvcDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tosrfbd.sys
+LoadOrderGroup = Extended Base
+AddReg = tosrfbd_Service_Inst_AddReg
+
+[tosrfbd_Event_Inst]
+AddReg = tosrfbd_Event_Inst_AddReg
+
+[tosrfbd_Event_Inst_AddReg]
+HKR,,TypesSupported,0x00010001,7
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\tosrfbd.sys"
+
+[tosrfbd_Service_Inst_AddReg]
+HKR,Parameters,"DummyWaitTime",0x10001,0
+HKR,Parameters,"AutoDisconnection",0x10001,1
+HKR,Parameters,"L2CapDefaultPacketType",0x10001,52248
+HKR,Parameters,"MPRLevel",0x10001,0
+HKR,Parameters,"RoleOkDevice",0x10001,1
+HKR,Parameters,"RtxTimerCount",0x10001,25
+HKR,NewSetup,"Conn_Accept_Timeout",0x10001,0x5678
+HKR,NewSetup,"Page_Timeout",0x10001,0x3000
+HKR,NewSetup,"Scan_Enable",0x10001,0x0
+HKR,NewSetup,"Authentication_Enable",0x10001,0
+HKR,NewSetup,"Encryption_Mode",0x10001,0
+HKR,NewSetup,"Class_of_Device",0x10001,131340
+HKR,NewSetup,"Voice_Channel_Setting",0x10001,0
+HKR,NewSetup,"Local_Name",0x1,0x54,0x6f,0x73,0x68,0x69,0x62,0x61,0x42,0x74
+
+
+;;[TosRFCOM_Addreg]
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","HardwareID",0x00010000,ROOT\BLUETOOTH_COM
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","DeviceDESC",0x00000000,"Bluetooth RFCOMM from TOSHIBA"
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","ClassGuid",0x00000000,{7240100F-6512-4548-8418-9EBB5C6A1A94}
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","Mfg",0x00000000,TOSHIBA
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","Capabilities",0x00000001,0x14,0x00,0x00,0x00
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","Class",0x00010000,BLUETOOTH
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","ConfigFlags",0x00000001,0x00,0x00,0x00,0x00
+;;HKLM,"Enum\Root\BLUETOOTH_COM\0000","Driver",0x00010000,BLUETOOTH\9999
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","DevLoader",0x00010000,*ntkern
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","NTMPDriver",0x00010000,tosrfcom.sys
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","InfPath",0x00010000,TOSRFCOM.INF
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","InfSection",0x00010000,TOSRFComm.inst
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","ProviderName",0x00010000,Toshiba
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","DriverDesc",0x00010000,"Bluetooth RFCOMM from TOSHIBA"
+;;HKLM,"System\Currentcontrolset\Services\Class\BLUETOOTH\9999","MatchingDeviceId",0x00010000,ROOT\BLUETOOTH_COM
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom\Parameters","MaxFrameSize",0x10001,670
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom\Parameters","UseCreditBase",0x10001,1
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom\Parameters","CBSize",0x10001,30
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom\Parameters","ReSendCBaseSize",0x10001,15
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom\Parameters","WriteWaitTime",0x10001,0
+
+;;[TosRFCOM_Addreg.NT]
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","HardwareID",0x00010000,ROOT\LEGACY_BLUETOOTH
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","DeviceDESC",0x00000000,"Bluetooth RFCOMM from TOSHIBA"
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","ClassGuid",0x00000000,{7240100F-6512-4548-8418-9EBB5C6A1A94}
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Mfg",0x00000000,TOSHIBA
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Capabilities",0x00000001,0x14,0x00,0x00,0x00
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Class",0x00010000,BLUETOOTH
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","ConfigFlags",0x00000001,0x00,0x00,0x00,0x00
+;;HKLM,"System\Currentcontrolset\Enum\Root\BLUETOOTH\0000","Driver",0x00010000,BLUETOOTH\9999
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom","Start",0x10001,1
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom","Type",0x10001,1
+;;HKLM,"System\Currentcontrolset\Services\Tosrfcom","ErrorControl",0x10001,1
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+TSB = "TOSHIBA"
+TOSHIBA = "TOSHIBA"
+TosRFBD.DevDesc = "Bluetooth RFBUS"
+TosRFBD.SvcDesc = "Bluetooth RFBUS"
+ClassName = "Bluetooth"

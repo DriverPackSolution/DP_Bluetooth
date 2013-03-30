@@ -1,0 +1,207 @@
+;
+; 64-Bit Windows Installation File for the Bluetooth
+; NDIS 5 LAN Access Server Virtual Driver
+;
+; Copyright (c) 2004, Broadcom Corp.
+;
+[version]
+Signature="$WINDOWS NT$"
+Compatible=1
+Class=Net
+ClassGUID = {4d36e972-e325-11ce-bfc1-08002be10318}
+provider=%V_WIDCOMM%
+CatalogFile=btwdndis.cat
+DriverVer=11/17/2009,5.6.0.3000
+
+[DestinationDirs]
+CopyFiles.NTamd64 = 12
+
+[SourceDisksNames]
+1 = %V_WIDCOMM%,,,
+
+[SourceDisksFiles]
+btwdndis.sys = 1
+
+
+[Manufacturer]
+%V_WIDCOMM%=WIDCOMM, NTamd64
+
+[WIDCOMM.NTamd64]
+%BTWDNDIS.DeviceDesc%=BTWDNDIS.ndi, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\BTWDNDIS
+
+[BTWDNDIS.ndi.NTamd64]
+Characteristics = 0x81; NCF_VIRTUAL, NCF_HAS_UI
+AddReg          = BTWDNDIS.Pars.ndi, BTWDNDIS.reg
+CopyFiles = CopyFiles.NTamd64
+
+[BTWDNDIS.ndi.NTamd64.Services]
+AddService = BTWDNDIS, 2, BTWDNDIS.Service, common.EventLog
+
+[BTWDNDIS.Pars.ndi]
+;TraceControl
+HKR,Ndi\params\TraceControl,ParamDesc,,"Trace Control Flag"
+HKR,Ndi\params\TraceControl,type,,"int"
+HKR,Ndi\params\TraceControl,default,,"0"
+HKR,Ndi\params\TraceControl,min,,"0"
+HKR,Ndi\params\TraceControl,max,,"255"
+HKR,Ndi\params\TraceControl,step,,"1"
+
+[BTWDNDIS.reg]
+HKR, Ndi,                       Service,    0, "BTWDNDIS"
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+
+[BTWDNDIS.Service]
+DisplayName     = %BTWDNDIS.Service.DispName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_DEMAND_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\btwdndis.sys
+LoadOrderGroup  = NDIS
+AddReg          = TextModeFlags.reg
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+[TextModeFlags.reg]
+HKR, , TextModeFlags, 0x00010001, 0x0001
+
+[CopyFiles.NTamd64]
+btwdndis.sys
+
+; Localizable Strings
+[strings]
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth LAN Access Server Driver"
+BTWDNDIS.Service.DispName="Bluetooth LAN Access Server"
+
+
+[Strings.0404] ; Chinese Traditional
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="ÂÅªŞ LAN ¦s¨ú¦øªA¾¹ÅX°Êµ{¦¡"
+BTWDNDIS.Service.DispName="ÂÅªŞ LAN ¦s¨ú¦øªA¾¹"
+
+[Strings.0406] ; Danish
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Driver til Bluetooth LAN-access-server"
+BTWDNDIS.Service.DispName="Bluetooth LAN-access-server"
+
+[Strings.0407] ; German
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Treiber für Bluetooth-LAN-Zugangsserver"
+BTWDNDIS.Service.DispName="Bluetooth-LAN-Zugangsserver"
+
+; Localizable Strings
+[Strings.040a] ; Spanish
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Controlador de servidor de acceso a LAN Bluetooth"
+BTWDNDIS.Service.DispName="Servidor de acceso a LAN Bluetooth"
+
+[Strings.040b] ; Finnish
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth-lähiverkkopalvelinohjain"
+BTWDNDIS.Service.DispName="Bluetooth-lähiverkkopalvelin"
+
+[Strings.040c] ; French
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Pilote de serveur d'accès au réseau local Bluetooth"
+BTWDNDIS.Service.DispName="Serveur d'accès au réseau local Bluetooth"
+
+[Strings.0410] ; Italian
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Driver del server di accesso alla rete LAN Bluetooth"
+BTWDNDIS.Service.DispName="Server di accesso alla rete LAN Bluetooth"
+
+[Strings.0411] ; Japanese
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth LAN ƒAƒNƒZƒX ƒT[ƒo[ ƒhƒ‰ƒCƒo"
+BTWDNDIS.Service.DispName="Bluetooth LAN ƒAƒNƒZƒX ƒT[ƒo["
+
+[Strings.0412] ; Korean
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth LAN ¾×¼¼½º ¼­¹ö µå¶óÀÌ¹ö"
+BTWDNDIS.Service.DispName="Bluetooth LAN ¾×¼¼½º ¼­¹ö"
+
+[Strings.0413] ; Dutch
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth stuurprogramma LAN Access Server "
+BTWDNDIS.Service.DispName="Bluetooth LAN Access Server"
+
+[Strings.0416] ; Brazilian Portuguese
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Driver do servidor de acesso à rede local Bluetooth"
+BTWDNDIS.Service.DispName="Driver de acesso à rede local Bluetooth"
+
+[Strings.041d] ; Swedish
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth-serverdrivrutin för nätverksåtkomst"
+BTWDNDIS.Service.DispName="Bluetooth-server för nätverksåtkomst"
+
+[Strings.0415] ; Polish
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Sterownik serwera dostêpu do sieci LAN Bluetooth"
+BTWDNDIS.Service.DispName="Serwer dostêpu do sieci LAN Bluetooth"
+
+[Strings.0419] ; Russian
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Äğàéâåğ ñåğâåğà äîñòóïà ê ëîêàëüíîé ñåòè Bluetooth"
+BTWDNDIS.Service.DispName="Ñåğâåğ äîñòóïà ê ëîêàëüíîé ñåòè Bluetooth"
+
+[Strings.0414] ; Norwegian
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="Bluetooth LAN Access Server Driver"
+BTWDNDIS.Service.DispName="Bluetooth LAN Access Server"
+
+[Strings.0804] ; ChineseSimplified
+V_WIDCOMM="Broadcom" 
+BTWDNDIS.DeviceDesc="À¶ÑÀ¾ÖÓòÍø½ÓÈë·şÎñÆ÷Çı¶¯³ÌĞò"
+BTWDNDIS.Service.DispName="À¶ÑÀ¾ÖÓòÍø½ÓÈë·şÎñÆ÷"
+
+[Strings.0401] ; Arabic
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="ÈÑäÇãÌ ÊÔÛíá Bluetooth áÎÇÏã ÇáæÕæá Åáì ÇáÔÈßÉ ÇáãÍáíÉ"
+BTWDNDIS.Service.DispName="Bluetooth áÎÇÏã ÇáæÕæá Åáì ÇáÔÈßÉ ÇáãÍáíÉ"
+
+[Strings.0405] ; Czech
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Ovladaè serveru pro pøístup k síti LAN Bluetooth"
+BTWDNDIS.Service.DispName="Server pro pøístup k síti LAN Bluetooth"
+
+[Strings.0408] ; Greek
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Ğñüãñáììá ïäŞãçóçò äéáêïìéóôŞ Bluetooth ãéá ğñüóâáóç óå LAN"
+BTWDNDIS.Service.DispName="ÄéáêïìéóôŞò Bluetooth ãéá ğñüóâáóç óå LAN"
+
+[Strings.040D] ; Hebrew
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="îğäì äú÷ï ìùøú âéùä LAN Bluetooth"
+BTWDNDIS.Service.DispName="ùøú âéùä LAN Bluetooth"
+
+[Strings.041A] ; Croatian
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Bluetooth upravljaèki program za LAN pristup posluitelju"
+BTWDNDIS.Service.DispName="Bluetooth posluitelj LAN pristupa"
+
+[Strings.040E] ; Hungarian
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Bluetooth LAN-hozzáférési kiszolgáló illesztõprogramja"
+BTWDNDIS.Service.DispName="Bluetooth LAN-hozzáférési kiszolgáló"
+
+[Strings.0816] ; Iberian Portuguese
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Controlador do servidor de acesso à LAN Bluetooth"
+BTWDNDIS.Service.DispName="Servidor de acesso à LAN Bluetooth"
+
+[Strings.0418] ; Romanian
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Driver pentru server de acces LAN Bluetooth"
+BTWDNDIS.Service.DispName="Server de acces LAN Bluetooth"
+
+[Strings.041F] ; Turkish
+V_WIDCOMM="Broadcom"
+BTWDNDIS.DeviceDesc="Bluetooth LAN Erişim Sunucusu Sürücüsü"
+BTWDNDIS.Service.DispName="Bluetooth LAN Erişim Sunucusu"

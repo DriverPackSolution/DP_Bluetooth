@@ -1,0 +1,118 @@
+;------------------------------------------------------------------------
+; blueletaudio.inf
+; IVT Bluelet Virtual Audio Adapter Installation Script
+; For Windows XP/2003/Vista/Win 7 / Win 8
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2013, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ProviderName%
+CatalogFile=BlueletAudio.cat
+DriverVer = 12/24/2012, 6.2.84.265
+
+[SourceDisksNames]
+1 = %SourceDisk%,,,
+
+[SourceDisksFiles]
+blueletaudio.sys = 1,,
+
+[DestinationDirs]
+DefaultDestDir        = 10, system32\drivers
+BlueletAudio.CopyList = 10, system32\drivers
+
+[Manufacturer]
+%MfgName%=IVT, NTamd64
+
+[IVT]
+%BlueletAudio.DeviceDesc%=BlueletAudio,{F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BLUELETAUDIO
+
+[IVT.NTamd64]
+%BlueletAudio.DeviceDesc%=BlueletAudio,{F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BLUELETAUDIO
+
+[BlueletAudio]
+Include	=	ks.inf, wdmaudio.inf
+Needs	=	KS.Registration,WDMAUDIO.Registration
+AddReg	=	BlueletAudio.AddReg
+CopyFiles=	BlueletAudio.CopyList
+
+[BlueletAudio.AddReg]
+HKR,,SetupPreferredAudioDevices,3,00,00,00,00
+HKR,,Driver,,blueletaudio.sys
+HKR,,NTMPDriver,,"blueletaudio.sys,sbemul.sys"
+HKR,,PageOutWhenUnopened,3,00
+HKR,,DontSuspendIfStreamsAreRunning,3,01
+HKR,"Parameters","BreakOnEntry",0x00010001,0
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"wave,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%BlueletAudio.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%BlueletAudio.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%BlueletAudio.DeviceDesc%
+
+[BlueletAudio.CopyList]
+blueletaudio.sys
+
+[BlueletAudio.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,BlueletAudio.Interface.Wave,
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,BlueletAudio.Interface.Wave,
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,BlueletAudio.Interface.Wave,
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,BlueletAudio.Interface.Topo,
+
+[BlueletAudio.Interface.Wave]
+AddReg=BlueletAudio.Interface.Wave.AddReg
+
+[BlueletAudio.Interface.Topo]
+AddReg=BlueletAudio.Interface.Topo.AddReg
+
+[BlueletAudio.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BlueletAudio.Wave.szPname%
+
+[BlueletAudio.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BlueletAudio.Topo.szPname%
+
+[BlueletAudio.Services]
+AddService = BlueletAudio,0x00000002,BlueletAudio.ServiceInstall
+
+[BlueletAudio.ServiceInstall]
+DisplayName	= %BlueletAudio.SvcDesc%
+ServiceType	= 1  	; SERVICE_KERNEL_DRIVER
+StartType	= 3	; SERVICE_DEMAND_START
+ErrorControl	= 1	; SERVICE_ERROR_NORMAL
+ServiceBinary	= %12%\blueletaudio.sys
+AddReg		= BlueletAudio.ServiceInstall.AddReg
+
+[BlueletAudio.ServiceInstall.AddReg]
+HKR,Parameters,BreakOnEntry,0x00010001,0
+HKR,Parameters,Loopback,0x00010001,0
+HKR,Parameters,TimerIntervalMsecs,0x00010001,1
+
+[Strings]
+ProviderName="IVT Corporation"
+MfgName="IVT Corporation"
+SourceDisk = "BlueSoleil Installation Disk"
+
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+BlueletAudio.DeviceDesc="Bluetooth Audio"
+BlueletAudio.Wave.szPname="Bluetooth Audio"
+BlueletAudio.Topo.szPname="Bluetooth Audio"
+BlueletAudio.SvcDesc="Bluetooth Audio Service"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"

@@ -1,0 +1,257 @@
+; File Name: BtL2caScoIf.inf
+; Install information file for BtL2caScoIf Driver
+;
+; Copyright (c) 2002-2012, Ralink Corporation.
+;
+;
+;  devcon.exe BtL2caScoIf.inf BTHENUM\{3E7068EE-CEBA-4be7-BA9D-5E9D5501E60F}
+
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Bluetooth Profiles
+ClassGuid={5B0E08FD-59EB-47af-B743-965F15C0F8F1}
+Provider=%ProviderName%
+DriverVer=07/19/2012,9.02.08.1000
+CatalogFile=BtL2caScoIf.cat
+
+;================================
+[ClassInstall32.NT]
+AddReg=BluetoothProfile.NT.AddReg
+
+[BluetoothProfile.NT.AddReg]
+HKR,,,,%BluetoothProfilesName%
+HKR,,NoInstallClass,,1
+HKR,,NoDisplayClass,,1
+HKR,,Installer32,,"bthci.dll,BluetoothClassInstaller"
+HKR,,Icon,,"201"
+;=================================
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+BtL2caScoIf.sys  = 1,,
+
+[DestinationDirs]
+DefaultDestDir = 10, system32\drivers
+driverFile.CopyList = 10, system32\drivers
+
+;*****************************************
+;*****************************************
+
+[Manufacturer]
+%ProviderName% = Ralink, NTamd64
+
+[Ralink]
+%DeviceDesc% = BtL2caScoIf_Inst,BTHENUM\{3E7068EE-CEBA-4be7-BA9D-5E9D5501E60F}
+
+%LAP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001102-0000-1000-8000-00805f9b34fb}
+%SYNC.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001104-0000-1000-8000-00805f9b34fb}
+%OPP.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001105-0000-1000-8000-00805f9b34fb}
+%FTP.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001106-0000-1000-8000-00805f9b34fb}
+%HANDSET.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001108-0000-1000-8000-00805f9b34fb}
+%A2DPSOURCE.DeviceDesc%   =  BtL2caScoIf_Inst,BTHENUM\{0000110a-0000-1000-8000-00805f9b34fb}
+%A2DPSink.DeviceDesc%     =  BtL2caScoIf_Inst,BTHENUM\{0000110b-0000-1000-8000-00805f9b34fb}
+%AVRCTARGET.DeviceDesc%   =  BtL2caScoIf_Inst,BTHENUM\{0000110C-0000-1000-8000-00805f9b34fb}
+%AVCONTROL_DESCRIPTION%   =  BTINULL,BTHENUM\{0000110e-0000-1000-8000-00805f9b34fb}
+%INTERCOM.DeviceDesc%     =  BTINULL,BTHENUM\{00001110-0000-1000-8000-00805f9b34fb}
+%FAX.DeviceDesc%	  =  BTINULL,BTHENUM\{00001111-0000-1000-8000-00805f9b34fb}
+%BPPDP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001118-0000-1000-8000-00805f9b34fb}
+%BPPRO.DeviceDesc%	  =  BTINULL,BTHENUM\{00001119-0000-1000-8000-00805f9b34fb}
+%BIP.DeviceDesc%          =  BtL2caScoIf_Inst,BTHENUM\{0000111b-0000-1000-8000-00805f9b34fb}
+%BIP1.DeviceDesc%	  =  BTINULL,BTHENUM\{0000111c-0000-1000-8000-00805f9b34fb}
+%BIP2.DeviceDesc%	  =  BTINULL,BTHENUM\{0000111d-0000-1000-8000-00805f9b34fb}
+%HANDSFREE.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{0000111e-0000-1000-8000-00805f9b34fb}
+%HANDSETAG.DeviceDesc%    =  BtL2caScoIf_Inst,BTHENUM\{00001112-0000-1000-8000-00805f9b34fb}
+%HANDSFREEAG.DeviceDesc%  =  BtL2caScoIf_Inst,BTHENUM\{0000111f-0000-1000-8000-00805f9b34fb}
+%BPPRP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001120-0000-1000-8000-00805f9b34fb}
+%BPPBP.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001122-0000-1000-8000-00805f9b34fb}
+%BPPPS.DeviceDesc%	  =  BTINULL,BTHENUM\{00001123-0000-1000-8000-00805f9b34fb}
+%SAP.DeviceDesc%	  =  BTINULL,BTHENUM\{0000112D-0000-1000-8000-00805f9b34fb}
+%PBAPPSE.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{0000112F-0000-1000-8000-00805f9b34fb}
+%MAP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001133-0000-1000-8000-00805f9b34fb}
+%GENTEL.DeviceDesc%	  =  BTINULL,BTHENUM\{00001204-0000-1000-8000-00805f9b34fb}
+%VDPSRC.DeviceDesc%	  =  BTINULL,BTHENUM\{00001303-0000-1000-8000-00805f9b34fb}
+%VDPSNK.DeviceDesc%	  =  BTINULL,BTHENUM\{00001304-0000-1000-8000-00805f9b34fb}
+%MAP_MAS.DeviceDesc%      =  BtL2caScoIf_Inst,BTHENUM\{00001132-0000-1000-8000-00805f9b34fb}
+
+%SYNCML.DeviceDesc%	  =  BTINULL,BTHENUM\{00000001-0000-1000-8000-0002ee000002}
+%SYNCML.DeviceDesc%	  =  BTINULL,BTHENUM\{00000002-0000-1000-8000-0002ee000002}
+
+; Nokia
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00000004-0000-1000-8000-0002ee000002}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00005005-0000-1000-8000-0002ee000001}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00005601-0000-1000-8000-0002ee000001}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00005557-0000-1000-8000-0002ee000001}
+
+; Sony Ericsson
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{8e771301-0000-1000-8000-00805f9b34fb}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{8e771401-0000-1000-8000-00805f9b34fb}
+
+; iPhone
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00000000-deca-fade-deca-deafdecacafe}
+
+; Blackberry bold
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{426c6163-6b42-6572-7279-44736b746f70}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{426c6163-6b42-6572-7279-427970617373}
+
+;Clevo
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00001801-0000-1000-8000-00805f9b34fb}
+
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{7f24c455-bd72-478d-a1b4-deda19978b07}
+
+%LEDEVICE.DeviceDesc% =  BtL2caScoIf_Inst,BTHENUM\{00001800-0000-1000-8000-00805f9b34fb}
+
+[Ralink.NTamd64]
+%DeviceDesc% = BtL2caScoIf_Inst,BTHENUM\{3E7068EE-CEBA-4be7-BA9D-5E9D5501E60F}
+
+%LAP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001102-0000-1000-8000-00805f9b34fb}
+%SYNC.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001104-0000-1000-8000-00805f9b34fb}
+%OPP.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001105-0000-1000-8000-00805f9b34fb}
+%FTP.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001106-0000-1000-8000-00805f9b34fb}
+%HANDSET.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001108-0000-1000-8000-00805f9b34fb}
+%A2DPSOURCE.DeviceDesc%   =  BtL2caScoIf_Inst,BTHENUM\{0000110a-0000-1000-8000-00805f9b34fb}
+%A2DPSink.DeviceDesc%     =  BtL2caScoIf_Inst,BTHENUM\{0000110b-0000-1000-8000-00805f9b34fb}
+%AVRCTARGET.DeviceDesc%   =  BtL2caScoIf_Inst,BTHENUM\{0000110C-0000-1000-8000-00805f9b34fb}
+%AVCONTROL_DESCRIPTION%   =  BTINULL,BTHENUM\{0000110e-0000-1000-8000-00805f9b34fb}
+%INTERCOM.DeviceDesc%     =  BTINULL,BTHENUM\{00001110-0000-1000-8000-00805f9b34fb}
+%FAX.DeviceDesc%	  =  BTINULL,BTHENUM\{00001111-0000-1000-8000-00805f9b34fb}
+%BPPDP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001118-0000-1000-8000-00805f9b34fb}
+%BPPRO.DeviceDesc%	  =  BTINULL,BTHENUM\{00001119-0000-1000-8000-00805f9b34fb}
+%BIP.DeviceDesc%          =  BtL2caScoIf_Inst,BTHENUM\{0000111b-0000-1000-8000-00805f9b34fb}
+%BIP1.DeviceDesc%	  =  BTINULL,BTHENUM\{0000111c-0000-1000-8000-00805f9b34fb}
+%BIP2.DeviceDesc%	  =  BTINULL,BTHENUM\{0000111d-0000-1000-8000-00805f9b34fb}
+%HANDSFREE.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{0000111e-0000-1000-8000-00805f9b34fb}
+%HANDSETAG.DeviceDesc%    =  BtL2caScoIf_Inst,BTHENUM\{00001112-0000-1000-8000-00805f9b34fb}
+%HANDSFREEAG.DeviceDesc%  =  BtL2caScoIf_Inst,BTHENUM\{0000111f-0000-1000-8000-00805f9b34fb}
+%BPPRP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001120-0000-1000-8000-00805f9b34fb}
+%BPPBP.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{00001122-0000-1000-8000-00805f9b34fb}
+%BPPPS.DeviceDesc%	  =  BTINULL,BTHENUM\{00001123-0000-1000-8000-00805f9b34fb}
+%SAP.DeviceDesc%	  =  BTINULL,BTHENUM\{0000112D-0000-1000-8000-00805f9b34fb}
+%PBAPPSE.DeviceDesc%	  =  BtL2caScoIf_Inst,BTHENUM\{0000112F-0000-1000-8000-00805f9b34fb}
+%MAP.DeviceDesc%	  =  BTINULL,BTHENUM\{00001133-0000-1000-8000-00805f9b34fb}
+%GENTEL.DeviceDesc%	  =  BTINULL,BTHENUM\{00001204-0000-1000-8000-00805f9b34fb}
+%VDPSRC.DeviceDesc%	  =  BTINULL,BTHENUM\{00001303-0000-1000-8000-00805f9b34fb}
+%VDPSNK.DeviceDesc%	  =  BTINULL,BTHENUM\{00001304-0000-1000-8000-00805f9b34fb}
+%MAP_MAS.DeviceDesc%      =  BtL2caScoIf_Inst,BTHENUM\{00001132-0000-1000-8000-00805f9b34fb}
+
+%SYNCML.DeviceDesc%	  =  BTINULL,BTHENUM\{00000001-0000-1000-8000-0002ee000002}
+%SYNCML.DeviceDesc%	  =  BTINULL,BTHENUM\{00000002-0000-1000-8000-0002ee000002}
+
+; Nokia
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00000004-0000-1000-8000-0002ee000002}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00005005-0000-1000-8000-0002ee000001}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00005601-0000-1000-8000-0002ee000001}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00005557-0000-1000-8000-0002ee000001}
+
+; Sony Ericsson
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{8e771301-0000-1000-8000-00805f9b34fb}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{8e771401-0000-1000-8000-00805f9b34fb}
+
+; iPhone
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00000000-deca-fade-deca-deafdecacafe}
+
+; Blackberry bold
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{426c6163-6b42-6572-7279-44736b746f70}
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{426c6163-6b42-6572-7279-427970617373}
+
+;Clevo
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{00001801-0000-1000-8000-00805f9b34fb}
+
+%NOTSUPPORTED.DeviceDesc% =  BTINULL,BTHENUM\{7f24c455-bd72-478d-a1b4-deda19978b07}
+
+%LEDEVICE.DeviceDesc% =  BtL2caScoIf_Inst,BTHENUM\{00001800-0000-1000-8000-00805f9b34fb}
+;======================================================
+[BtL2caScoIf_Inst.NT]
+CopyFiles = driverFile.CopyList
+
+[BtL2caScoIf_Inst.NT.Services]
+AddService = BthL2caScoIfSrv,2, BtL2caScoIf_Service_Inst
+
+[BtL2caScoIf_Service_Inst]
+DisplayName    = "Bluetooth Profile Interface Driver Service"
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\BtL2caScoIf.sys
+LoadOrderGroup = Extended Base
+
+[driverFile.CopyList]
+BtL2caScoIf.sys
+;
+;--- BtL2caScoIf_Inst Coinstaller installation ------
+;
+[DestinationDirs]
+BtL2caScoIf_Inst_CoInstaller_CopyFiles = 11
+
+[BtL2caScoIf_Inst.NT.CoInstallers]
+AddReg=BtL2caScoIf_Inst_CoInstaller_AddReg
+CopyFiles=BtL2caScoIf_Inst_CoInstaller_CopyFiles
+
+[BtL2caScoIf_Inst_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[BtL2caScoIf_Inst_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[SourceDisksFiles]
+WdfCoInstaller01009.dll=1 ; make sure the number matches with SourceDisksNames
+
+[BtL2caScoIf_Inst.NT.Wdf]
+KmdfService =  BthL2caScoIfSrv, BtL2caScoIf_Inst_wdfsect
+[BtL2caScoIf_Inst_wdfsect]
+KmdfLibraryVersion = 1.9
+
+; NULL Device
+[BTINULL.NTX86]
+
+[BTINULL.NTX86.Services]
+AddService = , %ASSOCSERVICE%  ; null service install
+
+; NULL Device
+[BTINULL.NTamd64]
+
+[BTINULL.NTamd64.Services]
+AddService = , %ASSOCSERVICE%  ; null service install
+
+[Strings]
+ProviderName 		= "Ralink Corporation"
+DiskName = "Ralink Bluetooth Device Installation Disk"
+DeviceDesc	= "Bluetooth Profile Interface Driver"
+V_IVT			=	"Ralink Corporation"
+Source_Description	=	"Ralink Bluetooth Installation Media"
+ASSOCSERVICE		=	 0x00000002
+A2DPSOURCE.DeviceDesc	=	"Bluetooth AV Source"
+A2DPSINK.DeviceDesc	=	"Bluetooth AV Sink"
+SYNC.DeviceDesc		=	"Bluetooth SYNC"
+FTP.DeviceDesc		=	"Bluetooth FTP"
+OPP.DeviceDesc		=	"Bluetooth OPP"
+BIP.DeviceDesc		=	"Bluetooth Imaging Responder"
+BluetoothProfilesName	=	"Bluetooth Profiles Devices"
+AVCONTROL_DESCRIPTION   = 	"Bluetooth Remote Control"
+NOTSUPPORTED.DeviceDesc =	"Not Supported Bluetooth Function"
+LAP.DeviceDesc		=	"Bluetooth LAN Access over PPP"
+AVRCTARGET.DeviceDesc	=   	"Bluetooth AV Remote Control Target"
+INTERCOM.DeviceDesc	=	"Bluetooth Intercom"
+BIP1.DeviceDesc		=	"Bluetooth Imaging Auto Archive"
+BIP2.DeviceDesc		=	"Bluetooth Imaging Reference Objects"
+FAX.DeviceDesc		=	"Bluetooth FAX"
+SYNCML.DeviceDesc	=	"Bluetooth SyncML"
+BPPDP.DeviceDesc	=	"Bluetooth BPP Direct"
+BPPRO.DeviceDesc	=   	"Bluetooth BPP Reference Object"
+BPPRP.DeviceDesc	=	"Bluetooth BPP Reference"
+BPPBP.DeviceDesc	=	"Bluetooth BPP Basic"
+BPPPS.DeviceDesc	=	"Bluetooth BPP Status"
+SAP.DeviceDesc		=	"Bluetooth SIM Access"
+PBAPPSE.DeviceDesc	=	"Bluetooth Phone Boook Access"
+MAP.DeviceDesc		=	"Bluetooth Message Access"
+GENTEL.DeviceDesc	=	"Bluetooth Generic Telephony"
+VDPSRC.DeviceDesc	=	"Video Source Device"
+VDPSNK.DeviceDesc	=	"Video Sink Device"
+HANDSET.DeviceDesc	=	"Bluetooth Headset"
+HANDSFREE.DeviceDesc	=	"Bluetooth Hands-free"
+HANDSETAG.DeviceDesc	=	"Bluetooth Headset AG"
+HANDSFREEAG.DeviceDesc	=	"Bluetooth Hands-free AG"
+MAP_MAS.DeviceDesc      =       "Bluetooth MAP_MAS"
+LEDEVICE.DeviceDesc	= 	"Bluetooth LE Device"

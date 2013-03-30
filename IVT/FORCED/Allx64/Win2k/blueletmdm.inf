@@ -1,0 +1,193 @@
+;------------------------------------------------------------------------
+; BlueletMDM.INF
+; IVT Corporation Bluetooth NULL Modem Installation Script
+; For Windows 2000/XP/2003/Vista
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2010, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=Modem
+ClassGUID={4D36E96D-E325-11CE-BFC1-08002BE10318}
+Provider=%IVT%
+CatalogFile=blueletmdm.cat
+DriverVer=08/26/2010,6.2.78.221
+
+[Manufacturer]
+%IVT% = IVT, NTamd64
+
+[IVT]
+%BlueletModem%  = Modemreg, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\MDMBTGEN336
+
+[IVT.NTamd64]
+%BlueletModem%  = Modemreg, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\MDMBTGEN336
+
+[Modemreg]
+AddReg=All, External
+
+[All]
+HKR,,ConfigDialog,,modemui.dll
+HKR,,DevLoader,,*vcomm
+HKR,,EnumPropPages,,"modemui.dll,EnumPropPages"
+HKR,,FriendlyDriver,,Unimodem.VXD
+HKR,,PortSubClass,1,02
+HKR,,CompatibilityFlags, 1, 01, 00, 00, 00
+HKR,,DCB, 1, 1C,00,00,00, 00,C2,01,00, 15,20,00,00, 00,00,0A,00, 0A,00,08,00, 00,11,13,00, 00,00
+
+HKR,, Properties, 1, 00,00,00,00, FF,00,00,00, 00,00,00,00, 07,00,00,00, 07,00,00,00, 00,03,00,00, 00,C2,01,00, 00,F4,01,00
+
+HKR, Init, 1,, "AT<cr>"
+HKR, Init, 2,, "ATE0V1&D2<cr>"
+
+;Value of 10 secs
+
+HKR, Settings, CallSetupFailTimer,, "S7=<#>" 
+HKR,,InactivityScale,1,0a,00,00,00
+
+HKR, Monitor, 1,, "ATS0=0<cr>"
+HKR, Monitor, 2,, "None"
+HKR, Answer, 1,, "ATA<cr>"
+HKR, Hangup, 1,, "ATH<cr>"
+HKR,, Reset,, "ATZ<cr>"
+HKR, Settings, Prefix,, "AT"
+HKR, Settings, Terminator,, "<cr>"
+HKR, Settings, DialPrefix,, "D"
+HKR, Settings, DialSuffix,, ""
+HKR, Settings, Blind_Off,, "X3"
+HKR, Settings, Blind_On,, "X1"
+HKR, Settings, Pulse,, "P"
+HKR, Settings, Tone,, "T"
+
+HKR, Settings, SpeakerVolume_Low,, "L0"
+HKR, Settings, SpeakerVolume_Med,, "L2"
+HKR, Settings, SpeakerVolume_High,, "L3"
+HKR, Settings, SpeakerMode_Off,, "M0"
+HKR, Settings, SpeakerMode_Dial,, "M1"
+HKR, Settings, SpeakerMode_On,, "M2"
+
+;HKR, Responses, "<cr>",     1,01,0,0,0,0,0,0,0,0,0
+;HKR, Responses, "<lf>",     1,01,0,0,0,0,0,0,0,0,0
+HKR, Responses, "0<cr>", 1, 00, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "1<cr>", 1, 02, 00, 00,00,00,00, 00,00,00,00
+HKR, Responses, "2<cr>", 1, 08, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "3<cr>", 1, 04, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "4<cr>", 1, 03, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "5<cr>", 1, 02, 00, b0,04,00,00, 00,00,00,00
+HKR, Responses, "6<cr>", 1, 05, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "7<cr>", 1, 06, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "8<cr>", 1, 07, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "10<cr>", 1, 02, 00, 60,09,00,00, 00,00,00,00
+HKR, Responses, "11<cr>", 1, 02, 00, c0,12,00,00, 00,00,00,00
+
+HKR, Responses, "<cr><lf>OK<cr><lf>",          1, 00, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>RING<cr><lf>",        1, 08, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>NO CARRIER<cr><lf>",  1, 04, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>ERROR<cr><lf>",       1, 03, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>NO DIALTONE<cr><lf>", 1, 05, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>BUSY<cr><lf>",        1, 06, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>NO ANSWER<cr><lf>",   1, 07, 00, 00,00,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT<cr><lf>",         1, 02, 00, 00,00,00,00, 00,00,00,00   
+HKR, Responses, "<cr><lf>CONNECT 1200/ARQ<cr><lf>", 1, 02, 02, B0,04,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 2400/ARQ<cr><lf>", 1, 02, 02, 60,09,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 4800/ARQ<cr><lf>", 1, 02, 02, C0,12,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 9600/ARQ<cr><lf>", 1, 02, 02, 80,25,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 7200/ARQ<cr><lf>", 1, 02, 02, 20,1C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 12000/ARQ<cr><lf>", 1, 02, 02, E0,2E,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 14400/ARQ<cr><lf>", 1, 02, 02, 40,38,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 19200/ARQ<cr><lf>", 1, 02, 02, 00,4B,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 32000/ARQ<cr><lf>", 1, 02, 02, 00,7D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 34000/ARQ<cr><lf>", 1, 02, 02, D0,84,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 36000/ARQ<cr><lf> ", 1, 02, 02, A0,8C,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 38000/ARQ<cr><lf>", 1, 02, 02, 70,94,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 40000/ARQ<cr><lf>", 1, 02, 02, 40,9C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 42000/ARQ<cr><lf>", 1, 02, 02, 10,A4,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 44000/ARQ<cr><lf>", 1, 02, 02, E0,AB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 46000/ARQ<cr><lf>", 1, 02, 02, B0,B3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 48000/ARQ<cr><lf>", 1, 02, 02, 80,BB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 50000/ARQ<cr><lf>", 1, 02, 02, 50,C3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 52000/ARQ<cr><lf>", 1, 02, 02, 20,CB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 54000/ARQ<cr><lf>", 1, 02, 02, F0,D2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 56000/ARQ<cr><lf>", 1, 02, 02, C0,DA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 58000/ARQ<cr><lf>", 1, 02, 02, 90,E2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 60000/ARQ<cr><lf>", 1, 02, 02, 60,EA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 31200/ARQ<cr><lf>", 1, 02, 02, E0,79,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 33600/ARQ<cr><lf>", 1, 02, 02, 40,83,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 38400/ARQ<cr><lf>", 1, 02, 02, 00,96,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 57600/ARQ<cr><lf>", 1, 02, 02, 00,E1,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 115200/ARQ<cr><lf>", 1, 02, 02, 00,C2,01,00, 00,00,00,00
+
+HKR, Responses, "<cr><lf>CONNECT 230400/ARQ<cr><lf>", 1, 02, 02, 00,84,03,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 230400<cr><lf>",     1, 02, 00, 00,84,03,00, 00,00,00,00
+
+HKR, Responses, "<cr><lf>CONNECT 460800/ARQ<cr><lf>", 1, 02, 02, 00,08,07,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 460800<cr><lf>",     1, 02, 00, 00,08,07,00, 00,00,00,00
+
+;HKR, Responses, "<cr><lf>CONNECT 921600/ARQ<cr><lf>", 1, 02, 02, 00,10,0E,00, 00,00,00,00
+;HKR, Responses, "<cr><lf>CONNECT 921600<cr><lf>",     1, 02, 00, 00,10,0E,00, 00,00,00,00
+
+;HKR, Responses, "<cr><lf>CONNECT 1843200/ARQ<cr><lf>", 1, 02, 02, 00,20,1C,00, 00,00,00,00
+;HKR, Responses, "<cr><lf>CONNECT 1843200<cr><lf>",     1, 02, 00, 00,20,1C,00, 00,00,00,00
+
+;HKR, Responses, "<cr><lf>CONNECT 3686400/ARQ<cr><lf>", 1, 02, 02, 00,40,38,00, 00,00,00,00
+;HKR, Responses, "<cr><lf>CONNECT 3686400<cr><lf>",     1, 02, 00, 00,40,38,00, 00,00,00,00
+
+;HKR, Responses, "<cr><lf>CONNECT 7372800/ARQ<cr><lf>", 1, 02, 02, 00,80,70,00, 00,00,00,00
+;HKR, Responses, "<cr><lf>CONNECT 7372800<cr><lf>",     1, 02, 00, 00,80,70,00, 00,00,00,00
+
+;HKR, Responses, "<cr><lf>CONNECT 14745600/ARQ<cr><lf>", 1, 02, 02, 00,00,E1,00, 00,00,00,00
+;HKR, Responses, "<cr><lf>CONNECT 14745600<cr><lf>",     1, 02, 00, 00,00,E1,00, 00,00,00,00
+
+HKR, Responses, "<cr><lf>CONNECT 75TX/1200RX<cr><lf>", 1, 02, 00, B0,04,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 1200TX/75RX<cr><lf>", 1, 02, 00, B0,04,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 16800/ARQ<cr><lf>", 1, 02, 02, A0,41,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 21600/ARQ<cr><lf>", 1, 02, 02, 60,54,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 24000/ARQ<cr><lf>", 1, 02, 02, C0,5D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 26400/ARQ<cr><lf>", 1, 02, 02, 20,67,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 28800/ARQ<cr><lf>", 1, 02, 02, 80,70,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 1200<cr><lf>", 1, 02, 00, B0,04,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 0600<cr><lf>", 1, 02, 00, 58,02,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 2400<cr><lf>", 1, 02, 00, 60,09,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 4800<cr><lf>", 1, 02, 00, C0,12,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 9600<cr><lf>", 1, 02, 00, 80,25,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 7200<cr><lf>", 1, 02, 00, 20,1C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 12000<cr><lf>", 1, 02, 00, E0,2E,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 14400<cr><lf>", 1, 02, 00, 40,38,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 19200<cr><lf>", 1, 02, 00, 00,4B,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 38400<cr><lf>", 1, 02, 00, 00,96,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 57600<cr><lf>", 1, 02, 00, 00,E1,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 115200<cr><lf>", 1, 02, 00, 00,C2,01,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 16800<cr><lf>", 1, 02, 00, A0,41,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 21600<cr><lf>", 1, 02, 00, 60,54,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 24000<cr><lf>", 1, 02, 00, C0,5D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 26400<cr><lf>", 1, 02, 00, 20,67,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 28800<cr><lf>", 1, 02, 00, 80,70,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 31200<cr><lf>", 1, 02, 00, E0,79,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 33600<cr><lf>", 1, 02, 00, 40,83,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 32000<cr><lf>", 1, 02, 00, 00,7D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 34000<cr><lf>", 1, 02, 00, D0,84,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 36000<cr><lf>", 1, 02, 00, A0,8C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 38000<cr><lf>", 1, 02, 00, 70,94,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 40000<cr><lf>", 1, 02, 00, 40,9C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 42000<cr><lf>", 1, 02, 00, 10,A4,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 44000<cr><lf>", 1, 02, 00, E0,AB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 46000<cr><lf>", 1, 02, 00, B0,B3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 48000<cr><lf>", 1, 02, 00, 80,BB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 50000<cr><lf>", 1, 02, 00, 50,C3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 52000<cr><lf>", 1, 02, 00, 20,CB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 54000<cr><lf>", 1, 02, 00, F0,D2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 56000<cr><lf>", 1, 02, 00, C0,DA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 58000<cr><lf>", 1, 02, 00, 90,E2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 60000<cr><lf>", 1, 02, 00, 60,EA,00,00, 00,00,00,00 
+
+[External]
+HKR,,DeviceType,1,01
+
+[Strings]
+IVT = "IVT Corporation"
+BlueletModem= "Bluetooth DUN Modem"
+

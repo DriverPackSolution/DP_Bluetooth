@@ -1,0 +1,90 @@
+;************************************************************************
+;* Copyright 2011 Motorola Solutions, Inc. All rights reserved.         *
+;*                                                                      *
+;* Installation inf for Bluetooth Keyboard and Mouse                    *
+;*                                                                      *
+;************************************************************************;
+
+[version]
+signature="$CHICAGO$"
+Class=HIDClass
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%INTEL%
+CatalogFile=btmhid.cat
+DriverVer=07/19/2011,2.0.34.324
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[DestinationDirs]
+CopyFiles.All = 12	;12 = %windir%\system32\drivers for 2000\XP\2003
+
+[SourceDisksNames]
+1=%Disk_Description%,,,\Win32
+
+[SourceDisksNames.x86]
+1=%Disk_Description%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%Disk_Description%,,,\Win64
+
+[SourceDisksFiles]
+btmhid.sys = 1
+
+[Manufacturer]
+%INTEL%=Intel, NTx86, NTamd64
+
+[Intel]
+%BT_KEYBOARD_DESC%=BT_HID, BTMUSB\BTMKEYBOARD
+%BT_MOUSE_DESC%=BT_HID, BTMUSB\BTMMOUSE
+%BT_HIDDEVICE_DESC%=BT_HID, BTMUSB\BTMHID
+
+[Intel.NTx86]
+%BT_KEYBOARD_DESC%=BT_HID, BTMUSB\BTMKEYBOARD
+%BT_MOUSE_DESC%=BT_HID, BTMUSB\BTMMOUSE
+%BT_HIDDEVICE_DESC%=BT_HID, BTMUSB\BTMHID
+
+[Intel.NTamd64]
+%BT_KEYBOARD_DESC%=BT_HID, BTMUSB\BTMKEYBOARD
+%BT_MOUSE_DESC%=BT_HID, BTMUSB\BTMMOUSE
+%BT_HIDDEVICE_DESC%=BT_HID, BTMUSB\BTMHID
+
+; Bluetooth Virtual HID device
+;0x00000002 = SPSVCINST_ASSOCSERVICE - functional driver
+
+[BT_HID]
+CopyFiles = CopyFiles.All
+
+[BT_HID.Services]
+AddService = btmhid,0x00000002,HID_Service_Inst
+
+; Service installation
+
+[HID_Service_Inst]
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+;StartType    = %SERVICE_AUTO_START%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\btmhid.sys
+
+[CopyFiles.All]
+btmhid.sys
+
+[Strings]
+Disk_Description="Bluetooth Installation Disk"
+INTEL="Intel Corporation"
+BT_KEYBOARD_DESC = "Bluetooth Keyboard"
+BT_MOUSE_DESC    = "Bluetooth Mouse"
+BT_HIDDEVICE_DESC = "Bluetooth HID device"
+
+SERVICE_BOOT_START   = 0x0
+SERVICE_SYSTEM_START = 0x1
+SERVICE_AUTO_START   = 0x2
+SERVICE_DEMAND_START = 0x3
+SERVICE_DISABLED     = 0x4
+
+SERVICE_KERNEL_DRIVER  = 0x1
+SERVICE_ERROR_IGNORE   = 0x0
+SERVICE_ERROR_NORMAL   = 0x1
+SERVICE_ERROR_SEVERE   = 0x2
+SERVICE_ERROR_CRITICAL = 0x3

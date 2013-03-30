@@ -1,0 +1,77 @@
+;------------------------------------------------------------------------
+; BtAudioBus.inf
+; Ralink Corporation Bluetooth Bus Device Installation Script
+; For Windows Win7
+; For Platform x86/Amd64
+;
+; Copyright (c) 2002-2012, Ralink Corporation.
+; http://www.Ralinktech.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+signature="$CHICAGO$"
+Class=Bluetooth Device
+ClassGUID={D2DE069D-7286-420b-BAF8-225D700CE748}
+Provider=%ProviderName%
+DriverVer=09/04/2012,9.02.00.0001
+CatalogFile=BtAudioBus.cat
+
+[SourceDisksNames]
+1 = %SourceDisk%,,,
+
+[SourceDisksFiles]
+BtAudioBus.sys = 1
+
+[DestinationDirs]
+DefaultDestDir     = 10,System32\Drivers
+BtAudioBus_Files = 10,System32\Drivers
+
+[ClassInstall32]
+AddReg=BSOL.NT.AddReg
+
+[BSOL.NT.AddReg]
+HKR,,,0,%BtAudioBusClassName%
+HKR,,SilentInstall,,1
+HKR,,NoInstallClass,,1
+HKR,,NoDisplayClass,,1
+
+[Manufacturer]
+%IVT%=Ralink, NTamd64
+
+[Ralink]
+%DeviceDesc%=BtAudioBus_DDI, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BtAudioBus
+
+
+[Ralink.NTamd64]
+%DeviceDesc%=BtAudioBus_DDI, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BtAudioBus
+
+
+[BtAudioBus_DDI.NT]
+CopyFiles=BtAudioBus_Files
+AddProperty=AddPropertySection
+
+[BtAudioBus_DDI.NT.Services]
+Addservice = BtAudioBusSrv, 0x00000002, BtAudioBus_Service_AddService
+
+[BtAudioBus_Service_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\BtAudioBus.sys
+
+[AddPropertySection]
+DeviceIcon,,,,"%SYSTEMROOT%\system32\bthci.dll,-201"
+
+[BtAudioBus_Files]
+BtAudioBus.sys
+
+;--------- Strings Section ---------------------------------------------------
+[Strings]
+IVT="Ralink Corporation"
+ProviderName="Ralink Corporation"
+SvcDesc="Ralink Bluetooth Audio Bus Service"
+SourceDisk="Ralink Bluetooth Installation Disk"
+DeviceDesc="Bluetooth Audio Bus Device"
+BtAudioBusClassName="Bluetooth Device"

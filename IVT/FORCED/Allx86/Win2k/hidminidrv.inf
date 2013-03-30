@@ -1,0 +1,120 @@
+;------------------------------------------------------------------------
+; hidminidrv.inf
+; IVT Corporation Bluetooth HID Device Installation Script
+; For Windows 2000/XP/2003/Vista/Win7
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2011, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=HIDClass
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%VENDOR%
+CatalogFile=hidminidrv.cat
+DriverVer=07/27/2011,6.2.82.241
+
+[ControlFlags]
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDDEVICE
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDKBD
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDMOUSE
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDKBDMOU
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDUNCLS
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDJOYSTK
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDGAMEPAD
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDRMTCTRL
+ExcludeFromSelect = {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDSENSE
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+VHIDMini.sys = 1
+
+[DestinationDirs]
+CopyFilesSYS = 10,system32\drivers  ;%SystemRoot%\system32\drivers
+DefaultDestDir = 10,system32\drivers
+CopyFilesDLL = 11                   ;%SystemRoot%\system or system32 - 98 or Win2000
+
+[Manufacturer]
+%VENDOR%=IVT, NTamd64
+
+;
+;   For each device the following must be defined:
+;   Device name     - name seen in the Add New Hardware selection dialog
+;   Install section - section in this INF to be run to install the device
+;   PnP ID          - ID which is matched by PnP when the device is detected
+;                     This should not contain spaces and for Win98 compatibility 
+;                     should use the form GamePort\VID_9999&PID_9999.
+;                     A PnP ID must be used or this device will be detected as 
+;                     always present and so loaded during boot even if the 
+;                     StartType of the service is SERVICE_DEMAND_START.
+;
+
+[IVT]
+;Device Name   Install Section     PnP ID
+;
+%HidMinidrv%=    HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDDEVICE
+%HidKeyBoard%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDKBD
+%HidMouse%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDMOUSE
+%HidKbdMou%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDKBDMOU
+%HidUncls%=      HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDUNCLS
+%HidJoyStick%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDJOYSTK
+%HidGamePad%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDGAMEPAD
+%HidRemoteCtrl%= HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDRMTCTRL
+%HidSense%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDSENSE
+
+[IVT.NTamd64]
+;Device Name   Install Section     PnP ID
+;
+%HidMinidrv%=    HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDDEVICE
+%HidKeyBoard%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDKBD
+%HidMouse%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDMOUSE
+%HidKbdMou%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDKBDMOU
+%HidUncls%=      HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDUNCLS
+%HidJoyStick%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDJOYSTK
+%HidGamePad%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDGAMEPAD
+%HidRemoteCtrl%= HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDRMTCTRL
+%HidSense%=	 HidMinidrv.Inst,    {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BTHIDSENSE
+
+[CopyFilesSYS]
+VHIDMini.sys
+;HidClass.sys
+;HidParse.sys
+
+[CopyFilesDLL]
+;Hid.dll
+
+[HidMinidrv.Inst]
+CopyFiles = CopyFilesSYS, CopyFilesDLL
+Include=input.inf
+
+[HidMinidrv.Inst.Services]
+AddService = VHidMinidrv,%SPSVCINST_ASSOCSERVICE%,HidMiniDrv_Service_Inst
+
+[HidMiniDrv_Service_Inst]
+DisplayName     = %SvcDesc.Svc%
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary   = %10%\system32\drivers\VHIDMini.sys
+LoadOrderGroup  = Extended Base
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+VENDOR          = "IVT Corporation"
+HidMinidrv      = "Bluetooth HID Device"
+HidKeyBoard 	= "Bluetooth HID Keyboard"
+HidMouse	= "Bluetooth HID Mouse"
+HidKbdMou	= "Bluetooth HID Keyboard or Mouse"
+HidUncls	= "Bluetooth HID Unclassfied Device"
+HidJoyStick	= "Bluetooth HID Joystick"
+HidGamePad	= "Bluetooth HID Gamepad"
+HidRemoteCtrl	= "Bluetooth HID Remote Ctrl"
+HidSense	= "Bluetooth HID Sense"
+SvcDesc.Svc         	= "Bluetooth HID Device Service"
+Source_Description	= "BlueSoleil Installation Disk"

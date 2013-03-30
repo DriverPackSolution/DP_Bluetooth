@@ -1,0 +1,1300 @@
+;------------------------------------------------------------------------
+; btcusb.inf
+; IVT Corporation Bluetooth USB Device Installation Script
+; For WinXP/2003/Vista/Win7
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2012, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+signature="$CHICAGO$"
+Class=Bluetooth Device
+ClassGUID={9B21FD3A-B1AB-4eb9-956F-E56ACFE78BCE}
+Provider=%ProviderName%
+DriverVer=12/25/2012,6.2.84.265
+
+CatalogFile=btcusb.cat
+
+[SourceDisksNames]
+1 = %SourceDisk%,,,
+
+[SourceDisksFiles]
+btcusb.sys = 1
+btinstall.dll = 1
+
+[ClassInstall32]
+AddReg=BSOL.NT.AddReg
+CopyFiles=BSOL.NT.CopyFiles
+
+[BSOL.NT.AddReg]
+HKR,,,0,%BTUSBClassName%
+HKR,,Icon,,100
+HKR,,Installer32,,"btinstall.dll,BTUSBInstaller"
+HKR,,SilentInstall,,1
+HKR,,NoInstallClass,,1
+;HKR,,NoDisplayClass,,1
+
+[BSOL.NT.CopyFiles]
+btinstall.dll
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%IVT%=IVT, NTamd64
+
+[IVT]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_1915
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_3164
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_1958
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_0134
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_ffff 
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_4851&PID_1103 
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_04F2&PID_AFF0 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_0043
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_1000
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_1000&Rev_5276
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_2000
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_2000&Rev_6817
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_3000
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_4000
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_1010
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_1011
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_1012
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0003
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0004
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0005
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0006
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3314
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3314&REV_5276
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3315
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3315&REV_0598
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249&REV_1080
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%CN512v1.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_000B
+%CN512v1.DeviceDesc%=Btusb_DDI, USB\VID_0DF6&PID_000B
+%CN521v1.DeviceDesc%=Btusb_DDI, USB\VID_0DF6&PID_000C
+%CN521v1.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_000C
+%CONWISE.DeviceDesc%=Btusb_DDI, USB\VID_0E5E&PID_6622
+%CONWISE.DeviceDesc%=Btusb_DDI, USB\VID_0E5E&PID_6623
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%ALPS.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3001
+%ALPS.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_ffff
+%ALPS.DeviceDesc%=Btusb_DDI, USB\Vid_044e&Pid_3005
+%ALPS.DeviceDesc%=Btusb_DDI, USB\Vid_044e&Pid_3006
+%ALPS.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3007
+%ERICSSON.DeviceDesc%=Btusb_DDI, USB\VID_0442&PID_ABBA
+%ERICSSON.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBA
+%ERICSSON.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBB
+%National.DeviceDesc%=BTusb_DDI, USB\VID_0400&PID_0807
+%National.DeviceDesc%=BTusb_DDI, USB\VID_0400&PID_080A
+%RTX.DeviceDesc%=BTusb_DDI, USB\VID_0D9A&PID_0001
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_0525&PID_A220
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_0525&PID_100D
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_0c10&PID_0000
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\Vid_0c10&Pid_0000&Rev_1350
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\Vid_0C10&Pid_0000&Rev_1915
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_1582&PID_3001
+%ZEEVO.DeviceDesc%=Btusb_DDI, USB\VID_0B7A&PID_07D0
+%ZEEVO.DeviceDesc%=Btusb_DDI, USB\Vid_0b7a&Pid_07d0&Rev_0126
+%ZEEVO.DeviceDesc%=Btusb_DDI, USB\Vid_0b7a&Pid_07d0&Rev_0133
+%SUPERBT.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1000
+%SUPERBT.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1002
+%AVNET.DeviceDesc%=Btusb_DDI, USB\VID_0471&PID_0809
+%TAIYOYUDEN.DeviceDesc%=Btusb_DDI, USB\VID_0547&PID_7777
+%WavePlus.DeviceDesc%=Btusb_DDI, USB\VID_0F57&PID_1002
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_200A
+%Mitsumi.DeviceDesc%=Btusb_DDI, USB\VID_03EE&PID_641F
+%Mitsumi.DeviceDesc%=Btusb_DDI, USB\VID_03EE&PID_6438
+%Mitsumi.DeviceDesc%=Btusb_DDI, USB\VID_03EE&PID_ffff
+%Oki.DeviceDesc%=Btusb_DDI, USB\VID_04D7&PID_1BE4
+%Oki.DeviceDesc%=Btusb_DDI, USB\VID_070A&PID_4002
+%Oki.DeviceDesc%=Btusb_DDI, USB\VID_070A&PID_4003
+%SAMSUNG.DeviceDesc%=Btusb_DDI, USB\VID_055D&PID_0BB1
+
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_1234
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_ffff
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_16AA
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_16AA&Rev_0009
+
+%SmartModular.DeviceDesc%=BTusb_DDI, USB\VID_0E39&PID_0137
+%Unknown.DeviceDesc%=BTusb_DDI, USB\VID_08fd&PID_0001
+%Unknown.DeviceDesc%=BTusb_DDI, USB\VID_0930&PID_0502
+
+%ST.DeviceDesc%=BTusb_DDI, USB\VID_0483&PID_5000
+;%ST.DeviceDesc%=BTusb_DDI, USB\VID_0483&PID_5001  ; this is ST HID dongle, it will switch to USB\VID_0483&PID_5000 in HCI mode
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_030A
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_030C
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0310
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0311
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0317
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0318
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_1668&PID_0441
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_1668&PID_1441
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_1668&PID_2441
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0309
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0319
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0320
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_030B
+%3COM.DeviceDesc%=BTusb_DDI, USB\VID_0506&PID_00A0
+%BILLIONTON.DeviceDesc%=BTusb_DDI, USB\VID_0B62&PID_000B
+%SMK.DeviceDesc%=BTusb_DDI, USB\VID_0609&PID_FF12
+%Microtune.DeviceDesc%=BTusb_DDI, USB\VID_0F4D&PID_1000
+%Arima.DeviceDesc%=BTusb_DDI, USB\VID_0471&PID_1201
+%Hitachi.DeviceDesc%=BTusb_DDI, USB\VID_0858&PID_3102
+%Maxell.DeviceDesc%=BTusb_DDI, USB\VID_0858&PID_ffff
+%GctSemi.DeviceDesc%=BTusb_DDI, USB\VID_1076&PID_0031
+%GctSemi.DeviceDesc%=BTusb_DDI, USB\VID_1076&PID_0032
+%DELL.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8000
+%DELL.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8010
+%DELL.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8103
+%DellBT360.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8140&Rev_4315
+%DellBT360.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8140
+%COMPAQ.DeviceDesc%=BTusb_DDI, USB\VID_049F&PID_0027 
+%COMPAQ.DeviceDesc%=BTusb_DDI, USB\VID_049F&PID_0036
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_1967 
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_ffff 
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_6855 
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_6970
+%MSIBToes20.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_4260
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_3801
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A870
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A871
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A872
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A970
+%MANFEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A97A
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_B970
+%MSICLASSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_6881
+%MANFCLASSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_688A
+%BT.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_B97A 
+%BT.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_697A 
+%SONY.DeviceDesc%=BTusb_DDI, USB\VID_044e&PID_2014
+%SONY.DeviceDesc%=BTusb_DDI, USB\Vid_044E&Pid_3002
+%SONY.DeviceDesc%=BTusb_DDI, USB\Vid_044E&Pid_3003
+%SONY.DeviceDesc%=BTusb_DDI, USB\Vid_044E&Pid_3004
+%Winbond.DeviceDesc%=BTusb_DDI, USB\VID_1046&PID_8901
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1001
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1001&Rev_0373
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1003
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1004
+%Belkin.DeviceDesc%=BTusb_DDI, USB\VID_050D&PID_0081
+%Belkin.DeviceDesc%=BTusb_DDI, USB\VID_050d&PID_0084
+%Air2U.DeviceDesc%=BTusb_DDI, USB\VID_1310&PID_0001
+%HP.DeviceDesc%=BTusb_DDI, USB\VID_049F&PID_0086
+%iTech.DeviceDesc%=BTusb_DDI, USB\VID_13DD&PID_0001
+%SocketCom.DeviceDesc%=BTusb_DDI, USB\VID_2299&PID_4533
+%Cellink.DeviceDesc%=BTusb_DDI, USB\VID_1733&PID_1000
+%BlueExpert.DeviceDesc%=BTusb_DDI, USB\VID_083A&PID_BB01
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%LOGITECH.DeviceDesc%=BTusb_DDI,  USB\VID_046D&PID_C707
+%LOGITECH.DeviceDesc%=BTusb_DDI,  USB\VID_046D&PID_C708
+%LOGITECH.DeviceDesc%=BTusb_DDI,  USB\VID_046D&PID_C709
+%IBMBM3.DeviceDesc%=BTusb_DDI,    USB\VID_1668&PID_2441
+%GIANT.DeviceDesc%=BTusb_DDI,    USB\VID_0FD1&PID_0001
+%Belkin.DeviceDesc%=BTusb_DDI,    USB\VID_050D&PID_0083
+%PANASONIC.DeviceDesc%=BTusb_DDI,	USB\VID_04AD&PID_2501
+%ICSI.DeviceDesc%=BTusb_DDI,      USB\VID_0547&PID_0001
+%ITRONIX.DeviceDesc%=BTusb_DDI,	USB\VID_11D9&PID_2600
+%ITRONIX.DeviceDesc%=BTusb_DDI, USB\VID_0C24&PID_001B
+
+%ITRONIX.DeviceDesc%=BTusb_DDI, USB\VID_0C24&PID_0022
+%ITRONIX.DeviceDesc%=BTusb_DDI, USB\VID_0C24&PID_0022&REV_4839
+
+%DELLELWOOD.DeviceDesc%=BTusb_DDI,	USB\VID_413C&PID_8501
+%FCS.DeviceDesc%=BTusb_DDI, 	USB\VID_0BF8&PID_1003
+%AboCom.DeviceDesc%=BTusb_DDI, USB\VID_07B8&PID_B02A
+%Princeton.DeviceDesc%=BTusb_DDI, USB\VID_117F&PID_3101
+%FIC.DeviceDesc%=BTusb_DDI, USB\VID_1457&PID_5202
+%GlobalSat.DeviceDesc%=BTusb_DDI, USB\VID_5994&PID_2005
+%Hewlett.DeviceDesc%=BTusb_DDI, USB\VID_03F0&PID_011D
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%Accel.DeviceDesc%=Btusb_DDI, USB\VID_1CAA&PID_0001
+%Accel.DeviceDesc%=Btusb_DDI, USB\VID_1CAA&PID_0002
+
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_3800
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_3810
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&REV_0002&MI_00
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&MI_00
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&REV_0002
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&REV_0002&MI_01
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&MI_01
+
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F&REV_0350
+
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F&REV_0360
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219C 
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219C&REV_0628
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_200F
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0506&PID_00A0
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0506&PID_00A1
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0506&PID_00A2
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2102
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_07B8&PID_B02B
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F118
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F117
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F116
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_047D&PID_105E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_174B&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_21F6
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_21F4
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13B1&PID_0019
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_3001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_049F&PID_0027
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0309
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_030A
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0310
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1002
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBA
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_200A
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2009
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2045
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2110
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2100
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2101
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2101&REV_0100
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2120
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2120&REV_0338
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2150
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2150&REV_0601
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2048
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C10&PID_0000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B7A&PID_07D0
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_055D&PID_0BB1
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8187
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8187&REV_0517
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_0441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0F4D&PID_1000  
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_1967
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_6970
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_697A
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_6855
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0319
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0317  
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0318
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0320
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_045E&PID_007E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_045E&PID_009C
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0400&PID_0807
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0483&PID_5000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_1234
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_2014
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0D9A&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_049F&PID_0086
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C707
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C708
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C709
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C70D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_2441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0FD1&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_050D&PID_0083
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04AD&PID_2501
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0547&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0471&PID_0809
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_11D9&PID_2600
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8501
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8501&REV_9999 
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8110
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05B1&PID_1389
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_011D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_0624
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_171D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_171D&REV_0100
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_D104
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1131&PID_1001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1310&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1310&PID_0002
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0BF8&PID_1003
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_4851&PID_1103
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_0500
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0022
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0022&REV_4839
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04E8&PID_7021
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_148D&PID_2430
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8103
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0002
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_201E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2020
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_041E&PID_5015
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_047D&PID_105D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0D62&PID_2026
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_22B8&PID_0850
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBB
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_030B
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_030C
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0311
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_049F&PID_0036
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8010
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_1441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0321
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_3441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0FD1&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2035
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_051D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_181D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8106
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_201D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2039
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_0C24
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8126
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8210&REV_0093
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8210
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1751&REV_0235
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1751
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252&REV_0165
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2151
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_02b0
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8160
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3017
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3017&Rev_0227
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1788
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1788&Rev_0449
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_2A1D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_2A1D&REV_0207
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3250
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3250&REV_0531
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3286
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3286&REV_14D4
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249&REV_1080
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E011
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00E&REV_0667
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00F
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00F&REV_0596
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3295
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3295&REV_0531
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8218
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8218&REV_0015
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8215
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8215&REV_0189
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0021
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0021&REV_4870
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252&REV_1081
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0930&PID_0214
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0930&PID_0214&REV_0546
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%BrainBoxes.DeviceDesc%=Btusb_DDI, USB\Vid_05d1&Pid_0003
+%MotionComputing.DeviceDesc%=BTusb_DDI, USB\Vid_10ab&Pid_1002
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0502&Rev_1350
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0505
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\VID_0930&PID_0506
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0507
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0A05
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0A05&REV_4839
+
+%TosrfUsb.DeviceDesc2%=Btusb_DDI,  USB\VID_8086&PID_110a
+%TosrfUsb.DeviceDesc3%=Btusb_DDI,  USB\VID_8086&PID_110b
+%TosrfUsb.DeviceDesc3%=Btusb_DDI,  USB\VID_8086&PID_0189
+%TosrfUsb.DeviceDesc3%=Btusb_DDI,  USB\VID_8086&PID_0189&REV_6919
+%TosrfUsb.DeviceDesc4%=Btusb_DDI,  USB\VID_0930&PID_0501
+%TosrfUsb.DeviceDesc9%=Btusb_DDI,  USB\VID_0930&PID_0503
+%TosrfUsb.DeviceDesc15%=Btusb_DDI,  USB\VID_0A12&PID_0002
+%TosrfUsb.DeviceDesc20%=Btusb_DDI,  USB\VID_0A12&PID_0007
+%TosrfUsb.DeviceDesc21%=Btusb_DDI,  USB\VID_0A12&PID_0008
+%TosrfUsb.DeviceDesc22%=Btusb_DDI,  USB\VID_0A12&PID_0009
+%TosrfUsb.DeviceDesc23%=Btusb_DDI,  USB\VID_0A12&PID_000A
+%TosrfUsb.DeviceDesc24%=Btusb_DDI,  USB\VID_0A12&PID_000B
+%TosrfUsb.DeviceDesc25%=Btusb_DDI,  USB\VID_0A12&PID_0100
+%TosrfUsb.DeviceDesc26%=Btusb_DDI,  USB\VID_0A12&PID_0101
+%TosrfUsb.DeviceDesc27%=Btusb_DDI,  USB\VID_0A12&PID_0102
+%TosrfUsb.DeviceDesc28%=Btusb_DDI,  USB\VID_0A12&PID_0103
+%TosrfUsb.DeviceDesc29%=Btusb_DDI,  USB\VID_0A12&PID_0104
+%TosrfUsb.DeviceDesc30%=Btusb_DDI,  USB\VID_0A12&PID_0105
+%TosrfUsb.DeviceDesc84%=Btusb_DDI,  USB\VID_0B05&PID_1712
+%TosrfUsb.DeviceDesc85%=Btusb_DDI,  USB\VID_040A&PID_5010
+%TosrfUsb.DeviceDesc86%=Btusb_DDI,  USB\VID_1582&PID_3006
+%TosrfUsb.DeviceDesc87%=Btusb_DDI,  USB\VID_413C&PID_8120
+%TosrfUsb.DeviceDesc88%=Btusb_DDI,  USB\VID_040A&PID_5012
+%TosrfUsb.DeviceDesc96%=Btusb_DDI,  USB\VID_07D1&PID_FC01
+%TosrfUsb.DeviceDesc97%=Btusb_DDI,  USB\VID_0C24&PID_000F
+%TosrfUsb.DeviceDesc97%=Btusb_DDI,  USB\VID_0C24&PID_0022 
+%TosrfUsb.DeviceDesc97%=Btusb_DDI,  USB\VID_0C24&PID_0022&REV_4839
+
+%TosrfUsb.DeviceDesc98%=Btusb_DDI,  USB\VID_1557&PID_0004
+%TosrfUsb.DeviceDesc99%=Btusb_DDI,  USB\VID_0c24&PID_000c
+%TosrfUsb.DeviceDesc101%=Btusb_DDI,  USB\VID_0C24&PID_0005
+%TosrfUsb.DeviceDesc102%=Btusb_DDI,  USB\VID_0C24&PID_000b
+%TosrfUsb.DeviceDesc103%=Btusb_DDI,  USB\VID_0c24&PID_000e
+%TosrfUsb.DeviceDesc104%=Btusb_DDI,  USB\VID_0c24&PID_0010
+%TosrfUsb.DeviceDesc105%=Btusb_DDI,  USB\VID_0c24&PID_0018
+%TosrfUsb.DeviceDesc106%=Btusb_DDI,  USB\VID_0c24&PID_0c24
+%TosrfUsb.DeviceDesc107%=Btusb_DDI,  USB\VID_044E&PID_300C
+%TosrfUsb.DeviceDesc108%=Btusb_DDI,  USB\VID_0930&PID_0508
+%TosrfUsb.DeviceDesc109%=Btusb_DDI,  USB\VID_0930&PID_0509
+%TosrfUsb.DeviceDesc110%=Btusb_DDI,  USB\VID_044E&PID_300D
+%TosrfUsb.DeviceDesc111%=Btusb_DDI,  USB\VID_0c24&PID_0012
+%TosrfUsb.DeviceDesc113%=Btusb_DDI,  USB\VID_0C24&PID_0019
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_001D
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_ffff
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_0022 
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_0022&REV_4839 
+
+%TosrfUsb.DeviceDesc114%=Btusb_DDI,  USB\VID_0CA0&PID_1101
+%TosrfUsb.DeviceDesc115%=Btusb_DDI,  USB\VID_10AB&PID_1005
+%MotionComputing.DeviceDesc%=BTusb_DDI, USB\Vid_10ab&Pid_1003
+%MotionComputing.DeviceDesc%=BTusb_DDI, USB\Vid_10ab&Pid_1006
+
+%TosrfUsb.DeviceDesc116%=Btusb_DDI,  USB\VID_0DF6&PID_2200
+%TosrfUsb.DeviceDesc117%=Btusb_DDI,  USB\VID_0DF6&PID_2208
+%TosrfUsb.DeviceDesc118%=Btusb_DDI,  USB\VID_0DF6&PID_2209
+%TosrfUsb.DeviceDesc120%=Btusb_DDI,  USB\VID_117F&PID_3102
+%TosrfUsb.DeviceDesc121%=Btusb_DDI,  USB\VID_0DF6&PID_0019
+%TosrfUsb.DeviceDesc122%=Btusb_DDI,  USB\VID_0DF6&PID_001A
+%TosrfUsb.DeviceDesc123%=Btusb_DDI,  USB\VID_117F&PID_3103
+%TOSHIBA.DeviceDesc%=Btusb_DDI,  USB\VID_1690&PID_0741&REV_5276
+%TOSHIBA.DeviceDesc%=Btusb_DDI,  USB\VID_1690&PID_0741
+
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_05ac&PID_8205
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2148&Rev_0337
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_13D3&PID_3250
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6260
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6260&REV_0540
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_219B
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_219C
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_21E8
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_21E8&REV_0112
+
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_21EC
+
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_016A&REV_0388
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_016A
+%ASUS.DeviceDesc%=Btusb_DDI,  USB\VID_0B05&PID_B700
+%ASUS.DeviceDesc%=Btusb_DDI,  USB\Vid_0b05&Pid_b700&Rev_0241
+%ASUS.DeviceDesc%=Btusb_DDI,  USB\VID_0B05&PID_B700&REV_0161
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8156&Rev_0456
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8156&REV_0172
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8156
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8122
+%ALPS.DeviceDesc%=Btusb_DDI,  USB\VID_044E&PID_3010&REV_0056
+%ALPS.DeviceDesc%=Btusb_DDI,  USB\VID_044E&PID_3010
+%WLink.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2146&REV_0273
+%WLink.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2146
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0131&REV_0412
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0131
+%Belkin1.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0017
+%Belkin1.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0017&REV_0291
+%ThinkPad.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2145
+%ThinkPad.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2145&REV_0399
+%ThinkPad.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2145&REV_0352
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050d&PID_0012
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050d&PID_0012&REV_0000
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050d&PID_0012&REV_0100
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_8203
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_820f
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_820f&Rev_0037
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_ffff
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_0a5c&Pid_821f
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_0a5c&Pid_821f&Rev_0038
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2154
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2154&REV_0250
+%Belkin2.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0121
+%Belkin2.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0121&REV_0100
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2148
+
+ALPS-UGPZ9-BCM2046=Btusb_DDI,  USB\VID_044E&PID_3017&REV_0227
+ALPS-UGPZ9-BCM2046=Btusb_DDI,  USB\VID_044E&PID_3017
+%DELL2.DeviceDesc%=Btusb_DDI,  USB\VID_413C&PID_8160&REV_0173
+%DELL2.DeviceDesc%=Btusb_DDI,  USB\VID_413C&PID_8160
+BCM2046 Bluetooth Device=Btusb_DDI,  USB\VID_413C&PID_02b0&REV_0467
+BCM2046 Bluetooth Device=Btusb_DDI,  USB\VID_413C&PID_02b0
+BCM2046 Bluetooth Module=Btusb_DDI,  USB\VID_0A5C&PID_2151&REV_0847
+BCM2046 Bluetooth Module=Btusb_DDI,  USB\VID_0A5C&PID_2151
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6252&Rev_0434
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6252
+%3DSP.DeviceDesc%=Btusb_DDI,  USB\VID_05E1&PID_3800
+%3DSP.DeviceDesc%=Btusb_DDI,  USB\VID_05E1&PID_3810
+
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_179C
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0BDA&PID_0139
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_0001
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_3000
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_3002&REV_0001
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_3002
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3304
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249&REV_1080
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_5134
+
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E02C
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E02C&REV_0001
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00D
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00D&REV_0472
+
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219B&REV_0072
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219B&REV_0504
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219B
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_03F0&PID_231D&REV_0165
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_03F0&PID_231D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0461&PID_4d75&REV_0667
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0461&PID_4d75
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_231D&REV_0306
+
+%AVM.DeviceDesc%=Btusb_DDI, USB\VID_057C&PID_3800
+%AVM.DeviceDesc%=Btusb_DDI, USB\VID_057C&PID_3800&REV_1500
+
+%MAVIN.DeviceDesc%=Btusb_DDI, USB\VID_21EE&PID_1101
+
+%FOXCONN.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_0000
+%FOXCONN.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_0001
+
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1A12&PID_0001&REV_5276
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1A12&PID_0001
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1690&PID_0754&REV_0557
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1690&PID_0754
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1690&PID_0757
+%DLINK.DeviceDesc%=Btusb_DDI, USB\VID_07D1&PID_F101\5&147F88E9&0&1
+%DLINK.DeviceDesc%=Btusb_DDI, USB\VID_07D1&PID_F101
+
+%MARVELL.DeviceDesc%=Btusb_DDI, USB\VID_1286&PID_1111
+%MARVELL.DeviceDesc%=Btusb_DDI, USB\VID_1286&PID_2042&MI_00
+%MARVELL.DeviceDesc%=Btusb_DDI, USB\VID_1286&PID_2042&REV_3201&MI_00
+
+%Medialink.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_2198
+%Medialink.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_2198&REV_0391
+
+[IVT.NTamd64]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_1915
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_3164
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_1958
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001&REV_0134
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_ffff 
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_4851&PID_1103 
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_04F2&PID_AFF0
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_0043
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_1000
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_1000&Rev_5276
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_2000
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_2000&Rev_6817
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_3000
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_148f&PID_4000
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_1010
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_1011
+;%CSR.DeviceDesc%=Btusb_DDI, USB\VID_0a12&PID_1012
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0003
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0004
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0005
+%CSR.DeviceDesc%=Btusb_DDI, USB\Vid_0a12&Pid_0006
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3314
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3314&REV_5276
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3315
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3315&REV_0598
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249
+%CSR.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249&REV_1080
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%CN512v1.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_000B
+%CN512v1.DeviceDesc%=Btusb_DDI, USB\VID_0DF6&PID_000B
+%CN521v1.DeviceDesc%=Btusb_DDI, USB\VID_0DF6&PID_000C
+%CN521v1.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_000C
+%CONWISE.DeviceDesc%=Btusb_DDI, USB\VID_0E5E&PID_6622
+%CONWISE.DeviceDesc%=Btusb_DDI, USB\VID_0E5E&PID_6623
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%ALPS.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3001
+%ALPS.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_ffff
+%ALPS.DeviceDesc%=Btusb_DDI, USB\Vid_044e&Pid_3005
+%ALPS.DeviceDesc%=Btusb_DDI, USB\Vid_044e&Pid_3006
+%ALPS.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3007
+%ERICSSON.DeviceDesc%=Btusb_DDI, USB\VID_0442&PID_ABBA
+%ERICSSON.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBA
+%ERICSSON.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBB
+%National.DeviceDesc%=BTusb_DDI, USB\VID_0400&PID_0807
+%National.DeviceDesc%=BTusb_DDI, USB\VID_0400&PID_080A
+%RTX.DeviceDesc%=BTusb_DDI, USB\VID_0D9A&PID_0001
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_0525&PID_A220
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_0525&PID_100D
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_0c10&PID_0000
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\Vid_0c10&Pid_0000&Rev_1350
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\Vid_0C10&Pid_0000&Rev_1915
+%SILICONWAVE.DeviceDesc%=Btusb_DDI, USB\VID_1582&PID_3001
+%ZEEVO.DeviceDesc%=Btusb_DDI, USB\VID_0B7A&PID_07D0
+%ZEEVO.DeviceDesc%=Btusb_DDI, USB\Vid_0b7a&Pid_07d0&Rev_0126
+%ZEEVO.DeviceDesc%=Btusb_DDI, USB\Vid_0b7a&Pid_07d0&Rev_0133
+%SUPERBT.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1000
+%SUPERBT.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1002
+%AVNET.DeviceDesc%=Btusb_DDI, USB\VID_0471&PID_0809
+%TAIYOYUDEN.DeviceDesc%=Btusb_DDI, USB\VID_0547&PID_7777
+%WavePlus.DeviceDesc%=Btusb_DDI, USB\VID_0F57&PID_1002
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_200A
+%Mitsumi.DeviceDesc%=Btusb_DDI, USB\VID_03EE&PID_641F
+%Mitsumi.DeviceDesc%=Btusb_DDI, USB\VID_03EE&PID_6438
+%Mitsumi.DeviceDesc%=Btusb_DDI, USB\VID_03EE&PID_ffff
+%Oki.DeviceDesc%=Btusb_DDI, USB\VID_04D7&PID_1BE4
+%Oki.DeviceDesc%=Btusb_DDI, USB\VID_070A&PID_4002
+%Oki.DeviceDesc%=Btusb_DDI, USB\VID_070A&PID_4003
+%SAMSUNG.DeviceDesc%=Btusb_DDI, USB\VID_055D&PID_0BB1
+
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_1234
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_ffff
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_16AA
+%TI.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_16AA&Rev_0009
+
+%SmartModular.DeviceDesc%=BTusb_DDI, USB\VID_0E39&PID_0137
+%Unknown.DeviceDesc%=BTusb_DDI, USB\VID_08fd&PID_0001
+%Unknown.DeviceDesc%=BTusb_DDI, USB\VID_0930&PID_0502
+%ST.DeviceDesc%=BTusb_DDI, USB\VID_0483&PID_5000
+;%ST.DeviceDesc%=BTusb_DDI, USB\VID_0483&PID_5001  ; this is ST HID dongle, it will switch to USB\VID_0483&PID_5000 in HCI mode
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_030A
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_030C
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0310
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0311
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0317
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0318
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_1668&PID_0441
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_1668&PID_1441
+%IBM.DeviceDesc%=BTusb_DDI, USB\VID_1668&PID_2441
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0309
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0319
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_0320
+%TDK.DeviceDesc%=BTusb_DDI, USB\VID_04BF&PID_030B
+%3COM.DeviceDesc%=BTusb_DDI, USB\VID_0506&PID_00A0
+%BILLIONTON.DeviceDesc%=BTusb_DDI, USB\VID_0B62&PID_000B
+%SMK.DeviceDesc%=BTusb_DDI, USB\VID_0609&PID_FF12
+%Microtune.DeviceDesc%=BTusb_DDI, USB\VID_0F4D&PID_1000
+%Arima.DeviceDesc%=BTusb_DDI, USB\VID_0471&PID_1201
+%Hitachi.DeviceDesc%=BTusb_DDI, USB\VID_0858&PID_3102
+%Maxell.DeviceDesc%=BTusb_DDI, USB\VID_0858&PID_ffff
+%GctSemi.DeviceDesc%=BTusb_DDI, USB\VID_1076&PID_0031
+%GctSemi.DeviceDesc%=BTusb_DDI, USB\VID_1076&PID_0032
+%DELL.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8000
+%DELL.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8010
+%DELL.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8103
+%DellBT360.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8140&Rev_4315
+%DellBT360.DeviceDesc%=BTusb_DDI, USB\VID_413C&PID_8140
+%COMPAQ.DeviceDesc%=BTusb_DDI, USB\VID_049F&PID_0027 
+%COMPAQ.DeviceDesc%=BTusb_DDI, USB\VID_049F&PID_0036
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_1967 
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_ffff 
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_6855 
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_6970
+%MSIBToes20.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_4260
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_3801
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A870
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A871
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A872
+%MSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A970
+%MANFEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_A97A
+%MSI.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_B970
+%MSICLASSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_6881
+%MANFCLASSIEDR.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_688A
+%BT.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_B97A 
+%BT.DeviceDesc%=BTusb_DDI, USB\VID_0DB0&PID_697A 
+%SONY.DeviceDesc%=BTusb_DDI, USB\VID_044e&PID_2014
+%SONY.DeviceDesc%=BTusb_DDI, USB\Vid_044E&Pid_3002
+%SONY.DeviceDesc%=BTusb_DDI, USB\Vid_044E&Pid_3003
+%SONY.DeviceDesc%=BTusb_DDI, USB\Vid_044E&Pid_3004
+%Winbond.DeviceDesc%=BTusb_DDI, USB\VID_1046&PID_8901
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1001
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1001&Rev_0373
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1003
+%ISSC.DeviceDesc%=BTusb_DDI, USB\VID_1131&PID_1004
+%Belkin.DeviceDesc%=BTusb_DDI, USB\VID_050D&PID_0081
+%Belkin.DeviceDesc%=BTusb_DDI, USB\VID_050d&PID_0084
+%Air2U.DeviceDesc%=BTusb_DDI, USB\VID_1310&PID_0001
+%HP.DeviceDesc%=BTusb_DDI, USB\VID_049F&PID_0086
+%iTech.DeviceDesc%=BTusb_DDI, USB\VID_13DD&PID_0001
+%SocketCom.DeviceDesc%=BTusb_DDI, USB\VID_2299&PID_4533
+%Cellink.DeviceDesc%=BTusb_DDI, USB\VID_1733&PID_1000
+%BlueExpert.DeviceDesc%=BTusb_DDI, USB\VID_083A&PID_BB01
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%LOGITECH.DeviceDesc%=BTusb_DDI,  USB\VID_046D&PID_C707
+%LOGITECH.DeviceDesc%=BTusb_DDI,  USB\VID_046D&PID_C708
+%LOGITECH.DeviceDesc%=BTusb_DDI,  USB\VID_046D&PID_C709
+%IBMBM3.DeviceDesc%=BTusb_DDI,    USB\VID_1668&PID_2441
+%GIANT.DeviceDesc%=BTusb_DDI,    USB\VID_0FD1&PID_0001
+%Belkin.DeviceDesc%=BTusb_DDI,    USB\VID_050D&PID_0083
+%PANASONIC.DeviceDesc%=BTusb_DDI,	USB\VID_04AD&PID_2501
+%ICSI.DeviceDesc%=BTusb_DDI,      USB\VID_0547&PID_0001
+%ITRONIX.DeviceDesc%=BTusb_DDI,	USB\VID_11D9&PID_2600
+%ITRONIX.DeviceDesc%=BTusb_DDI, USB\VID_0C24&PID_001B
+%ITRONIX.DeviceDesc%=BTusb_DDI, USB\VID_0C24&PID_0022 
+%ITRONIX.DeviceDesc%=BTusb_DDI, USB\VID_0C24&PID_0022&REV_4839 
+
+
+%DELLELWOOD.DeviceDesc%=BTusb_DDI,	USB\VID_413C&PID_8501
+%FCS.DeviceDesc%=BTusb_DDI, 	USB\VID_0BF8&PID_1003
+%AboCom.DeviceDesc%=BTusb_DDI, USB\VID_07B8&PID_B02A
+%Princeton.DeviceDesc%=BTusb_DDI, USB\VID_117F&PID_3101
+%FIC.DeviceDesc%=BTusb_DDI, USB\VID_1457&PID_5202
+%GlobalSat.DeviceDesc%=BTusb_DDI, USB\VID_5994&PID_2005
+%Hewlett.DeviceDesc%=BTusb_DDI, USB\VID_03F0&PID_011D
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%Accel.DeviceDesc%=Btusb_DDI, USB\VID_1CAA&PID_0001
+%Accel.DeviceDesc%=Btusb_DDI, USB\VID_1CAA&PID_0002
+
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_3800
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_3810
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&REV_0002&MI_00
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&MI_00
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&REV_0002
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&REV_0002&MI_01
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_05E1&PID_0100&MI_01
+
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F
+%3DSP.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F&REV_0350
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_217F&REV_0360
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219C
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219C&REV_0628
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_200F
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0506&PID_00A0
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0506&PID_00A1
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0506&PID_00A2
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2102
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_07B8&PID_B02B
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F118
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F117
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F116
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_047D&PID_105E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_174B&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_21F6
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_3574&PID_21F4
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13B1&PID_0019
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_3001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_049F&PID_0027
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0309
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_030A
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0310
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1002
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0BDB&PID_1000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBA
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_200A
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2009
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2045
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2110
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2100
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2101
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2101&REV_0100
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C10&PID_0000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B7A&PID_07D0
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_055D&PID_0BB1
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_0441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0F4D&PID_1000  
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_1967
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_6970
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_697A
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_6855
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0319
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0317  
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0318
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0320
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_045E&PID_007E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_045E&PID_009C
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0400&PID_0807
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0483&PID_5000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_1234
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0451&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_2014
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0D9A&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_049F&PID_0086
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C707
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C708
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C709
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_046D&PID_C70D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_2441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0FD1&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_050D&PID_0083
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04AD&PID_2501
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0547&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0471&PID_0809
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_11D9&PID_2600
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8501
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8501&REV_9999
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8187
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8187&REV_0517
+ 
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8110
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05B1&PID_1389
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_011D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_0624
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_171D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_171D&REV_0100
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_D104
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1131&PID_1001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1310&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1310&PID_0002
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0BF8&PID_1003
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_4851&PID_1103
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_0500
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0001
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0022 
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0022&REV_4839 
+
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04E8&PID_7021
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_148D&PID_2430
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8103
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0002
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_201E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2020
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_2001&PID_F111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_041E&PID_5015
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_047D&PID_105D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0D62&PID_2026
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_22B8&PID_0850
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_08EA&PID_ABBB
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A12&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_030B
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_030C
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0311
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_049F&PID_0036
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044e&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8010
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_1441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0DB0&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_04BF&PID_0321
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_1668&PID_3441
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0FD1&PID_ffff
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2000
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2120
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2120&REV_0338
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2150
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2150&REV_0601
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2048
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2035
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_051D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_181D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8106
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8111
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_201D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2039
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_0C24
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8126
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8210&REV_0093
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8210
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1751&REV_0235
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1751
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252&REV_0165
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_2151
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_02b0
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_413C&PID_8160
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3017
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_044E&PID_3017&Rev_0227
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1788
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_1788&Rev_0449
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_2A1D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_2A1D&REV_0207
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3250
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3250&REV_0531
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3286
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3286&REV_14D4
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249&REV_1080
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E011
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00E
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00E&REV_0667
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00F
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00F&REV_0596
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3295
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3295&REV_0531
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8218
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8218&REV_0015
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8215
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_8215&REV_0189
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0021
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0C24&PID_0021&REV_4870
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252&REV_1081
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_18E8&PID_6252
+
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0930&PID_0214
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0930&PID_0214&REV_0546
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%BrainBoxes.DeviceDesc%=Btusb_DDI, USB\Vid_05d1&Pid_0003
+%MotionComputing.DeviceDesc%=BTusb_DDI, USB\Vid_10ab&Pid_1002
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0502&Rev_1350
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0505
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\VID_0930&PID_0506
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0507
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0A05
+%TOSHIBA.DeviceDesc%=BTusb_DDI, USB\Vid_0930&Pid_0A05&REV_4839
+
+%TosrfUsb.DeviceDesc2%=Btusb_DDI,  USB\VID_8086&PID_110a
+%TosrfUsb.DeviceDesc3%=Btusb_DDI,  USB\VID_8086&PID_110b
+%TosrfUsb.DeviceDesc3%=Btusb_DDI,  USB\VID_8086&PID_0189
+%TosrfUsb.DeviceDesc3%=Btusb_DDI,  USB\VID_8086&PID_0189&REV_6919
+%TosrfUsb.DeviceDesc4%=Btusb_DDI,  USB\VID_0930&PID_0501
+%TosrfUsb.DeviceDesc9%=Btusb_DDI,  USB\VID_0930&PID_0503
+%TosrfUsb.DeviceDesc15%=Btusb_DDI,  USB\VID_0A12&PID_0002
+%TosrfUsb.DeviceDesc20%=Btusb_DDI,  USB\VID_0A12&PID_0007
+%TosrfUsb.DeviceDesc21%=Btusb_DDI,  USB\VID_0A12&PID_0008
+%TosrfUsb.DeviceDesc22%=Btusb_DDI,  USB\VID_0A12&PID_0009
+%TosrfUsb.DeviceDesc23%=Btusb_DDI,  USB\VID_0A12&PID_000A
+%TosrfUsb.DeviceDesc24%=Btusb_DDI,  USB\VID_0A12&PID_000B
+%TosrfUsb.DeviceDesc25%=Btusb_DDI,  USB\VID_0A12&PID_0100
+%TosrfUsb.DeviceDesc26%=Btusb_DDI,  USB\VID_0A12&PID_0101
+%TosrfUsb.DeviceDesc27%=Btusb_DDI,  USB\VID_0A12&PID_0102
+%TosrfUsb.DeviceDesc28%=Btusb_DDI,  USB\VID_0A12&PID_0103
+%TosrfUsb.DeviceDesc29%=Btusb_DDI,  USB\VID_0A12&PID_0104
+%TosrfUsb.DeviceDesc30%=Btusb_DDI,  USB\VID_0A12&PID_0105
+%TosrfUsb.DeviceDesc84%=Btusb_DDI,  USB\VID_0B05&PID_1712
+%TosrfUsb.DeviceDesc85%=Btusb_DDI,  USB\VID_040A&PID_5010
+%TosrfUsb.DeviceDesc86%=Btusb_DDI,  USB\VID_1582&PID_3006
+%TosrfUsb.DeviceDesc87%=Btusb_DDI,  USB\VID_413C&PID_8120
+%TosrfUsb.DeviceDesc88%=Btusb_DDI,  USB\VID_040A&PID_5012
+%TosrfUsb.DeviceDesc96%=Btusb_DDI,  USB\VID_07D1&PID_FC01
+%TosrfUsb.DeviceDesc97%=Btusb_DDI,  USB\VID_0C24&PID_000F
+%TosrfUsb.DeviceDesc97%=Btusb_DDI,  USB\VID_0C24&PID_0022
+%TosrfUsb.DeviceDesc97%=Btusb_DDI,  USB\VID_0C24&PID_0022&REV_4839 
+
+%TosrfUsb.DeviceDesc98%=Btusb_DDI,  USB\VID_1557&PID_0004
+%TosrfUsb.DeviceDesc99%=Btusb_DDI,  USB\VID_0c24&PID_000c
+%TosrfUsb.DeviceDesc101%=Btusb_DDI,  USB\VID_0C24&PID_0005
+%TosrfUsb.DeviceDesc102%=Btusb_DDI,  USB\VID_0C24&PID_000b
+%TosrfUsb.DeviceDesc103%=Btusb_DDI,  USB\VID_0c24&PID_000e
+%TosrfUsb.DeviceDesc104%=Btusb_DDI,  USB\VID_0c24&PID_0010
+%TosrfUsb.DeviceDesc105%=Btusb_DDI,  USB\VID_0c24&PID_0018
+%TosrfUsb.DeviceDesc106%=Btusb_DDI,  USB\VID_0c24&PID_0c24
+%TosrfUsb.DeviceDesc107%=Btusb_DDI,  USB\VID_044E&PID_300C
+%TosrfUsb.DeviceDesc108%=Btusb_DDI,  USB\VID_0930&PID_0508
+%TosrfUsb.DeviceDesc109%=Btusb_DDI,  USB\VID_0930&PID_0509
+%TosrfUsb.DeviceDesc110%=Btusb_DDI,  USB\VID_044E&PID_300D
+%TosrfUsb.DeviceDesc111%=Btusb_DDI,  USB\VID_0c24&PID_0012
+%TosrfUsb.DeviceDesc113%=Btusb_DDI,  USB\VID_0C24&PID_0019
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_001D
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_ffff
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_0022
+%Taiyo.DeviceDesc%=Btusb_DDI,  USB\VID_0C24&PID_0022&REV_4839
+
+
+%TosrfUsb.DeviceDesc114%=Btusb_DDI,  USB\VID_0CA0&PID_1101
+%TosrfUsb.DeviceDesc115%=Btusb_DDI,  USB\VID_10AB&PID_1005
+%MotionComputing.DeviceDesc%=BTusb_DDI, USB\Vid_10ab&Pid_1003
+%MotionComputing.DeviceDesc%=BTusb_DDI, USB\Vid_10ab&Pid_1006
+
+%TosrfUsb.DeviceDesc116%=Btusb_DDI,  USB\VID_0DF6&PID_2200
+%TosrfUsb.DeviceDesc117%=Btusb_DDI,  USB\VID_0DF6&PID_2208
+%TosrfUsb.DeviceDesc118%=Btusb_DDI,  USB\VID_0DF6&PID_2209
+%TosrfUsb.DeviceDesc120%=Btusb_DDI,  USB\VID_117F&PID_3102
+%TosrfUsb.DeviceDesc121%=Btusb_DDI,  USB\VID_0DF6&PID_0019
+%TosrfUsb.DeviceDesc122%=Btusb_DDI,  USB\VID_0DF6&PID_001A
+%TosrfUsb.DeviceDesc123%=Btusb_DDI,  USB\VID_117F&PID_3103
+%TOSHIBA.DeviceDesc%=Btusb_DDI,  USB\VID_1690&PID_0741&REV_5276
+%TOSHIBA.DeviceDesc%=Btusb_DDI,  USB\VID_1690&PID_0741
+
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_8205
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2148&Rev_0337
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_13D3&PID_3250
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6260
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6260&REV_0540
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_219B
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_219C
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_21E8
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_21E8&REV_0112
+
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_21EC
+
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_016A&REV_0388
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_016A
+%ASUS.DeviceDesc%=Btusb_DDI,  USB\VID_0B05&PID_B700
+%ASUS.DeviceDesc%=Btusb_DDI,  USB\Vid_0b05&Pid_b700&Rev_0241
+%ASUS.DeviceDesc%=Btusb_DDI,  USB\VID_0B05&PID_B700&REV_0161
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8156&Rev_0456
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8156&REV_0172
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8156
+%DELL1.DeviceDesc%=Btusb_DDI,  USB\VID_413c&PID_8122
+%ALPS.DeviceDesc%=Btusb_DDI,  USB\VID_044E&PID_3010&REV_0056
+%ALPS.DeviceDesc%=Btusb_DDI,  USB\VID_044E&PID_3010
+%WLink.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2146&REV_0273
+%WLink.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2146
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0131&REV_0412
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0131
+%Belkin1.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0017
+%Belkin1.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0017&REV_0291
+%ThinkPad.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2145
+%ThinkPad.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2145&REV_0399
+%ThinkPad.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2145&REV_0352
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050d&PID_0012
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050d&PID_0012&REV_0000
+%Belkin.DeviceDesc%=Btusb_DDI,  USB\VID_050d&PID_0012&REV_0100
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_8203
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_820f
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_820f&Rev_0037
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_05ac&Pid_ffff
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_0a5c&Pid_821f
+%Apple.DeviceDesc%=Btusb_DDI,  USB\Vid_0a5c&Pid_821f&Rev_0038
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2154
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2154&REV_0250
+%Belkin2.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0121
+%Belkin2.DeviceDesc%=Btusb_DDI,  USB\VID_050D&PID_0121&REV_0100
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_0A5C&PID_2148
+
+ALPS-UGPZ9-BCM2046=Btusb_DDI,  USB\VID_044E&PID_3017&REV_0227
+ALPS-UGPZ9-BCM2046=Btusb_DDI,  USB\VID_044E&PID_3017
+%DELL2.DeviceDesc%=Btusb_DDI,  USB\VID_413C&PID_8160&REV_0173
+%DELL2.DeviceDesc%=Btusb_DDI,  USB\VID_413C&PID_8160
+BCM2046 Bluetooth Device=Btusb_DDI,  USB\VID_413C&PID_02b0&REV_0467
+BCM2046 Bluetooth Device=Btusb_DDI,  USB\VID_413C&PID_02b0
+BCM2046 Bluetooth Module=Btusb_DDI,  USB\VID_0A5C&PID_2151&REV_0847
+BCM2046 Bluetooth Module=Btusb_DDI,  USB\VID_0A5C&PID_2151
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6252&Rev_0434
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_18E8&PID_6252
+%3DSP.DeviceDesc%=Btusb_DDI,  USB\VID_05E1&PID_3800
+%3DSP.DeviceDesc%=Btusb_DDI,  USB\VID_05E1&PID_3810
+
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0B05&PID_179C
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0BDA&PID_0139
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_0001
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_3000
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_3002&REV_0001
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0CF3&PID_3002
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3304
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_3249&REV_1080
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_13D3&PID_5134
+
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E02C
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E02C&REV_0001
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00D
+%Atheros.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_E00D&REV_0472
+
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219B&REV_0072
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219B&REV_0504
+%WLink.DeviceDesc%=Btusb_DDI, USB\VID_0A5C&PID_219B
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_03F0&PID_231D&REV_0165
+%BROADCOM.DeviceDesc%=Btusb_DDI,  USB\VID_03F0&PID_231D
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0461&PID_4d75&REV_0667
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_0461&PID_4d75
+%BROADCOM.DeviceDesc%=Btusb_DDI, USB\VID_03F0&PID_231D&REV_0306
+
+%AVM.DeviceDesc%=Btusb_DDI, USB\VID_057C&PID_3800
+%AVM.DeviceDesc%=Btusb_DDI, USB\VID_057C&PID_3800&REV_1500
+
+%MAVIN.DeviceDesc%=Btusb_DDI, USB\VID_21EE&PID_1101
+
+%FOXCONN.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_0000
+%FOXCONN.DeviceDesc%=Btusb_DDI, USB\VID_0489&PID_0001
+
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1A12&PID_0001&REV_5276
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1A12&PID_0001
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1690&PID_0754&REV_0557
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1690&PID_0754
+%Askey.DeviceDesc%=Btusb_DDI, USB\VID_1690&PID_0757
+%DLINK.DeviceDesc%=Btusb_DDI, USB\VID_07D1&PID_F101\5&147F88E9&0&1
+%DLINK.DeviceDesc%=Btusb_DDI, USB\VID_07D1&PID_F101
+
+%MARVELL.DeviceDesc%=Btusb_DDI, USB\VID_1286&PID_1111
+%MARVELL.DeviceDesc%=Btusb_DDI, USB\VID_1286&PID_2042&MI_00
+%MARVELL.DeviceDesc%=Btusb_DDI, USB\VID_1286&PID_2042&REV_3201&MI_00
+
+%Medialink.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_2198
+%Medialink.DeviceDesc%=Btusb_DDI, USB\VID_05AC&PID_2198&REV_0391
+
+[Btusb_DDI]
+CopyFiles=Btusb_Files_Driver
+
+[Btusb_DDI.Services]
+Addservice = Btcsrusb, 0x00000002, Btusb_AddService
+
+[Btusb_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\btcusb.sys
+
+[Btusb_Files_Driver]
+btcusb.sys
+
+[DestinationDirs]
+DefaultDestDir     = 11
+Btusb_Files_Driver = 10,System32\Drivers
+
+
+;--------- Strings Section ---------------------------------------------------
+[Strings]
+IVT="IVT Corporation"
+ProviderName="IVT Corporation"
+BTUSBClassName="Bluetooth USB"
+SvcDesc="Bluetooth USB For Bluetooth Service"
+SourceDisk="BlueSoleil Installation Disk"
+
+CSR.DeviceDesc="CSR Bluetooth Device"
+AVNET.DeviceDesc="AVNET Bluetooth Device"
+ALPS.DeviceDesc="ALPS Bluetooth Device"
+Accel.DeviceDesc="Accel Bluetooth Device"
+ERICSSON.DeviceDesc="ERICSSON Bluetooth Device"
+NATIONAL.DeviceDesc="NSC Bluetooth Device"
+SILICONWAVE.DeviceDesc="RFMD Bluetooth Device"
+ZEEVO.DeviceDesc="Zeevo Bluetooth Device"
+SUPERBT.DeviceDesc="SUPERBT Bluetooth Device"
+WavePlus.DeviceDesc="WavePlus Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="TAIYO YUDEN Bluetooth Device"
+BROADCOM.DeviceDesc="BROADCOM Bluetooth Device"
+WLink.DeviceDesc="WLink Bluetooth Device"
+Mitsumi.DeviceDesc="Mitsumi Bluetooth Device"
+Oki.DeviceDesc="OKI Bluetooth Device"
+SAMSUNG.DeviceDesc="SAMSUNG Bluetooth Device"
+TI.DeviceDesc="TI Bluetooth Device"
+RTX.DeviceDesc="RTX Bluetooth Device"
+Unknown.DeviceDesc="Bluetooth Device"
+ST.DeviceDesc="ST Micro Bluetooth Device"
+IBM.DeviceDesc="IBM Bluetooth Device"
+TDK.DeviceDesc="TDK Bluetooth Device"
+3COM.DeviceDesc="3COM Bluetooth Device"
+BILLIONTON.DeviceDesc="BILLIONTON Bluetooth Device"
+SMK.DeviceDesc="SMK Bluetooth Device"
+Microtune.DeviceDesc="Microtune Bluetooth Device"
+Arima.DeviceDesc="Arima Bluetooth Device"
+Hitachi.DeviceDesc="Hitachi Bluetooth Device"
+GctSemi.DeviceDesc="GctSemi Bluetooth Device"
+DELL.DeviceDesc="DELL Bluetooth Device"
+COMPAQ.DeviceDesc="COMPAQ Bluetooth Device"
+MSI.DeviceDesc="MSI Bluetooth Device"
+BT.DeviceDesc="USB Bluetooth Device"
+SONY.DeviceDesc="SONY Bluetooth Device"
+Air2U.DeviceDesc="USB Bluetooth Device"
+HP.DeviceDesc="HP Bluetooth Device"
+iTech.DeviceDesc="i.Tech Dynamic Bluetooth Device"
+Winbond.DeviceDesc="Winbond Bluetooth Device"
+ISSC.DeviceDesc="Bluetooth Device"
+SmartModular.DeviceDesc="SmartModular Bluetooth Device"
+Belkin.DeviceDesc="Belkin Bluetooth Device"
+Belkin1.DeviceDesc="Belkin F8T017NG 100m Bluetooth 2.1 adapter"
+Belkin2.DeviceDesc="Belkin F8T012xx1 device"
+
+SocketCom.DeviceDesc="Socketcom Bluetooth Device"
+Cellink.DeviceDesc="Cellink Bluetooth Device"
+BlueExpert.DeviceDesc="BlueExpert Bluetooth Device"
+
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth Device"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth/SD Reader USB Adapter"
+FCS.DeviceDesc="Fujitsu Siemens Bluetooth Device"
+AboCom.DeviceDesc="AboCom Bluetooth Device"
+Princeton.DeviceDesc="Princeton USB BT Adapter"
+FIC.DeviceDesc="FIC Bluetooth USB Device"
+MSIEDR.DeviceDesc="MSI Bluetooth EDR Device"
+MANFEDR.DeviceDesc="USB Bluetooth EDR Device"
+MSICLASSIEDR.DeviceDesc="MSI Bluetooth Class I EDR Device"
+MANFCLASSIEDR.DeviceDesc="USB Bluetooth Class I EDR Device"
+GlobalSat.DeviceDesc="GlobalSat Bluetooth Device"
+Hewlett.DeviceDesc="Hewlett Packard Bluetooth Device"
+3DSP.DeviceDesc="3DSP Bluetooth Device"
+
+CN512v1.DeviceDesc="Bluetooth 2.0 USB adapter 10m"
+CN521v1.DeviceDesc="Bluetooth 2.0 USB adapter 100m"
+CONWISE.DeviceDesc="Conwise Bluetooth Device"
+MSIBToes20.DeviceDesc="BToes 2.0 Bluetooth Dongle"
+
+BrainBoxes.DeviceDesc="Brain Boxes USB Bluetooth Adapter BL-554"
+MotionComputing.DeviceDesc="Motion Computing USB Bluetooth Device"
+TOSHIBA.DeviceDesc="TOSHIBA Integrated Bluetooth"
+DellBT360.DeviceDesc="Dell Wireless 360 Bluetooth Module"
+
+TosrfUsb.DeviceDesc2 = "Bluetooth USB Controller from TOSHIBA (Ericsson P4A)"
+TosrfUsb.DeviceDesc3 = "Bluetooth USB Controller from TOSHIBA (Intel/CSR)"
+TosrfUsb.DeviceDesc4 = "Bluetooth USB Controller from TOSHIBA (ALPS/CSR)"
+TosrfUsb.DeviceDesc9 = "Bluetooth USB Controller-2 from TOSHIBA" ; "TaiyoYuden/CSR"
+TosrfUsb.DeviceDesc15 = "Frontline Test Equipment Bluetooth Device"
+TosrfUsb.DeviceDesc20 = "CSR Nanosira3-ROM"
+TosrfUsb.DeviceDesc21 = "CSR Nanosira4-EDR"
+TosrfUsb.DeviceDesc22 = "CSR Nanosira4-EDR WHQL Reference Radio"
+TosrfUsb.DeviceDesc23 = "CSR Nanosira4-EDR-ROM"
+TosrfUsb.DeviceDesc24 = "CSR Nanosira5-ROM"
+TosrfUsb.DeviceDesc25 = "CSR Casira with BlueCore2-External Module"
+TosrfUsb.DeviceDesc26 = "CSR Casira with BlueCore2-Flash Module"
+TosrfUsb.DeviceDesc27 = "CSR Casira with BlueCore3-Multimedia Module"
+TosrfUsb.DeviceDesc28 = "CSR Casira with BlueCore3-Flash Module"
+TosrfUsb.DeviceDesc29 = "CSR Casira with BlueCore4-External Module"
+TosrfUsb.DeviceDesc30 = "CSR Casira with BlueCore4-Multimedia Module"
+TosrfUsb.DeviceDesc84 = "BT-183 Bluetooth 2.0"
+TosrfUsb.DeviceDesc85 = "USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc86 = "USB Bluetooth 2.0 EDR Dongle"
+TosrfUsb.DeviceDesc87 = "Dell Bluetooth USB adapter"
+TosrfUsb.DeviceDesc88 = "Kodak DBT-220 USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc96 = "D-Link DBT-120 USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc97 = "USB Bluetooth Driver (V2.0+EDR)"
+TosrfUsb.DeviceDesc98 = "OQO Bluetooth Radio v2.0"
+TosrfUsb.DeviceDesc99 = "Taiyo Yuden Bluetooth USB Adaptor"
+TosrfUsb.DeviceDesc101 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc102 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc103 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc104 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc105 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc106 = "Taiyo Yuden Bluetooth Device(SAMPLE)"
+TosrfUsb.DeviceDesc107 = "Bluetooth USB Controller (ALPS/UGPZ6)"
+TosrfUsb.DeviceDesc108 = "Bluetooth USB Controller-5 from TOSHIBA" ; "TaiyoYuden/CSR"
+TosrfUsb.DeviceDesc109 = "TOSHIBA Bluetooth Adaptor-2"
+TosrfUsb.DeviceDesc110 = "Bluetooth USB Controller (ALPS/UGPZ6)"
+TosrfUsb.DeviceDesc111 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc113 = "MATSUSHITA Bluetooth Device"
+TosrfUsb.DeviceDesc114 = "BOSCH USB Bluetooth Device"
+TosrfUsb.DeviceDesc115 = "Motion Computing USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc116 = "Sitecom USB bluetooth2.0 class 2 dongle CN-512"
+TosrfUsb.DeviceDesc117 = "Sitecom USB bluetooth2.0 class 2 dongle CN-520"
+TosrfUsb.DeviceDesc118 = "Sitecom USB bluetooth2.0 class 1 dongle CN-521"
+TosrfUsb.DeviceDesc120 = "PT Bluetooth Ver2.0 USB+EDR Adapter"
+TosrfUsb.DeviceDesc121 = "Bluetooth 2.0 USB adapter 10m CN-512v2 001"
+TosrfUsb.DeviceDesc122 = "Bluetooth 2.0 USB adapter 100m CN-521v2 001"
+TosrfUsb.DeviceDesc123 = "PTM-UBT3"
+ASUS.DeviceDesc = "ASUS BT-253"
+DELL1.DeviceDesc = "Dell Wireless 370 Bluetooth Mini-card"
+ThinkPad.DeviceDesc="ThinkPad Bluetooth 2.1 with Enhanced Data Rate"
+Apple.DeviceDesc = "Apple Built-in Bluetooth"
+Maxell.DeviceDesc = "Maxell DFU"
+Taiyo.DeviceDesc = "Taiyo Yuden for GD-Itronix Bluetooth Device"  
+DELL2.DeviceDesc = "Dell Wireless 365 Bluetooth Module"
+Atheros.DeviceDesc = "Atheros Bluetooth Device"
+AVM.DeviceDesc = "AVM BlueFRITZ! Bluetooth Device"
+MAVIN.DeviceDesc= "Bluetooth 3.0 Device"
+FOXCONN.DeviceDesc = "Bluetooth Foxconn-CPBT20CU-CSRBC4"
+Askey.DeviceDesc = "Askey Bluetooth Device"
+DLINK.DeviceDesc = "D-Link USB Bluetooth Adapter"
+MARVELL.DeviceDesc = "Marvell AVASTAR Bluetooth Controller"
+Medialink.DeviceDesc = "Medialink bluetooth usb devices model MUA-BA3"

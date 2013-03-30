@@ -1,0 +1,312 @@
+;;
+;; BTPORT.INF
+;;
+;; Install File for the WIDCOMM virtual BlueTooth COM port.
+;;
+;; WIDCOMM, Inc. Copyright (C) 2000-2003
+;;
+
+[Version]
+signature="$Windows NT$"
+Class=Ports
+ClassGuid       = {4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%WIDCOMM%
+CatalogFile=btport.cat
+DriverVer=11/17/2009,5.6.0.3000
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+btport.sys = 1
+
+[Manufacturer]
+%WIDCOMM%=BTPORT
+
+[BTPORT]
+%port% = BluetoothPort, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\BLUETOOTHPORT
+
+[BluetoothPort]
+AddReg=BtPortMF.AddReg,BTDriver.AddReg
+CopyFiles=CopyFiles
+; addreg and copy files for serenum.sys
+; Include=msports.inf
+; Needs=SerialEnumerator.NT
+
+[BluetoothPort.Services]
+AddService=BTDriver,%SPSVCINST_ASSOCSERVICE%,BTDriver.AddService,BTDriver_EventLog.AddEventLog
+; install the serenum service itself
+; Include=msports.inf
+; Needs=SerialEnumerator.NT.Services
+
+[BtPortMF.AddReg]
+HKR,,Manufacturer,,%WIDCOMM%
+
+[BTDriver.AddReg]
+;  Whatever parameters...
+HKR,,TraceEnable,%REG_DWORD%,0
+
+
+[BluetoothPort.HW]
+AddReg=BluetoothPort.HW.AddReg
+
+[BluetoothPort.HW.AddReg]
+; HKR,,"UpperFilters",0x00010000,"serenum"
+
+
+[BTDriver.AddService]
+DisplayName=%BTDriver.ServiceDesc%
+ServiceType    = 1                ; SERVICE_KERNEL_DRIVER
+StartType      = 3                ; SERVICE_DEMAND_START
+ErrorControl   = 0                ; SERVICE_ERROR_IGNORE
+ServiceBinary=%12%\btport.sys    ; 12=drivers directory
+;LoadOrderGroup=Extended Base
+
+
+[BTDriver_EventLog.AddEventLog]
+AddReg=StlnAta_EventLog_AddEventLog.AddReg
+ 
+[StlnAta_EventLog_AddEventLog.AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\btport.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[CopyFiles]
+btport.sys
+
+[Strings]
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM Installation Media"
+port="Bluetooth Communications Port"
+BTDriver.ServiceDesc="Bluetooth Virtual Communications Driver"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+
+[Strings.0404] ; Chinese Traditional
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM ¶w∏À¥C≈È"
+port="¬≈™ﬁ≥q∞T∞"
+BTDriver.ServiceDesc="¬≈™ﬁµÍ¿¿≥q∞T≈X∞ µ{¶°"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0406] ; Danish
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM-installationsmedie"
+port="Bluetooth-kommunikationsport"
+BTDriver.ServiceDesc="Driver til virtuel Bluetooth-kommunikation"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0407] ; German
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM-Installationsmedien"
+port="Bluetooth-Kommunikationsanschluss"
+BTDriver.ServiceDesc="Virtueller Bluetooth-Kommunikationstreiber"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.040a] ; Spanish
+WIDCOMM="Broadcom"
+Source_Description="Medios de instalaciÛn de WIDCOMM"
+port="Puerto de comunicaciones Bluetooth"
+BTDriver.ServiceDesc="Controlador de comunicaciones virtual Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.040b] ; Finnish
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM-asennuslevy"
+port="Bluetooth-tietoliikenneportti"
+BTDriver.ServiceDesc="Bluetooth-n‰enn‰istietoliikenneohjain"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.040c] ; French
+WIDCOMM="Broadcom"
+Source_Description="Support d'installation WIDCOMM"
+port="Port de communications Bluetooth"
+BTDriver.ServiceDesc="Pilote de communications virtuelles Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0410] ; Italian
+WIDCOMM="Broadcom"
+Source_Description="Supporto di installazione WIDCOMM"
+port="Porta di comunicazione Bluetooth"
+BTDriver.ServiceDesc="Driver di comunicazioni virtuali Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0411] ; Japanese
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM ÉCÉìÉXÉgÅ[Éã ÉÅÉfÉBÉA"
+port="Bluetooth í êMÉ|Å[Ég"
+BTDriver.ServiceDesc="Bluetooth âºëzí êMÉhÉâÉCÉo"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0412] ; Korean
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM º≥ƒ° πÃµæÓ"
+port="Bluetooth ≈ÎΩ≈ ∆˜∆Æ"
+BTDriver.ServiceDesc="Bluetooth ∞°ªÛ ≈ÎΩ≈ µÂ∂Û¿Ãπˆ"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0413] ; Dutch
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM-installatiemedia"
+port="Bluetooth-communicatiepoort"
+BTDriver.ServiceDesc="Bluetooth virtuele-communicatiestuurprogramma"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0416] ; Brazilian Portuguese
+WIDCOMM="Broadcom"
+Source_Description="MÌdia de instalaÁ„o WIDCOMM"
+port="Porta de comunicaÁ„o Bluetooth"
+BTDriver.ServiceDesc="Driver de comunicaÁ„o virtual Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.041d] ; Swedish
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM-installationsskiva"
+port="Bluetooth-kommunikationssport"
+BTDriver.ServiceDesc="Virtuell Bluetooth-kommunikationsdrivrutin"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0415] ; Polish
+WIDCOMM="Broadcom"
+Source_Description="Noúnik instalacyjny WIDCOMM"
+port="Port komunikacyjny Bluetooth"
+BTDriver.ServiceDesc="Sterownik do komunikacji wirtualnej Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0419] ; Russian
+WIDCOMM="Broadcom"
+Source_Description="ÕÓÒËÚÂÎ¸ ‰Îˇ ÛÒÚ‡ÌÓ‚ÍË WIDCOMM"
+port="œÓÚ Ò‚ˇÁË Bluetooth"
+BTDriver.ServiceDesc="ƒ‡È‚Â ‚ËÚÛ‡Î¸ÌÓÈ Ò‚ˇÁË Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0414] ; Norwegian
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM-installasjonsmedier"
+port="Bluetooth-kommunikasjonsport"
+BTDriver.ServiceDesc="Bluetooth-driver for virtuell kommunikasjon"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[DestinationDirs]
+DefaultDestDir             =12
+
+[Strings.0804] ; ChineseSimplified
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM ∞≤◊∞ΩÈ÷ "
+port="¿∂—¿Õ®–≈∂Àø⁄"
+BTDriver.ServiceDesc="¿∂—¿–Èƒ‚Õ®–≈«˝∂Ø≥Ã–Ú"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0401] ; Arabic
+WIDCOMM="Broadcom"
+Source_Description="Ê”«∆ÿ  À»Ì  WIDCOMM"
+port="„‰›– « ’«·«  Bluetooth"
+BTDriver.ServiceDesc="»—‰«„Ã  ‘€Ì· « ’«·«  Bluetooth «·Ÿ«Â—Ì…"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0405] ; Czech
+WIDCOMM="Broadcom"
+Source_Description="InstalaËnÌ mÈdia WIDCOMM"
+port="KomunikaËnÌ port Bluetooth"
+BTDriver.ServiceDesc="OvladaË virtu·lnÌch komunikacÌ Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0408] ; Greek
+WIDCOMM="Broadcom"
+Source_Description="–ÔÎıÏ›Û· Â„Í·Ù‹ÛÙ·ÛÁÚ WIDCOMM"
+port="»˝Ò·  ≈ÈÍÔÈÌ˘ÌÈ˛Ì Bluetooth"
+BTDriver.ServiceDesc="–Ò¸„Ò·ÏÏ· Ô‰ﬁ„ÁÛÁÚ ÛıÛÍÂıﬁÚ ÂÈÍÔÌÈÍﬁÚ ÂÈÍÔÈÌ˘Ìﬂ·Ú Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.040D] ; Hebrew
+WIDCOMM="Broadcom"
+Source_Description="Ó„È˙ ‰˙˜‰ WIDCOMM"
+port="ÈˆÈ‡˙ ˙˜˘Â¯˙ Bluetooth"
+BTDriver.ServiceDesc="Ó‰Ï ‰˙˜Ô ˙˜˘Â¯˙ ÂÈ¯ËÂ‡ÏÈ˙ Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.041A] ; Croatian
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM mediji za instalaciju"
+port="Bluetooth komunikacijski prikljuËak"
+BTDriver.ServiceDesc="Bluetooth upravljaËki program za virtualnu komunikaciju"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.040E] ; Hungarian
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM Installation Media"
+port="Bluetooth kommunik·ciÛs port"
+BTDriver.ServiceDesc="Bluetooth virtu·lis kommunik·ciÛs illesztıprogram"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0816] ; Iberian Portuguese
+WIDCOMM="Broadcom"
+Source_Description="Suporte de instalaÁ„o WIDCOMM"
+port="Porta de ComunicaÁıes Bluetooth"
+BTDriver.ServiceDesc="Controlador de comunicaÁıes virtuais Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.0418] ; Romanian
+WIDCOMM="Broadcom"
+Source_Description="Suport de instalare WIDCOMM"
+port="Port de comunica˛ii Bluetooth"
+BTDriver.ServiceDesc="Driver de comunica˛ii virtual Bluetooth"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001
+
+[Strings.041F] ; Turkish
+WIDCOMM="Broadcom"
+Source_Description="WIDCOMM Y¸kleme Ortam˝"
+port="Bluetooth ›leti˛im Balant˝ Noktas˝"
+BTDriver.ServiceDesc="Bluetooth Sanal ›leti˛im S¸r¸c¸s¸"
+
+SPSVCINST_ASSOCSERVICE   = 2
+REG_DWORD                = 0x00010001

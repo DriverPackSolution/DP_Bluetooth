@@ -1,0 +1,604 @@
+; TOSRFUSB.INF
+;
+; Bluetooth USB Driver
+;
+; Copyright 1999-2011, TOSHIBA Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = BLUETOOTH
+ClassGuid = {7240100F-6512-4548-8418-9EBB5C6A1A94}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TOSHIBA%
+DriverPackageDisplayName = %tosrfusb.SVCDESC%
+DriverVer = 12/16/2011,8.1.1216.0
+CatalogFile = tosrfusb.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksNames.x86]
+3426 = windows cd
+
+[SourceDisksFiles]
+tosrfusb.sys = 3426
+TosBtCi.dll = 3426
+
+[SourceDisksFiles.x86]
+tosrfusb.sys = 3426
+TosBtCi.dll = 3426
+
+[ClassInstall32]
+Addreg=BluetoothClassReg
+CopyFiles=BluetoothClassFiles
+
+[BluetoothClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,"100"
+HKR,,Installer32,,"TosBtCi.dll,BluetoothClassInstaller"
+
+[BluetoothClassFiles]
+TosBtCi.dll
+
+[DestinationDirs]
+;;Drivers_Dir = 10,System32\Drivers
+;;INF_Dir = 17
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+Drivers_Dir    = 12
+
+;*****************************************
+; Tosrfusb  Install Section
+;*****************************************
+
+[Manufacturer]
+%StdMfg%=Standard, NTamd64
+
+[SignatureAttributes]
+tosrfusb.sys = SignatureAttributes.DRM
+
+[ControlFlags]
+;
+; Exclude all devices from Select Device list
+;
+ExcludeFromSelect = *
+
+;
+; These are the tosrfusb bus pnp ids
+;
+[Standard]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TosrfUsb.DeviceDesc1%=TosrfUsb_Device,  USB\VID_08EA&PID_abba
+%TosrfUsb.DeviceDesc2%=TosrfUsb_Device,  USB\VID_8086&PID_110a
+%TosrfUsb.DeviceDesc3%=TosrfUsb_Device,  USB\VID_8086&PID_110b
+%TosrfUsb.DeviceDesc4%=TosrfUsb_Device,  USB\VID_0930&PID_0501
+%TosrfUsb.DeviceDesc5%=TosrfUsb_Device,  USB\VID_0c10&PID_0000
+%TosrfUsb.DeviceDesc6%=TosrfUsb_Device,  USB\VID_0930&PID_0502
+%TosrfUsb.DeviceDesc7%=TosrfUsb_Device,  USB\VID_0A12&PID_0001
+%TosrfUsb.DeviceDesc8%=TosrfUsb_Device,  USB\VID_0525&PID_a220
+%TosrfUsb.DeviceDesc9%=TosrfUsb_Device,  USB\VID_0930&PID_0503
+%TosrfUsb.DeviceDesc10%=TosrfUsb_Device,  USB\VID_0930&PID_0505
+%TosrfUsb.DeviceDesc11%=TosrfUsb_Device,  USB\VID_044e&PID_3001
+%TosrfUsb.DeviceDesc12%=TosrfUsb_Device,  USB\VID_0c24&PID_0001
+%TosrfUsb.DeviceDesc13%=TosrfUsb_Device,  USB\VID_0930&PID_0507
+%TosrfUsb.DeviceDesc14%=TosrfUsb_Device,  USB\VID_0930&PID_0506
+%TosrfUsb.DeviceDesc15%=TosrfUsb_Device,  USB\VID_0A12&PID_0002
+%TosrfUsb.DeviceDesc16%=TosrfUsb_Device,  USB\VID_0A12&PID_0003
+%TosrfUsb.DeviceDesc17%=TosrfUsb_Device,  USB\VID_0A12&PID_0004
+%TosrfUsb.DeviceDesc18%=TosrfUsb_Device,  USB\VID_0A12&PID_0005
+%TosrfUsb.DeviceDesc19%=TosrfUsb_Device,  USB\VID_0A12&PID_0006
+%TosrfUsb.DeviceDesc20%=TosrfUsb_Device,  USB\VID_0A12&PID_0007
+%TosrfUsb.DeviceDesc21%=TosrfUsb_Device,  USB\VID_0A12&PID_0008
+%TosrfUsb.DeviceDesc22%=TosrfUsb_Device,  USB\VID_0A12&PID_0009
+%TosrfUsb.DeviceDesc23%=TosrfUsb_Device,  USB\VID_0A12&PID_000A
+%TosrfUsb.DeviceDesc24%=TosrfUsb_Device,  USB\VID_0A12&PID_000B
+%TosrfUsb.DeviceDesc25%=TosrfUsb_Device,  USB\VID_0A12&PID_0100
+%TosrfUsb.DeviceDesc26%=TosrfUsb_Device,  USB\VID_0A12&PID_0101
+%TosrfUsb.DeviceDesc27%=TosrfUsb_Device,  USB\VID_0A12&PID_0102
+%TosrfUsb.DeviceDesc28%=TosrfUsb_Device,  USB\VID_0A12&PID_0103
+%TosrfUsb.DeviceDesc29%=TosrfUsb_Device,  USB\VID_0A12&PID_0104
+%TosrfUsb.DeviceDesc30%=TosrfUsb_Device,  USB\VID_0A12&PID_0105
+%TosrfUsb.DeviceDesc31%=TosrfUsb_Device,  USB\VID_413C&PID_8103
+%TosrfUsb.DeviceDesc32%=TosrfUsb_Device,  USB\VID_049F&PID_0027
+%TosrfUsb.DeviceDesc33%=TosrfUsb_Device,  USB\VID_04BF&PID_030A
+%TosrfUsb.DeviceDesc34%=TosrfUsb_Device,  USB\VID_04BF&PID_0309
+%TosrfUsb.DeviceDesc35%=TosrfUsb_Device,  USB\VID_04BF&PID_0310
+%TosrfUsb.DeviceDesc36%=TosrfUsb_Device,  USB\VID_04BF&PID_0319
+%TosrfUsb.DeviceDesc37%=TosrfUsb_Device,  USB\VID_04BF&PID_0320
+%TosrfUsb.DeviceDesc38%=TosrfUsb_Device,  USB\VID_04BF&PID_0317
+%TosrfUsb.DeviceDesc39%=TosrfUsb_Device,  USB\VID_04BF&PID_0318
+%TosrfUsb.DeviceDesc40%=TosrfUsb_Device,  USB\VID_0BDB&PID_1000
+%TosrfUsb.DeviceDesc41%=TosrfUsb_Device,  USB\VID_0BDB&PID_1002 
+%TosrfUsb.DeviceDesc43%=TosrfUsb_Device,  USB\VID_0A5C&PID_200A
+%TosrfUsb.DeviceDesc44%=TosrfUsb_Device,  USB\VID_0A5C&PID_2035
+%TosrfUsb.DeviceDesc45%=TosrfUsb_Device,  USB\VID_0A5C&PID_2009
+%TosrfUsb.DeviceDesc46%=TosrfUsb_Device,  USB\VID_055D&PID_0BB1
+%TosrfUsb.DeviceDesc47%=TosrfUsb_Device,  USB\VID_05B1&PID_1389
+%TosrfUsb.DeviceDesc48%=TosrfUsb_Device,  USB\VID_0B7A&PID_07D0
+%TosrfUsb.DeviceDesc49%=TosrfUsb_Device,  USB\VID_413C&PID_8000
+%TosrfUsb.DeviceDesc50%=TosrfUsb_Device,  USB\VID_1668&PID_0441
+%TosrfUsb.DeviceDesc51%=TosrfUsb_Device,  USB\VID_1668&PID_2441
+%TosrfUsb.DeviceDesc52%=TosrfUsb_Device,  USB\VID_0F4D&PID_1000
+%TosrfUsb.DeviceDesc53%=TosrfUsb_Device,  USB\VID_0DB0&PID_1967
+%TosrfUsb.DeviceDesc54%=TosrfUsb_Device,  USB\VID_0DB0&PID_6970
+%TosrfUsb.DeviceDesc55%=TosrfUsb_Device,  USB\VID_0DB0&PID_697A
+%TosrfUsb.DeviceDesc56%=TosrfUsb_Device,  USB\VID_0DB0&PID_6855
+%TosrfUsb.DeviceDesc58%=TosrfUsb_Device,  USB\VID_0400&PID_0807
+%TosrfUsb.DeviceDesc59%=TosrfUsb_Device,  USB\VID_0483&PID_5000
+%TosrfUsb.DeviceDesc60%=TosrfUsb_Device,  USB\VID_0451&PID_1234
+%TosrfUsb.DeviceDesc61%=TosrfUsb_Device,  USB\VID_0451&PID_ffff
+%TosrfUsb.DeviceDesc62%=TosrfUsb_Device,  USB\VID_044e&PID_2014
+%TosrfUsb.DeviceDesc63%=TosrfUsb_Device,  USB\VID_0D9A&PID_0001
+%TosrfUsb.DeviceDesc64%=TosrfUsb_Device,  USB\VID_4851&PID_1103
+%TosrfUsb.DeviceDesc65%=TosrfUsb_Device,  USB\VID_049F&PID_0086
+%TosrfUsb.DeviceDesc66%=TosrfUsb_Device,  USB\VID_046D&PID_C707
+%TosrfUsb.DeviceDesc67%=TosrfUsb_Device,  USB\VID_046D&PID_C708
+%TosrfUsb.DeviceDesc68%=TosrfUsb_Device,  USB\VID_046D&PID_C709
+%TosrfUsb.DeviceDesc69%=TosrfUsb_Device,  USB\VID_0FD1&PID_0001
+%TosrfUsb.DeviceDesc70%=TosrfUsb_Device,  USB\VID_050D&PID_0083
+%TosrfUsb.DeviceDesc71%=TosrfUsb_Device,  USB\VID_04AD&PID_2501
+%TosrfUsb.DeviceDesc72%=TosrfUsb_Device,  USB\VID_0547&PID_0001
+%TosrfUsb.DeviceDesc73%=TosrfUsb_Device,  USB\VID_0471&PID_0809
+%TosrfUsb.DeviceDesc74%=TosrfUsb_Device,  USB\VID_11D9&PID_2600
+%TosrfUsb.DeviceDesc75%=TosrfUsb_Device,  USB\VID_413C&PID_8501
+%TosrfUsb.DeviceDesc76%=TosrfUsb_Device,  USB\VID_03F0&PID_011D
+%TosrfUsb.DeviceDesc77%=TosrfUsb_Device,  USB\VID_03F0&PID_0624
+%TosrfUsb.DeviceDesc78%=TosrfUsb_Device,  USB\VID_1131&PID_1001
+%TosrfUsb.DeviceDesc79%=TosrfUsb_Device,  USB\VID_1310&PID_0001
+%TosrfUsb.DeviceDesc80%=TosrfUsb_Device,  USB\VID_0BF8&PID_1003
+%TosrfUsb.DeviceDesc81%=TosrfUsb_Device,  USB\VID_1668&PID_0500
+%TosrfUsb.DeviceDesc82%=TosrfUsb_Device,  USB\VID_04E8&PID_7021
+%TosrfUsb.DeviceDesc83%=TosrfUsb_Device,  USB\VID_148D&PID_2430
+%TosrfUsb.DeviceDesc84%=TosrfUsb_Device,  USB\VID_0B05&PID_1712
+%TosrfUsb.DeviceDesc85%=TosrfUsb_Device,  USB\VID_040A&PID_5010
+%TosrfUsb.DeviceDesc86%=TosrfUsb_Device,  USB\VID_1582&PID_3006
+%TosrfUsb.DeviceDesc87%=TosrfUsb_Device,  USB\VID_413C&PID_8120
+%TosrfUsb.DeviceDesc88%=TosrfUsb_Device,  USB\VID_040A&PID_5012
+%TosrfUsb.DeviceDesc90%=TosrfUsb_Device,  USB\VID_0DB0&PID_6970
+%TosrfUsb.DeviceDesc91%=TosrfUsb_Device,  USB\VID_0DB0&PID_697A
+%TosrfUsb.DeviceDesc92%=TosrfUsb_Device,  USB\VID_0DB0&PID_A970
+%TosrfUsb.DeviceDesc93%=TosrfUsb_Device,  USB\VID_0DB0&PID_A97A
+%TosrfUsb.DeviceDesc94%=TosrfUsb_Device,  USB\VID_0DB0&PID_B970
+%TosrfUsb.DeviceDesc95%=TosrfUsb_Device,  USB\VID_0DB0&PID_B97A
+%TosrfUsb.DeviceDesc96%=TosrfUsb_Device,  USB\VID_07D1&PID_FC01
+%TosrfUsb.DeviceDesc97%=TosrfUsb_Device,  USB\VID_0C24&PID_000F
+%TosrfUsb.DeviceDesc98%=TosrfUsb_Device,  USB\VID_1557&PID_0004
+%TosrfUsb.DeviceDesc99%=TosrfUsb_Device,  USB\VID_0c24&PID_000c
+%TosrfUsb.DeviceDesc100%=TosrfUsb_Device,  USB\VID_0C24&PID_0002
+%TosrfUsb.DeviceDesc101%=TosrfUsb_Device,  USB\VID_0C24&PID_0005
+%TosrfUsb.DeviceDesc102%=TosrfUsb_Device,  USB\VID_0C24&PID_000b
+%TosrfUsb.DeviceDesc103%=TosrfUsb_Device,  USB\VID_0c24&PID_000e
+%TosrfUsb.DeviceDesc104%=TosrfUsb_Device,  USB\VID_0c24&PID_0010
+%TosrfUsb.DeviceDesc105%=TosrfUsb_Device,  USB\VID_0c24&PID_0018
+%TosrfUsb.DeviceDesc106%=TosrfUsb_Device,  USB\VID_0c24&PID_0c24
+%TosrfUsb.DeviceDesc107%=TosrfUsb_Device,  USB\VID_044E&PID_300C
+%TosrfUsb.DeviceDesc108%=TosrfUsb_Device,  USB\VID_0930&PID_0508
+%TosrfUsb.DeviceDesc109%=TosrfUsb_Device,  USB\VID_0930&PID_0509
+%TosrfUsb.DeviceDesc110%=TosrfUsb_Device,  USB\VID_044E&PID_300D
+%TosrfUsb.DeviceDesc111%=TosrfUsb_Device,  USB\VID_0c24&PID_0012
+%TosrfUsb.DeviceDesc112%=TosrfUsb_Device,  USB\VID_413C&PID_8140
+%TosrfUsb.DeviceDesc113%=TosrfUsb_Device,  USB\VID_0C24&PID_0019
+%TosrfUsb.DeviceDesc114%=TosrfUsb_Device,  USB\VID_0CA0&PID_1101
+%TosrfUsb.DeviceDesc115%=TosrfUsb_Device,  USB\VID_10AB&PID_1005
+%TosrfUsb.DeviceDesc116%=TosrfUsb_Device,  USB\VID_0DF6&PID_2200
+%TosrfUsb.DeviceDesc117%=TosrfUsb_Device,  USB\VID_0DF6&PID_2208
+%TosrfUsb.DeviceDesc118%=TosrfUsb_Device,  USB\VID_0DF6&PID_2209
+%TosrfUsb.DeviceDesc119%=TosrfUsb_Device,  USB\VID_117F&PID_3101
+%TosrfUsb.DeviceDesc120%=TosrfUsb_Device,  USB\VID_117F&PID_3102
+%TosrfUsb.DeviceDesc121%=TosrfUsb_Device,  USB\VID_0DF6&PID_0019
+%TosrfUsb.DeviceDesc122%=TosrfUsb_Device,  USB\VID_0DF6&PID_001A
+%TosrfUsb.DeviceDesc123%=TosrfUsb_Device,  USB\VID_117F&PID_3103
+%TosrfUsb.DeviceDesc124%=TosrfUsb_Device,  USB\VID_0B05&PID_173C
+%TosrfUsb.DeviceDesc125%=TosrfUsb_Device,  USB\VID_0C24&PID_001C
+%TosrfUsb.DeviceDesc126%=TosrfUsb_Device,  USB\VID_0C24&PID_001D
+%TosrfUsb.DeviceDesc127%=TosrfUsb_Device,  USB\VID_0C24&PID_001E
+%TosrfUsb.DeviceDesc128%=TosrfUsb_Device,  USB\VID_0C24&PID_001F
+%TosrfUsb.DeviceDesc129%=TosrfUsb_Device,  USB\VID_0C24&PID_0020
+%TosrfUsb.DeviceDesc130%=TosrfUsb_Device,  USB\VID_0930&PID_0200
+%TosrfUsb.DeviceDesc131%=TosrfUsb_Device,  USB\VID_0C24&PID_0021
+%TosrfUsb.DeviceDesc132%=TosrfUsb_Device,  USB\VID_0C24&PID_0022
+%TosrfUsb.DeviceDesc133%=TosrfUsb_Device,  USB\VID_044E&PID_301A
+%TosrfUsb.DeviceDesc134%=TosrfUsb_Device,  USB\VID_13D3&PID_3255
+%TosrfUsb.DeviceDesc135%=TosrfUsb_Device,  USB\VID_13D3&PID_3256
+%TosrfUsb.DeviceDesc136%=TosrfUsb_Device,  USB\VID_13D3&PID_3257
+%TosrfUsb.DeviceDesc137%=TosrfUsb_Device,  USB\VID_0930&PID_0A05
+%TosrfUsb.DeviceDesc138%=TosrfUsb_Device,  USB\VID_1D4D&PID_0008
+%TosrfUsb.DeviceDesc139%=TosrfUsb_Device,  USB\VID_0930&PID_020F
+%TosrfUsb.DeviceDesc140%=TosrfUsb_Device,  USB\VID_18E8&PID_6216
+%TosrfUsb.DeviceDesc141%=TosrfUsb_Device,  USB\VID_1D4D&PID_000A
+%TosrfUsb.DeviceDesc142%=TosrfUsb_Device,  USB\VID_13D3&PID_3287
+%TosrfUsb.DeviceDesc143%=TosrfUsb_Device,  USB\VID_13D3&PID_3288
+%TosrfUsb.DeviceDesc144%=TosrfUsb_Device,  USB\VID_1690&PID_0741
+%TosrfUsb.DeviceDesc145%=TosrfUsb_Device,  USB\VID_1690&PID_0737
+%TosrfUsb.DeviceDesc146%=TosrfUsb_Device,  USB\VID_0930&PID_0213
+%TosrfUsb.DeviceDesc147%=TosrfUsb_Device,  USB\VID_0930&PID_0214
+%TosrfUsb.DeviceDesc148%=TosrfUsb_Device,  USB\VID_0930&PID_0215
+%TosrfUsb.DeviceDesc149%=TosrfUsb_Device,  USB\VID_8086&PID_0189
+%TosrfUsb.DeviceDesc150%=TosrfUsb_Device,  USB\VID_0930&PID_0219
+%TosrfUsb.DeviceDesc151%=TosrfUsb_Device,  USB\VID_0930&PID_021A
+%TosrfUsb.DeviceDesc152%=TosrfUsb_Device,  USB\VID_0930&PID_021C
+%TosrfUsb.DeviceDesc153%=TosrfUsb_Device,  USB\VID_0930&PID_021D
+%TosrfUsb.DeviceDesc154%=TosrfUsb_Device,  USB\VID_0930&PID_021F
+%TosrfUsb.DeviceDesc155%=TosrfUsb_Device,  USB\VID_0930&PID_021E
+%TosrfUsb.DeviceDesc156%=TosrfUsb_Device,  USB\VID_044E&PID_301D
+%TosrfUsb.DeviceDesc157%=TosrfUsb_Device,  USB\VID_0BDA&PID_8723
+%TosrfUsb.DeviceDesc158%=TosrfUsb_Device,  USB\VID_8087&PID_07DA
+%TosrfUsb.DeviceDesc159%=TosrfUsb_Device,  USB\VID_13D3&PID_3362
+%TosrfUsb.DeviceDesc160%=TosrfUsb_Device,  USB\VID_0CF3&PID_3004
+
+
+[Standard.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TosrfUsb.DeviceDesc1%=TosrfUsb_Device,  USB\VID_08EA&PID_abba
+%TosrfUsb.DeviceDesc2%=TosrfUsb_Device,  USB\VID_8086&PID_110a
+%TosrfUsb.DeviceDesc3%=TosrfUsb_Device,  USB\VID_8086&PID_110b
+%TosrfUsb.DeviceDesc4%=TosrfUsb_Device,  USB\VID_0930&PID_0501
+%TosrfUsb.DeviceDesc5%=TosrfUsb_Device,  USB\VID_0c10&PID_0000
+%TosrfUsb.DeviceDesc6%=TosrfUsb_Device,  USB\VID_0930&PID_0502
+%TosrfUsb.DeviceDesc7%=TosrfUsb_Device,  USB\VID_0A12&PID_0001
+%TosrfUsb.DeviceDesc8%=TosrfUsb_Device,  USB\VID_0525&PID_a220
+%TosrfUsb.DeviceDesc9%=TosrfUsb_Device,  USB\VID_0930&PID_0503
+%TosrfUsb.DeviceDesc10%=TosrfUsb_Device,  USB\VID_0930&PID_0505
+%TosrfUsb.DeviceDesc11%=TosrfUsb_Device,  USB\VID_044e&PID_3001
+%TosrfUsb.DeviceDesc12%=TosrfUsb_Device,  USB\VID_0c24&PID_0001
+%TosrfUsb.DeviceDesc13%=TosrfUsb_Device,  USB\VID_0930&PID_0507
+%TosrfUsb.DeviceDesc14%=TosrfUsb_Device,  USB\VID_0930&PID_0506
+%TosrfUsb.DeviceDesc15%=TosrfUsb_Device,  USB\VID_0A12&PID_0002
+%TosrfUsb.DeviceDesc16%=TosrfUsb_Device,  USB\VID_0A12&PID_0003
+%TosrfUsb.DeviceDesc17%=TosrfUsb_Device,  USB\VID_0A12&PID_0004
+%TosrfUsb.DeviceDesc18%=TosrfUsb_Device,  USB\VID_0A12&PID_0005
+%TosrfUsb.DeviceDesc19%=TosrfUsb_Device,  USB\VID_0A12&PID_0006
+%TosrfUsb.DeviceDesc20%=TosrfUsb_Device,  USB\VID_0A12&PID_0007
+%TosrfUsb.DeviceDesc21%=TosrfUsb_Device,  USB\VID_0A12&PID_0008
+%TosrfUsb.DeviceDesc22%=TosrfUsb_Device,  USB\VID_0A12&PID_0009
+%TosrfUsb.DeviceDesc23%=TosrfUsb_Device,  USB\VID_0A12&PID_000A
+%TosrfUsb.DeviceDesc24%=TosrfUsb_Device,  USB\VID_0A12&PID_000B
+%TosrfUsb.DeviceDesc25%=TosrfUsb_Device,  USB\VID_0A12&PID_0100
+%TosrfUsb.DeviceDesc26%=TosrfUsb_Device,  USB\VID_0A12&PID_0101
+%TosrfUsb.DeviceDesc27%=TosrfUsb_Device,  USB\VID_0A12&PID_0102
+%TosrfUsb.DeviceDesc28%=TosrfUsb_Device,  USB\VID_0A12&PID_0103
+%TosrfUsb.DeviceDesc29%=TosrfUsb_Device,  USB\VID_0A12&PID_0104
+%TosrfUsb.DeviceDesc30%=TosrfUsb_Device,  USB\VID_0A12&PID_0105
+%TosrfUsb.DeviceDesc31%=TosrfUsb_Device,  USB\VID_413C&PID_8103
+%TosrfUsb.DeviceDesc32%=TosrfUsb_Device,  USB\VID_049F&PID_0027
+%TosrfUsb.DeviceDesc33%=TosrfUsb_Device,  USB\VID_04BF&PID_030A
+%TosrfUsb.DeviceDesc34%=TosrfUsb_Device,  USB\VID_04BF&PID_0309
+%TosrfUsb.DeviceDesc35%=TosrfUsb_Device,  USB\VID_04BF&PID_0310
+%TosrfUsb.DeviceDesc36%=TosrfUsb_Device,  USB\VID_04BF&PID_0319
+%TosrfUsb.DeviceDesc37%=TosrfUsb_Device,  USB\VID_04BF&PID_0320
+%TosrfUsb.DeviceDesc38%=TosrfUsb_Device,  USB\VID_04BF&PID_0317
+%TosrfUsb.DeviceDesc39%=TosrfUsb_Device,  USB\VID_04BF&PID_0318
+%TosrfUsb.DeviceDesc40%=TosrfUsb_Device,  USB\VID_0BDB&PID_1000
+%TosrfUsb.DeviceDesc41%=TosrfUsb_Device,  USB\VID_0BDB&PID_1002 
+%TosrfUsb.DeviceDesc43%=TosrfUsb_Device,  USB\VID_0A5C&PID_200A
+%TosrfUsb.DeviceDesc44%=TosrfUsb_Device,  USB\VID_0A5C&PID_2035
+%TosrfUsb.DeviceDesc45%=TosrfUsb_Device,  USB\VID_0A5C&PID_2009
+%TosrfUsb.DeviceDesc46%=TosrfUsb_Device,  USB\VID_055D&PID_0BB1
+%TosrfUsb.DeviceDesc47%=TosrfUsb_Device,  USB\VID_05B1&PID_1389
+%TosrfUsb.DeviceDesc48%=TosrfUsb_Device,  USB\VID_0B7A&PID_07D0
+%TosrfUsb.DeviceDesc49%=TosrfUsb_Device,  USB\VID_413C&PID_8000
+%TosrfUsb.DeviceDesc50%=TosrfUsb_Device,  USB\VID_1668&PID_0441
+%TosrfUsb.DeviceDesc51%=TosrfUsb_Device,  USB\VID_1668&PID_2441
+%TosrfUsb.DeviceDesc52%=TosrfUsb_Device,  USB\VID_0F4D&PID_1000
+%TosrfUsb.DeviceDesc53%=TosrfUsb_Device,  USB\VID_0DB0&PID_1967
+%TosrfUsb.DeviceDesc54%=TosrfUsb_Device,  USB\VID_0DB0&PID_6970
+%TosrfUsb.DeviceDesc55%=TosrfUsb_Device,  USB\VID_0DB0&PID_697A
+%TosrfUsb.DeviceDesc56%=TosrfUsb_Device,  USB\VID_0DB0&PID_6855
+%TosrfUsb.DeviceDesc58%=TosrfUsb_Device,  USB\VID_0400&PID_0807
+%TosrfUsb.DeviceDesc59%=TosrfUsb_Device,  USB\VID_0483&PID_5000
+%TosrfUsb.DeviceDesc60%=TosrfUsb_Device,  USB\VID_0451&PID_1234
+%TosrfUsb.DeviceDesc61%=TosrfUsb_Device,  USB\VID_0451&PID_ffff
+%TosrfUsb.DeviceDesc62%=TosrfUsb_Device,  USB\VID_044e&PID_2014
+%TosrfUsb.DeviceDesc63%=TosrfUsb_Device,  USB\VID_0D9A&PID_0001
+%TosrfUsb.DeviceDesc64%=TosrfUsb_Device,  USB\VID_4851&PID_1103
+%TosrfUsb.DeviceDesc65%=TosrfUsb_Device,  USB\VID_049F&PID_0086
+%TosrfUsb.DeviceDesc66%=TosrfUsb_Device,  USB\VID_046D&PID_C707
+%TosrfUsb.DeviceDesc67%=TosrfUsb_Device,  USB\VID_046D&PID_C708
+%TosrfUsb.DeviceDesc68%=TosrfUsb_Device,  USB\VID_046D&PID_C709
+%TosrfUsb.DeviceDesc69%=TosrfUsb_Device,  USB\VID_0FD1&PID_0001
+%TosrfUsb.DeviceDesc70%=TosrfUsb_Device,  USB\VID_050D&PID_0083
+%TosrfUsb.DeviceDesc71%=TosrfUsb_Device,  USB\VID_04AD&PID_2501
+%TosrfUsb.DeviceDesc72%=TosrfUsb_Device,  USB\VID_0547&PID_0001
+%TosrfUsb.DeviceDesc73%=TosrfUsb_Device,  USB\VID_0471&PID_0809
+%TosrfUsb.DeviceDesc74%=TosrfUsb_Device,  USB\VID_11D9&PID_2600
+%TosrfUsb.DeviceDesc75%=TosrfUsb_Device,  USB\VID_413C&PID_8501
+%TosrfUsb.DeviceDesc76%=TosrfUsb_Device,  USB\VID_03F0&PID_011D
+%TosrfUsb.DeviceDesc77%=TosrfUsb_Device,  USB\VID_03F0&PID_0624
+%TosrfUsb.DeviceDesc78%=TosrfUsb_Device,  USB\VID_1131&PID_1001
+%TosrfUsb.DeviceDesc79%=TosrfUsb_Device,  USB\VID_1310&PID_0001
+%TosrfUsb.DeviceDesc80%=TosrfUsb_Device,  USB\VID_0BF8&PID_1003
+%TosrfUsb.DeviceDesc81%=TosrfUsb_Device,  USB\VID_1668&PID_0500
+%TosrfUsb.DeviceDesc82%=TosrfUsb_Device,  USB\VID_04E8&PID_7021
+%TosrfUsb.DeviceDesc83%=TosrfUsb_Device,  USB\VID_148D&PID_2430
+%TosrfUsb.DeviceDesc84%=TosrfUsb_Device,  USB\VID_0B05&PID_1712
+%TosrfUsb.DeviceDesc85%=TosrfUsb_Device,  USB\VID_040A&PID_5010
+%TosrfUsb.DeviceDesc86%=TosrfUsb_Device,  USB\VID_1582&PID_3006
+%TosrfUsb.DeviceDesc87%=TosrfUsb_Device,  USB\VID_413C&PID_8120
+%TosrfUsb.DeviceDesc88%=TosrfUsb_Device,  USB\VID_040A&PID_5012
+%TosrfUsb.DeviceDesc90%=TosrfUsb_Device,  USB\VID_0DB0&PID_6970
+%TosrfUsb.DeviceDesc91%=TosrfUsb_Device,  USB\VID_0DB0&PID_697A
+%TosrfUsb.DeviceDesc92%=TosrfUsb_Device,  USB\VID_0DB0&PID_A970
+%TosrfUsb.DeviceDesc93%=TosrfUsb_Device,  USB\VID_0DB0&PID_A97A
+%TosrfUsb.DeviceDesc94%=TosrfUsb_Device,  USB\VID_0DB0&PID_B970
+%TosrfUsb.DeviceDesc95%=TosrfUsb_Device,  USB\VID_0DB0&PID_B97A
+%TosrfUsb.DeviceDesc96%=TosrfUsb_Device,  USB\VID_07D1&PID_FC01
+%TosrfUsb.DeviceDesc97%=TosrfUsb_Device,  USB\VID_0C24&PID_000F
+%TosrfUsb.DeviceDesc98%=TosrfUsb_Device,  USB\VID_1557&PID_0004
+%TosrfUsb.DeviceDesc99%=TosrfUsb_Device,  USB\VID_0c24&PID_000c
+%TosrfUsb.DeviceDesc100%=TosrfUsb_Device,  USB\VID_0C24&PID_0002
+%TosrfUsb.DeviceDesc101%=TosrfUsb_Device,  USB\VID_0C24&PID_0005
+%TosrfUsb.DeviceDesc102%=TosrfUsb_Device,  USB\VID_0C24&PID_000b
+%TosrfUsb.DeviceDesc103%=TosrfUsb_Device,  USB\VID_0c24&PID_000e
+%TosrfUsb.DeviceDesc104%=TosrfUsb_Device,  USB\VID_0c24&PID_0010
+%TosrfUsb.DeviceDesc105%=TosrfUsb_Device,  USB\VID_0c24&PID_0018
+%TosrfUsb.DeviceDesc106%=TosrfUsb_Device,  USB\VID_0c24&PID_0c24
+%TosrfUsb.DeviceDesc107%=TosrfUsb_Device,  USB\VID_044E&PID_300C
+%TosrfUsb.DeviceDesc108%=TosrfUsb_Device,  USB\VID_0930&PID_0508
+%TosrfUsb.DeviceDesc109%=TosrfUsb_Device,  USB\VID_0930&PID_0509
+%TosrfUsb.DeviceDesc110%=TosrfUsb_Device,  USB\VID_044E&PID_300D
+%TosrfUsb.DeviceDesc111%=TosrfUsb_Device,  USB\VID_0c24&PID_0012
+%TosrfUsb.DeviceDesc112%=TosrfUsb_Device,  USB\VID_413C&PID_8140
+%TosrfUsb.DeviceDesc113%=TosrfUsb_Device,  USB\VID_0C24&PID_0019
+%TosrfUsb.DeviceDesc114%=TosrfUsb_Device,  USB\VID_0CA0&PID_1101
+%TosrfUsb.DeviceDesc115%=TosrfUsb_Device,  USB\VID_10AB&PID_1005
+%TosrfUsb.DeviceDesc116%=TosrfUsb_Device,  USB\VID_0DF6&PID_2200
+%TosrfUsb.DeviceDesc117%=TosrfUsb_Device,  USB\VID_0DF6&PID_2208
+%TosrfUsb.DeviceDesc118%=TosrfUsb_Device,  USB\VID_0DF6&PID_2209
+%TosrfUsb.DeviceDesc119%=TosrfUsb_Device,  USB\VID_117F&PID_3101
+%TosrfUsb.DeviceDesc120%=TosrfUsb_Device,  USB\VID_117F&PID_3102
+%TosrfUsb.DeviceDesc121%=TosrfUsb_Device,  USB\VID_0DF6&PID_0019
+%TosrfUsb.DeviceDesc122%=TosrfUsb_Device,  USB\VID_0DF6&PID_001A
+%TosrfUsb.DeviceDesc123%=TosrfUsb_Device,  USB\VID_117F&PID_3103
+%TosrfUsb.DeviceDesc124%=TosrfUsb_Device,  USB\VID_0B05&PID_173C
+%TosrfUsb.DeviceDesc125%=TosrfUsb_Device,  USB\VID_0C24&PID_001C
+%TosrfUsb.DeviceDesc126%=TosrfUsb_Device,  USB\VID_0C24&PID_001D
+%TosrfUsb.DeviceDesc127%=TosrfUsb_Device,  USB\VID_0C24&PID_001E
+%TosrfUsb.DeviceDesc128%=TosrfUsb_Device,  USB\VID_0C24&PID_001F
+%TosrfUsb.DeviceDesc129%=TosrfUsb_Device,  USB\VID_0C24&PID_0020
+%TosrfUsb.DeviceDesc130%=TosrfUsb_Device,  USB\VID_0930&PID_0200
+%TosrfUsb.DeviceDesc131%=TosrfUsb_Device,  USB\VID_0C24&PID_0021
+%TosrfUsb.DeviceDesc132%=TosrfUsb_Device,  USB\VID_0C24&PID_0022
+%TosrfUsb.DeviceDesc133%=TosrfUsb_Device,  USB\VID_044E&PID_301A
+%TosrfUsb.DeviceDesc134%=TosrfUsb_Device,  USB\VID_13D3&PID_3255
+%TosrfUsb.DeviceDesc135%=TosrfUsb_Device,  USB\VID_13D3&PID_3256
+%TosrfUsb.DeviceDesc136%=TosrfUsb_Device,  USB\VID_13D3&PID_3257
+%TosrfUsb.DeviceDesc137%=TosrfUsb_Device,  USB\VID_0930&PID_0A05
+%TosrfUsb.DeviceDesc138%=TosrfUsb_Device,  USB\VID_1D4D&PID_0008
+%TosrfUsb.DeviceDesc139%=TosrfUsb_Device,  USB\VID_0930&PID_020F
+%TosrfUsb.DeviceDesc140%=TosrfUsb_Device,  USB\VID_18E8&PID_6216
+%TosrfUsb.DeviceDesc141%=TosrfUsb_Device,  USB\VID_1D4D&PID_000A
+%TosrfUsb.DeviceDesc142%=TosrfUsb_Device,  USB\VID_13D3&PID_3287
+%TosrfUsb.DeviceDesc143%=TosrfUsb_Device,  USB\VID_13D3&PID_3288
+%TosrfUsb.DeviceDesc144%=TosrfUsb_Device,  USB\VID_1690&PID_0741
+%TosrfUsb.DeviceDesc145%=TosrfUsb_Device,  USB\VID_1690&PID_0737
+%TosrfUsb.DeviceDesc146%=TosrfUsb_Device,  USB\VID_0930&PID_0213
+%TosrfUsb.DeviceDesc147%=TosrfUsb_Device,  USB\VID_0930&PID_0214
+%TosrfUsb.DeviceDesc148%=TosrfUsb_Device,  USB\VID_0930&PID_0215
+%TosrfUsb.DeviceDesc149%=TosrfUsb_Device,  USB\VID_8086&PID_0189
+%TosrfUsb.DeviceDesc150%=TosrfUsb_Device,  USB\VID_0930&PID_0219
+%TosrfUsb.DeviceDesc151%=TosrfUsb_Device,  USB\VID_0930&PID_021A
+%TosrfUsb.DeviceDesc152%=TosrfUsb_Device,  USB\VID_0930&PID_021C
+%TosrfUsb.DeviceDesc153%=TosrfUsb_Device,  USB\VID_0930&PID_021D
+%TosrfUsb.DeviceDesc154%=TosrfUsb_Device,  USB\VID_0930&PID_021F
+%TosrfUsb.DeviceDesc155%=TosrfUsb_Device,  USB\VID_0930&PID_021E
+%TosrfUsb.DeviceDesc156%=TosrfUsb_Device,  USB\VID_044E&PID_301D
+%TosrfUsb.DeviceDesc157%=TosrfUsb_Device,  USB\VID_0BDA&PID_8723
+%TosrfUsb.DeviceDesc158%=TosrfUsb_Device,  USB\VID_8087&PID_07DA
+%TosrfUsb.DeviceDesc159%=TosrfUsb_Device,  USB\VID_13D3&PID_3362
+%TosrfUsb.DeviceDesc160%=TosrfUsb_Device,  USB\VID_0CF3&PID_3004
+
+[TosrfUsb_Device]
+CopyFiles=Drivers_Dir
+AddReg=Tosrfusb.AddReg
+
+[TosrfUsb_Device.NT]
+CopyFiles=Drivers_Dir
+AddReg=Tosrfusb.AddReg
+
+[Tosrfusb.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,Tosrfusb.sys
+HKLM,"Software\Toshiba\BluetoothStack","NotInternalUSBDevice",0x10001,3
+
+[Drivers_Dir]
+tosrfusb.sys,,,2
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+;-------------- Service installation
+[TosrfUsb_Device.NT.Services]
+AddService = tosrfusb, %SPSVCINST_ASSOCSERVICE%, Tosrfusb_Service_Inst, Tosrfusb_Event_Inst
+
+; -------------- tosrfusb driver install sections
+[Tosrfusb_Service_Inst]
+DisplayName    = %tosrfusb.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tosrfusb.sys
+LoadOrderGroup = Base
+AddReg = Tosrfusb_Service_Inst_AddReg
+
+[Tosrfusb_Event_Inst]
+AddReg = Tosrfusb_Event_Inst_AddReg
+
+[Tosrfusb_Event_Inst_AddReg]
+HKR,,TypesSupported,0x10001,7
+HKR,,EventMessageFile,0x20000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\tosrfusb.sys"
+
+[Tosrfusb_Service_Inst_AddReg]
+HKR,Parameters,"BreakSR",0x10001,0
+HKR,Parameters,"DebugLevel",0x10001,0
+HKR,Parameters,"TraceLevel",0x10001,3
+HKR,Parameters,"OsType",0x10001,1			;Win98=0, W2K=1
+
+; -------------- tosrfusb driver install sections
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+TOSHIBA = "TOSHIBA"
+StdMfg = "Toshiba"
+DiskId1 = "Bluetooth Bus Installation Disk #1"
+tosrfusb.SVCDESC = "Bluetooth USB Controller"
+ClassName = "Bluetooth"
+
+TosrfUsb.DeviceDesc1 = "Bluetooth USB Controller from TOSHIBA (Ericsson P3D)"
+TosrfUsb.DeviceDesc2 = "Bluetooth USB Controller from TOSHIBA (Ericsson P4A)"
+TosrfUsb.DeviceDesc3 = "Bluetooth USB Controller from TOSHIBA (Intel/CSR)"
+TosrfUsb.DeviceDesc4 = "Bluetooth USB Controller from TOSHIBA (ALPS/CSR)"
+TosrfUsb.DeviceDesc5 = "Bluetooth USB Controller from TOSHIBA (TaiyoYuden/SiW)"
+TosrfUsb.DeviceDesc6 = "Bluetooth USB Controller from TOSHIBA"	; "TaiyoYuden/SiW is Default"
+TosrfUsb.DeviceDesc7 = "Generic Bluetooth Radio"
+TosrfUsb.DeviceDesc8 = "Bluetooth USB Controller from TOSHIBA (TaiyoYuden/SiW Sample)"
+TosrfUsb.DeviceDesc9 = "Bluetooth USB Controller-2 from TOSHIBA" ; "TaiyoYuden/CSR"
+TosrfUsb.DeviceDesc10 = "Bluetooth USB Controller-3 from TOSHIBA" ; "TaiyoYuden/CSR"
+TosrfUsb.DeviceDesc11 = "USB Bluetooth Driver (ALPS)"
+TosrfUsb.DeviceDesc12 = "TOSHIBA Bluetooth Adaptor" ; "Taiyoyuden/CSR for Test"
+TosrfUsb.DeviceDesc13 = "TOSHIBA Bluetooth Adaptor" ; "Taiyoyuden/CSR"
+TosrfUsb.DeviceDesc14 = "Bluetooth USB Controller-4 from TOSHIBA" ; "TaiyoYuden/CSR"
+TosrfUsb.DeviceDesc15 = "Frontline Test Equipment Bluetooth Device"
+TosrfUsb.DeviceDesc16 = "CSR Nanosira"
+TosrfUsb.DeviceDesc17 = "CSR Nanosira WHQL Reference Radio"
+TosrfUsb.DeviceDesc18 = "CSR Nanosira-Multimedia"
+TosrfUsb.DeviceDesc19 = "CSR Nanosira-Multimedia WHQL Reference Radio"
+TosrfUsb.DeviceDesc20 = "CSR Nanosira3-ROM"
+TosrfUsb.DeviceDesc21 = "CSR Nanosira4-EDR"
+TosrfUsb.DeviceDesc22 = "CSR Nanosira4-EDR WHQL Reference Radio"
+TosrfUsb.DeviceDesc23 = "CSR Nanosira4-EDR-ROM"
+TosrfUsb.DeviceDesc24 = "CSR Nanosira5-ROM"
+TosrfUsb.DeviceDesc25 = "CSR Casira with BlueCore2-External Module"
+TosrfUsb.DeviceDesc26 = "CSR Casira with BlueCore2-Flash Module"
+TosrfUsb.DeviceDesc27 = "CSR Casira with BlueCore3-Multimedia Module"
+TosrfUsb.DeviceDesc28 = "CSR Casira with BlueCore3-Flash Module"
+TosrfUsb.DeviceDesc29 = "CSR Casira with BlueCore4-External Module"
+TosrfUsb.DeviceDesc30 = "CSR Casira with BlueCore4-Multimedia Module"
+TosrfUsb.DeviceDesc31 = "Dell Wireless 350 Bluetooth Internal Card"
+TosrfUsb.DeviceDesc32 = "Bluetooth Multiport Module by Compaq"
+TosrfUsb.DeviceDesc33 = "Bluetooth Ultraport Module from IBM"
+TosrfUsb.DeviceDesc34 = "TDK Bluetooth USB Adaptor"
+TosrfUsb.DeviceDesc35 = "IBM Integrated Bluetooth"
+TosrfUsb.DeviceDesc36 = "TDK Bluetooth USB Adaptor"
+TosrfUsb.DeviceDesc37 = "TDK Bluetooth USB Adaptor"
+TosrfUsb.DeviceDesc38 = "Bluetooth Ultraport Module from IBM"
+TosrfUsb.DeviceDesc39 = "IBM Integrated Bluetooth"
+TosrfUsb.DeviceDesc40 = "Ericsson BV USB Bluetooth Device"
+TosrfUsb.DeviceDesc41 = "Ericsson USB Bluetooth Device 1.2"
+TosrfUsb.DeviceDesc43 = "Broadcom USB Bluetooth Device"
+TosrfUsb.DeviceDesc44 = "Broadcom USB Bluetooth Device"
+TosrfUsb.DeviceDesc45 = "Broadcom USB Bluetooth Device"
+TosrfUsb.DeviceDesc46 = "Samsung Bluetooth Device"
+TosrfUsb.DeviceDesc47 = "Silicon Wave Bluetooth Device"
+TosrfUsb.DeviceDesc48 = "Zeevo Bluetooth Device"
+TosrfUsb.DeviceDesc49 = "Dell TrueMobile Bluetooth Module"
+TosrfUsb.DeviceDesc50 = "IBM Integrated Bluetooth II"
+TosrfUsb.DeviceDesc51 = "IBM Integrated Bluetooth III"
+TosrfUsb.DeviceDesc52 = "Microtune USB Bluetooth Device"
+TosrfUsb.DeviceDesc53 = "MSI USB Bluetooth Device"
+TosrfUsb.DeviceDesc54 = "MSI USB Bluetooth Device"
+TosrfUsb.DeviceDesc55 = "MSI USB Bluetooth Device"
+TosrfUsb.DeviceDesc56 = "MSI USB Bluetooth Device"
+TosrfUsb.DeviceDesc58 = "National Semi Bluetooth Board"
+TosrfUsb.DeviceDesc59 = "National Semiconductor Bluetooth Board"
+TosrfUsb.DeviceDesc60 = "TI Mistral Bluetooth Device"
+TosrfUsb.DeviceDesc61 = "TI Mistral Bluetooth Device"
+TosrfUsb.DeviceDesc62 = "Sony Bluetooth Device"
+TosrfUsb.DeviceDesc63 = "Formosa Bluetooth Device"
+TosrfUsb.DeviceDesc64 = "Formosa Bluetooth Device"
+TosrfUsb.DeviceDesc65 = "Bluetooth by hp"
+TosrfUsb.DeviceDesc66 = "Bluetooth wireless hub"
+TosrfUsb.DeviceDesc67 = "Bluetooth wireless hub"
+TosrfUsb.DeviceDesc68 = "Bluetooth wireless hub"
+TosrfUsb.DeviceDesc69 = "GIANT Bluetooth Device"
+TosrfUsb.DeviceDesc70 = "Belkin Bluetooth Device"
+TosrfUsb.DeviceDesc71 = "Panasonic Bluetooth Device"
+TosrfUsb.DeviceDesc72 = "ICSI Bluetooth USB Device"
+TosrfUsb.DeviceDesc73 = "Philips BluePearl Bluetooth USB Device"
+TosrfUsb.DeviceDesc74 = "Itronix Bluetooth Device"
+TosrfUsb.DeviceDesc75 = "Dell Bluetooth USB adapter"
+TosrfUsb.DeviceDesc76 = "HP integrated module with Bluetooth wireless technology"
+TosrfUsb.DeviceDesc77 = "HP integrated module with Bluetooth wireless technology"
+TosrfUsb.DeviceDesc78 = "ISSC USB Bluetooth Device"
+TosrfUsb.DeviceDesc79 = "Air2U Bluetooth Device"
+TosrfUsb.DeviceDesc80 = "Fujitsu Siemens USB Device"
+TosrfUsb.DeviceDesc81 = "Actiontec USB Bluetooth Device BTM200"
+TosrfUsb.DeviceDesc82 = "Samsung Bluetooth Device"
+TosrfUsb.DeviceDesc83 = "Microlink-Foxlink Bluetooth Device"
+TosrfUsb.DeviceDesc84 = "BT-183 Bluetooth 2.0"
+TosrfUsb.DeviceDesc85 = "USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc86 = "USB Bluetooth 2.0 EDR Dongle"
+TosrfUsb.DeviceDesc87 = "Dell Bluetooth USB adapter"
+TosrfUsb.DeviceDesc88 = "Kodak DBT-220 USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc90 = "MSI Bluetooth Device"
+TosrfUsb.DeviceDesc91 = "USB Bluetooth Device"
+TosrfUsb.DeviceDesc92 = "MSI Bluetooth EDR Device"
+TosrfUsb.DeviceDesc93 = "USB Bluetooth EDR Device"
+TosrfUsb.DeviceDesc94 = "MSI Bluetooth Device"
+TosrfUsb.DeviceDesc95 = "USB Bluetooth Device"
+TosrfUsb.DeviceDesc96 = "D-Link DBT-120 USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc97 = "USB Bluetooth Driver (V2.0+EDR)"
+TosrfUsb.DeviceDesc98 = "OQO Bluetooth Radio v2.0"
+TosrfUsb.DeviceDesc99 = "Taiyo Yuden Bluetooth USB Adaptor"
+TosrfUsb.DeviceDesc100 = "Taiyo Yuden Bluetooth Device"
+TosrfUsb.DeviceDesc101 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc102 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc103 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc104 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc105 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc106 = "Taiyo Yuden Bluetooth Device(SAMPLE)"
+TosrfUsb.DeviceDesc107 = "Bluetooth USB Controller (ALPS/UGPZ6)"
+TosrfUsb.DeviceDesc108 = "Bluetooth USB Controller-5 from TOSHIBA" ; "TaiyoYuden/CSR"
+TosrfUsb.DeviceDesc109 = "TOSHIBA Bluetooth Adaptor-2"
+TosrfUsb.DeviceDesc110 = "Bluetooth USB Controller (ALPS/UGPZ6)"
+TosrfUsb.DeviceDesc111 = "Taiyo Yuden Bluetooth Device(BC04-External)"
+TosrfUsb.DeviceDesc112 = "Dell Wireless 360 Bluetooth Module"
+TosrfUsb.DeviceDesc113 = "Panasonic Bluetooth Device"
+TosrfUsb.DeviceDesc114 = "BOSCH USB Bluetooth Device"
+TosrfUsb.DeviceDesc115 = "Motion Computing USB Bluetooth Adapter"
+TosrfUsb.DeviceDesc116 = "Sitecom USB bluetooth2.0 class 2 dongle CN-512"
+TosrfUsb.DeviceDesc117 = "Sitecom USB bluetooth2.0 class 2 dongle CN-520"
+TosrfUsb.DeviceDesc118 = "Sitecom USB bluetooth2.0 class 1 dongle CN-521"
+TosrfUsb.DeviceDesc119 = "PT USB BT"
+TosrfUsb.DeviceDesc120 = "PT Bluetooth Ver2.0 USB+EDR Adapter"
+TosrfUsb.DeviceDesc121 = "Bluetooth 2.0 USB adapter 10m CN-512v2 001"
+TosrfUsb.DeviceDesc122 = "Bluetooth 2.0 USB adapter 100m CN-521v2 001"
+TosrfUsb.DeviceDesc123 = "PTM-UBT3"
+TosrfUsb.DeviceDesc124 = "BT-183 Bluetooth 2.0"
+TosrfUsb.DeviceDesc125 = "USB Bluetooth Driver (V2.0+EDR)"
+TosrfUsb.DeviceDesc126 = "TAIYO YUDEN Bluetooth Device"
+TosrfUsb.DeviceDesc127 = "TAIYO YUDEN Bluetooth Device"
+TosrfUsb.DeviceDesc128 = "TAIYO YUDEN Bluetooth Device"
+TosrfUsb.DeviceDesc129 = "TAIYO YUDEN Bluetooth Device"
+TosrfUsb.DeviceDesc130 = "Bluetooth USB Controller-6 from TOSHIBA"
+TosrfUsb.DeviceDesc131 = "USB Bluetooth Driver (V2.1+EDR)"
+TosrfUsb.DeviceDesc132 = "USB Bluetooth Driver (V2.1+EDR)"
+TosrfUsb.DeviceDesc133 = "Bluetooth USB Controller (ALPS/UGPZ9)"
+TosrfUsb.DeviceDesc134 = "Bluetooth 2.1 module"
+TosrfUsb.DeviceDesc135 = "Bluetooth 2.1 module"
+TosrfUsb.DeviceDesc136 = "Bluetooth 2.1 module"
+TosrfUsb.DeviceDesc137 = "TOSHIBA Bluetooth Adaptor-3"
+TosrfUsb.DeviceDesc138 = "BT183-V2"
+TosrfUsb.DeviceDesc139 = "Bluetooth USB Controller-7 from TOSHIBA"
+TosrfUsb.DeviceDesc140 = "USB Bluetooth Driver (V2.1+EDR)"
+TosrfUsb.DeviceDesc141 = "BT-183 Bluetooth 2.1 + EDR"
+TosrfUsb.DeviceDesc142 = "Bluetooth Module"
+TosrfUsb.DeviceDesc143 = "Bluetooth Module"
+TosrfUsb.DeviceDesc144 = "USB Bluetooth Driver (V2.1+EDR)"
+TosrfUsb.DeviceDesc145 = "USB Bluetooth Driver-2 (V2.1+EDR)"
+TosrfUsb.DeviceDesc146 = "Bluetooth USB Controller-8 from TOSHIBA"
+TosrfUsb.DeviceDesc147 = "Bluetooth USB Controller-9 from TOSHIBA"
+TosrfUsb.DeviceDesc148 = "Bluetooth USB Controller-10 from TOSHIBA"
+TosrfUsb.DeviceDesc149 = "Bluetooth USB Controller-11 from TOSHIBA"
+TosrfUsb.DeviceDesc150 = "Bluetooth USB Controller-12 from TOSHIBA"
+TosrfUsb.DeviceDesc151 = "Bluetooth USB Controller-13 from TOSHIBA"
+TosrfUsb.DeviceDesc152 = "Bluetooth USB Controller-14 from TOSHIBA"
+TosrfUsb.DeviceDesc153 = "Bluetooth USB Controller-15 from TOSHIBA"
+TosrfUsb.DeviceDesc154 = "Bluetooth USB Controller-16 from TOSHIBA"
+TosrfUsb.DeviceDesc155 = "Bluetooth USB Controller-17 from TOSHIBA"
+TosrfUsb.DeviceDesc156 = "Bluetooth V4.0 Module (ALPS)"
+TosrfUsb.DeviceDesc157 = "RTL8723 4.0+HS"
+TosrfUsb.DeviceDesc158 = "Bluetooth V4.0 Module"
+TosrfUsb.DeviceDesc159 = "Bluetooth V4.0 Module (3012)"
+TosrfUsb.DeviceDesc160=  "Bluetooth V4.0 Module (0225)"

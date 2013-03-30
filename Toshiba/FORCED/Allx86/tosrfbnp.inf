@@ -1,0 +1,113 @@
+; TOSRFBNP.INF
+;
+; Toshiba Bluetooth RFBNEP Driver
+;
+; Copyright (c) 2000-2010 TOSHIBA Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = BLUETOOTH
+ClassGuid = {7240100F-6512-4548-8418-9EBB5C6A1A94}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TSB%
+DriverPackageDisplayName = %tosrfbnp.SvcDesc%
+DriverVer = 11/11/2010,8.00.1111.0
+CatalogFile = tosrfbnp.cat
+
+[SourceDisksNames]
+3426=windows cd
+
+[SourceDisksNames.x86]
+3426=windows cd
+
+[SourceDisksFiles]
+tosrfbnp.sys = 3426
+TosBtCi.dll = 3426
+
+[SourceDisksFiles.x86]
+tosrfbnp.sys = 3426
+TosBtCi.dll = 3426
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+Drivers_Dir    = 12
+BluetoothClassFiles = 11
+
+[ClassInstall32]
+Addreg=BluetoothClassReg
+CopyFiles=BluetoothClassFiles
+
+[BluetoothClassFiles]
+TosBtCi.dll
+
+[BluetoothClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,"100"
+HKR,,Installer32,,"TosBtCi.dll,BluetoothClassInstaller"
+
+[ControlFlags]
+ExcludeFromSelect = Bluetooth\0004&0006
+
+[Manufacturer]
+%TOSHIBA% = ToshibaRFBNP, NTamd64
+
+[SignatureAttributes]
+tosrfbnp.sys=SignatureAttributes.DRM
+
+[ToshibaRFBNP]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSRFBNP% = TOSRFBNP.inst, Bluetooth\0004&0006
+
+[ToshibaRFBNP.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSRFBNP% = TOSRFBNP.inst, Bluetooth\0004&0006
+
+[TOSRFBNP.inst]
+CopyFiles=RFBNP.Copy,INF_Dir
+AddReg=TOSRFBNP.AddReg
+
+[TOSRFBNP.inst.NT]
+CopyFiles=RFBNP.Copy,INF_Dir
+AddReg=TOSRFBNP.AddReg.NT
+
+[RFBNP.Copy]
+tosrfbnp.sys,,,2
+;;tosrfbnp.sys,,,0x100
+
+[INF_Dir]
+
+[TOSRFBNP.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,tosrfbnp.sys
+
+[TOSRFBNP.AddReg.NT]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,tosrfbnp.sys
+
+[TOSRFBNP.inst.NT.Services]
+AddService = tosrfbnp, %SPSVCINST_ASSOCSERVICE%, bluetooth_Service
+
+[bluetooth_Service]
+DisplayName    = %tosrfbnp.SvcDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\tosrfbnp.sys
+LoadOrderGroup = Extended Base
+AddReg = bluetooth_Service_AddReg
+
+[bluetooth_Service_AddReg]
+;;HKLM,System\Currentcontrolset\Services\Tosrfbnp\Parameters,"OsType",0x10001,0
+HKLM,System\Currentcontrolset\Services\Tosrfbnp\Parameters,"OsType",0x10001,1
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+TSB = "TOSHIBA"
+TOSHIBA = "TOSHIBA"
+TOSRFBNP = "Bluetooth RFBNEP"
+tosrfbnp.SvcDesc = "Bluetooth RFBNEP"
+ClassName = "Bluetooth"

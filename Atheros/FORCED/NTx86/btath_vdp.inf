@@ -1,0 +1,115 @@
+;-------------------------------------------------------------------------------
+; btath_vdp.INF
+;
+; Bluetooth VDP Device
+;
+; Copyright (c) Atheros Bluetooth Solutions, Inc.  All rights reserved.
+
+[version]
+Signature="$WINDOWS NT$"
+Class=Media
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ATHR%
+DriverVer=01/21/2013,8.0.0000.0220
+CatalogFile=btath_vdp.cat
+
+;[ControlFlags]
+;ExcludeFromSelect=*
+
+[Manufacturer]
+%ATHR% = Standard,NTx86, NTamd64
+
+[SourceDisksFiles]
+btath_vdp.sys=99
+btath_avdt.sys=99
+
+[SourceDisksNames]
+99=%DISK_NAME%,
+
+[DestinationDirs]
+DefaultDestDir=12
+BTATH_VDP.CopyFiles = 12
+
+; For XP and later
+[Standard.NTx86]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%BTATH_VDP_DEV.DeviceDesc% = BTATH_VDP_DEV, BTHENUM\{06A7D6E8-753A-4d7a-803D-799430AAA441}
+
+; FOR VISTA64
+[Standard.NTamd64]
+%BTATH_VDP_DEV.DeviceDesc% = BTATH_VDP_DEV, BTHENUM\{06A7D6E8-753A-4d7a-803D-799430AAA441}
+
+[BTATH_VDP_DEV.NT]
+Include=ks.inf, KSCAPTUR.inf
+Needs=KS.Registration,KSCAPTUR.Registration.NT
+CopyFiles=BTATH_VDP.CopyFiles
+
+[BTATH_VDP_DEV.NT.hw]
+AddReg=BTATH_VDP_DEV.NT.hw.reg
+
+[BTATH_VDP_DEV.NT.hw.reg]
+HKR, ,LowerFilters, 0x00010000, "btath_avdt"
+
+; Files
+
+[BTATH_VDP.CopyFiles]
+btath_vdp.sys
+btath_avdt.sys
+
+; Interfaces
+
+[BTATH_VDP_DEV.NT.Interfaces]
+;AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",CaptureInterface.NT,
+AddInterface=%KSCATEGORY_VIDEO%,"GLOBAL",CaptureInterface.NT,
+
+[CaptureInterface.NT]
+AddReg=BTATH_VDP.Reader.AddReg
+
+;---------------------------------------------------------------
+;                A d d R e g
+;---------------------------------------------------------------
+
+[BTATH_VDP.Reader.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTATH_VDP.Reader.FriendlyName%
+
+
+; Services
+
+[BTATH_VDP_DEV.NT.Services]
+AddService = BTATH_VDP,    0x00000002, BTATH_VDP_Service_Inst
+AddService=btath_avdt,,btath_avdt_Service_Inst
+
+
+[BTATH_VDP_Service_Inst]
+DisplayName    = %BTATH_VDP.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\btath_vdp.sys
+
+[btath_avdt_Service_Inst]
+DisplayName    = %btath_avdt.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\btath_avdt.sys
+
+[Strings]
+; non-localizable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+;KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_VIDEO="{6994AD05-93EF-11D0-A3CC-00A0C9223196}"
+BTATH_VDP.Reader.FriendlyName="Btath_vdp"
+
+ATHR                            = "Qualcomm Atheros Communications"
+DISK_NAME                       = "BlueManager Driver Disk"
+BTATH_VDP.SvcDesc               = "Bluetooth VDP Driver"
+btath_avdt.SvcDesc              = "Qualcomm Atheros Bluetooth AVDT Service"
+
+; BTIABUS_XXX_NAME syncronized with BtProfService.h
+; BTIABUS_VDP_DEV_NAME          = "Bluetooth VDP Device"
+
+BTATH_VDP_DEV.DeviceDesc        = "Bluetooth VDP Device"
+

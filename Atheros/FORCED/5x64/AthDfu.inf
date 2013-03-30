@@ -1,0 +1,68 @@
+; Installation inf for Atheros Predator USB board
+;
+; (c) Copyright 2008 Atheros
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+provider=%ATHR%
+DriverVer=03/22/2010,6.13.0322.0102
+Catalogfile = AthDfu.cat
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+athdfu.sys = 1
+
+[Manufacturer]
+%MfgName%=Atheros, NTAMD64
+
+[Atheros.NTAMD64]
+%USB\VID_0CF3&PID_3000.DeviceDesc%=AthDfu.Dev, USB\VID_0CF3&PID_3000
+%USB\VID_0CF3&PID_3003.DeviceDesc%=AthDfu.Dev, USB\VID_0CF3&PID_3003
+%USB\VID_0CF3&PID_ffff.DeviceDesc%=AthDfu.Dev, USB\VID_0CF3&PID_ffff
+
+
+[DestinationDirs]
+AthDfu.Files.Ext = 10,System32\Drivers
+
+[AthDfu.Dev.NT]
+CopyFiles=AthDfu.Files.Ext
+
+[AthDfu.Dev.NT.Services]
+Addservice = AthDfu, 0x00000002, AthDfu.AddService
+
+[AthDfu.AddService]
+DisplayName    = %AthDfu.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\AthDfu.sys
+AddReg         = AthDfu.AddReg
+LoadOrderGroup = Base
+
+[AthDfu.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,BinPath,,\DosDevices\%10%\System32\Drivers\AtherosBT.bin
+HKR,,GUID,,{E8A640AA-95E2-4909-A1EB-94959E3273EE}
+HKR,,NTMPDriver,,AthDfu.sys
+HKR,"Parameters","MaximumTransferSize",0x10001,4096
+HKR,"Parameters","DebugLevel",0x10001,3
+HKR,"Parameters","AthUsbEnable",0x10001,0
+
+[AthDfu.Files.Ext]
+AthDfu.sys,,,1
+
+;---------------------------------------------------------------;
+
+[Strings]
+ATHR="Atheros"
+MfgName="Atheros"
+Disk_Description="AthUsb Installation Disk"
+USB\VID_0CF3&PID_3000.DeviceDesc="Atheros Valkyrie BootROM"
+USB\VID_0CF3&PID_3003.DeviceDesc="Atheros Valkyrie BootROM"
+USB\VID_0CF3&PID_ffff.DeviceDesc="Atheros Valkyrie BootROM"
+AthDfu.SvcDesc="Atheros Valkyrie USB BootROM"

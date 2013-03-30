@@ -1,0 +1,106 @@
+;
+; Port Emulation Setup File
+; Copyright (c) 1999-2009 Toshiba Corporation
+; Manufacturer: Toshiba
+;
+[Version]
+Signature = "$WINDOWS NT$"
+Class = Ports
+ClassGuid = {4D36E978-E325-11CE-BFC1-08002BE10318}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TOSHIBA%
+DriverPackageDisplayName = %Tosporte.SVCDESC%
+DriverVer = 06/16/2009,6.00.0616.0
+CatalogFile = tosporte.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksFiles]
+tosporte.sys = 3426
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+Tosporte.NT.Copy = 12
+
+; Install class "Ports"
+;----------------------------------------------------------
+[ClassInstall]
+AddReg=PortsClass.AddReg
+
+[ClassInstall32.NT]
+AddReg=PortsClass.NT.AddReg
+
+[PortsClass.NT.AddReg]
+HKR,,,,%PortsClassName%
+HKR,,Icon,,"-23"
+HKR,,Installer32,,"MsPorts.Dll,PortsClassInstaller"
+
+[Manufacturer]
+%TOSHIBA% = Toshiba, NTamd64
+
+[Toshiba]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSEMULATION% = Tosporte, Bluetooth\0004&0002
+
+[Toshiba.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSEMULATION% = Tosporte, Bluetooth\0004&0002
+
+[ControlFlags]
+ExcludeFromSelect = Bluetooth\0004&0002
+
+[Tosporte.NT]
+CopyFiles=Tosporte.NT.Copy
+AddReg=Tosporte.NT.AddReg
+SyssetupPnPFlags = 1
+
+[Tosporte.NT.Copy]
+tosporte.sys,,,2
+;;tosporte.sys,,,0x100
+
+[Tosporte.NT.AddReg]
+;;HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[Tosporte.NT.HW]
+AddReg=Tosporte.NT.HW.AddReg
+
+[Tosporte.NT.HW.AddReg]
+;;HKR,,"UpperFilters",0x00010000,"serenum"
+
+;-------------- Service installation
+; Port Driver (function driver for this device)
+[Tosporte.NT.Services]
+AddService = tosporte, 0x00000002, Serial_Service_Inst, Serial_EventLog_Inst
+
+; -------------- Serial Port Driver install sections
+[Serial_Service_Inst]
+DisplayName    = %Tosporte.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_SYSTEM_START (this driver may do detection)
+ErrorControl   = 1               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\tosporte.sys
+LoadOrderGroup = Extended base
+
+[Serial_EventLog_Inst]
+AddReg = Serial_EventLog_AddReg
+
+[Serial_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\tosporte.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+; User readable strings
+;----------------------------------------------------------
+[Strings]
+TOSHIBA = "TOSHIBA"
+PortsClassName = "Ports (COM & LPT)"
+
+TOSEMULATION = "BT Port"
+Tosporte.SvcDesc = "Bluetooth COM Port"
+Serenum.SVCDESC = "Serenum Filter Driver"

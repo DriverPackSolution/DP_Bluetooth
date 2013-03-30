@@ -1,0 +1,170 @@
+;
+; Copyright (c) 2010 Realtek Semiconductor Corp.
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+Provider=%REALTEK%
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+DriverVer=11/06/2012,1.0.88.0
+CatalogFile=RtkA2dp.cat
+
+[SourceDisksNames]
+222=%cdname%,,,
+
+[SourceDisksFiles]
+RtkA2dp.sys=222
+
+
+;;This syntax is only recognized on Windows XP and above- it is needed to install 64-bit drivers on
+;;Windows Server 2003 Service Pack 1 and above.
+
+[Manufacturer]
+%MfgName%=RealtekStereoAudio,NTx86,NTAMD64,NTIA64
+;;======================================================================
+;;  For Windows Server 2003 Service Pack 1 and above, a 64-bit OS will not install a driver
+;;  unless the Manufacturer and Models Sections explicitly show it is a driver for that platform
+;;  But the individual model section decorations (or lack thereof) work as they always have.
+;;  All of the model sections referred to are undecorated or NT-decorated, hence work on all platforms
+
+[RealtekStereoAudio.NTx86]
+
+%RtkA2dp.DeviceDesc%=RtkA2dp,,BTHENUM\{0000110b-0000-1000-8000-00805f9b34fb}_LOCALMFG&005d
+%RtkA2dp.DeviceDesc%=RtkA2dp,,BTHENUM\{0000110a-0000-1000-8000-00805f9b34fb}_LOCALMFG&005d
+
+;; This section enables installing on x64 systems
+
+[RealtekStereoAudio.NTAMD64]
+%RtkA2dp.DeviceDesc%=RtkA2dp,,BTHENUM\{0000110b-0000-1000-8000-00805f9b34fb}_LOCALMFG&005d
+%RtkA2dp.DeviceDesc%=RtkA2dp,,BTHENUM\{0000110a-0000-1000-8000-00805f9b34fb}_LOCALMFG&005d
+
+;;  This section enables installing on Itanium systems
+[RealtekStereoAudio.NTIA64]
+%RtkA2dp.DeviceDesc%=RtkA2dp,,BTHENUM\{0000110b-0000-1000-8000-00805f9b34fb}_LOCALMFG&005d
+%RtkA2dp.DeviceDesc%=RtkA2dp,,BTHENUM\{0000110a-0000-1000-8000-00805f9b34fb}_LOCALMFG&005d
+
+;;_LOCALMFG&005d
+
+[DestinationDirs]
+RtkA2dp.CopyList=10,system32\drivers
+
+
+
+;======================================================
+; RtkA2dp
+;======================================================
+[RtkA2dp.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=RtkA2dp.CopyList
+AddReg=RtkA2dp.AddReg
+
+[RtkA2dp.CopyList]
+RtkA2dp.sys
+
+[RtkA2dp.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,RtkA2dp.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,RtkA2dp.I.Wave
+
+
+[RtkA2dp.NT.Services]
+DelService = bthav,0x00000200
+AddService=RtkA2dp,0x00000002,RtkA2dp_Service_Inst
+
+[RtkA2dp_Service_Inst]
+DisplayName=%RtkA2dp.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\RtkA2dp.sys
+
+[RtkA2dp.AddReg]
+
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,RtkA2dp.sys
+
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+
+HKR,Drivers,SubClasses,,"wave"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%BthGenericDesc%
+
+
+HKLM,%MediaCategories%\%RtkA2dp.NameGuid%,Name,,%RtkA2dp.Name%
+
+;--------------- add audio output pinnames----------------------
+HKLM,%MediaCategories%\%AudioRenderPinGUID%,Name,,%AudioRenderPinName%
+
+;SCMS-T 
+HKLM,%ServiceName%,SCMS-T,0x00010003,0
+
+;============================================================================
+
+[RtkA2dp.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%RtkA2dp.GUID%,RtkA2dp.Interface.Install,
+AddInterface=%KSCATEGORY_RENDER%,%RtkA2dp.GUID%,RtkA2dp.Interface.Install,
+;AddInterface=%KSCATEGORY_CAPTURE%,%RtkA2dp.GUID%,RtkA2dp.Interface.Install,
+;AddInterface=%KSCATEGORY_TOPOLOGY%,%RtkA2dp.GUID%,RtkA2dp.Interface.Install,
+
+[RtkA2dp.Interface.Install]
+AddReg=RtkA2dp.Interface.Install.Addreg
+
+[RtkA2dp.Interface.Install.AddReg]
+HKR,,FriendlyName,,%BthGenericDesc%
+HKR,,CLSID,,%Proxy.CLSID%
+
+
+;======================================================
+; COMMON
+;======================================================
+[RtkA2dp.I.Wave]
+AddReg=RtkA2dp.I.Wave.AddReg
+[RtkA2dp.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%A2DP.Wave.szPname%
+
+
+
+;======================================================
+; STRING
+;======================================================
+[Strings]
+REALTEK="Realtek Semicondunctor Corp."
+MfgName="Realtek Bluetooth"
+RtkA2dp.DeviceDesc="Realtek Bluetooth A2dp Device"
+RtkA2dp.SvcDesc="Realtek Bluetooth A2dp Source Service"
+BthGenericDesc="Bluetooth Stereo Audio"
+cdname="RtkA2dp Driver Disk"
+A2DP.Wave.szPname="A2DP Wave"
+
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSNAME_Wave="Bth Wave"
+
+
+ServiceName="SYSTEM\CurrentControlSet\Services\RtkA2dp"
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+RtkA2dp.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+RtkA2dp.Name="Realtek RtkA2dp"
+
+; Our Filter GUIDs
+
+RtkA2dp.GUID="{9F0D4BE4-C6B8-4c19-A3DC-35CE134247C9}"
+
+; Our Pin GUIDs
+AudioRenderPinGUID="{6EF22519-C094-4e1e-95A8-5C42513F1E86}"
+AudioRenderPinName="Bluetooth A2DP Stere Audio"
+
+; Category GUIDs
+KSCATEGORY_TOPOLOGY= "{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+
+

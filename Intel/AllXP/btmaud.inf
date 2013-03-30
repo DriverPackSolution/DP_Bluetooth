@@ -1,0 +1,147 @@
+;************************************************************************
+;* Copyright 2011 Motorola Solutions, Inc. All rights reserved.         *
+;*                                                                      *
+;* Installation inf for Bluetooh Audio Device                           *
+;*                                                                      *
+;************************************************************************
+[Version]
+CatalogFile = btmaud.cat
+Signature   = "$CHICAGO$"
+Class       = MEDIA
+Provider    = %INTEL%
+ClassGUID   = {4d36e96c-e325-11ce-bfc1-08002be10318}
+DriverVer   = 08/30/2011,2.0.34.331
+
+[ControlFlags]
+ExcludeFromSelect=BTMUSB\BTMAUDIO
+
+[SourceDisksNames]
+1=%DiskName%,,,\Win32
+
+[SourceDisksNames.x86]
+1=%DiskName%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%DiskName%,,,\Win64
+
+[SourceDisksFiles]
+btmaud.sys=1
+
+[DestinationDirs]
+BTMAUDIO.CopyList = 10,system32\drivers
+
+[Manufacturer]
+%INTEL% = Intel, NTx86, NTamd64
+
+[Intel]
+%BTMAUDIO.DeviceDesc% = BTMAUDIO,BTMUSB\BTMAUDIO
+
+[Intel.NTx86]
+%BTMAUDIO.DeviceDesc% = BTMAUDIO,BTMUSB\BTMAUDIO
+
+[Intel.NTamd64]
+%BTMAUDIO.DeviceDesc% = BTMAUDIO,BTMUSB\BTMAUDIO
+
+[BTMAUDIO]
+Include   = ks.inf,wdmaudio.inf
+Needs     = KS.Registration, WDMAUDIO.Registration
+CopyFiles = BTMAUDIO.CopyList
+AddReg    = BTMAUDIO.AddReg
+
+[BTMAUDIO.CopyList]
+btmaud.sys
+
+[BTMAUDIO.AddReg]
+HKR,,SetupPreferredAudioDevices,1,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,btmaud.sys
+HKR,,NTMPDriver,,"btmaud.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%BTMAUDIO.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,%BTMAUDIO.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,,%BTMAUDIO.MIDI%
+
+HKLM,%MediaCategories%\%BTMAUDIO.GUID%,Name,,%BTMAUDIO.EndpointName%
+
+[BTMAUDIO.Interfaces]
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_HSPWave%,BTMAUDIO.I.HSPWave
+AddInterface = %KSCATEGORY_RENDER%,%KSNAME_HSPWave%,BTMAUDIO.I.HSPWave
+AddInterface = %KSCATEGORY_CAPTURE%,%KSNAME_HSPWave%,BTMAUDIO.I.HSPWave
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_HSPTopology%,BTMAUDIO.I.HSPTopology
+
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_A2DPWave%,BTMAUDIO.I.A2DPWave
+AddInterface = %KSCATEGORY_RENDER%,%KSNAME_A2DPWave%,BTMAUDIO.I.A2DPWave
+AddInterface = %KSCATEGORY_CAPTURE%,%KSNAME_A2DPWave%,BTMAUDIO.I.A2DPWave
+AddInterface = %KSCATEGORY_AUDIO%,%KSNAME_A2DPTopology%,BTMAUDIO.I.A2DPTopology
+
+[BTMAUDIO.I.HSPWave]
+AddReg=BTMAUDIO.I.HSPWave.AddReg
+
+[BTMAUDIO.I.HSPWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTMAUDIO.HSPWave.Name%
+
+[BTMAUDIO.I.HSPTopology]
+AddReg=BTMAUDIO.I.HSPTopology.AddReg
+
+[BTMAUDIO.I.HSPTopology.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTMAUDIO.HSPTopology.Name%
+
+[BTMAUDIO.I.A2DPWave]
+AddReg=BTMAUDIO.I.A2DPWave.AddReg
+
+[BTMAUDIO.I.A2DPWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTMAUDIO.A2DPWave.Name%
+
+[BTMAUDIO.I.A2DPTopology]
+AddReg=BTMAUDIO.I.A2DPTopology.AddReg
+
+[BTMAUDIO.I.A2DPTopology.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTMAUDIO.A2DPTopology.Name%
+
+[BTMAUDIO.Services]
+AddService = btmaudio,0x00000002,BTMAUDIO.ServiceInst
+
+[BTMAUDIO.ServiceInst]
+DisplayName   = %BTMAUDIO.ServiceDesc%
+ServiceType   = 1
+StartType     = 3
+ErrorControl  = 1
+ServiceBinary = %10%\system32\drivers\btmaud.sys
+
+[Strings]
+INTEL = "Intel Corporation"
+DiskName = "Bluetooth Installation Disk"
+
+MediaCategories = "SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTMAUDIO.DeviceDesc  = "Bluetooth Audio"
+BTMAUDIO.ServiceDesc = "Intel Bluetooth Audio Service"
+
+BTMAUDIO.GUID = "{10206CC0-8449-430d-8F21-165AB5168419}"
+BTMAUDIO.Name = "Bluetooth Audio"
+BTMAUDIO.MIDI = "Bluetooth MIDI"
+BTMAUDIO.EndpointName = "Bluetooth"
+
+BTMAUDIO.HSPWave.Name     = "Bluetooth Mono Audio"
+BTMAUDIO.HSPTopology.Name = "Bluetooth Mono Topology"
+BTMAUDIO.A2DPWave.Name     = "Bluetooth Stereo Audio"
+BTMAUDIO.A2DPTopology.Name = "Bluetooth Stereo Topology"
+
+Proxy.CLSID        ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO   ="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER  ="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE ="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+KSNAME_HSPWave     = "HSPWave"
+KSNAME_HSPTopology = "HSPTopology"
+
+KSNAME_A2DPWave     = "A2DPWave"
+KSNAME_A2DPTopology = "A2DPTopology"

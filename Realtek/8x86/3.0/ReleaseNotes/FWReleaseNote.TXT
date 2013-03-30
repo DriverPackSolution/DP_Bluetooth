@@ -1,0 +1,111 @@
+Version: 0x4239(HCI_REVISION), 0x38DE(LMP_SUBVERSION)
+1. erase the trash data in fifo to avoid ring noise after receive hci reset command
+
+Version: 0x4239(HCI_REVISION), 0xD38C(LMP_SUBVERSION)
+1. fixed an issue with ring noise of HFP/HSP application
+   *  send mute code in SCO/eSCO channel when controller does not receive any hci isochronous data packets from upstream
+
+Version: 0x423B(HCI_REVISION), 0xBD88(LMP_SUBVERSION)
+1. enhance acl downlink throughput in USB 2.0
+
+Version: 0x423C(HCI_REVISION), 0x0DAA (LMP_SUBVERSION)
+1. correct the gpio settings
+2. fixed an issue with afh channel map generator deadlock
+
+Version: 0x423D(HCI_REVISION), 0x1BFB(LMP_SUBVERSION)
+1. fixed an issue with missing radio off indication in cpu boot time
+
+Version: 0x424B(HCI_REVISION), 0x4E4C(LMP_SUBVERSION)
+1. fixed some IOT issues with some bt devices
+2. reset duplicated filter after disable le scan
+
+Version: 0x201E(HCI_REVISION), 0xD3DD(LMP_SUBVERSION)
+1. fixed some IOT issues with some bt devices
+2. improve the performance of multi-links and co-existence
+
+Version: 0x201E(HCI_REVISION), 0xD701(LMP_SUBVERSION)
+1. fixed an issue with power control after download patch code when reboot the system
+
+Version: 0x201E(HCI_REVISION), 0xFC81(LMP_SUBVERSION)
+----------------------------------------------------------------------
+1. Improve the processing time and flow in feature exchange procedure
+
+Details :
+When local device and remote device initate feature exchange simultaneous in noisy environment,
+local device has probability to finish one feature exchange procedure too late or reject the 
+response pdu from remote device at wrong state. 
+When the feature exchange is triggered from the driver via hci read remote features command,
+it can cause the driver timeout. This patch can fix the issue and speed up orignal procedure.
+
+Related Operations/Tests :
+local device and remote device initate feature exchange simultaneous
+
+Affected Devices :
+----------------------------------------------------------------------
+
+Version: 0x241F(HCI_REVISION), 0x99ED(LMP_SUBVERSION)
+----------------------------------------------------------------------
+1.  Improve the processing time and flow for Win8 WHCK test
+
+Details :
+For dual mode test, we adjust some processing time and flow to provide 
+more bandwidth for LE. For BR/EDR test, fixed an issue with SSP debug mode.
+
+Related Operations/Tests :
+Win8 WHCK test
+
+Affected Devices :
+----------------------------------------------------------------------
+2. Improve the bandwidth utilization to avoid audio skips when using A2DP 
+   headset with HID mouse simultaneously
+
+Details :
+When user uses some basic rate A2DP headsets and HID devices simultaneously,
+the bandwidth cost is too high to operate the application smoothly in original settings.
+We improve the bandwidth utilization in this version.
+
+Related Operations/Tests :
+use basic rate A2DP headset and HID mouse simultaneously
+
+Affected Devices :
+----------------------------------------------------------------------
+3. Fixed an issue with headset reconnect in Win8 Bluetooth MS stack
+
+Details :
+During HW Radio Off/On or S3/S4 to S0, some headsets maybe can not be reconnected
+or audio player can not be played automatically because Win8 Bluetooth Stack
+does not receive excepted event packet. We fix an issue about this.
+
+Related Operations/Tests :
+connect the headset and play music then HW Radio Off/On or S3/S4 to S0 
+
+Affected Devices :
+----------------------------------------------------------------------
+
+Version: 0x241F(HCI_REVISION), 0xBDDA(LMP_SUBVERSION)
+----------------------------------------------------------------------
+1. Fixed an issue with A2DP reconnect after resume from S3 in 
+   Win8 Bluetooth MS stack
+
+Details :
+During S3 to S0, some headsets maybe can not be reconnected or audio player 
+can not be played automatically because Win8 Bluetooth Stack can not finish
+some procedures before enter S3. We fix an issue about this.
+
+Related Operations/Tests :
+connect the headset and play music from S3 to S0
+
+Affected Devices :
+----------------------------------------------------------------------
+2. Improve Win8 WHCK dual mode test in noisy environment
+
+Details :
+Some criterion of Win8 WHCK test cases can not pass easily in noisy environment.
+We adjust some procedure and guarantee bandwidth for dual mode to help pass test 
+cases more easily.
+
+Related Operations/Tests :
+Win8 WHCK test
+
+Affected Devices :
+----------------------------------------------------------------------

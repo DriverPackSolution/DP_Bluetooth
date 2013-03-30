@@ -1,0 +1,638 @@
+;/*++
+;
+;Copyright (c) 1990-1999 Microsoft Corporation All rights Reserved
+;
+;Module Name:
+;
+;    iBtFltCoex.INF
+;
+;Abstract:
+;    INF file for installing coexistance filter driver
+;    This file is dependant on bth.inf
+;
+;--*/
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Bluetooth
+ClassGuid   = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider    = %PROVIDER_NAME%
+DriverVer=09/17/2012,2.6.23.40059
+CatalogFile = iBtFltCoex.cat
+CatalogFile.ntamd64 = iBtFltCoex.cat
+
+
+[SourceDisksNames]
+1=%SOURCEDISK1%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%SOURCEDISK1%,,,\Win64
+
+[SourceDisksFiles]
+iBtFltCoex.sys                    =1
+btmhsf.sys=1
+WdfCoInstaller01009.dll = 1
+
+[DestinationDirs]
+iBtFltCoex.Copy = 12                    ;DIRID_DRIVERS
+iBtFltCoex_CoInstaller_CopyFiles = 11
+
+
+[Manufacturer]
+%COMPANY_NAME% = Device,NTx86.6.0, NTamd64.6.0, NTx86.6.1, NTamd64.6.1, NTx86.6.2, NTamd64.6.2
+
+
+[Device.NTx86.6.0]
+%USB\VID_0A12&PID_0001_RP_Vista% = Install_CoexFilter_RP_Vista, USB\VID_8086&PID_0189
+%USB\VID_0A12&PID_0001_JP_Vista% = Install_CoexFilter_JP_Vista, USB\VID_8087&PID_07DA
+
+[Device.NTamd64.6.0]
+%USB\VID_0A12&PID_0001_RP_Vista% = Install_CoexFilter_RP_Vista, USB\VID_8086&PID_0189
+%USB\VID_0A12&PID_0001_JP_Vista% = Install_CoexFilter_JP_Vista, USB\VID_8087&PID_07DA
+
+
+[Device.NTx86.6.1]
+%USB\VID_0A12&PID_0001_RP% = Install_CoexFilter_RP, USB\VID_8086&PID_0189
+%USB\VID_0A12&PID_0001_JP% = Install_CoexFilter_JP, USB\VID_8087&PID_07DA
+
+[Device.NTamd64.6.1]
+%USB\VID_0A12&PID_0001_RP% = Install_CoexFilter_RP, USB\VID_8086&PID_0189
+%USB\VID_0A12&PID_0001_JP% = Install_CoexFilter_JP, USB\VID_8087&PID_07DA
+
+[Device.NTx86.6.2]
+%USB\VID_0A12&PID_0001_RP% = Install_CoexFilter_RP, USB\VID_8086&PID_0189
+%USB\VID_0A12&PID_0001_JP% = Install_CoexFilter_JP_W8, USB\VID_8087&PID_07DA
+
+[Device.NTamd64.6.2]
+%USB\VID_0A12&PID_0001_RP% = Install_CoexFilter_RP, USB\VID_8086&PID_0189
+%USB\VID_0A12&PID_0001_JP% = Install_CoexFilter_JP_W8, USB\VID_8087&PID_07DA
+
+; --------------Start filter Driver JP install section (Vista)
+
+[Install_CoexFilter_JP_Vista]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=iBtFltCoex.Copy
+
+[Install_CoexFilter_JP_Vista.HW]
+Needs=BthUsb.NT.HW
+AddReg=iBtFltCoex.HW.AddReg.Filters
+AddReg=iBtFltCoex.HW.AddReg.DisableSelectiveSuspend
+AddReg=iBtFltCoex.HW.AddReg.HubSelectiveSuspendWorkAround
+
+[Install_CoexFilter_JP_Vista.Services]
+Needs=BthUSB.NT.Services
+AddService=iBtFltCoex,,iBtFltCoex_JP_Service_Inst ;
+AddService = btmhsf,, BTMHSF.ServiceInst_Vista
+
+[Install_CoexFilter_JP_Vista.CoInstallers]
+AddReg          = iBtFltCoex_CoInstaller_AddReg
+CopyFiles       = iBtFltCoex_CoInstaller_CopyFiles
+
+[Install_CoexFilter_JP_Vista.Wdf]
+KmdfService              = iBtFltCoex, iBtFltCoex_wdfsect
+
+; --------------End filter Driver JP install section (Vista)
+
+; --------------Start filter Driver JP install section (W8)
+
+[Install_CoexFilter_JP_W8]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=iBtFltCoex.Copy
+
+[Install_CoexFilter_JP_W8.HW]
+Needs=BthUsb.NT.HW
+AddReg=iBtFltCoex.HW.AddReg.Filters
+AddReg=iBtFltCoex.HW.AddReg.HubSelectiveSuspendWorkAround
+
+[Install_CoexFilter_JP_W8.Services]
+Needs=BthUSB.NT.Services
+AddService=iBtFltCoex,,iBtFltCoex_JP_Service_Inst ;
+AddService = btmhsf,, BTMHSF.ServiceInst_W8
+
+[Install_CoexFilter_JP_W8.CoInstallers]
+AddReg          = iBtFltCoex_CoInstaller_AddReg
+CopyFiles       = iBtFltCoex_CoInstaller_CopyFiles
+
+[Install_CoexFilter_JP_W8.Wdf]
+KmdfService              = iBtFltCoex, iBtFltCoex_wdfsect
+
+; --------------End filter Driver JP install section (W8)
+
+; --------------Start filter Driver JP install section (Win7)
+
+[Install_CoexFilter_JP]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=iBtFltCoex.Copy
+
+[Install_CoexFilter_JP.HW]
+Needs=BthUsb.NT.HW
+AddReg=iBtFltCoex.HW.AddReg.Filters
+AddReg=iBtFltCoex.HW.AddReg.HubSelectiveSuspendWorkAround
+
+[Install_CoexFilter_JP.Services]
+Needs=BthUSB.NT.Services
+AddService=iBtFltCoex,,iBtFltCoex_JP_Service_Inst ;
+AddService = btmhsf,, BTMHSF.ServiceInst
+
+[Install_CoexFilter_JP.CoInstallers]
+AddReg          = iBtFltCoex_CoInstaller_AddReg
+CopyFiles       = iBtFltCoex_CoInstaller_CopyFiles
+
+[Install_CoexFilter_JP.Wdf]
+KmdfService              = iBtFltCoex, iBtFltCoex_wdfsect
+
+; --------------End filter Driver JP install section (Win7)
+
+; --------------Start filter Driver RP install section (Vista)
+
+[Install_CoexFilter_RP_Vista]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=iBtFltCoex.Copy
+
+[Install_CoexFilter_RP_Vista.HW]
+Needs=BthUsb.NT.HW
+AddReg=iBtFltCoex.HW.AddReg.Filters
+AddReg=iBtFltCoex.HW.AddReg.DisableSelectiveSuspend
+AddReg=iBtFltCoex.HW.AddReg.HubSelectiveSuspendWorkAround
+
+[Install_CoexFilter_RP_Vista.Services]
+Needs=BthUSB.NT.Services
+AddService=iBtFltCoex,,iBtFltCoex_RP_Service_Inst ;
+AddService = btmhsf,, BTMHSF.ServiceInst_Vista
+
+[Install_CoexFilter_RP_Vista.CoInstallers]
+AddReg          = iBtFltCoex_CoInstaller_AddReg
+CopyFiles       = iBtFltCoex_CoInstaller_CopyFiles
+
+[Install_CoexFilter_RP_Vista.Wdf]
+KmdfService              = iBtFltCoex, iBtFltCoex_wdfsect
+
+; --------------End filter Driver RP install section (Vista)
+
+
+; --------------Start filter Driver RP install section (Win7+)
+
+[Install_CoexFilter_RP]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=iBtFltCoex.Copy
+
+[Install_CoexFilter_RP.HW]
+Needs=BthUsb.NT.HW
+AddReg=iBtFltCoex.HW.AddReg.Filters
+AddReg=iBtFltCoex.HW.AddReg.HubSelectiveSuspendWorkAround
+
+[Install_CoexFilter_RP.Services]
+Needs=BthUSB.NT.Services
+AddService=iBtFltCoex,,iBtFltCoex_RP_Service_Inst ;
+AddService = btmhsf,, BTMHSF.ServiceInst 
+
+[Install_CoexFilter_RP.CoInstallers]
+AddReg          = iBtFltCoex_CoInstaller_AddReg
+CopyFiles       = iBtFltCoex_CoInstaller_CopyFiles
+
+[Install_CoexFilter_RP.Wdf]
+KmdfService              = iBtFltCoex, iBtFltCoex_wdfsect
+
+; --------------End filter Driver RP install section (Win7+)
+
+
+[iBtFltCoex.Copy]
+iBtFltCoex.sys
+btmhsf.sys
+
+[iBtFltCoex.HW.AddReg.DisableSelectiveSuspend]
+HKR,,"SelectiveSuspendEnabled", 0x00010001, 0
+
+[iBtFltCoex.HW.AddReg.Filters]
+HKR,,"LowerFilters",0x00010008,"iBtFltCoex"
+HKR,,"LowerFilters", 0x00010008, "btmhsf" 
+
+
+[iBtFltCoex.HW.AddReg.HubSelectiveSuspendWorkAround]
+HKLM, System\CurrentControlSet\Control\usbflags\808700240000, NoClearTTBufferOnCancel, 0x00000001, 1
+HKLM, System\CurrentControlSet\Control\usbflags\808700200000, NoClearTTBufferOnCancel, 0x00000001, 1
+
+; -------------- filter Driver install section
+[iBtFltCoex_JP_Service_Inst]
+;DisplayName    = %iBtFltCoex.SVCDESC_JP%
+ServiceType    = 1 ;SERVICE_KERNEL_DRIVER
+StartType      = 3 ;SERVICE_DEMAND_START
+ErrorControl   = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\iBtFltCoex.sys
+LoadOrderGroup = PNP Filter
+AddReg=iBtFltCoex_JP_Service_Inst.Parameters
+
+[iBtFltCoex_JP_Service_Inst.Parameters]
+HKR,Parameters,OverrideInquiry,0x00010001,0x00000000
+HKR,Parameters,InquiryLength,0x00010001,0x00000005
+
+[iBtFltCoex_RP_Service_Inst]
+;DisplayName    = %iBtFltCoex.SVCDESC_RP%
+ServiceType    = 1 ;SERVICE_KERNEL_DRIVER
+StartType      = 3 ;SERVICE_DEMAND_START
+ErrorControl   = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\iBtFltCoex.sys
+LoadOrderGroup = PNP Filter
+AddReg=iBtFltCoex_RP_Service_Inst.Parameters
+
+[iBtFltCoex_RP_Service_Inst.Parameters]
+HKR,Parameters,OverrideInquiry,0x00010001,0x00000001
+HKR,Parameters,InquiryLength,0x00010001,0x00000005
+
+[iBtFltCoex_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[iBtFltCoex_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[iBtFltCoex_wdfsect]
+KmdfLibraryVersion       = 1.9
+
+[BTMHSF.ServiceInst_Vista]
+;DisplayName=%BTMHSF.ServiceDesc%
+ServiceType=1					; SERVICE_KERNEL_DRIVER
+StartType=3					; SERVICE_DEMAND_START 
+ErrorControl=1					; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btmhsf.sys
+LoadOrderGroup = PNP Filter
+
+[BTMHSF.ServiceInst]
+;DisplayName=%BTMHSF.ServiceDesc%
+ServiceType=1					; SERVICE_KERNEL_DRIVER
+StartType=3					; SERVICE_DEMAND_START 
+ErrorControl=1					; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btmhsf.sys
+LoadOrderGroup = PNP Filter
+AddReg=BTMHSF.ServiceInst.EnableHS
+
+[BTMHSF.ServiceInst_W8]
+;DisplayName=%BTMHSF.ServiceDesc%
+ServiceType=1					; SERVICE_KERNEL_DRIVER
+StartType=3					; SERVICE_DEMAND_START 
+ErrorControl=1					; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btmhsf.sys
+LoadOrderGroup = PNP Filter
+AddReg=BTMHSF.ServiceInst.EnableHS
+AddReg=BTMHSF.ServiceInst.W8
+
+[BTMHSF.ServiceInst.W8]
+HKR,Parameters,"{BE37D77F-997A-4520-9BFA-469EA8391E29}", 0x00010001, 1
+
+[BTMHSF.ServiceInst.EnableHS]
+HKR,Parameters,{2AF3B5F3-9F38-4936-9349-CFA669E16FE2},0x00010001,3
+HKR,Parameters,OBEXIntervalAMP,0x00010001,0x00000004
+HKR,Parameters,MaxAMPSwitches,0x00010001,0x00000000
+HKR,Parameters,SwitchSpeedAMP,0x00010001,0x00001f40
+HKR,Parameters,SwitchSpeedBR,0x00010001,0x00000bb8
+HKR,Parameters,{BAB01B31-6527-4e92-9888-1402E21A0107},0x00010001,1
+HKR,Parameters,{E9D88F82-245A-4381-A254-6D7BF0BBB0EC},0x00010001,0x000003e8
+HKR,Parameters,{58BFF5B4-A56E-4c77-ADD9-912809F89933},0x00010001,1
+HKR,Parameters,{57EDBF10-60FA-448a-B4FE-DA8B153F7A67},0x00010001,1
+
+
+[Strings]
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  = "Intel Corporation"
+iBtFltCoex.SVCDESC_RP = "Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP = "Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP = "Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP = "Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista = "Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista = "Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista = "Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista = "Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 = "Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter Install Disk"
+
+[Strings.0401] ; Arabic (Saudi Arabia)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="??? ????? Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.0804] ; Chinese (Simplified)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter ???"
+[Strings.0404] ; Chinese (Traditional)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter ????"
+
+[Strings.0405] ; Czech (Czech Republic)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter - instala?n? disk"
+
+[Strings.0406] ; Danish (Denmark)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter-installationsdiskette"
+
+[Strings.0407] ; German (Germany)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter Installationsdiskette"
+
+[Strings.0408] ; Greek (Greece)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="??????? ???????????? Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+
+[Strings.0C0A] ; Spanish (Spain)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Disco de instalaci?n de Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.040B] ; Finnish (Finland)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter -asennuslevy"
+
+
+[Strings.040C] ; French (France)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Disque d'installation d'Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+
+[Strings.040D] ; Hebrew (Israel)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="???? ????? ?? Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.040E] ; Hungarian (Hungary)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter telep?t?lemez"
+
+[Strings.0410] ; Italian (Italy)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Disco di installazione di Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.0411] ; Japanese (Japan)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter ???????????"
+
+[Strings.0412] ; Korean (Korea)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter ?? ???"
+
+[Strings.0413] ; Dutch (Netherlands)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Installatieschijf Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.0414] ; Norwegian (Bokm?l) (Norway)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter Installasjonsdiskett"
+
+[Strings.0415] ; Polish (Poland)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Dysk instalacyjny karty Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Dysk instalacyjny karty Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+
+[Strings.0416] ; Portuguese (Brazil)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Disco de instala??o do Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.0816] ; Portuguese (Portugal)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Disco de instala??o Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.0419] ; Russian (Russia)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Установочный диск Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.041D] ; Swedish (Sweden)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Installationsdisk Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.041E] ; Thai (Thailand)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="???????????? Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+
+[Strings.041F] ; Turkish (Turkey)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter Y?kleme Diski"
+
+[Strings.0C04] ; Chinese (Hong Kong)
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  ="Intel Corporation"
+iBtFltCoex.SVCDESC_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Service"
+USB\VID_0A12&PID_0001_RP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Service"
+USB\VID_0A12&PID_0001_JP ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter"
+iBtFltCoex.SVCDESC_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Service"
+USB\VID_0A12&PID_0001_RP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 3.0 Adapter"
+iBtFltCoex.SVCDESC_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Service"
+USB\VID_0A12&PID_0001_JP_Vista ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 Adapter"
+SOURCEDISK1 ="Intel(R) Centrino(R) Wireless Bluetooth(R) 4.0 + High Speed Adapter ????"

@@ -1,0 +1,75 @@
+;-------------------------------------------------------------------------------
+; btath_bus.INF
+;
+; Bluetooth BUS
+;
+; Copyright (c) Atheros Bluetooth Solutions, Inc.  All rights reserved.
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%ATHR%
+DriverVer=01/21/2013,8.0.0000.0220
+CatalogFile=btath_bus.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+btath_bus.sys  = 1,,
+
+;*****************************************
+; Atheros Bluetooth Bus  Install Section
+;*****************************************
+
+[Manufacturer]
+%ATHR%=Standard, NTAMD64
+
+[Standard.NTAMD64]
+;
+; These are atheros bluetooth bus pnp ids
+;
+
+%AthBus.DeviceDesc%=AthBus_Device, root\BTATH_BUS
+
+[AthBus_Device.NTAMD64]
+CopyFiles=Drivers_Dir
+
+[ToasterBus_Device.NTAMD64.HW]
+AddReg=AthBus_Device.NTx86.AddReg
+
+[AthBus_Device.NTAMD64.AddReg]                            
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;WD)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+;-------------- Service installation
+[AthBus_Device.NTAMD64.Services]
+AddService = BTATH_BUS,%SPSVCINST_ASSOCSERVICE%, athbus_Service_Inst
+
+
+
+[Drivers_Dir]
+btath_bus.sys
+
+
+; -------------- atheros bluetooth bus driver install sections
+[athbus_Service_Inst]
+DisplayName    = %BTATH_BUS.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btath_bus.sys
+LoadOrderGroup = Extended Base
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ATHR = "Qualcomm Atheros Communications"
+DiskId1 = "Qualcomm Atheros Bluetooth Bus Installation Disk #1"
+AthBus.DeviceDesc = "Qualcomm Atheros Bluetooth Bus"
+BTATH_BUS.SVCDESC = "Qualcomm Atheros Bluetooth Bus"
+

@@ -1,0 +1,193 @@
+;-------------------------------------------------------------------------------
+; BTIAA2DP.INF
+;
+; Bluetooth Audio Device
+;
+; Copyright (c) Atheros , Inc.  All rights reserved.
+
+[version]
+Signature="$WINDOWS NT$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Atheros%
+DriverVer=02/24/2011,7.3.0000.0090
+CatalogFile=btath2dp.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%Atheros% = Atheros,NTAMD64
+
+[SourceDisksFiles]
+btatha2dp.sys=99
+
+[SourceDisksNames]
+99=%DISK_NAME%,
+
+[DestinationDirs]
+DefaultDestDir=12
+btatha2dp.CopyFiles = 12
+
+; For Win2K
+[Atheros]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%btatha2dp_SRC.DeviceDesc% = btatha2dp_SRC, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btatha2dp
+%btatha2dp_SNK.DeviceDesc% = btatha2dp_SNK, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btatha2dpsnk
+
+; For XP and later
+[Atheros.NTAMD64]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%btatha2dp_SRC.DeviceDesc% = btatha2dp_SRC, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btatha2dp
+%btatha2dp_SNK.DeviceDesc% = btatha2dp_SNK, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btatha2dpsnk
+
+
+[btatha2dp_SRC.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=btatha2dp.CopyFiles
+AddReg=btatha2dp_SRC.AddReg
+
+[btatha2dp_SNK.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=btatha2dp.CopyFiles
+AddReg=btatha2dp_SNK.AddReg
+
+; Files
+
+[btatha2dp.CopyFiles]
+btatha2dp.sys
+
+; Registry
+
+[btatha2dp_SRC.AddReg]
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,btatha2dp.sys
+HKR,,NTMPDriver,,"btatha2dp.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,mixer,midi"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%btatha2dp_SRC.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%btatha2dp_SRC.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%btatha2dp_MIDI%
+
+HKLM,%MediaCategories%\%ComponentIdSrc.NameGuid%,Name,,%ComponentIdSrc.Name%
+
+[btatha2dp_SNK.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,btatha2dp.sys
+HKR,,NTMPDriver,,"btatha2dp.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%btatha2dp_SNK.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%btatha2dp_SNK.DeviceDesc%
+
+HKLM,%MediaCategories%\%ComponentIdSnk.NameGuid%,Name,,%ComponentIdSnk.Name%
+
+; Interfaces
+
+[btatha2dp_SRC.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,btatha2dp_SRC.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,btatha2dp_SRC.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,btatha2dp_SRC.Interface.Topology
+
+[btatha2dp_SRC.Interface.Wave]
+AddReg=btatha2dp_SRC.Interface.Wave.AddReg
+
+[btatha2dp_SRC.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%btatha2dp_SRC.Wave.szPname%
+
+[btatha2dp_SRC.Interface.Topology]
+AddReg=btatha2dp_SRC.Interface.Topology.AddReg
+
+[btatha2dp_SRC.Interface.Topology.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%btatha2dp_SRC.Topology.szPname%
+
+[btatha2dp_SNK.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,btatha2dp_SNK.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,btatha2dp_SNK.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,btatha2dp_SNK.Interface.Topology
+
+[btatha2dp_SNK.Interface.Wave]
+AddReg=btatha2dp_SNK.Interface.Wave.AddReg
+
+[btatha2dp_SNK.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%btatha2dp_SNK.Wave.szPname%
+
+[btatha2dp_SNK.Interface.Topology]
+AddReg=btatha2dp_SNK.Interface.Topology.AddReg
+
+[btatha2dp_SNK.Interface.Topology.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%btatha2dp_SNK.Topology.szPname%
+
+
+; Services
+
+[btatha2dp_SRC.NT.Services]
+AddService = btatha2dp,    0x00000002, btatha2dp_Service_Inst
+
+[btatha2dp_SNK.NT.Services]
+AddService = btatha2dp,    0x00000002, btatha2dp_Service_Inst
+
+
+[btatha2dp_Service_Inst]
+DisplayName    = %btatha2dp.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\btatha2dp.sys
+
+
+
+[Strings]
+Atheros						= "Atheros"                      
+DISK_NAME						= "Bluetooth Driver Disk"
+btatha2dp.SvcDesc			    = "Bluetooth A2DP Audio Device Driver"
+
+; BTIABUS_XXX_NAME syncronized with BtProfService.h
+BTIABUS_A2DP_SRC_NAME			= "Bluetooth A2DP Source Device"
+BTIABUS_A2DP_SNK_NAME			= "Bluetooth A2DP Sink Device"
+
+btatha2dp_SRC.DeviceDesc			= "Bluetooth A2DP Source Device"
+btatha2dp_SRC.Wave.szPname		= "Bluetooth A2DP Source Wave"
+btatha2dp_SRC.Topology.szPname	= "Bluetooth A2DP Source Topology"
+
+btatha2dp_SNK.DeviceDesc			= "Bluetooth A2DP Sink Device"
+btatha2dp_SNK.Wave.szPname		= "Bluetooth A2DP Sink Wave"
+btatha2dp_SNK.Topology.szPname	= "Bluetooth A2DP Sink Topology"
+
+btatha2dp_MIDI					= "WDM Midi Device"
+
+Proxy.CLSID						= "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+
+KSCATEGORY_AUDIO				= "{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER				= "{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE				= "{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY				= "{DDA54A40-1E4C-11D1-A050-405705C10000}"
+	
+KSNAME_Wave						= "Wave"
+KSNAME_Topology					= "Topology"
+
+MediaCategories					= "SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+ComponentIdSnk.NameGuid			= "{A9F050CB-8699-47ac-AC2D-392B714F878A}"
+ComponentIdSnk.Name				= "Bluetooth A2DP Sink Device"
+
+ComponentIdSrc.NameGuid			= "{D832E4C1-038A-4dcb-8844-D7B61D60A83A}"
+ComponentIdSrc.Name				= "Bluetooth A2DP Source Device"

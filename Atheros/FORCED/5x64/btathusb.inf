@@ -1,0 +1,446 @@
+;-------------------------------------------------------------------------------
+; BTATHUSB.INF
+;
+; Bluetooth Protocol and Transport Driver
+;
+; Copyright (c) Atheros, Inc.  All rights reserved.
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=BlueManager
+ClassGUID={E36BAC78-0FEA-4175-816B-CBC56B5AFB75}
+provider=%VNDR%
+DriverVer=07/25/2012,8.0.0000.0204
+CatalogFile=btathusb.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+BlueManagerClass.NT.CopyFiles = 11
+
+;*****************************************
+; Class Install Section
+;*****************************************
+
+[ClassInstall32.NT]
+AddReg=BlueManagerClass.NT.AddReg
+CopyFiles=BlueManagerClass.NT.CopyFiles
+
+[BlueManagerClass.NT.AddReg]
+HKR,,,,%BlueManagerClassName%
+HKR,,Icon,,"100"
+HKR,,Installer32,,"btathci.dll,BlueManagerClassInstaller"
+HKR,,"UpperFilters",0x00010000,"btathprot"
+
+[BlueManagerClass.NT.CopyFiles]
+btathci.dll
+
+;*****************************************
+; Device Install Section
+;*****************************************
+
+[Manufacturer]
+%MfgName%=Atheros,NTAMD64,NTx86.6.0,NTamd64.6.0
+
+[Atheros.NTx86.6.0]   ; Empty section, so this INF does not support NT 6.0 and later.
+[Atheros.NTamd64.6.0] ; Empty section, so this INF does not support NT 6.0 and later.
+
+
+; For Win2K
+[Atheros]   
+; DisplayName                   Section           DeviceId
+; -----------                   -------           --------
+%USB\Vid_1131&Pid_1001.DeviceDesc%=btathUSB, USB\Vid_1131&Pid_1001
+%USB\Vid_1131&Pid_1004.DeviceDesc%=btathUSB, USB\Vid_1131&Pid_1004
+%USB\Vid_050D&Pid_0013.DeviceDesc%=btathUSB, USB\Vid_050D&Pid_0013
+%USB\Vid_0A12&Pid_0001.DeviceDesc%=btathUSB, USB\Vid_0A12&Pid_0001
+%USB\Vid_04BF&Pid_0320.DeviceDesc%=btathUSB, USB\Vid_04BF&Pid_0320
+%USB\Vid_0A5C&Pid_200A.DeviceDesc%=btathUSB, USB\VID_0A5C&PID_200A
+%USB\Vid_0a5c&Pid_2101.DeviceDesc%=btathUSB, USB\Vid_0a5c&Pid_2101
+%USB\Vid_0cf3&Pid_3002.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3002
+%USB\Vid_0cf3&Pid_3004.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3004
+%USB\Vid_0cf3&Pid_3008.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3008
+%USB\Vid_0cf3&Pid_3006.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3006&MI_02
+%USB\Vid_0e5e&Pid_6622.DeviceDesc%=btathUSB, USB\Vid_0e5e&Pid_6622
+%USB\Vid_0e5e&Pid_6623.DeviceDesc%=btathUSB, USB\Vid_0e5e&Pid_6623
+%USB\Vid_0cf3&Pid_312D.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_312D&MI_02
+
+%USB\Vid_04ca&Pid_3001.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3001
+%USB\Vid_04ca&Pid_3004.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3004
+%USB\Vid_04ca&Pid_3005.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3005
+%USB\Vid_04ca&Pid_3008.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3008
+
+%Azurewave_AW-BT260.DeviceDesc%     =btathUSB, USB\Vid_13D3&Pid_3283
+%Azurewave_AW-BT261_6pin.DeviceDesc%=btathUSB, USB\Vid_13D3&Pid_3293
+%Azurewave_AW-BT261_8pin.DeviceDesc%=btathUSB, USB\Vid_13D3&Pid_3294
+%Azurewave_Janus.DeviceDesc%        =btathUSB, USB\Vid_13D3&Pid_3296
+%Azurewave_Janus_3304.DeviceDesc%   =btathUSB, USB\Vid_13D3&Pid_3304
+%Azurewave_13D3_3373.DeviceDesc%    =btathUSB, USB\Vid_13D3&Pid_3373
+
+%Asus.DeviceDesc%                   =btathUSB, USB\Vid_0B05&Pid_1783
+%Asus01.DeviceDesc%                 =btathUSB, USB\Vid_0B05&Pid_179C
+%Foxconn.DeviceDesc%                =btathUSB, USB\Vid_0489&Pid_E015
+%Foxconn.DeviceDesc%                =btathUSB, USB\Vid_0A5C&Pid_E027
+
+%Vid_04CA&Pid_3002.DeviceDesc%      =btathUSB, USB\Vid_04CA&Pid_3002
+%Vid_04CA&Pid_3006.DeviceDesc%      =btathUSB, USB\Vid_04CA&Pid_3006
+
+%Acer_VID_0489&PID_E03C.DeviceDesc% =btathUSB, USB\VID_0489&PID_E03C
+%Vid_0489&Pid_E03D.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E03D
+
+%Askey_Janus.DeviceDesc%            =btathUSB, USB\Vid_1690&Pid_0751
+%Foxconn_Acer.DeviceDesc%           =btathUSB, USB\Vid_0CF3&Pid_E019
+%Foxconn_Samsung.DeviceDesc%        =btathUSB, USB\Vid_0CF3&Pid_E020
+%Foxconn_WB.DeviceDesc%             =btathUSB, USB\Vid_0CF3&Pid_E021
+
+%WNC_DELL.DeviceDesc%               =btathUSB, USB\Vid_5160&Pid_30B0
+%DELL_WB263.DeviceDesc%             =btathUSB, USB\Vid_0271&Pid_0301
+%LiteOn.DeviceDesc%                 =btathUSB, USB\Vid_04CA&Pid_3000
+
+%Azurewave_AW-BT042.DeviceDesc%     =btathUSB, USB\Vid_13d3&Pid_3320
+%AZW_Vid_13d3&Pid_3362.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3362
+%AZW_VID_13d3&PID_3363.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3363
+%AZW_VID_13d3&PID_3374.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3374
+%AZW_VID_13d3&PID_3375.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3375
+%AZW_VID_13d3&PID_3393.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3393
+%AZW_VID_13d3&PID_3395.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3395
+%AZW_VID_13d3&PID_3397.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3397
+%AZW_VID_13d3&PID_3398.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3398
+%AZW_VID_13d3&PID_3402.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3402
+
+%AZW_VID_1690&PID_0765.DeviceDesc%  =btathUSB, USB\Vid_1690&Pid_0765
+
+%Askey_Janus2.DeviceDesc%           =btathUSB, USB\Vid_1690&Pid_0755
+%Askey_Janus2.DeviceDesc%           =btathUSB, USB\Vid_1690&Pid_0754
+%Askey_Janus2.DeviceDesc%           =btathUSB, USB\Vid_1690&Pid_0763
+
+
+%Foxconn_WB_2.DeviceDesc%           =btathUSB, USB\Vid_0A5C&Pid_E028 
+%Foxconn_Acer_BU12.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E02C 
+
+%Askey_Toshiba.DeviceDesc%          =btathUSB, USB\Vid_0930&Pid_0215
+%ToH_VID_0930&PID_0218.DeviceDesc%  =btathUSB, USB\Vid_0930&Pid_0218
+%ToH_VID_0930&PID_0219.DeviceDesc%  =btathUSB, USB\Vid_0930&Pid_0219
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFF1
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFF3
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFF4
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFFD
+%HP_VID_03F0&PID_311D.DeviceDesc%   =btathUSB, USB\Vid_03F0&Pid_311D
+%HP_VID_0CF3&PID_311D.DeviceDesc%   =btathUSB, USB\Vid_0CF3&Pid_311D
+%HP_VID_0CF3&PID_311E.DeviceDesc%   =btathUSB, USB\Vid_0CF3&Pid_311E
+%HP_VID_0CF3&PID_311F.DeviceDesc%   =btathUSB, USB\Vid_0CF3&Pid_311F
+
+%VID_0489&PID_E027.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E027
+%VID_0489&PID_E036.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E036
+%VID_0489&PID_E043.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E043
+%VID_0489&PID_E048.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E048
+%VID_0489&PID_E04C.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E04C
+%VID_0489&PID_E04E.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E04E
+
+
+%VID_0489&PID_E060.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E060
+%VID_0489&PID_E061.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E061
+
+%VID_145F&PID_0197.DeviceDesc%      =btathUSB, USB\Vid_145F&Pid_0197
+%VID_145F&PID_0198.DeviceDesc%      =btathUSB, USB\Vid_145F&Pid_0198
+%Apple_VID_05AC&PID_8282.DeviceDesc%  =btathUSB, USB\Vid_05AC&Pid_8282
+
+
+
+; For XP and later
+[Atheros.NTAMD64]
+%USB\Vid_1131&Pid_1001.DeviceDesc%=btathUSB, USB\Vid_1131&Pid_1001
+%USB\Vid_1131&Pid_1004.DeviceDesc%=btathUSB, USB\Vid_1131&Pid_1004
+%USB\Vid_050D&Pid_0013.DeviceDesc%=btathUSB, USB\Vid_050D&Pid_0013
+%USB\Vid_0A12&Pid_0001.DeviceDesc%=btathUSB, USB\Vid_0A12&Pid_0001
+%USB\Vid_04BF&Pid_0320.DeviceDesc%=btathUSB, USB\Vid_04BF&Pid_0320
+%USB\Vid_0A5C&Pid_200A.DeviceDesc%=btathUSB, USB\VID_0A5C&PID_200A
+%USB\Vid_0a5c&Pid_2101.DeviceDesc%=btathUSB, USB\Vid_0a5c&Pid_2101
+%USB\Vid_0cf3&Pid_3002.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3002
+%USB\Vid_0cf3&Pid_3004.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3004
+%USB\Vid_0cf3&Pid_3008.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3008
+%USB\Vid_0cf3&Pid_3006.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_3006&MI_02
+%USB\Vid_0e5e&Pid_6622.DeviceDesc%=btathUSB, USB\Vid_0e5e&Pid_6622
+%USB\Vid_0e5e&Pid_6623.DeviceDesc%=btathUSB, USB\Vid_0e5e&Pid_6623
+%USB\Vid_0cf3&Pid_312D.DeviceDesc%=btathUSB, USB\Vid_0cf3&Pid_312D&MI_02
+
+%USB\Vid_04ca&Pid_3001.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3001
+%USB\Vid_04ca&Pid_3004.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3004
+%USB\Vid_04ca&Pid_3005.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3005
+%USB\Vid_04ca&Pid_3008.DeviceDesc%=btathUSB, USB\Vid_04ca&Pid_3008
+
+%Azurewave_AW-BT260.DeviceDesc%     =btathUSB, USB\Vid_13D3&Pid_3283
+%Azurewave_AW-BT261_6pin.DeviceDesc%=btathUSB, USB\Vid_13D3&Pid_3293
+%Azurewave_AW-BT261_8pin.DeviceDesc%=btathUSB, USB\Vid_13D3&Pid_3294
+%Azurewave_Janus.DeviceDesc%        =btathUSB, USB\Vid_13D3&Pid_3296
+%Azurewave_Janus_3304.DeviceDesc%   =btathUSB, USB\Vid_13D3&Pid_3304
+%Azurewave_13D3_3373.DeviceDesc%    =btathUSB, USB\Vid_13D3&Pid_3373
+
+%Asus.DeviceDesc%                   =btathUSB, USB\Vid_0B05&Pid_1783
+%Asus01.DeviceDesc%                 =btathUSB, USB\Vid_0B05&Pid_179C
+%Foxconn.DeviceDesc%                =btathUSB, USB\Vid_0489&Pid_E015
+%Foxconn.DeviceDesc%                =btathUSB, USB\Vid_0A5C&Pid_E027
+
+%Vid_04CA&Pid_3002.DeviceDesc%      =btathUSB, USB\Vid_04CA&Pid_3002
+%Vid_04CA&Pid_3006.DeviceDesc%      =btathUSB, USB\Vid_04CA&Pid_3006
+
+%Acer_VID_0489&PID_E03C.DeviceDesc% =btathUSB, USB\VID_0489&PID_E03C
+%Vid_0489&Pid_E03D.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E03D
+
+%Askey_Janus.DeviceDesc%            =btathUSB, USB\Vid_1690&Pid_0751
+%Foxconn_Acer.DeviceDesc%           =btathUSB, USB\Vid_0CF3&Pid_E019
+%Foxconn_Samsung.DeviceDesc%        =btathUSB, USB\Vid_0CF3&Pid_E020
+%Foxconn_WB.DeviceDesc%             =btathUSB, USB\Vid_0CF3&Pid_E021
+
+%WNC_DELL.DeviceDesc%               =btathUSB, USB\Vid_5160&Pid_30B0
+%DELL_WB263.DeviceDesc%             =btathUSB, USB\Vid_0271&Pid_0301
+%LiteOn.DeviceDesc%                 =btathUSB, USB\Vid_04CA&Pid_3000
+
+%Azurewave_AW-BT042.DeviceDesc%     =btathUSB, USB\Vid_13d3&Pid_3320
+%AZW_Vid_13d3&Pid_3362.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3362
+%AZW_VID_13d3&PID_3363.DeviceDesc%  =btathUSB, USB\VID_13d3&PID_3363
+%AZW_VID_13d3&PID_3374.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3374
+%AZW_VID_13d3&PID_3375.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3375
+%AZW_VID_13d3&PID_3393.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3393
+%AZW_VID_13d3&PID_3395.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3395
+%AZW_VID_13d3&PID_3397.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3397
+%AZW_VID_13d3&PID_3398.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3398
+%AZW_VID_13d3&PID_3402.DeviceDesc%  =btathUSB, USB\Vid_13d3&Pid_3402
+
+%AZW_VID_1690&PID_0765.DeviceDesc%  =btathUSB, USB\Vid_1690&Pid_0765
+
+
+%Askey_Janus2.DeviceDesc%           =btathUSB, USB\Vid_1690&Pid_0755
+%Askey_Janus2.DeviceDesc%           =btathUSB, USB\Vid_1690&Pid_0754
+%Askey_Janus2.DeviceDesc%           =btathUSB, USB\Vid_1690&Pid_0763
+
+%Foxconn_WB_2.DeviceDesc%           =btathUSB, USB\Vid_0A5C&Pid_E028
+%Foxconn_Acer_BU12.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E02C
+
+%Askey_Toshiba.DeviceDesc%          =btathUSB, USB\Vid_0930&Pid_0215
+%ToH_VID_0930&PID_0218.DeviceDesc%  =btathUSB, USB\Vid_0930&Pid_0218
+%ToH_VID_0930&PID_0219.DeviceDesc%  =btathUSB, USB\Vid_0930&Pid_0219 
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFF1
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFF3
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFF4
+%Xavi.DeviceDesc%                   =btathUSB, USB\Vid_04F2&Pid_AFFD
+%HP_VID_03F0&PID_311D.DeviceDesc%   =btathUSB, USB\Vid_03F0&Pid_311D
+%HP_VID_0CF3&PID_311D.DeviceDesc%   =btathUSB, USB\Vid_0CF3&Pid_311D
+%HP_VID_0CF3&PID_311E.DeviceDesc%   =btathUSB, USB\Vid_0CF3&Pid_311E
+%HP_VID_0CF3&PID_311F.DeviceDesc%   =btathUSB, USB\Vid_0CF3&Pid_311F
+
+%VID_0489&PID_E027.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E027
+%VID_0489&PID_E036.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E036
+%VID_0489&PID_E043.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E043
+%VID_0489&PID_E048.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E048
+%VID_0489&PID_E04C.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E04C
+%VID_0489&PID_E04E.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E04E
+
+%VID_0489&PID_E060.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E060
+%VID_0489&PID_E061.DeviceDesc%      =btathUSB, USB\Vid_0489&Pid_E061
+
+%VID_145F&PID_0197.DeviceDesc%      =btathUSB, USB\Vid_145F&Pid_0197
+%VID_145F&PID_0198.DeviceDesc%      =btathUSB, USB\Vid_145F&Pid_0198
+%Apple_VID_05AC&PID_8282.DeviceDesc%  =btathUSB, USB\Vid_05AC&Pid_8282
+
+[btathUSB.NT]
+CopyFiles=btathUSB.NT.Copy
+
+[btathUSB.NT.Copy]
+btathusb.sys
+btathprot.sys
+btfilter.sys
+
+[btathUSB.NT.HW]
+AddReg=btathUSB.NT.HW.AddReg
+AddReg=BtFilterUpper.NT.HW.AddReg
+AddReg=BtFilterLower.NT.HW.AddReg
+
+[btathUSB.NT.HW.AddReg]
+HKR,,"EnableHciSniffer",%REG_DWORD%, 0x00000000
+HKR,,"EnableStackLog",%REG_DWORD%, 0x00000000
+
+[BtFilterUpper.NT.HW.AddReg]
+HKR,,"UpperFilters",0x00010000,"BtFilter"
+
+[BtFilterLower.NT.HW.AddReg]
+HKR,,"LowerFilters",0x00010000,"BtFilter"
+
+;*****************************************
+; Device Filter Service Section
+;*****************************************
+
+[btathUSB.NT.Services]
+;Do not specify SPSVCINST_ASSOCSERVICE on filter drivers. 
+AddService = btfilter,, btfilter.AddService
+AddService = btathprot,, btathprot.AddService
+Addservice = btathUSB, 0x00000002, btathUSB.AddService
+
+[btathprot.AddService]
+DisplayName    = %btathprot.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btathprot.sys                            
+
+[btfilter.AddService]
+DisplayName    = %btfilter.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btfilter.sys   
+
+[btathUSB.AddService]
+DisplayName    = %btathUSB.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btathusb.sys
+LoadOrderGroup = Base
+AddReg         = btathUSB.AddReg
+
+[btathUSB.AddReg]
+HKR,"Parameters","BinPath",0x00000,\DosDevices\%10%\System32\Drivers\AtherosBT.bin
+
+;*************************
+; Source file information
+;*************************
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+btathusb.sys  = 1,,
+btathprot.sys = 1,,
+btfilter.sys = 1,,
+btathci.dll = 1,,
+
+;
+;--- btathUSB Coinstaller installation ------
+;
+[DestinationDirs]
+btathUSB_CoInstaller_CopyFiles = 11
+
+[btathUSB.NT.CoInstallers]
+AddReg=btathUSB_CoInstaller_AddReg
+CopyFiles=btathUSB_CoInstaller_CopyFiles
+
+[btathUSB_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01005.dll,WdfCoInstaller"
+
+[btathUSB_CoInstaller_CopyFiles]
+wdfcoinstaller01005.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01005.dll=1 ; make sure the number matches with SourceDisksNames
+
+[btathUSB.NT.Wdf]
+KmdfService = btathprot,  btathprot_wdfsect
+
+[btathprot_wdfsect]
+KmdfLibraryVersion = 1.5
+
+
+;---------------------------------------------------------------;
+
+[Strings]
+VNDR="Atheros"
+MfgName="Atheros"
+DiskId1 = "Bluetooth Installation Disk #1"
+
+BlueManagerClassName="Bluetooth Radios"
+
+USB\Vid_1131&Pid_1001.DeviceDesc    ="ISSC Bluetooth USB Adapter"
+USB\Vid_1131&Pid_1004.DeviceDesc    ="ISSC (EDR) Bluetooth USB Adapter"
+USB\Vid_050D&Pid_0013.DeviceDesc    ="Belkin Bluetooth USB Adapter"
+USB\Vid_0A12&Pid_0001.DeviceDesc    ="CSR Bluetooth USB Adapter"
+USB\Vid_04BF&Pid_0320.DeviceDesc    ="TDK Bluetooth USB Adapter"
+USB\Vid_0A5C&Pid_200A.DeviceDesc    ="Bluetonium 2035 USB Adapter"
+USB\Vid_0a5c&Pid_2101.DeviceDesc    ="IOGear Bluetooth USB Adapter"
+USB\Vid_0cf3&Pid_3002.DeviceDesc    ="Bluetooth USB Adapter"
+USB\Vid_0cf3&Pid_3004.DeviceDesc    ="Bluetooth USB Adapter"
+USB\Vid_0cf3&Pid_3008.DeviceDesc    ="Atheros AR1005 Bluetooth 3.0 + HS Adapter"
+USB\Vid_0cf3&Pid_3006.DeviceDesc    ="Bluetooth USB Adapter"
+USB\Vid_0e5e&Pid_6622.DeviceDesc    ="Conwise Bluetooth 2.0 USB Adapter"
+USB\Vid_0e5e&Pid_6623.DeviceDesc    ="Conwise Bluetooth 2.1 USB Adapter"
+USB\Vid_0cf3&Pid_312D.DeviceDesc    ="Atheros AR3012 Bluetooth 3.0 + HS Adapter"
+
+USB\Vid_04ca&Pid_3001.DeviceDesc    ="Bluetooth USB Adapter"
+USB\Vid_04ca&Pid_3004.DeviceDesc    ="Bluetooth USB Module"
+USB\Vid_04ca&Pid_3005.DeviceDesc    ="Atheros AR3012 Bluetooth 3.0 + HS"
+USB\Vid_04ca&Pid_3008.DeviceDesc    ="Bluetooth USB Module"
+
+HP_VID_03F0&PID_311D.DeviceDesc     ="Atheros AR3011 Bluetooth 3.0 + HS Adapter"
+HP_VID_0CF3&PID_311D.DeviceDesc     ="Atheros AR3012 Bluetooth 3.0 + HS Adapter"
+HP_VID_0CF3&PID_311E.DeviceDesc     ="Atheros AR9462 Bluetooth 3.0 + HS Adapter"
+HP_VID_0CF3&PID_311F.DeviceDesc     ="Qualcomm Atheros QCA9565 Bluetooth 3.0 + HS Adapter"
+
+Azurewave_AW-BT260.DeviceDesc        ="Bluetooth 2.1 Module"
+Azurewave_AW-BT261_6pin.DeviceDesc   ="Bluetooth 2.1 Module"
+Azurewave_AW-BT261_8pin.DeviceDesc   ="Bluetooth 2.1 Module"
+Azurewave_Janus.DeviceDesc           ="Bluetooth Module"
+Azurewave_Janus_3304.DeviceDesc      ="Bluetooth Module"
+Azurewave_13D3_3373.DeviceDesc       ="AR3012 BT with OTP"
+
+
+Asus.DeviceDesc       ="ASUS Bluetooth v2.1 USB Adapter"
+Asus01.DeviceDesc     ="ASUS Bluetooth"
+Foxconn.DeviceDesc    ="Bluetooth 2.1 Module"
+
+Askey_Janus.DeviceDesc      ="Askey Bluetooth Adapter" 
+Foxconn_Acer.DeviceDesc     ="General Bluetooth Device"
+Foxconn_Samsung.DeviceDesc  ="General Bluetooth Device"
+Foxconn_WB.DeviceDesc       ="General Bluetooth Device"
+Foxconn_WB_2.DeviceDesc     ="Atheros AR3011 Bluetooth 3.0"
+
+btathUSB.SvcDesc             ="General Bluetooth Device"
+btathprot.SvcDesc            ="General Bluetooth Filter"
+btfilter.SvcDesc             ="General Bluetooth Filter ss"
+
+WNC_DELL.DeviceDesc          ="Bluetooth USB Adapter"
+DELL_WB263.DeviceDesc        ="Dell Wireless 1535C Bluetooth Device"
+LiteOn.DeviceDesc            ="Bluetooth USB Adapter"
+
+Azurewave_AW-BT042.DeviceDesc        ="Bluetooth Module"
+AZW_Vid_13d3&Pid_3362.DeviceDesc     ="Bluetooth module"
+AZW_Vid_13d3&Pid_3363.DeviceDesc     ="Bluetooth class 1 module"
+AZW_Vid_13d3&Pid_3374.DeviceDesc     ="Atheros AR3012 Bluetooth 3.0 + HS"
+AZW_Vid_13d3&Pid_3375.DeviceDesc     ="Atheros AR3012 Bluetooth 3.0 + HS"
+AZW_Vid_13d3&Pid_3393.DeviceDesc     ="Atheros AR9462 Bluetooth 3.0 + HS"
+AZW_Vid_13d3&Pid_3395.DeviceDesc     ="Atheros AR9462 Bluetooth 3.0 + HS"
+AZW_Vid_13d3&Pid_3397.DeviceDesc     ="Atheros AR9462 Bluetooth 3.0 + HS"
+AZW_Vid_13d3&Pid_3398.DeviceDesc     ="Atheros AR9462 Bluetooth 3.0 + HS"
+AZW_Vid_13d3&Pid_3402.DeviceDesc     ="Atheros AR3012 Bluetooth 3.0 + HS"
+
+AZW_VID_1690&PID_0765.DeviceDesc     ="Atheros AR3012 Bluetooth 3.0 + HS"
+
+Askey_Janus2.DeviceDesc              ="Bluetooth USB Adapter" 
+Xavi.DeviceDesc                 ="Bluetooth USB Adapter" 
+Foxconn_Acer_BU12.DeviceDesc    ="Bluetooth USB Adapter"
+
+Vid_04CA&Pid_3002.DeviceDesc       ="Bluetooth Module"
+Vid_04ca&Pid_3006.DeviceDesc    ="Bluetooth USB Module"
+
+Acer_Vid_0489&Pid_E03C.DeviceDesc  ="Bluetooth USB Module"
+Vid_0489&Pid_E03D.DeviceDesc       ="Bluetooth Module"
+
+Askey_Toshiba.DeviceDesc            ="Bluetooth USB Adapter"
+ToH_VID_0930&PID_0218.DeviceDesc    ="Atheros AR3012 Bluetooth 3.0"
+ToH_VID_0930&PID_0219.DeviceDesc    ="Atheros AR3012 Bluetooth 3.0"
+VID_0489&PID_E027.DeviceDesc         ="Atheros AR3011 Bluetooth(R) Adapter"
+VID_0489&PID_E036.DeviceDesc         ="Atheros AR3012 Bluetooth(R) Adapter"
+VID_0489&PID_E043.DeviceDesc         ="Bluetooth USB Adapter"
+VID_0489&PID_E048.DeviceDesc         ="Bluetooth USB Module"
+VID_0489&PID_E04C.DeviceDesc         ="Bluetooth USB Module"
+VID_0489&PID_E04E.DeviceDesc         ="Bluetooth USB Module"
+
+VID_0489&PID_E060.DeviceDesc         ="Bluetooth USB Module"
+VID_0489&PID_E061.DeviceDesc         ="Bluetooth USB Module"
+
+VID_145F&PID_0197.DeviceDesc         ="Trust Bluetooth 2.1 Adapter"
+VID_145F&PID_0198.DeviceDesc         ="Trust Bluetooth 3.0 Adapter"
+Apple_VID_05AC&PID_8282.DeviceDesc   ="Atheros AR3012 Bluetooth 3.0"
+SPSVCINST_ASSOCSERVICE = 0x00000002
+REG_DWORD              = 0x00010001
+
+
+

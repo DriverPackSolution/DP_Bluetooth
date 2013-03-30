@@ -1,0 +1,93 @@
+;************************************************************************
+;* Copyright 2012 Motorola Solutions, Inc. All Rights Reserved.         *
+;*                                                                      *
+;* Installation inf for Bluetooh Low Energy Driver                      *	
+;*                                                                      *
+;************************************************************************
+
+[Version]
+CatalogFile=btmlehid.cat
+Signature="$WINDOWS NT$"
+Class=HIDClass
+CLASSGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%MOTOROLA%
+DriverVer=11/13/2012,2.6.1211.0290
+
+[SourceDisksNames]
+1=%DiskName%,,,\Win32
+
+[SourceDisksNames.x86]
+1=%DiskName%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%DiskName%,,,\Win64
+
+[SourceDisksFiles]
+btmlehid.sys=1
+
+[DestinationDirs]
+BTMLEHID.CopyList = 10,system32\drivers
+
+[Manufacturer]
+%MOTOROLA% = Motorola, NTx86, NTamd64
+
+[Motorola]
+%BTMLEHID.BTMDEVICE% = BTMLEHID,BTHENUM\{07F96271-E321-4FCC-9D1A-D105DE2E5510}
+
+[Motorola.NTx86]
+%BTMLEHID.BTMDEVICE% = BTMLEHID,BTHENUM\{07F96271-E321-4FCC-9D1A-D105DE2E5510}
+
+[Motorola.NTamd64]
+%BTMLEHID.BTMDEVICE% = BTMLEHID,BTHENUM\{07F96271-E321-4FCC-9D1A-D105DE2E5510}
+
+[BTMLEHID.CopyList]
+btmlehid.sys
+
+[BTMLEHID.NT]
+CopyFiles=BTMLEHID.CopyList
+
+[BTMLEHID.NT.HW]
+AddReg=BTMLEHID.NT.AddReg
+
+[BTMLEHID.NT.AddReg]
+HKR,,"UpperFilters",0x00010000,"mshidkmdf"
+
+[BTMLEHID.NT.Services]
+AddService = btmlehid,0x00000002,BTMLEHID.ServiceInst
+
+[BTMLEHID.ServiceInst]
+DisplayName    = %BTMLEHID.ServiceDesc%                               
+ServiceType    = 1 ;SERVICE_KERNEL_DRIVER
+StartType      = 3 ;SERVICE_DEMAND_START 
+ErrorControl   = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btmlehid.sys
+LoadOrderGroup = Extended Base
+
+[DestinationDirs]
+BTMLEHID.Coinstaller.CopyFiles = 11
+
+[BTMLEHID.NT.CoInstallers]
+AddReg=BTMLEHID.Coinstaller.AddReg
+CopyFiles=BTMLEHID.Coinstaller.CopyFiles
+
+[BTMLEHID.Coinstaller.AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[BTMLEHID.Coinstaller.CopyFiles]
+WdfCoInstaller01009.dll
+
+[SourceDisksFiles]
+WdfCoInstaller01009.dll=1
+
+[BTMLEHID.NT.Wdf]
+KmdfService = btmlehid, BTMLEHID.WDF
+
+[BTMLEHID.WDF]
+KmdfLibraryVersion = 1.9
+
+[Strings]
+MOTOROLA = "Intel Corporation"
+DiskName = "Intel Bluetooth Installation Disk"
+BTMLEHID.BTMDEVICE = "Bluetooth Low Energy HID Device"
+BTMLEHID.ServiceDesc = "Intel Bluetooth Low Energy HID Service"
+BluetoothLEHID.NAME = "Bluetooth LE HID"

@@ -1,0 +1,122 @@
+; TOSRFCOM.INF
+;
+; Toshiba Bluetooth RFCOMM Driver
+;
+; Copyright (c) 2000-2012 TOSHIBA Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = BLUETOOTH
+ClassGuid = {7240100F-6512-4548-8418-9EBB5C6A1A94}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TSB%
+DriverPackageDisplayName = %tosrfcom.SvcDesc%
+DriverVer = 03/05/2012,8.00.2505.0
+CatalogFile = tosrfcom.cat
+
+[SourceDisksNames]
+3426=windows cd
+
+[SourceDisksNames.x86]
+3426=windows cd
+
+[SourceDisksFiles]
+tosrfcom.sys = 3426
+TosBtCi.dll = 3426
+
+[SourceDisksFiles.x86]
+tosrfcom.sys = 3426
+TosBtCi.dll = 3426
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+Drivers_Dir    = 12
+BluetoothClassFiles = 11
+
+[ClassInstall32]
+Addreg=BluetoothClassReg
+CopyFiles=BluetoothClassFiles
+
+[BluetoothClassFiles]
+TosBtCi.dll
+
+[BluetoothClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,"100"
+HKR,,Installer32,,"TosBtCi.dll,BluetoothClassInstaller"
+
+[ControlFlags]
+ExcludeFromSelect = ROOT\BLUETOOTH_COM
+
+[Manufacturer]
+%TOSHIBA% = ToshibaRFComm, NTamd64
+
+[SignatureAttributes]
+tosrfcom.sys = SignatureAttributes.DRM
+
+[ToshibaRFComm]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSRFComm% = TOSRFComm_inst, ROOT\BLUETOOTH_COM
+
+[ToshibaRFComm.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TOSRFComm% = TOSRFComm_inst, ROOT\BLUETOOTH_COM
+
+[TOSRFComm_inst]
+;;CopyFiles = RfComm_Copy,ComPort_Copy,INF_Dir
+CopyFiles = RfComm_Copy
+AddReg = TOSRFComm.AddReg
+
+[TOSRFComm_inst.NT]
+;;CopyFiles = RfComm_Copy,ComPort_Copy.x86,INF_Dir
+CopyFiles = RfComm_Copy
+AddReg = TOSRFComm.AddReg
+
+[RfComm_Copy]
+tosrfcom.sys,,,2
+;;tosrfcom.sys,,,0x100
+
+[ComPort_Copy]
+;;tosporte.vxd,,,2
+
+[ComPort_Copy.x86]
+;;tosporte.sys,,,2
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+[TOSRFComm.AddReg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,tosrfcom.sys
+
+[TOSRFComm_inst.NT.Services]
+AddService = tosrfcom, %SPSVCINST_ASSOCSERVICE%, bluetooth_Service
+
+[bluetooth_Service]
+DisplayName    = %tosrfcom.SvcDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 1               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\tosrfcom.sys
+LoadOrderGroup = Extended Base
+AddReg = bluetooth_Service_AddReg
+
+[bluetooth_Service_AddReg]
+HKLM,System\Currentcontrolset\Services\Tosrfcom\Parameters,"Enable",0x10001,1
+HKLM,System\Currentcontrolset\Services\Tosrfcom\Parameters,"MaxFrameSize",0x10001,6091
+HKLM,System\Currentcontrolset\Services\Tosrfcom\Parameters,"UseCreditBase",0x10001,1
+HKLM,System\Currentcontrolset\Services\Tosrfcom\Parameters,"CBSize",0x10001,30
+HKLM,System\Currentcontrolset\Services\Tosrfcom\Parameters,"ReSendCBaseSize",0x10001,15
+HKLM,System\Currentcontrolset\Services\Tosrfcom\Parameters,"WriteWaitTime",0x10001,0
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+TSB = "TOSHIBA"
+TOSHIBA = "TOSHIBA"
+TOSRFComm = "Bluetooth RFCOMM"
+tosrfcom.SvcDesc = "Bluetooth RFCOMM"
+ClassName = "Bluetooth"

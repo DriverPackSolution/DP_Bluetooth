@@ -1,0 +1,105 @@
+;/*++
+;
+;Copyright (c) 2009-2013 Realtek Semiconductor Corporation All rights Reserved
+;
+;Module Name:
+;
+;    Rtkfilter.INF
+;--*/
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %REALTEK%
+CLASS = Bluetooth
+CatalogFile= RsCFilter.cat
+DriverPackageType = ClassFilter
+DriverVer=08/01/2012,2.3.15.3
+
+;*************************
+; Source file information
+;*************************
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+RtkBtfilter.sys         = 1,,
+
+;*************************
+; Destination information
+;*************************
+[DestinationDirs]
+RsBthFilter.CopyList = 12 ;DIRID_DRIVER
+
+[RsBthFilter.CopyList]
+RtkBtfilter.sys
+
+
+;**********************************
+; Bluetooth Filter Install Section
+;**********************************
+[DefaultInstall.NT]
+CopyFiles=RsBthFilter.CopyList
+AddReg=RsBthFilter.AddReg
+
+[RsBthFilter.AddReg]
+HKLM, System\CurrentControlSet\Control\Class\{7240100F-6512-4548-8418-9EBB5C6A1A94}, LowerFilters, 0x00010008, RtkBtFilter
+HKLM, System\CurrentControlSet\Control\Class\{E0CBF06C-CD8B-4647-BB8A-263B43F0F974}, LowerFilters, 0x00010008, RtkBtFilter
+
+;******************************************
+; Bluetooth Filter Service Install Section
+;******************************************
+[DefaultInstall.NT.Services]
+AddService = RtkBtFilter, , RtkBtFilter_Service_Inst
+
+[RtkBtFilter_Service_Inst]
+DisplayName     = %BtFilt.SvcDesc%                            
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\RtkBtfilter.sys      
+
+;**********************************
+; Bluetooth Filter UnInstall Section
+;**********************************
+[DefaultUninstall.NT]
+DelFiles = RsBthFilter.CopyList;
+DelReg = RsBthFilter.DelReg
+
+[RsBthFilter.DelReg]
+HKLM, System\CurrentControlSet\Control\Class\{7240100F-6512-4548-8418-9EBB5C6A1A94}, LowerFilters, 0x00010008, RtkBtFilter
+HKLM, System\CurrentControlSet\Control\Class\{E0CBF06C-CD8B-4647-BB8A-263B43F0F974}, LowerFilters, 0x00010008, RtkBtFilter
+
+[DefaultUninstall.NT.Services]
+DelService = RtkBtFilter, 0x200
+;**********************************************
+; Bluetooth Filter Coinstaller Install Section
+; It's useless for Class Filter Driver
+;**********************************************
+[RtkBtFilter.CoInstallers]
+AddReg=CoInstaller.AddReg
+CopyFiles=CoInstaller.CopyList
+
+[CoInstaller.AddReg]
+HKR,,CoInstallers32, 0x00010000, "WdfCoInstaller01009.dll, WdfCoInstaller"
+
+[CoInstaller.CopyList]
+WdfCoInstaller01009.dll,,,2
+
+[RtkBtFilter.Wdf]
+KmdfService = RtkBtFilter, RsBthFilter_wdfsect
+[RsBthFilter_wdfsect]
+KmdfLibraryVersion = 1.9
+
+;*****************************************
+; Bluetooth Filter String Section
+;*****************************************
+[Strings]
+REALTEK                  = "Realtek Semiconductor Corp."
+DiskId1                  = "Realtek Bluetooth Filter Installation Disk #1"
+BtFilt.SvcDesc 		 = "Realtek Bluetooth Filter Driver"
+RTK.DeviceDesc		 = "Realtek Bluetooth 3.0+HS"
+TSB.DeviceDesc           = "Realtek Bluetooth 3.0+HS"
+
+
+
+

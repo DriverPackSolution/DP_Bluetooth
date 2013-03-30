@@ -1,0 +1,131 @@
+; TOSBTSD2.INF
+;
+; TOSHIBA SD Card Controller device install information file.
+;
+; (c) Copyright 2001-2004 Toshiba Corporation
+;
+;	M.Tada (PS5)
+;
+
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1
+Provider = %ProviderName%
+;;ClassGUID={0212A498-0383-4b45-884B-CBE664BC4CDE}
+ClassGuid={7240100F-6512-4548-8418-9EBB5C6A1A94}
+Class=BLUETOOTH
+;;CatalogFile=tosbtsd2.cat
+DriverVer=04/07/2003, 2.0.0.030407
+
+[ClassInstall32]
+Addreg=BluetoothClassReg
+
+[BluetoothClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+;--------- SourceDisksNames Section ------------------------------------------
+
+[SourceDisksNames]
+1 = "Toshiba Bluetooth SD Installation Disk",,,
+
+[SourceDisksNames.x86]
+1 = "Toshiba Bluetooth SD Installation Disk",,,
+
+
+;--------- SourceDisksFiles Section ------------------------------------------
+
+[SourceDisksFiles]
+tosbtsd2.sys = 1
+
+[SourceDisksFiles.x86]
+tosbtsd2.sys = 1
+
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+SDIO.copy.files = 10,System32\Drivers
+SDIO.copy.files.NT = 12
+
+
+;--------- Manufacturer Section ----------------------------------------------
+
+[Manufacturer]
+%ProviderName% = SDIO_PIGEON
+
+
+;--------- Models Section ----------------------------------------------------
+
+[SDIO_PIGEON]
+%DeviceDesc1% = SDIO_DDI, TSDHD\MID_0098&CID_0000000000000002&I
+%DeviceDesc2% = SDIO_DDI, TSDHD\MID_0098&CID_0000000000000003&I
+
+
+;--------- ControlFlags Section ----------------------------------------------
+
+[ControlFlags]
+ExcludeFromSelect = TSDHD\MID_0098&CID_0000000000000002&I
+ExcludeFromSelect = TSDHD\MID_0098&CID_0000000000000003&I
+
+
+;--------- DDInstall Section -------------------------------------------------
+
+[SDIO_DDI]
+;CopyFiles = SDIO.copy.files
+AddReg = SDIO.AddReg
+
+[SDIO_DDI.NT]
+;CopyFiles = SDIO.copy.files.NT
+AddReg = SDIO.AddReg
+
+
+;--------- CopyFIles Section -------------------------------------------------
+
+[SDIO.copy.files]
+tosbtsd2.sys,,,2
+
+[SDIO.copy.files.NT]
+tosbtsd2.sys,,,2
+
+
+;--------- AddReg Section ----------------------------------------------------
+
+[SDIO.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,tosbtsd2.sys
+HKLM,"System\CurrentControlSet\Services\Tosbtsd2\Parameters","BreakOnEntry",0x00010001,0
+HKLM,"System\CurrentControlSet\Services\Tosbtsd2\Parameters","FPGASetupTime",0x00010001,2000
+HKLM,"System\CurrentControlSet\Services\Tosbtsd2\Parameters","SDIOSpecVersion",0x00010001,7
+HKLM,"System\CurrentControlSet\Services\Tosbtsd2\Parameters","TransferMode",0x00010001,1
+HKLM,"System\CurrentControlSet\Services\Tosbtsd2\Parameters","FilterIOResource",0x00010001,0
+HKLM,"System\CurrentControlSet\Services\Tosbtsd2\Parameters","AIS",0x00010001,0xFFFFFFFF
+HKLM,"Software\Toshiba\BluetoothStack","NotInternalUSBDevice",0x10001,2
+
+
+;--------- DDInstall.Service Section -----------------------------------------
+
+[SDIO_DDI.NT.Services]
+Addservice = Tosbtsd2, 0x00000002, SDIO_AddService
+
+
+;--------- AddService Section ------------------------------------------------
+
+[SDIO_AddService]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\tosbtsd2.sys
+
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+ProviderName	= "TOSHIBA"
+ClassName       = "Bluetooth"
+DeviceDesc1	= "Bluetooth SD Card2 from TOSHIBA"
+DeviceDesc2	= "Bluetooth SD Card3 from TOSHIBA"
+SvcDesc		= "Bluetooth SD-I/O Host Controller from TOSHIBA"

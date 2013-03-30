@@ -1,0 +1,105 @@
+;-------------------------------------------------------------------------------
+; btath_hcrp.INF
+;
+; Bluetooth HCRP
+;
+; Copyright (c) Atheros Bluetooth Solutions, Inc.  All rights reserved.
+
+[version]
+Signature	= "$WINDOWS NT$"
+Class       = USB
+ClassGUID   = {36FC9E60-C465-11CF-8056-444553540000}
+Provider    = %ATHR%
+DriverVer=12/18/2012,8.0.0000.0218
+CatalogFile=btath_hcrp.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%ATHR% = Standard,NTx86
+
+[SourceDisksFiles]
+btath_hcrp.sys=99
+
+[SourceDisksNames]
+99=%DISK_NAME%,
+
+[DestinationDirs]
+DefaultDestDir=12
+
+
+
+; For XP and later
+[Standard.NTx86]
+; DisplayName           Section           DeviceId
+; -----------           -------           --------
+%BTATH_HCRP.DeviceDesc% = BTATH_HCRP, BTHENUM\{8855C1D2-9BFE-4b96-BCBF-CBB9682C76BD}
+
+
+[BTATH_HCRP.NT]
+CopyFiles=BTATH_HCRP.CopyFiles
+
+[BTATH_HCRP.CopyFiles]
+btath_hcrp.sys
+
+
+[BTATH_HCRP.NT.Services]
+AddService=BTATH_HCRP,0x00000002,BTATH_HCRP_Service_Inst, BTATH_HCRP_Logging_Inst 
+
+[BTATH_HCRP_Service_Inst]
+DisplayName    = %BTATH_HCRP.SvcDesc%                            
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btath_hcrp.sys                            
+AddReg         = BTATH_HCRP_Parameters_AddReg
+
+[BTATH_HCRP_Parameters_AddReg]
+HKR, Parameters\Wdf, VerboseOn,       0x00010001, 1
+HKR, Parameters\Wdf, VerifierOn,      0x00010001, 1
+HKR, Parameters\Wdf, DbgBreakOnError, 0x00010001, 1
+
+
+[BTATH_HCRP_Logging_Inst]
+AddReg = BTATH_HCRP_Logging_Inst_AddReg
+
+[BTATH_HCRP_Logging_Inst_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\btath_hcrp.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[Strings]
+ATHR			= "Qualcomm Atheros Communications"                      
+DISK_NAME			= "BlueManager Driver Disk"
+BTATH_HCRP.SvcDesc		= "Bluetooth HCRP Server driver"
+BTATH_HCRP.DeviceDesc	= "Bluetooth Hard Copy Cable Replacement Server"
+
+
+;
+;--- WDF Coinstaller installation ------
+;
+[DestinationDirs]
+BTATH_HCRP_CoInstaller_CopyFiles = 11
+
+[BTATH_HCRP.NT.CoInstallers]
+AddReg=BTATH_HCRP_CoInstaller_AddReg
+CopyFiles=BTATH_HCRP_CoInstaller_CopyFiles
+
+[BTATH_HCRP_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01009.dll,WdfCoInstaller"
+
+[BTATH_HCRP_CoInstaller_CopyFiles]
+wdfcoinstaller01009.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01009.dll=99 ; make sure the number matches with SourceDisksNames
+
+[BTATH_HCRP.NT.Wdf]
+KmdfService = BTATH_HCRP, BTATH_HCRP_wdfsect
+
+[BTATH_HCRP_wdfsect]
+KmdfLibraryVersion = 1.9
+
+
+
+

@@ -1,0 +1,100 @@
+;/*++
+;
+;Copyright (c) 2011 Qualcomm Atheros Communications Inc.
+;
+;Module Name:
+;
+;    qca_shb.INF
+;
+;Abstract:
+;    INF file for installing a serial bus driver over UART transport
+;
+;Installation Notes:
+;    For testing purpose, use Devcon.exe to install
+;
+;        "devcon install qca_shb.inf ACPI\QCA_BTH_AR3002"
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%ProviderName%
+DriverVer=05/29/2012,11.22.54.596
+CatalogFile.NT=qca_shb.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+qca_shb.sys = 1
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%ManufacturerName% = QCA,NTx86.6.2
+
+[QCA.NTx86.6.2]
+%DeviceDesc% = QCA_SHB, ACPI\QCA_BTH_AR3002
+
+[QCA_SHB]
+CopyFiles = QCA_SHB_CopyFiles
+
+[QCA_SHB_CopyFiles]
+qca_shb.sys
+
+[QCA_SHB.HW]
+AddReg = QCA_SHB_HW_AddReg
+
+[QCA_SHB_HW_AddReg]
+HKR,,DeviceCharacteristics,0x10001,0x0100      ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"   ; Allow generic-all access to Built-in administrators and Local system 
+; Reference: http://msdn.microsoft.com/en-us/library/ff546320.aspx
+
+[QCA_SHB.Services]
+AddService = qca_shb,0x00000002, Bus_Service_Inst
+
+[Bus_Service_Inst]
+DisplayName    = %ServiceDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\qca_shb.sys
+Dependencies   = serenum
+AddReg	       = QCA_SHB_SW_AddReg
+
+[QCA_SHB_SW_AddReg]
+HKR,Parameters,BinFilePath,0x00000,"\DosDevices\%12%\"
+HKR,Parameters,DebugFlags,0x10001,0xC000C000
+HKR,Parameters,DebugLevel,0x10001,0x0000FFFF
+HKR,Parameters,BtLogEnabled,0x10001,0
+HKR,Parameters,HCIDumpEnabled,0x10001,0
+HKR,Parameters,HciDumpRawDataForEventsNotDecoded,0x10001,1
+HKR,Parameters,AclDumpRawData,0x10001,1
+HKR,Parameters,HciDumpTruncateSize,0x10001,0
+HKR,Parameters,RamPatchDumpEnabled,0x10001,0
+HKR,Parameters,RamPsDumpEnabled,0x10001,0
+HKR,Parameters,RamPsOveride,0x10001,1
+HKR,Parameters,UART_TO_READ,0x10001,40
+HKR,Parameters,UART_TO_WRITE,0x10001,150
+HKR,Parameters,BaudRate,0x10001,115200
+HKR,Parameters,TargetSleepModeEnabled,0x10001,1
+HKR,Parameters,CmdAclOutUseUnifiedQ,0x10001,0
+HKR,Parameters,EvtAclInUseUnifiedQ,0x10001,1
+HKR,Parameters,EvtAclInGoThroughIoWorker,0x10001,0
+HKR,Parameters,EvtInPrioritized,0x10001,1
+HKR,Parameters,AclPassupDelay,0x10001,10
+HKR,Parameters,RadioRtD2Enabled,0x10001,1
+
+[Strings]
+;Localizable
+ProviderName = "Qualcomm Atheros Communications Inc."
+ManufacturerName = "Qualcomm Atheros Communications Inc."
+DiskId1 = "Qualcomm Atheros Bluetooth Extensibility Transport Driver Installation Disk"
+DeviceDesc = "Qualcomm Atheros UART Bus Enumerator"
+ServiceDesc = "Qualcomm Atheros UART Bus Driver"

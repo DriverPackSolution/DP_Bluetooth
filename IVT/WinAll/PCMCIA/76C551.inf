@@ -1,0 +1,118 @@
+;
+; ATMEL bluetooth PCMCIA
+;
+
+[Version]
+Signature="$CHICAGO$"
+Provider=%ProviderName%
+
+Class=Bluetooth
+ClassGUID={ff646f80-8def-11d2-9449-00105a075f6b}
+
+;--------- SourceDiskNames and SourceDiskFiles Section -----------------------
+
+[SourceDisksNames]
+1 = "ATMEL Bluetooth Install Disk",,,
+
+[SourceDisksFiles]
+btpcmcia.sys = 1,,
+
+
+
+;--------- ClassInstall/ClassInstall32 Section -------------------------------
+; 9X Style
+[ClassInstall]
+Addreg=Class98.AddReg,Class.Icon
+
+; NT Style
+[ClassInstall32]
+Addreg=Class.AddReg,Class.Icon
+
+
+[Class.AddReg]
+;HKR,,Class,,Bluetooth
+HKR,,,,%DeviceClassName%
+
+
+[Class98.AddReg]
+HKR,,Class,,BluetoothDevices
+HKR,,,,%DeviceClassName%
+
+[Class.Icon]
+HKR,,Icon,,""
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+atmelPcmciaDriver   = 10,System32\Drivers
+
+
+;--------- Manufacturer and Models Sections ----------------------------------
+
+[Manufacturer]
+%MfgName%=Mfg0
+
+[Mfg0]
+%DeviceDesc%= atmel.pcmcia,PCMCIA\ATMEL-AT76C551-E47B
+
+;---------- DDInstall Sections -----------------------------------------------
+; --------- Windows 9X -----------------
+
+; Experimentation has shown that DDInstall root names greater than 19 characters
+; cause problems in Windows 98
+
+[atmel.pcmcia]
+CopyFiles=atmelPcmciaDriver
+AddReg=atmel.pcmcia.9X.AddReg
+
+[atmel.pcmcia.HW]
+AddReg=atmel.Pcmcia.HWAddReg
+
+[atmel.pcmcia.9X.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,btpcmcia.sys
+HKR, "Parameters", "DebugFlags", 0x00010001, 0x00000000
+
+; --------- Windows NT -----------------
+
+[ControlFlags.NT]
+ExcludeFromSelect=PCMCIA\ATMEL-AT76C55X-8441
+
+[atmel.pcmcia.NT]
+CopyFiles=atmelPcmciaDriver
+AddReg=atmel.pcmcia.NT.AddReg
+
+
+[atmel.pcmcia.NT.HW]
+;AddReg=atmel.pcmcia.hwAddReg
+
+[atmel.pcmcia.NT.Services]
+Addservice = btatmel, 0x00000002, atmel.pcmcia.AddService
+
+[atmel.pcmcia.AddService]
+DisplayName    = %atmelSvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\btpcmcia.sys
+
+[atmel.pcmcia.NT.AddReg]
+HKLM, "System\CurrentControlSet\Services\btatmel\Parameters","DebugFlags", 0x00010001, 0x000000000
+
+
+; --------- Files (common) -------------
+
+[atmelPcmciaDriver]
+btpcmcia.sys
+
+
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+ProviderName="ATMEL"
+MfgName="ATMEL"
+DeviceDesc="ATMEL Bluetooth Device"
+DeviceClassName="Bluetooth Devices"
+atmelSvcDesc="ATMEL bluetooth device driver"
+

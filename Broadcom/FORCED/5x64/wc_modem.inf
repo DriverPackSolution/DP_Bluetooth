@@ -1,0 +1,382 @@
+;
+; 64-Bit Windows WIDCOMM Modem Driver INF File
+;
+; Copyright (c) 2004, Broadcom Corp.
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Modem
+Provider=%WIDCOMM%
+CLASSGUID={4D36E96D-E325-11CE-BFC1-08002BE10318}
+CatalogFile=wc_modem.cat
+DriverVer=11/17/2009,5.6.0.3000
+
+[Manufacturer]
+%WIDCOMM% = WIDCOMM, NTamd64
+; %WIDCOMM% = WIDCOMM
+
+[WIDCOMM.NTamd64]
+; [WIDCOMM]
+%Modem1%  = Modemint, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\WCBTMODEM0
+
+; [Modemint.NTamd64]
+[Modemint.NT]
+DriverVer=11/17/2009,5.6.0.3000
+CopyFiles = CopyFileSection
+AddReg=All, AddRegInt, INTERNAL
+
+; [Modemint.NTamd64.Services]
+[Modemint.NT.Services]
+AddService = btwmodem, 0x00000000, btwmodem_Service_Inst
+
+; [Modemint.NTamd64.HW]
+[Modemint.NT.HW]
+AddReg = LowerFilterAddReg
+
+[LowerFilterAddReg]
+HKR,,"LowerFilters",0x00010000,btwmodem
+
+[btwmodem_Service_Inst]
+DisplayName = %Modemint%
+ServiceType = 1
+StartType = 3
+ErrorControl = 0
+ServiceBinary = %12%\btwmodem.sys
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+btwmodem.sys = 1
+
+[CopyFileSection]
+btwmodem.sys
+
+[DestinationDirs]
+DriverCopyfiles=12
+DefaultDestDir=12
+
+[All]
+HKR,,ConfigDialog,,modemui.dll
+HKR,,DevLoader,,*vcomm
+HKR,,EnumPropPages,,"modemui.dll,EnumPropPages"
+HKR,,FriendlyDriver,,unimodem.vxd
+HKR,,PortSubClass,1,02
+HKR,,CompatibilityFlags, 1, 01, 00, 00, 00
+HKR,,DCB, 1, 1C,00,00,00, 00,C2,01,00, 15,20,00,00, 00,00,0A,00, 0A,00,08,00, 00,11,13,00, 00,00
+
+;;modified as to support only BlindDial and ToneDial options
+
+[AddRegInt]
+HKR,, Properties, 1, 00,00,00,00, FF,00,00,00, 00,00,00,00, 07,00,00,00, 07,00,00,00, 00,03,00,00, 00,C2,01,00, 00,F4,01,00
+
+HKR, Init, 1,, "AT<cr>"
+HKR, Init, 2,, "ATE0V1&D2<cr>"
+
+;Value of 10 secs
+HKR, Settings, CallSetupFailTimer,, "S7=<#>" 
+HKR,,InactivityScale,1,0a,00,00,00
+
+
+HKR, Monitor, 1,, "ATS0=0<cr>"
+HKR, Monitor, 2,, "None"
+HKR, Answer, 1,, "ATA<cr>"
+HKR, Hangup, 1,, "ATH0<cr>"
+HKR,, Reset,, "ATZ<cr>"
+HKR, Settings, Prefix,, "AT"
+HKR, Settings, Terminator,, "<cr>"
+HKR, Settings, DialPrefix,, "D"
+HKR, Settings, Pulse,, "P"
+HKR, Settings, Tone,, "T"
+HKR, Settings, DialSuffix,, ""
+HKR, Settings, Blind_Off,, "X3"
+HKR, Settings, Blind_On,, "X1"
+;;The ITU supports 0,1,2 and 3 for volume settings
+; HKR, Settings, SpeakerVolume_Low,, "L0"
+HKR, Settings, SpeakerVolume_Low,, "L1"
+HKR, Settings, SpeakerVolume_Med,, "L2"
+HKR, Settings, SpeakerVolume_High,, "L3"
+HKR, Settings, SpeakerMode_Off,, "M0"
+HKR, Settings, SpeakerMode_Dial,, "M1"
+HKR, Settings, SpeakerMode_On,, "M2"
+
+HKR, Responses, "<cr>",     1,01,0,0,0,0,0,0,0,0,0
+HKR, Responses, "<lf>",     1,01,0,0,0,0,0,0,0,0,0
+HKR, Responses, "0<cr>", 1, 00, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "1<cr>", 1, 02, 00, 00,00,00,00, 00,00,00,00
+HKR, Responses, "2<cr>", 1, 08, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "3<cr>", 1, 04, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "4<cr>", 1, 03, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "5<cr>", 1, 02, 00, b0,04,00,00, 00,00,00,00
+HKR, Responses, "6<cr>", 1, 05, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "7<cr>", 1, 06, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "8<cr>", 1, 07, 00, 00,00,00,00, 00,00,00,00 
+HKR, Responses, "10<cr>", 1, 02, 00, 60,09,00,00, 00,00,00,00
+HKR, Responses, "11<cr>", 1, 02, 00, c0,12,00,00, 00,00,00,00
+
+HKR, Responses, "<cr><lf>OK<cr><lf>",          1, 00, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>RING<cr><lf>",        1, 08, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>NO CARRIER<cr><lf>",  1, 04, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>ERROR<cr><lf>",       1, 03, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>NO DIALTONE<cr><lf>", 1, 05, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>BUSY<cr><lf>",        1, 06, 00, 00,00,00,00, 00,00,00,00    
+HKR, Responses, "<cr><lf>NO ANSWER<cr><lf>",   1, 07, 00, 00,00,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT<cr><lf>",         1, 02, 00, 00,00,00,00, 00,00,00,00   
+HKR, Responses, "<cr><lf>CONNECT 1200/ARQ<cr><lf>", 1, 02, 02, B0,04,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 2400/ARQ<cr><lf>", 1, 02, 02, 60,09,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 4800/ARQ<cr><lf>", 1, 02, 02, C0,12,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 9600/ARQ<cr><lf>", 1, 02, 02, 80,25,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 7200/ARQ<cr><lf>", 1, 02, 02, 20,1C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 12000/ARQ<cr><lf>", 1, 02, 02, E0,2E,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 14400/ARQ<cr><lf>", 1, 02, 02, 40,38,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 19200/ARQ<cr><lf>", 1, 02, 02, 00,4B,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 32000/ARQ<cr><lf>", 1, 02, 02, 00,7D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 34000/ARQ<cr><lf>", 1, 02, 02, D0,84,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 36000/ARQ<cr><lf> ", 1, 02, 02, A0,8C,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 38000/ARQ<cr><lf>", 1, 02, 02, 70,94,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 40000/ARQ<cr><lf>", 1, 02, 02, 40,9C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 42000/ARQ<cr><lf>", 1, 02, 02, 10,A4,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 44000/ARQ<cr><lf>", 1, 02, 02, E0,AB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 46000/ARQ<cr><lf>", 1, 02, 02, B0,B3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 48000/ARQ<cr><lf>", 1, 02, 02, 80,BB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 50000/ARQ<cr><lf>", 1, 02, 02, 50,C3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 52000/ARQ<cr><lf>", 1, 02, 02, 20,CB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 54000/ARQ<cr><lf>", 1, 02, 02, F0,D2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 56000/ARQ<cr><lf>", 1, 02, 02, C0,DA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 58000/ARQ<cr><lf>", 1, 02, 02, 90,E2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 60000/ARQ<cr><lf>", 1, 02, 02, 60,EA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 31200/ARQ<cr><lf>", 1, 02, 02, E0,79,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 33600/ARQ<cr><lf>", 1, 02, 02, 40,83,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 38400/ARQ<cr><lf>", 1, 02, 02, 00,96,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 57600/ARQ<cr><lf>", 1, 02, 02, 00,E1,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 115200/ARQ<cr><lf>", 1, 02, 02, 00,C2,01,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 75TX/1200RX<cr><lf>", 1, 02, 00, B0,04,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 1200TX/75RX<cr><lf>", 1, 02, 00, B0,04,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 16800/ARQ<cr><lf>", 1, 02, 02, A0,41,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 21600/ARQ<cr><lf>", 1, 02, 02, 60,54,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 24000/ARQ<cr><lf>", 1, 02, 02, C0,5D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 26400/ARQ<cr><lf>", 1, 02, 02, 20,67,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 28800/ARQ<cr><lf>", 1, 02, 02, 80,70,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 29333/ARQ<cr><lf>",      1, 02, 00, 95,72,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 30666/ARQ<cr><lf>",      1, 02, 00, CA,77,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 33333/ARQ<cr><lf>",      1, 02, 00, 35,82,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 34666/ARQ<cr><lf>",      1, 02, 00, 6A,87,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 37333/ARQ<cr><lf>",      1, 02, 00, D5,91,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 38666/ARQ<cr><lf>",      1, 02, 00, 0A,97,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 41333/ARQ<cr><lf>",      1, 02, 00, 75,A1,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 42666/ARQ<cr><lf>",      1, 02, 00, AA,A6,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 45333/ARQ<cr><lf>",      1, 02, 00, 15,B1,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 46666/ARQ<cr><lf>",      1, 02, 00, 4A,B6,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 49333/ARQ<cr><lf>",      1, 02, 00, B5,C0,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 50666/ARQ<cr><lf>",      1, 02, 00, EA,C5,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 53333/ARQ<cr><lf>",      1, 02, 00, 55,D0,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 54666/ARQ<cr><lf>",      1, 02, 00, 8A,D5,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 1200<cr><lf>", 1, 02, 00, B0,04,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 0600<cr><lf>", 1, 02, 00, 58,02,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 2400<cr><lf>", 1, 02, 00, 60,09,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 4800<cr><lf>", 1, 02, 00, C0,12,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 9600<cr><lf>", 1, 02, 00, 80,25,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 7200<cr><lf>", 1, 02, 00, 20,1C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 12000<cr><lf>", 1, 02, 00, E0,2E,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 14400<cr><lf>", 1, 02, 00, 40,38,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 19200<cr><lf>", 1, 02, 00, 00,4B,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 38400<cr><lf>", 1, 02, 00, 00,96,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 57600<cr><lf>", 1, 02, 00, 00,E1,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 115200<cr><lf>", 1, 02, 00, 00,C2,01,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 16800<cr><lf>", 1, 02, 00, A0,41,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 21600<cr><lf>", 1, 02, 00, 60,54,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 24000<cr><lf>", 1, 02, 00, C0,5D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 26400<cr><lf>", 1, 02, 00, 20,67,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 28800<cr><lf>", 1, 02, 00, 80,70,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 31200<cr><lf>", 1, 02, 00, E0,79,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 33600<cr><lf>", 1, 02, 00, 40,83,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 32000<cr><lf>", 1, 02, 00, 00,7D,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 34000<cr><lf>", 1, 02, 00, D0,84,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 36000<cr><lf> ", 1, 02, 00, A0,8C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 38000<cr><lf>", 1, 02, 00, 70,94,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 40000<cr><lf>", 1, 02, 00, 40,9C,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 42000<cr><lf>", 1, 02, 00, 10,A4,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 44000<cr><lf>", 1, 02, 00, E0,AB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 46000<cr><lf>", 1, 02, 00, B0,B3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 48000<cr><lf>", 1, 02, 00, 80,BB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 50000<cr><lf>", 1, 02, 00, 50,C3,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 52000<cr><lf>", 1, 02, 00, 20,CB,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 54000<cr><lf>", 1, 02, 00, F0,D2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 56000<cr><lf>", 1, 02, 00, C0,DA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 58000<cr><lf>", 1, 02, 00, 90,E2,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 60000<cr><lf>", 1, 02, 00, 60,EA,00,00, 00,00,00,00 
+HKR, Responses, "<cr><lf>CONNECT 29333<cr><lf>",      1, 02, 00, 95,72,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 30666<cr><lf>",      1, 02, 00, CA,77,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 33333<cr><lf>",      1, 02, 00, 35,82,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 34666<cr><lf>",      1, 02, 00, 6A,87,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 37333<cr><lf>",      1, 02, 00, D5,91,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 38666<cr><lf>",      1, 02, 00, 0A,97,00,00,  00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 41333<cr><lf>",      1, 02, 00, 75,A1,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 42666<cr><lf>",      1, 02, 00, AA,A6,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 45333<cr><lf>",      1, 02, 00, 15,B1,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 46666<cr><lf>",      1, 02, 00, 4A,B6,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 49333<cr><lf>",      1, 02, 00, B5,C0,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 50666<cr><lf>",      1, 02, 00, EA,C5,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 53333<cr><lf>",      1, 02, 00, 55,D0,00,00, 00,00,00,00
+HKR, Responses, "<cr><lf>CONNECT 54666<cr><lf>",      1, 02, 00, 8A,D5,00,00, 00,00,00,00
+
+[INTERNAL]
+HKR,, DeviceType, 1, 02
+
+[Strings]
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM Installation Media"
+Modemint  = "Bluetooth Modem"
+Modem1  = "Bluetooth Modem"
+
+[Strings.0404] ; Chinese Traditional
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM ¶w∏À¥C≈È"
+Modemint  = "¬≈™ﬁº∆æ⁄æ˜"
+Modem1  = "¬≈™ﬁº∆æ⁄æ˜"
+
+[Strings.0406] ; Danish
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM-installationsmedie"
+Modemint  = "Bluetooth-modem"
+Modem1  = "Bluetooth-modem"
+
+[Strings.0407] ; German
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM-Installationsmedien"
+Modemint  = "Bluetooth-Modem"
+Modem1  = "Bluetooth-Modem"
+
+[Strings.040a] ; Spanish
+WIDCOMM = "Broadcom"
+Source_Description="Medios de instalaciÛn de WIDCOMM"
+Modemint  = "MÛdem Bluetooth"
+Modem1  = "MÛdem Bluetooth"
+
+[Strings.040b] ; Finnish
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM-asennuslevy"
+Modemint  = "Bluetooth-modeemi"
+Modem1  = "Bluetooth-modeemi"
+
+[Strings.040c] ; French
+WIDCOMM = "Broadcom"
+Source_Description="Support d'installation WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.0410] ; Italian
+WIDCOMM = "Broadcom"
+Source_Description="Supporto di installazione WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.0411] ; Japanese
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM ÉCÉìÉXÉgÅ[Éã ÉÅÉfÉBÉA"
+Modemint  = "Bluetooth ÉÇÉfÉÄ"
+Modem1  = "Bluetooth ÉÇÉfÉÄ"
+
+[Strings.0412] ; Korean
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM º≥ƒ° πÃµæÓ"
+Modemint  = "Bluetooth ∏µ©"
+Modem1  = "Bluetooth ∏µ©"
+
+[Strings.0413] ; Dutch
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM-installatiemedia"
+Modemint  = "Bluetooth-modem"
+Modem1  = "Bluetooth-modem"
+
+[Strings.0416] ; Brazilian Portuguese
+WIDCOMM = "Broadcom"
+Source_Description="MÌdia de instalaÁ„o WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.041d] ; Swedish
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM-installationsskiva"
+Modemint  = "Bluetooth-modem"
+Modem1  = "Bluetooth-modem"
+
+[Strings.0415] ; Polish
+WIDCOMM = "Broadcom"
+Source_Description="Noúnik instalacyjny WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.0419] ; Russian
+WIDCOMM = "Broadcom"
+Source_Description="ÕÓÒËÚÂÎ¸ ‰Îˇ ÛÒÚ‡ÌÓ‚ÍË WIDCOMM"
+Modemint  = "ÃÓ‰ÂÏ Bluetooth"
+Modem1  = "ÃÓ‰ÂÏ Bluetooth"
+
+[Strings.0414] ; Norwegian
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM-installasjonsmedier"
+Modemint  = "Bluetooth-modem"
+Modem1  = "Bluetooth-modem"
+
+
+[Strings.0804] ; ChineseSimplified
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM ∞≤◊∞ΩÈ÷ "
+Modemint  = "¿∂—¿µ˜÷∆Ω‚µ˜∆˜"
+Modem1  = "¿∂—¿µ˜÷∆Ω‚µ˜∆˜"
+
+[Strings.0401] ; Arabic
+WIDCOMM = "Broadcom"
+Source_Description="Ê”«∆ÿ  À»Ì  WIDCOMM"
+Modemint  = "„Êœ„ Bluetooth"
+Modem1  = "„Êœ„ Bluetooth"
+
+[Strings.0405] ; Czech
+WIDCOMM = "Broadcom"
+Source_Description="InstalaËnÌ mÈdia WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.0408] ; Greek
+WIDCOMM = "Broadcom"
+Source_Description="–ÔÎıÏ›Û· Â„Í·Ù‹ÛÙ·ÛÁÚ WIDCOMM"
+Modemint  = "Ã¸ÌÙÂÏ Bluetooth"
+Modem1  = "Ã¸ÌÙÂÏ Bluetooth"
+
+[Strings.040D] ; Hebrew
+WIDCOMM = "Broadcom"
+Source_Description="Ó„È˙ ‰˙˜‰ WIDCOMM"
+Modemint  = "ÓÂ„Ì Bluetooth"
+Modem1  = "ÓÂ„Ì Bluetooth"
+
+[Strings.041A] ; Croatian
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM mediji za instalaciju"
+Modemint  = "Bluetooth modem"
+Modem1  = "Bluetooth modem"
+
+[Strings.040E] ; Hungarian
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM Installation Media"
+Modemint  = "Bluetooth-modem"
+Modem1  = "Bluetooth-modem"
+
+[Strings.0816] ; Iberian Portuguese
+WIDCOMM = "Broadcom"
+Source_Description="Suporte de instalaÁ„o WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.0418] ; Romanian
+WIDCOMM = "Broadcom"
+Source_Description="Suport de instalare WIDCOMM"
+Modemint  = "Modem Bluetooth"
+Modem1  = "Modem Bluetooth"
+
+[Strings.041F] ; Turkish
+WIDCOMM = "Broadcom"
+Source_Description="WIDCOMM Y¸kleme Ortam˝"
+Modemint  = "Bluetooth Modem"
+Modem1  = "Bluetooth Modem"

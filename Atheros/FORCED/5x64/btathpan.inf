@@ -1,0 +1,147 @@
+;-------------------------------------------------------------------------------
+; BTathPAN.INF
+;
+; Bluetooth PAN Adapter
+;
+; Copyright (c) Atheros, Inc.  All rights reserved.
+
+
+[version]
+Signature   = "$Windows NT$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %Atheros%
+DriverVer=07/16/2010,6.9.0716.0102
+CatalogFile = btathpan.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%Atheros% = Atheros,NTAMD64
+
+; For Win2k
+[Atheros]
+%btathPan.DeviceDesc%    = btathPan.ndi,	{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathPan	; Controller enumerated
+%btathPanU.DeviceDesc%   = btathPanU.ndi, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathPanU	; Controller enumerated
+%btathNAP.DeviceDesc%	= btathNAP.ndi,	{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathNAP	; Controller enumerated
+%btathGN.DeviceDesc%		= btathGN.ndi,	{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathGN	; Controller enumerated
+
+; For XP and later
+[Atheros.NTAMD64]
+%btathPan.DeviceDesc%    = btathPan.ndi, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathPan		; Controller enumerated
+%btathPanU.DeviceDesc%   = btathPanU.ndi, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathPanU	; Controller enumerated
+%btathNAP.DeviceDesc%	= btathNAP.ndi,	{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathNAP	; Controller enumerated
+%btathGN.DeviceDesc%		= btathGN.ndi,	{1B340A07-550B-456d-ABF3-0B8AC6B212CA}\BTathGN		; Controller enumerated
+
+;-------------------------------------------------------------------------------
+; Bluetooth PAN Adapter
+;
+[btathPan.ndi]
+Characteristics = %NCF_VIRTUAL%
+AddReg          = btathPan.Reg
+CopyFiles       = btathPan.CopyFiles
+
+[btathPan.ndi.Services]
+AddService      = BTathPan, 2, btathPan.Service, btathPan.EventLog
+
+
+;-------------------------------------------------------------------------------
+; Bluetooth PANU Adapter
+;
+[btathPanU.ndi]
+Characteristics = %NCF_VIRTUAL%
+AddReg          = btathPan.Reg
+CopyFiles       = btathPan.CopyFiles
+
+[btathPanU.ndi.Services]
+AddService      = btathPan, 2, btathPan.Service, btathPan.EventLog
+
+;-------------------------------------------------------------------------------
+; Bluetooth NAP Adapter
+;
+[btathNAP.ndi]
+Characteristics = %NCF_VIRTUAL%
+AddReg          = btathPan.Reg
+CopyFiles       = btathPan.CopyFiles
+
+[btathNAP.ndi.Services]
+AddService      = btathPan, 2, btathPan.Service, btathPan.EventLog
+
+;-------------------------------------------------------------------------------
+; Bluetooth GN Adapter
+;
+[btathGN.ndi]
+Characteristics = %NCF_VIRTUAL%
+AddReg          = btathPan.Reg
+CopyFiles       = btathPan.CopyFiles
+
+[btathGN.ndi.Services]
+AddService      = btathPan, %SPSVCINST_ASSOCSERVICE%, btathPan.Service, btathPan.EventLog
+
+
+;-----------------------------------------------------------------------------
+; Bluetooth PAN Common
+;
+[btathPan.Reg]
+HKR, Ndi,                         Service,             0, "btathpan"
+HKR, Ndi\Interfaces,              UpperRange,          0, "ndis5, ndis5_ip6"
+HKR, Ndi\Interfaces,              LowerRange,          0, "nolower"
+
+;-----------------------------------------------------------------------------
+; Driver and Service Section
+;
+[btathPan.CopyFiles]
+btathpan.sys,,,2
+
+[btathPan.Service]
+DisplayName     = %btathPan.Service.DispName%
+ServiceType     = %SERVICE_KERNEL_DRIVER%
+StartType       = %SERVICE_DEMAND_START%
+ErrorControl    = %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\btathpan.sys
+LoadOrderGroup  = NDIS
+
+[btathPan.EventLog]
+AddReg = btathPan.AddEventLog.Reg
+
+[btathPan.AddEventLog.Reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+btathpan.sys  = 1,,
+
+;-----------------------------------------------------------------------------
+; DestinationDirs
+;
+[DestinationDirs]
+btathPan.CopyFiles = 12
+
+;-----------------------------------------------------------------------------
+; Localizable Strings
+;
+[Strings]
+Atheros						= "Atheros"                      
+btathPan.DeviceDesc			= "Bluetooth PAN Adapter Device"
+;btathPanU.DeviceDesc			= "Bluetooth PANU Adapter Device"
+btathPanU.DeviceDesc			= "Bluetooth LAN Access Adapter Device"
+btathNAP.DeviceDesc			= "Bluetooth NAP Adapter Device"
+btathGN.DeviceDesc			= "Bluetooth GN Adapter Device"
+btathPan.Service.DispName    = "Bluetooth PAN Miniport Device"
+DiskId1						= "Bluetooth PAN Miniport Device Installation Disk #1"
+
+
+; Non-localizable
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
+SPSVCINST_ASSOCSERVICE = 0x00000002
+COPYFLG_WARN_IF_SKIP   = 0x00000001
+COPYFLG_NOSKIP         = 0x00000002
+NCF_VIRTUAL            = 0x1
+

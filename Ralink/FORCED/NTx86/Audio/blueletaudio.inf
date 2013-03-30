@@ -1,0 +1,126 @@
+;------------------------------------------------------------------------
+; blueletaudio.inf
+; Ralink Bluetooth Virtual Audio Adapter Installation Script
+; For Windows 2000/XP/2003/Vista
+; For Platform x86/Amd64
+;
+; Copyright (c) 2002-2012, Ralink Corporation.
+; http://www.Ralinktech.com
+;
+;------------------------------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ProviderName%
+CatalogFile=BlueletAudio.cat
+DriverVer = 06/21/2012, 9.2.0.0001
+;LayoutFile=layout.inf, layout1.inf, layout2.inf
+
+[SourceDisksNames]
+1 = %SourceDisk%,,,
+
+[SourceDisksFiles]
+blueletaudio.sys = 1,,
+
+[DestinationDirs]
+DefaultDestDir        = 10, system32\drivers
+BlueletAudio.CopyList = 10, system32\drivers
+
+[Manufacturer]
+%MfgName%=Ralink, NTamd64
+
+[Ralink]
+%BLUELETAUDIO.DeviceDesc%=BlueletAudio,{F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BLUELETAUDIO
+
+[Ralink.NTamd64]
+%BLUELETAUDIO.DeviceDesc%=BlueletAudio,{F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\BLUELETAUDIO
+
+[BlueletAudio]
+Include	=	ks.inf, wdmaudio.inf
+Needs	=	KS.Registration,WDMAUDIO.Registration
+AddReg	=	BlueletAudio.AddReg
+CopyFiles=	BlueletAudio.CopyList
+
+[BlueletAudio.AddReg]
+HKR,,SetupPreferredAudioDevices,3,00,00,00,00
+HKR,,Driver,,blueletaudio.sys
+HKR,,NTMPDriver,,"blueletaudio.sys,sbemul.sys"
+;HKR,,PageOutWhenUnopened,3,01
+HKR,,PageOutWhenUnopened,3,00
+HKR,,DontSuspendIfStreamsAreRunning,3,01
+HKR,"Parameters","BreakOnEntry",0x00010001,0
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"wave,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%BlueletAudio.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%BlueletAudio.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%BlueletAudio.DeviceDesc%
+
+[BlueletAudio.CopyList]
+blueletaudio.sys
+
+[BlueletAudio.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,BlueletAudio.Interface.Wave,
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,BlueletAudio.Interface.Wave,
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,BlueletAudio.Interface.Topo,
+
+[BlueletAudio.Interface.Wave]
+AddReg=BlueletAudio.Interface.Wave.AddReg
+
+[BlueletAudio.Interface.Topo]
+AddReg=BlueletAudio.Interface.Topo.AddReg
+
+[BlueletAudio.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BlueletAudio.Wave.szPname%
+
+[BlueletAudio.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BlueletAudio.Topo.szPname%
+
+[BlueletAudio.Services]
+AddService = BlueletAudio,0x00000002,BlueletAudio.ServiceInstall
+
+[BlueletAudio.ServiceInstall]
+DisplayName	= %BLUELETAUDIO.SvcDesc%
+ServiceType	= 1  	; SERVICE_KERNEL_DRIVER
+StartType	= 3	; SERVICE_DEMAND_START
+ErrorControl	= 1	; SERVICE_ERROR_NORMAL
+ServiceBinary	= %12%\blueletaudio.sys
+AddReg		= BlueletAudio.ServiceInstall.AddReg
+
+[BlueletAudio.ServiceInstall.AddReg]
+HKR,Parameters,BreakOnEntry,0x00010001,0
+HKR,Parameters,Loopback,0x00010001,0
+HKR,Parameters,TimerIntervalMsecs,0x00010001,1
+
+[Strings]
+ProviderName="Ralink Corporation"
+MfgName="Ralink Corporation"
+SourceDisk = "Ralink Bluetooth Installation Disk"
+
+BlueletAudio.DeviceDesc="Bluetooth AV Audio"
+BlueletAudio.SvcDesc="Bluetooth Audio Service"
+BlueletAudio.NameGuid="{D2EB2781-0D7A-4356-A762-79C0B83AE476}"
+BlueletAudio.Name="Bluetooth AV Audio"
+BlueletAudio.Wave.szPname="Bluetooth AV Audio"
+BlueletAudio.Topo.szPname="Bluetooth AV Audio"
+;BlueletAudio_MIDI="Bluetooth AV Audio"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+MediaPrefered="Software\Microsoft\Multimedia\Sound Mapper"
+MediaPreferedValue="Bluetooth AV Audio"

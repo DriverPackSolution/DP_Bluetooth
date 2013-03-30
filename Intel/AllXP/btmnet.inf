@@ -1,0 +1,96 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Copyright 2011 Motorola Solutions, Inc. All rights reserved.
+;
+; Installation INF file for Bluetooth Virtual Network driver
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %INTEL%
+DriverVer   = 07/01/2011,2.0.34.322
+CatalogFile = btmnet.cat
+
+[ControlFlags]
+ExcludeFromSelect=BTMUSB\BTMNET
+
+[Manufacturer]
+%INTEL% = Intel, NTx86, NTamd64
+
+[Intel]
+%INTEL.Device% = BTMNET, BTMUSB\BTMNET
+
+[Intel.NTx86]
+%INTEL.Device% = BTMNET, BTMUSB\BTMNET
+
+[Intel.NTamd64]
+%INTEL.Device% = BTMNET, BTMUSB\BTMNET
+
+
+[BTMNET]
+Characteristics = 1 ; NCF_VIRTUAL
+AddReg          = BTMNET.AddReg
+CopyFiles       = BTMNET.CopyFiles
+*IfType = 1 ; IF_TYPE_OTHER
+*MediaType = 0 ; NdisMedium802_3 (Ethernet (802.3))
+*PhysicalMediaType = 10 ; NdisPhysicalMediumBluetooth
+
+[BTMNET.AddReg]
+HKR,   ,                 BusNumber,    0,   "0"
+HKR,   Ndi,              Service,      0,   "BTMNET"
+HKR,   Ndi\Interfaces,   LowerRange,   0,   "ethernet"
+HKR,   Ndi\Interfaces,   UpperRange,   0,   "ndis5"
+
+
+[BTMNET.CopyFiles]
+btmnet.sys,,,2 ; COPYFLG_NOSKIP
+
+[DestinationDirs]
+BTMNET.CopyFiles = 12 ; %windir%\system32\drivers
+
+[SourceDisksNames]
+1 = %INTEL.DiskId%,,,\Win32
+
+[SourceDisksNames.x86]
+1=%INTEL.DiskId%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%INTEL.DiskId%,,,\Win64
+
+[SourceDisksFiles]
+btmnet.sys = 1
+
+
+[BTMNET.Services]
+AddService = BTMNET, 2, BTMNET.Service, BTMNET.EventLog
+
+[BTMNET.Service]
+DisplayName    = %INTEL.Service%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 2 ; SERVICE_ERROR_SEVERE
+ServiceBinary  = %12%\btmnet.sys
+LoadOrderGroup = NDIS
+AddReg         = BTMNET.Service.AddReg
+
+[BTMNET.Service.AddReg]
+HKR, , Settings,      0x00010001, 0x00010011
+HKR, , Timeout,       0x00010001, 10
+HKR, , TextModeFlags, 0x00010001, 0x0001
+
+[BTMNET.EventLog]
+; AddReg = BTMNET.EventLog.AddReg
+
+;[BTMNET.EventLog.AddReg]
+;HKR,   ,   EventMessageFile,   0x00020000,   "%%SystemRoot%%\System32\netevent.dll"
+;HKR,   ,   TypesSupported,     0x00010001,   7
+
+
+[Strings]
+INTEL         = "Intel Corporation"
+INTEL.Device  = "Bluetooth Network Adapter"
+INTEL.Service = "Bluetooth Network Adapter Service"
+INTEL.DiskId  = "Bluetooth Installation Disk"

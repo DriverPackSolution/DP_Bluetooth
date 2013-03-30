@@ -1,0 +1,82 @@
+;
+; x86 PAN driver install
+;
+; Copyright (c) 2010 Broadcom Corporation
+;
+[Version]
+Provider         = %MfgName%
+Signature        = "$Windows NT$"
+Class            = Net
+ClassGuid        = {4d36e972-e325-11ce-bfc1-08002be10318}
+CatalogFile      = btwdpan64.cat
+DriverVer        = 09/16/2011,6.5.1.300
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+btwdpan.sys 		= 1
+
+[Manufacturer]
+%MfgName%        = Msft,NTamd64
+
+[Msft.NTamd64]
+%BTWDPAN.DisplayName% = BTWDPAN.Install, BTHENUM\{7788FA25-DFE4-4ea4-B838-4771E26CCF82}
+
+[DestinationDirs]
+DefaultDestDir     = %WINDOWS_DIR%
+BTWDPAN.CopyFiles   = %DRIVERS_DIR%
+
+[BTWDPAN.Install]
+Characteristics    = %NCF_VIRTUAL%
+CopyFiles          = BTWDPAN.CopyFiles
+AddReg             = BTWDPAN.AddReg
+*IfType            = 6                  ; IF_TYPE_ETHERNET_CSMACD
+*MediaType         = 0                  ; NdisMedium802_3
+*PhysicalMediaType = 0x0                ; NdisPhysicalMediumUnspecified
+
+[BTWDPAN.CopyFiles]
+btwdpan.sys,,,%COPYFLG_WARN_IF_SKIP%
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[BTWDPAN.Install.Services]
+AddService = BTWDPAN, %SPSVCINST_ASSOCSERVICE%, BTWDPAN.AddService
+
+[BTWDPAN.AddService]
+DisplayName    = %BTWDPAN.DisplayName%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\btwdpan.sys
+LoadOrderGroup = NDIS
+Description    = %BTWDPAN.DisplayName%
+
+[BTWDPAN.AddReg]
+; Clsss Information
+HKR, Ndi,             HelpText,     0,  %BTWDPAN.HelpText%
+HKR, Ndi,             Service,      0,  "BTWDPAN"
+
+; Interfaces
+HKR, Ndi\Interfaces,  UpperRange,   0,  "ndis5, ndis5_ip6"
+HKR, Ndi\Interfaces,  LowerRange,   0,  "nolower"
+
+[strings]
+; Non-localizable
+WINDOWS_DIR            = 10 ; %windir%
+DRIVERS_DIR            = 12 ; %windir%\system32\drivers
+SYSTEM32_DIR           = 11 ; %windir%\system32
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
+SPSVCINST_ASSOCSERVICE = 0x00000002
+COPYFLG_WARN_IF_SKIP   = 0x00000001
+COPYFLG_NOSKIP         = 0x00000002
+NCF_VIRTUAL            = 0x1
+
+; Localizable
+MfgName                 = "Broadcom"
+BTWDPAN.DisplayName     = "Bluetooth Personal Area Network"
+BTWDPAN.HelpText        = "BTWDPAN HelpText"
+Source_Description      = "WIDCOMM Installation Media"

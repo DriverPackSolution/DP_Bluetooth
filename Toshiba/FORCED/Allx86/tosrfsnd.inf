@@ -1,0 +1,235 @@
+; TosRfSnd.inf
+;
+; TOSHIBA Bluetooth RFSND Driver
+;
+; Copyright (c)2003-2009 TOSHIBA Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = MEDIA
+ClassGUID = {4d36e96c-e325-11ce-bfc1-08002be10318}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TSB%
+DriverPackageDisplayName = %TosRfSnd.SvcDesc%
+DriverVer = 08/05/2009,6.00.0805.0
+CatalogFile = TosRfSnd.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksFiles]
+TosRfSnd.sys = 3426
+
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+TosRfVic.CopyList = 12
+TosRfSnd.CopyList = 12
+
+[Manufacturer]
+%StdMfg%=TOSHIBA, NTamd64
+
+[SignatureAttributes]
+tosrfbd.sys = SignatureAttributes.DRM
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+; Microsoft
+; BTHENUM\{PROFILE_GUID}_VID&XXXXYYYY_PID&ZZZZ
+; HandsFree Service class: {0000111e-0000-1000-8000-00805f9b34fb} 
+; Headset Service class: {00001108-0000-1000-8000-00805f9b34fb} 
+; A2DP Source : {0000110a-0000-1000-8000-00805f9b34fb} 
+; A2DP Sink : {0000110b-0000-1000-8000-00805f9b34fb} 
+; AVRCP Source: {0000110e-0000-1000-8000-00805f9b34fb} 
+; Handsfree AG service: {0000111F-0000-1000-8000-00805F9B34FB}
+; Headset AG service: {00001112-0000-1000-8000-00805F9B34FB}
+; AVRCP Target {0000110C-0000-1000-8000-00805F9B34FB}
+; A2DP Service: {0000110D-0000-1000-8000-00805F9B34FB}
+[TOSHIBA]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\0004&0008
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\0004&0108
+%TosRfVic.DeviceDesc% = TosRfVic, Bluetooth\0004&0009
+
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\{0000110e-0000-1000-8000-00805f9b34fb}
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\{00001108-0000-1000-8000-00805f9b34fb}
+%TosRfVic.DeviceDesc% = TosRfVic, Bluetooth\{0000111e-0000-1000-8000-00805f9b34fb}
+
+
+[TOSHIBA.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\0004&0008
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\0004&0108
+%TosRfVic.DeviceDesc% = TosRfVic, Bluetooth\0004&0009
+
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\{0000110e-0000-1000-8000-00805f9b34fb}
+%TosRfSnd.DeviceDesc% = TosRfSnd, Bluetooth\{00001108-0000-1000-8000-00805f9b34fb}
+%TosRfVic.DeviceDesc% = TosRfVic, Bluetooth\{0000111e-0000-1000-8000-00805f9b34fb}
+
+
+;======================================================
+; TosRfVic
+;======================================================
+[TosRfVic]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+;;AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=TosRfVic.CopyList
+AddReg=TosRfVic.AddReg
+
+[TosRfVic.CopyList]
+TosRfSnd.sys,,,2
+;;TosRfSnd.sys,,,0x100
+
+[TosRfVic.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,TosRfVic.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,TosRfVic.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,TosRfVic.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,TosRfVic.I.Topo
+
+[TosRfVic.I.Wave]
+AddReg=TosRfVic.I.Wave.AddReg
+
+[TosRfVic.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%TosRfVic.Wave.szPname%
+
+[TosRfVic.I.Topo]
+AddReg=TosRfVic.I.Topo.AddReg
+
+[TosRfVic.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%TosRfVic.Topo.szPname%
+
+[TosRfVic.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,tosrfsnd.sys
+HKR,,NTMPDriver,,"tosrfsnd.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%TosRfVic.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%TosRfVic_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%TosRfVic.DeviceDesc%
+
+HKLM,%MediaCategories%\%ComponentId.NameGuid%,Name,,%ComponentId.Name%
+
+;======================================================
+; TosRfSnd
+;======================================================
+[TosRfSnd]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+;AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=TosRfSnd.CopyList
+AddReg=TosRfSnd.AddReg
+
+[TosRfSnd.CopyList]
+TosRfSnd.sys,,,2
+;;TosRfSnd.sys,,,0x100
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+[TosRfSnd.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,TosRfSnd.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,TosRfSnd.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,TosRfSnd.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,TosRfSnd.I.Topo
+
+[TosRfSnd.I.Wave]
+AddReg=TosRfSnd.I.Wave.AddReg
+
+[TosRfSnd.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%TosRfSnd.Wave.szPname%
+
+[TosRfSnd.I.Topo]
+AddReg=TosRfSnd.I.Topo.AddReg
+
+[TosRfSnd.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%TosRfSnd.Topo.szPname%
+
+[TosRfSnd.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,TosRfSnd.sys
+HKR,,NTMPDriver,,"TosRfSnd.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%TosRfSnd.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%TosRfSnd_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%TosRfSnd.DeviceDesc%
+
+;======================================================
+; Set this as a preferred audio device.
+; 3 => OR of FLG_ADDREG_BINVALUETYPE and FLG_ADDREG_NOCLOBBER
+; 01,00,00,00 => enable the directive.
+;======================================================
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+
+HKLM,%MediaCategories%\%ComponentId.NameGuid%,Name,,%ComponentId.Name%
+
+;======================================================
+; Services
+;======================================================
+[TosRfVic.Services]
+AddService=TosRfSnd,0x00000002,TosRfSnd_Service_Inst
+
+[TosRfSnd.Services]
+AddService=TosRfSnd,0x00000002,TosRfSnd_Service_Inst
+
+[TosRfSnd_Service_Inst]
+DisplayName=%TosRfSnd.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\tosrfsnd.sys
+
+
+;======================================================
+; Strings
+;======================================================
+[Strings]
+TSB="TOSHIBA"
+MfgName="Bluetooth Audio"
+
+TosRfSnd.DeviceDesc="Bluetooth Audio Device"
+TosRfSnd.Wave.szPname="Bluetooth Wave"
+TosRfSnd.Topo.szPname="Bluetooth Topology"
+TosRfSnd_MIDI="TosRfSnd -> WDM Midi Device"
+
+TosRfVic.DeviceDesc="Bluetooth Voice Device"
+TosRfVic.Wave.szPname="Bluetooth Wave(Voice)"
+TosRfVic.Topo.szPname="Bluetooth Topology(Voice)"
+TosRfVic_MIDI="TosRfSnd(Voice) -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+TosRfSnd.SvcDesc="Bluetooth Audio"
+StdMfg="TOSHIBA"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+ComponentId.NameGuid="{78EF23E9-EE2F-4A1D-897D-30ABD5F11AE1}"
+ComponentId.Name="Bluetooth Audio Windows DDK Driver"
+;EOF

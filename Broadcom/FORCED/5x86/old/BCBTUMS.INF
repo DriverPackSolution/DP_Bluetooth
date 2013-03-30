@@ -1,0 +1,70 @@
+; Broadcom INF for Microsoft Windows Bluetooth Driver
+; Copyright (c) 2004 Broadcom Corporation
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Bluetooth
+ClassGuid={e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider="Broadcom"
+DriverVer=02/24/2004, 5.1.2535.0
+CatalogFile=Bcbtums.CAT
+ 
+[ControlFlags]
+ExcludeFromSelect = "USB\VID_03F0&PID_011D"     ; HP	
+ExcludeFromSelect = "USB\VID_03F0&PID_0C24"
+
+ExcludeFromSelect = "USB\VID_047D&PID_105D"     ; Kensington PocketMouse Bluetooth
+
+ExcludeFromSelect = "USB\Vid_0A5C&Pid_2009"     ; Broadcom	
+ExcludeFromSelect = "USB\Vid_0A5C&Pid_200A"     ;
+ExcludeFromSelect = "USB\Vid_0A5C&Pid_200F"     ;
+ExcludeFromSelect = "USB\Vid_0A5c&Pid_2020"     ; Broadcom Bluetooth Dongle
+ExcludeFromSelect = "USB\Vid_0A5C&Pid_201E"	; 
+ExcludeFromSelect = "USB\Vid_0A5C&Pid_2110"	; IBM ThinkPad Enhanced Bluetooth
+
+ExcludeFromSelect = "USB\Vid_413c&Pid_8501"     ; Dell
+
+
+[Manufacturer]
+Broadcom=Broadcom
+
+[Broadcom]
+%BtUsbHpMdl.DeviceDesc%   =BCBTUsbDriverInstallXP, USB\VID_03F0&PID_011D    ; HP Bluetooth Module
+%BtUsbHpDgl.DeviceDesc%   =BCBTUsbDriverInstallXP, USB\VID_03F0&PID_0C24    ; HP Bluetooth Dongle
+
+%BtUsbKstn.DeviceDesc%    =BCBTUsbDriverInstallXP, USB\VID_047D&PID_105D    ; Kensington PocketMouse Bluetooth
+
+%BtUsbBrcm.DeviceDesc%    =BCBTUsbDriverInstallXP, USB\Vid_0A5C&Pid_2009    ; Broadcom Bluetooth Controller
+%BtUsbBrcm.DeviceDesc%    =BCBTUsbDriverInstallXP, USB\Vid_0A5C&Pid_200A    ; Broadcom Bluetooth Controller
+%BtUsbBrcm.DeviceDesc%    =BCBTUsbDriverInstallXP, USB\Vid_0A5c&Pid_200F    ; Broadcom Bluetooth Controller
+%BtUsbBrcmDgl.DeviceDesc% =BCBTUsbDriverInstallXP, USB\Vid_0A5c&Pid_2020    ; Broadcom Bluetooth Dongle
+%BtUsbBrcmMd.DeviceDesc%  =BCBTUsbDriverInstallXP, USB\Vid_0A5C&Pid_201E    ; Broadcom/IBM Bluetooth module
+%BtUsbIBM.DeviceDesc%     =BCBTUsbDriverInstallXP, USB\Vid_0A5C&Pid_2110    ; IBM ThinkPad Enhanced Bluetooth
+
+%BtUsbDell.DeviceDesc%    =BCBTUsbDriverInstallXP, USB\Vid_413c&Pid_8501    ; Dell Bluetooth USB Adapter
+ 
+[BCBTUsbDriverInstallXP.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[BCBTUsbDriverInstallXP.NT.HW]
+Needs=BthUsb.NT.HW
+
+[BCBTUsbDriverInstallXP.NT.Services]
+needs=BthUsb.NT.Services
+
+[Strings]
+Broadcom="Broadcom Corporation"
+
+BtUsbBrcm.DeviceDesc    ="Broadcom Bluetooth Controller"
+BtUsbBrcmDgl.DeviceDesc ="Broadcom Bluetooth Dongle"
+BtUsbBrcmMd.DeviceDesc  ="IBM Integrated Bluetooth IV"
+
+BtUsbDell.DeviceDesc    ="Dell Bluetooth USB Adapter"
+
+BtUsbHpMdl.DeviceDesc   ="HP Bluetooth Module"
+BtUsbHpDgl.DeviceDesc   ="HP Bluetooth Dongle"
+
+BtUsbIBM.DeviceDesc     ="ThinkPad Bluetooth with Enhanced Data Rate"
+
+BtUsbKstn.DeviceDesc    ="Kensington PocketMouse Bluetooth"

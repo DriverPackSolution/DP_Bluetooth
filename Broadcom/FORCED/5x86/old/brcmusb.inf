@@ -1,0 +1,99 @@
+;************************************************
+;
+; BRCMUSB.INF
+;
+; Installation file for Broadcom Blutonium
+; Bluetooth USB driver
+;
+; (c) 2001, 2002 Broadcom Corporation
+; All Rights Reserved
+;
+; Author: RWH
+;
+;************************************************
+
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+Compatible=1
+provider=%Broadcom%
+DriverVer=17/11/2002,3.3.6.0
+
+[ControlFlags]
+ExcludeFromSelect = USB\VID_0A5C&PID_2033
+ExcludeFromSelect = USB\VID_0A5C&PID_2038
+
+[Manufacturer]
+%Broadcom%=Broadcom
+
+[Broadcom]
+; Initial boot-up
+%USB\VID_0A5C&PID_2033.DeviceDesc%=BCBTHUB.Dev, USB\VID_0A5C&PID_2033
+%USB\VID_0A5C&PID_2038.DeviceDesc%=BCBTHUB.Dev, USB\VID_0A5C&PID_2038
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[SourceDisksNames]
+;
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+; "unused" is really used by 98 as the disk serial number
+; and it apparently MUST be 0000-0000 to get it to work
+; with an arbitrary serial number
+;
+1 = %BtInstallDisk%,,0000-0000
+ 
+[SourceDisksFiles]
+;
+; filename_on_source = diskID[, [subdir][, size]]
+;
+bcbthub.sys = 1,,
+
+[DestinationDirs]
+BCBTUSB.CopyFiles = 10,System32\Drivers
+DefaultDestDir = 10,System32\Drivers
+
+[BCBTHUB.Dev]
+AddReg=BCBTHUB.AddReg.9x,BCBTHUB.Svc.AddReg
+CopyFiles=BCBTHUB.CopyFiles
+
+[BCBTHUB.Dev.NT]
+CopyFiles=BCBTHUB.CopyFiles
+
+[BCBTHUB.AddReg.9x]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,bcbthub.sys
+
+[BCBTHUB.Dev.NT.Services]
+Addservice = bcbthub,2,BCBTHUB.AddService
+
+[BCBTHUB.AddService]
+DisplayName    = %BCBTHUB.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\bcbthub.sys
+LoadOrderGroup = Base
+AddReg=BCBTHUB.Svc.AddReg
+
+[BCBTHUB.Svc.AddReg]
+HKLM,%Param%,"InternalFw",3,0x01
+HKLM,%Param%,"Pid",3,0x1D,0x20
+; Pool of BdAddrs for EEPROM-less devices
+HKLM,%Param%,BdAddr0,3,0x00,0x01,0xA4,0xEE,0x11,0x11
+
+
+
+[BCBTHUB.CopyFiles]
+;bcbthub.sys,,,0x60
+
+;---------------------------------------------------------------;
+
+[Strings]
+Broadcom="Broadcom"
+Param="System\CurrentControlSet\Services\BCBTHUB\Parameters"
+USB\VID_0A5C&PID_2033.DeviceDesc="Bluetooth USB Device Firmware Downloader"
+USB\VID_0A5C&PID_2038.DeviceDesc="Bluetooth USB Device Firmware Downloader"
+BCBTHUB.SvcDesc="Bluetooth Composite Device Driver"
+BtInstallDisk="Bluetooth Blutonium Install Disk"

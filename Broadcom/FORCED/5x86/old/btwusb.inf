@@ -1,0 +1,1807 @@
+;
+; WIDCOMM Bluetooth USB Device Installation Script
+; for Windows 2000 and XP
+;
+; Copyright (c) 2000-2004, WIDCOMM Inc.
+;
+
+[Version]
+signature="$WINDOWS NT$"
+Class=BTW
+ClassGUID={95C7A0A0-3094-11D7-A202-00508B9D7D5A}
+Provider=%V_WIDCOMM%
+CatalogFile=btwusb.cat
+DriverVer=01/11/2006,5.0.1.1500
+
+
+[ControlFlags]
+ExcludeFromSelect=USB\VID_07B8&PID_B02D
+ExcludeFromSelect=USB\VID_07B8&PID_B02E
+ExcludeFromSelect=USB\VID_07B8&PID_B02C
+ExcludeFromSelect=USB\VID_0A5C&PID_2111
+ExcludeFromSelect=USB\VID_0A5C&PID_2102
+ExcludeFromSelect=USB\VID_07B8&PID_B02B
+ExcludeFromSelect=USB\VID_2001&PID_F118
+ExcludeFromSelect=USB\VID_2001&PID_F117
+ExcludeFromSelect=USB\VID_2001&PID_F116
+ExcludeFromSelect=USB\VID_2001&PID_F111
+ExcludeFromSelect=USB\VID_047D&PID_105E
+ExcludeFromSelect=USB\VID_174B&PID_0001
+ExcludeFromSelect=USB\VID_3574&PID_21F6
+ExcludeFromSelect=USB\VID_3574&PID_21F4
+ExcludeFromSelect=USB\VID_13B1&PID_0019
+ExcludeFromSelect = USB\VID_044e&PID_3001
+ExcludeFromSelect = USB\VID_049F&PID_0027
+ExcludeFromSelect = USB\VID_04BF&PID_0309
+ExcludeFromSelect = USB\VID_04BF&PID_030A
+ExcludeFromSelect = USB\VID_04BF&PID_0310
+ExcludeFromSelect = USB\VID_0A12&PID_0001
+ExcludeFromSelect = USB\VID_0BDB&PID_1002  
+ExcludeFromSelect = USB\VID_0BDB&PID_1000
+ExcludeFromSelect = USB\VID_08EA&PID_ABBA
+ExcludeFromSelect = USB\VID_0A5C&PID_200A
+ExcludeFromSelect = USB\VID_0A5C&PID_2009
+ExcludeFromSelect = USB\VID_0A5C&PID_2045
+ExcludeFromSelect = USB\VID_0A5C&PID_2110
+ExcludeFromSelect = USB\VID_0A5C&PID_2100
+ExcludeFromSelect = USB\VID_0A5C&PID_2101
+ExcludeFromSelect = USB\VID_0C10&PID_0000
+ExcludeFromSelect = USB\VID_0B7A&PID_07D0
+ExcludeFromSelect = USB\VID_055D&PID_0BB1
+ExcludeFromSelect = USB\VID_413C&PID_8000
+ExcludeFromSelect = USB\VID_1668&PID_0441
+ExcludeFromSelect = USB\VID_0F4D&PID_1000  
+ExcludeFromSelect = USB\VID_0DB0&PID_1967
+ExcludeFromSelect = USB\VID_0DB0&PID_6970
+ExcludeFromSelect = USB\VID_0DB0&PID_697A
+ExcludeFromSelect = USB\VID_0DB0&PID_6855
+ExcludeFromSelect = USB\VID_04BF&PID_0319
+ExcludeFromSelect = USB\VID_04BF&PID_0317  
+ExcludeFromSelect = USB\VID_04BF&PID_0318
+ExcludeFromSelect = USB\VID_04BF&PID_0320
+ExcludeFromSelect = USB\VID_045E&PID_007E
+ExcludeFromSelect = USB\VID_0400&PID_0807
+ExcludeFromSelect = USB\VID_0483&PID_5000
+ExcludeFromSelect = USB\VID_0451&PID_1234
+ExcludeFromSelect = USB\VID_0451&PID_ffff
+ExcludeFromSelect = USB\VID_044e&PID_2014
+ExcludeFromSelect = USB\VID_0D9A&PID_0001
+ExcludeFromSelect = USB\VID_049F&PID_0086
+ExcludeFromSelect = USB\VID_046D&PID_C707
+ExcludeFromSelect = USB\VID_046D&PID_C708
+ExcludeFromSelect = USB\VID_046D&PID_C709
+ExcludeFromSelect = USB\VID_046D&PID_C70D
+ExcludeFromSelect = USB\VID_1668&PID_2441
+ExcludeFromSelect = USB\VID_0FD1&PID_0001
+ExcludeFromSelect = USB\VID_050D&PID_0083
+ExcludeFromSelect = USB\VID_04AD&PID_2501
+ExcludeFromSelect = USB\VID_0547&PID_0001
+ExcludeFromSelect = USB\VID_0471&PID_0809
+ExcludeFromSelect = USB\VID_11D9&PID_2600
+ExcludeFromSelect = USB\VID_413C&PID_8501
+ExcludeFromSelect = USB\VID_413C&PID_8110
+ExcludeFromSelect = USB\VID_05B1&PID_1389
+ExcludeFromSelect = USB\VID_03F0&PID_011D
+ExcludeFromSelect = USB\VID_03F0&PID_0624
+ExcludeFromSelect = USB\VID_03F0&PID_171D
+ExcludeFromSelect = USB\VID_03F0&PID_D104
+ExcludeFromSelect = USB\VID_1131&PID_1001
+ExcludeFromSelect = USB\VID_1310&PID_0001
+ExcludeFromSelect = USB\VID_1310&PID_0002
+ExcludeFromSelect = USB\VID_0BF8&PID_1003
+ExcludeFromSelect = USB\VID_4851&PID_1103
+ExcludeFromSelect = USB\VID_1668&PID_0500
+ExcludeFromSelect = USB\VID_0C24&PID_0001
+ExcludeFromSelect = USB\VID_04E8&PID_7021
+ExcludeFromSelect = USB\VID_148D&PID_2430
+ExcludeFromSelect = USB\VID_413C&PID_8103
+ExcludeFromSelect = USB\VID_0C24&PID_0002
+ExcludeFromSelect = USB\VID_0A5C&PID_201E
+ExcludeFromSelect = USB\VID_0A5C&PID_2020
+ExcludeFromSelect = USB\VID_2001&PID_F111
+ExcludeFromSelect = USB\VID_041E&PID_5015
+ExcludeFromSelect = USB\VID_047D&PID_105D
+ExcludeFromSelect = USB\VID_0D62&PID_2026
+ExcludeFromSelect = USB\VID_22B8&PID_0850
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+btwusb.sys = 1
+frmupgr.sys = 1
+btw_ci.dll = 1
+
+[ClassInstall32]
+AddReg=BTW.NT.AddReg
+CopyFiles=BTW.NT.CopyFiles
+
+[BTW.NT.AddReg]
+HKR,,,0,%BTWClassName%
+HKR,,Icon,,100
+HKR,,Installer32,,"btw_ci.dll,BTWClassInstaller"
+
+[BTW.NT.CopyFiles]
+btw_ci.dll
+
+[Manufacturer]
+%V_WIDCOMM%=WIDCOMM,NTx86.5.1
+
+;
+; WinXP or newer specific sections
+;
+[WIDCOMM.NTx86.5.1]
+%ABOCOMDFU.DeviceDesc%=DFUBTUSB,  USB\VID_07B8&PID_B02D
+%ABOCOMDFU.DeviceDesc%=DFUBTUSB,  USB\VID_07B8&PID_B02E
+%ABOCOM.DeviceDesc%=SUSPENDUSB,  USB\VID_07B8&PID_B02C
+%BRCMANYCOMUHE.DeviceDesc%=BRSMARTUSB,  USB\VID_0A5C&PID_2111
+%BRCMANYCOM.DeviceDesc%=SUSPENDUSB,  USB\VID_0A5C&PID_2102
+%ABOCOM.DeviceDesc%=SUSPENDUSB,  USB\VID_07B8&PID_B02B
+%FORMOSA4.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F118
+%FORMOSA3.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F117
+%FORMOSA2.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F116
+%FORMOSA1.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F111
+%KENSINGTONEDR.DeviceDesc%=BRSMARTUSB,  USB\VID_047D&PID_105E
+%BARCODA.DeviceDesc%=SUSPENDUSB,  USB\VID_174B&PID_0001
+%SITECOM.DeviceDesc%=SUSPENDUSB,  USB\VID_3574&PID_21F6
+%SITECOM.DeviceDesc%=SUSPENDUSB,  USB\VID_3574&PID_21F4
+%LINKSYS.DeviceDesc%=SUSPENDUSB,  USB\VID_13B1&PID_0019
+%ALPS.DeviceDesc%=BTWUSB,     USB\VID_044e&PID_3001  ; ALPS based VID&PID
+%COMPAQ.DeviceDesc%=BTWUSB,   USB\VID_049F&PID_0027  ; COMPAQ CSR based VID&PID
+%IBM.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_030A  ; IBM CSR based VID&PID
+%TDK.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0309  ; TDK CSR based VID&PID
+%IBMBDC.DeviceDesc%=BTWUSB,   USB\VID_04BF&PID_0310  ; IBM BDC CSR based VID&PID
+%TDK.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0319  ; TDK USB ADAPTER
+%TDK.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0320  ; TDK CSR BC2 based VID&PID
+%IBM.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0317  ; ULTRAPORT
+%IBMBDC.DeviceDesc%=BTWUSB,   USB\VID_04BF&PID_0318  ; BDC
+%ERICMN.DeviceDesc%=BTWUSB,   USB\VID_0BDB&PID_1000  ; Ericsson Business Mobile Networks BV VID&PID
+%ERICMP.DeviceDesc%=BTWUSB,   USB\VID_0BDB&PID_1002  ; Ericsson Multipoint VID&PID
+%CSR.DeviceDesc%=BTWUSB,      USB\VID_0A12&PID_0001  ; CSR VID&PID
+%ERICSSONUSB.DeviceDesc%=BTWUSB, USB\VID_08EA&PID_ABBA  ; Ericsson VID&PID
+%BROADCOM.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_200A ; Broadcom VID&PID
+%BROADCOM.DeviceDesc%=BRSMARTUSB, USB\VID_0A5C&PID_2009 ; Broadcom VID&PID Smart dongle
+%BROADIBM.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_201E ; Broadcom-IBM VID&PID Smart dongle
+%BROADCOM.DeviceDesc%=BRSMARTUSB, USB\VID_0A5C&PID_2020 ; Broadcom VID&PID Unified UHE
+%BROADCOM.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_2045 ; Broadcom 2045 VID&PID
+%BROADIBMEDR.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_2110 ; Broadcom IBM VID&PID
+%BRCM2045UHE.DeviceDesc%=BRSMARTUSB, USB\VID_0A5C&PID_2100 ; Broadcom 2045 VID&PID, UHE
+%BRCM2045.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_2101 ; Broadcom 2045 VID&PID, non UHE
+%SAMSUNG.DeviceDesc%=BTWUSB,  USB\VID_055D&PID_0BB1  ; SAMSUNG BC02 external
+%SIWAVE.DeviceDesc%=BTWUSB,   USB\VID_0C10&PID_0000  ; Silicon Wave VID&PID
+%SIWAVE.DeviceDesc%=BTWUSB,   USB\VID_05B1&PID_1389  ; Silicon Wave VID&PID
+%ZEEVO.DeviceDesc%=BTWUSB,    USB\VID_0B7A&PID_07D0  ; Zeevo VID&PID
+%DELL.DeviceDesc%=SUSPENDUSB,    USB\VID_413C&PID_8000  ; Dell BC02 VID&PID
+%IBMBM.DeviceDesc%=BTWUSB,    USB\VID_1668&PID_0441  ; IBM integrated BT Modem VID&PID
+%IBMBM3.DeviceDesc%=SUSPENDUSB, USB\VID_1668&PID_2441  ; IBM Integrated Bluetooth III VID&PID
+%MICROTUNE.DeviceDesc%=BTWUSB, USB\VID_0F4D&PID_1000 ; Microtune USB Bluetooth Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_1967  ; MSI USB Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_6970  ; MSI USB Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_697A  ; MSI USB Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_6855 ; MSI USB Device VID&PID
+%MSFT.DeviceDesc%=BTWUSB,     USB\VID_045E&PID_007E  ; Microsoft
+%NSCEVAL.DeviceDesc%=BTWUSB,  USB\VID_0400&PID_0807  ; National Semi Bluetooth board
+%STM.DeviceDesc%=WDSMARTUSB,      USB\VID_0483&PID_5000  ; STM VID&PID
+%TI.DeviceDesc%=WDSMARTUSB,       USB\VID_0451&PID_1234  ; TI VID&PID
+%TI.DeviceDesc%=BTWUSB,       USB\VID_0451&PID_ffff  ; TI VID&PID
+%SONY.DeviceDesc%=BTWUSB,     USB\VID_044e&PID_2014  ; SONY VID&PID
+%FORMOSA.DeviceDesc%=BTWUSB,  USB\VID_0D9A&PID_0001  ; FORMOSA VID&PID
+%FORMOSA.DeviceDesc%=BTWUSB,  USB\VID_4851&PID_1103  ; FORMOSA VID&PID
+%BLUETHUMB.DeviceDesc%=SUSP1USB, USB\VID_049F&PID_0086 ; BLUETHUMB USB Device VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C707  ; LOGITECH VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C708  ; LOGITECH VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C709  ; LOGITECH VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C70D  ; LOGITECH VID&PID
+%GIANT.DeviceDesc%=BTWUSB,    USB\VID_0FD1&PID_0001  ; Giant VID&PID
+%BELKIN.DeviceDesc%=SUSPENDUSB,  USB\VID_050D&PID_0083
+%PANASONIC.DeviceDesc%=BTWUSB,	USB\VID_04AD&PID_2501 ; Panasoic VId&PID
+%ICSI.DeviceDesc%=BTWUSB,      USB\VID_0547&PID_0001 ; ICSI USB Device VID&PID
+%PHILIPS.DeviceDesc%=BTWUSB,  USB\VID_0471&PID_0809  ; Philips BluePearl VID&PID
+%ITRONIX.DeviceDesc%=BTWUSB,	USB\VID_11D9&PID_2600 ; Itronix Bluetooth Device VId&PID
+%DELLELWOOD.DeviceDesc%=BRSMARTUSB,	USB\VID_413C&PID_8501 ; Dell Elwood VId&PID
+%BROADCOMHP.DeviceDesc%=SUSP1USB,	USB\VID_03F0&PID_011D ; BROADCOM VId&PID for Hp
+%BROADCOM2045HP.DeviceDesc%=SUSP1USB,	USB\VID_03F0&PID_171D ; BROADCOM VId&PID for Hp
+%BRCMHPPRINT.DeviceDesc%=SUSPENDUSB,	USB\VID_03F0&PID_D104 ; BROADCOM VId&PID for Hp
+%BCHPTransceiver.DeviceDesc%=BRSMARTUSB, USB\VID_03F0&PID_0624 ; BROADCOM VId&PID for Hp
+%ISSC.DeviceDesc%=BTWUSB, 	USB\VID_1131&PID_1001 ; ISSC USB Device Vid&PID
+%AIR2U.DeviceDesc%=BTWUSB, 	USB\VID_1310&PID_0001 ; Air2U Device Vid&Pid
+%AIR2UBRCM.DeviceDesc%=SUSPENDUSB,  USB\VID_1310&PID_0002 ; Air2U(BCM) Device Vid&Pid
+%FCS.DeviceDesc%=BTWUSB, 	USB\VID_0BF8&PID_1003 ; Fujitsu Siemens Vid&Pid
+%ACTIONTEC.DeviceDesc%=BTWUSB,  USB\VID_1668&PID_0500 ; Actiontec USB Bluetooth Device BTM200
+%TAIYOYUDEN.DeviceDesc%=BTWUSB, USB\VID_0C24&PID_0001 ; TAIYO YUDEN USB Device VID&PID 
+%TAIYOYUDEN2.DeviceDesc%=BTWUSB, USB\VID_0C24&PID_0002 ; TAIYO YUDEN USB Device VID&PID 
+%SAMSUNGTY.DeviceDesc%=BTWUSB, 	USB\VID_04E8&PID_7021 ; Samsung TY USB Device VID&PID
+%MICROLINK.DeviceDesc%=BTWUSB, 	USB\VID_148D&PID_2430 ; MICROLINK USB Device VID&PID
+%DELLU2.DeviceDesc%=SUSPENDUSB, USB\VID_413C&PID_8103 ; DELL\CSR's U2 module VID&PID
+%DELLPHISH.DeviceDesc%=SUSPENDUSB, USB\VID_413C&PID_8110 ; DELL PHISH module VID&PID
+%TECOM.DeviceDesc%=SUSPENDUSB,  	USB\VID_041E&PID_5015 ; TECOM USB PID&VID
+%KENSINGTON.DeviceDesc%=BRSMARTUSB,	USB\VID_047D&PID_105D ; Kensington USB PID&VID
+%TECOM.DeviceDesc%=BRSMARTUSB,  	USB\VID_0D62&PID_2026 ; TECOM Darfon USB PID&VID
+%BRCMMOTO.DeviceDesc%=SUSPENDUSB,  USB\VID_22B8&PID_0850
+
+;
+; Win2k specific sections
+;
+[WIDCOMM]
+%ABOCOMDFU.DeviceDesc%=DFUBTUSB,  USB\VID_07B8&PID_B02D
+%ABOCOMDFU.DeviceDesc%=DFUBTUSB,  USB\VID_07B8&PID_B02E
+%ABOCOM.DeviceDesc%=SUSPENDUSB,  USB\VID_07B8&PID_B02C
+%BRCMANYCOMUHE.DeviceDesc%=BRSMARTUSB,  USB\VID_0A5C&PID_2111
+%BRCMANYCOM.DeviceDesc%=SUSPENDUSB,  USB\VID_0A5C&PID_2102
+%ABOCOM.DeviceDesc%=SUSPENDUSB,  USB\VID_07B8&PID_B02B
+%FORMOSA4.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F118
+%FORMOSA3.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F117
+%FORMOSA2.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F116
+%FORMOSA1.DeviceDesc%=SUSPENDUSB,  USB\VID_2001&PID_F111
+%KENSINGTONEDR.DeviceDesc%=BRSMARTUSB,  USB\VID_047D&PID_105E
+%BARCODA.DeviceDesc%=SUSPENDUSB,  USB\VID_174B&PID_0001
+%SITECOM.DeviceDesc%=SUSPENDUSB,  USB\VID_3574&PID_21F6
+%SITECOM.DeviceDesc%=SUSPENDUSB,  USB\VID_3574&PID_21F4
+%LINKSYS.DeviceDesc%=SUSPENDUSB,  USB\VID_13B1&PID_0019
+%ALPS.DeviceDesc%=BTWUSB,     USB\VID_044e&PID_3001  ; ALPS based VID&PID
+%COMPAQ.DeviceDesc%=BTWUSB,   USB\VID_049F&PID_0027  ; COMPAQ CSR based VID&PID
+%IBM.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_030A  ; IBM CSR based VID&PID
+%TDK.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0309  ; TDK CSR based VID&PID
+%IBMBDC.DeviceDesc%=BTWUSB,   USB\VID_04BF&PID_0310  ; IBM BDC CSR based VID&PID
+%TDK.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0319  ; TDK USB ADAPTER
+%TDK.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0320  ; TDK CSR BC2 based VID&PID
+%IBM.DeviceDesc%=BTWUSB,      USB\VID_04BF&PID_0317  ; ULTRAPORT
+%IBMBDC.DeviceDesc%=BTWUSB,   USB\VID_04BF&PID_0318  ; BDC
+%ERICMN.DeviceDesc%=BTWUSB,   USB\VID_0BDB&PID_1000  ; Ericsson Business Mobile Networks BV VID&PID
+%ERICMP.DeviceDesc%=BTWUSB,   USB\VID_0BDB&PID_1002  ; Ericsson Multipoint VID&PID
+%CSR.DeviceDesc%=BTWUSB,      USB\VID_0A12&PID_0001  ; CSR VID&PID
+%ERICSSONUSB.DeviceDesc%=BTWUSB, USB\VID_08EA&PID_ABBA  ; Ericsson VID&PID
+%BROADCOM.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_200A ; Broadcom VID&PID
+%BROADCOM.DeviceDesc%=BRSMARTUSB, USB\VID_0A5C&PID_2009 ; Broadcom VID&PID Smart dongle
+%BROADIBM.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_201E ; Broadcom-IBM VID&PID Smart dongle
+%BROADCOM.DeviceDesc%=BRSMARTUSB, USB\VID_0A5C&PID_2020 ; Broadcom VID&PID Unified UHE
+%BROADCOM.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_2045 ; Broadcom 2045 VID&PID
+%BROADIBMEDR.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_2110 ; Broadcom IBM VID&PID
+%BRCM2045UHE.DeviceDesc%=BRSMARTUSB, USB\VID_0A5C&PID_2100 ; Broadcom 2045 VID&PID, UHE
+%BRCM2045.DeviceDesc%=SUSPENDUSB, USB\VID_0A5C&PID_2101 ; Broadcom 2045 VID&PID, non UHE
+%SAMSUNG.DeviceDesc%=BTWUSB,  USB\VID_055D&PID_0BB1  ; SAMSUNG BC02 external
+%SIWAVE.DeviceDesc%=BTWUSB,   USB\VID_0C10&PID_0000  ; Silicon Wave VID&PID
+%SIWAVE.DeviceDesc%=BTWUSB,   USB\VID_05B1&PID_1389  ; Silicon Wave VID&PID
+%ZEEVO.DeviceDesc%=BTWUSB,    USB\VID_0B7A&PID_07D0  ; Zeevo VID&PID
+%DELL.DeviceDesc%=SUSPENDUSB,    USB\VID_413C&PID_8000  ; Dell BC02 VID&PID
+%IBMBM.DeviceDesc%=BTWUSB,    USB\VID_1668&PID_0441  ; IBM integrated BT Modem VID&PID
+%IBMBM3.DeviceDesc%=BROADUSB, USB\VID_1668&PID_2441  ; IBM Integrated Bluetooth III VID&PID
+%MICROTUNE.DeviceDesc%=BTWUSB, USB\VID_0F4D&PID_1000 ; Microtune USB Bluetooth Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_1967  ; MSI USB Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_6970  ; MSI USB Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_697A  ; MSI USB Device VID&PID
+%MSI.DeviceDesc%=BTWUSB,      USB\VID_0DB0&PID_6855  ; MSI USB Device VID&PID
+%MSFT.DeviceDesc%=BTWUSB,     USB\VID_045E&PID_007E  ; Microsoft
+%NSCEVAL.DeviceDesc%=BTWUSB,  USB\VID_0400&PID_0807  ; National Semi Bluetooth board
+%STM.DeviceDesc%=WDSMARTUSB,      USB\VID_0483&PID_5000  ; STM VID&PID
+%TI.DeviceDesc%=WDSMARTUSB,       USB\VID_0451&PID_1234  ; TI VID&PID
+%TI.DeviceDesc%=BTWUSB,       USB\VID_0451&PID_ffff  ; TI VID&PID
+%SONY.DeviceDesc%=BTWUSB,     USB\VID_044e&PID_2014  ; SONY VID&PID
+%FORMOSA.DeviceDesc%=BTWUSB,  USB\VID_0D9A&PID_0001  ; FORMOSA VID&PID
+%FORMOSA.DeviceDesc%=BTWUSB,  USB\VID_4851&PID_1103  ; FORMOSA VID&PID
+%BLUETHUMB.DeviceDesc%=SUSP1USB, USB\VID_049F&PID_0086 ; BLUETHUMB USB Device VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C707  ; LOGITECH VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C708  ; LOGITECH VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C709  ; LOGITECH VID&PID
+%LOGITECH.DeviceDesc%=BTWUSB,  USB\VID_046D&PID_C70D  ; LOGITECH VID&PID
+%GIANT.DeviceDesc%=BTWUSB,    USB\VID_0FD1&PID_0001  ; Giant VID&PID
+%BELKIN.DeviceDesc%=SUSPENDUSB,  USB\VID_050D&PID_0083
+%PANASONIC.DeviceDesc%=BTWUSB,	USB\VID_04AD&PID_2501 ; Panasoic VId&PID
+%ICSI.DeviceDesc%=BTWUSB,      USB\VID_0547&PID_0001 ; ICSI USB Device VID&PID
+%PHILIPS.DeviceDesc%=BTWUSB,  USB\VID_0471&PID_0809  ; Philips BluePearl VID&PID
+%ITRONIX.DeviceDesc%=BTWUSB,	USB\VID_11D9&PID_2600 ; Itronix Bluetooth Device VId&PID
+%DELLELWOOD.DeviceDesc%=BRSMARTUSB,	USB\VID_413C&PID_8501 ; Dell Elwood VId&PID
+%BROADCOMHP.DeviceDesc%=SUSP1USB,	USB\VID_03F0&PID_011D ; BROADCOM VId&PID for Hp
+%BROADCOM2045HP.DeviceDesc%=SUSP1USB,	USB\VID_03F0&PID_171D ; BROADCOM VId&PID for Hp
+%BRCMHPPRINT.DeviceDesc%=SUSPENDUSB,	USB\VID_03F0&PID_D104 ; BROADCOM VId&PID for Hp
+%BCHPTransceiver.DeviceDesc%=BRSMARTUSB, USB\VID_03F0&PID_0624 ; BROADCOM VId&PID for Hp
+%ISSC.DeviceDesc%=BTWUSB, 	USB\VID_1131&PID_1001 ; ISSC USB Device Vid&PID
+%AIR2U.DeviceDesc%=BTWUSB, 	USB\VID_1310&PID_0001 ; Air2U Device Vid&Pid
+%AIR2UBRCM.DeviceDesc%=SUSPENDUSB,  USB\VID_1310&PID_0002 ; Air2U(BCM) Device Vid&Pid
+%FCS.DeviceDesc%=BTWUSB, 	USB\VID_0BF8&PID_1003 ; Fujitsu Siemens Vid&Pid
+%ACTIONTEC.DeviceDesc%=BTWUSB,  USB\VID_1668&PID_0500 ; Actiontec USB Bluetooth Device BTM200
+%TAIYOYUDEN.DeviceDesc%=BTWUSB, USB\VID_0C24&PID_0001 ; TAIYO YUDEN USB Device VID&PID 
+%TAIYOYUDEN2.DeviceDesc%=BTWUSB, USB\VID_0C24&PID_0002 ; TAIYO YUDEN USB Device VID&PID 
+%SAMSUNGTY.DeviceDesc%=BTWUSB, 	USB\VID_04E8&PID_7021 ; Samsung TY USB Device VID&PID
+%MICROLINK.DeviceDesc%=BTWUSB, 	USB\VID_148D&PID_2430 ; Microlink USB Device VID&PID
+%DELLU2.DeviceDesc%=BTWUSB,    USB\VID_413C&PID_8103  ; Dell\CSR's U2 module VID&PID
+%DELLPHISH.DeviceDesc%=SUSPENDUSB, USB\VID_413C&PID_8110 ; DELL PHISH module VID&PID
+%TECOM.DeviceDesc%=SUSPENDUSB,  	USB\VID_041E&PID_5015 ; TECOM USB PID&VID
+%KENSINGTON.DeviceDesc%=BRSMARTUSB,	USB\VID_047D&PID_105D ; Kensington USB PID&VID
+%TECOM.DeviceDesc%=BRSMARTUSB,  	USB\VID_0D62&PID_2026 ; TECOM Darfon USB PID&VID
+%BRCMMOTO.DeviceDesc%=SUSPENDUSB,  USB\VID_22B8&PID_0850
+
+;
+; Special sections for the Broadcom dongle and others
+; with both selective suspend & remote wakeup disabled
+;
+[BROADUSB]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles, BTWUSB.inf.CopyFiles
+
+[BROADUSB.hw]
+AddReg=BROADUSB.hw.reg
+
+[BROADUSB.NT.hw]
+AddReg=BROADUSB.hw.reg
+
+[BROADUSB.NT]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[BROADUSB.NT.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[BROADUSB.hw.reg]
+HKR,,"RemoteWakeupDisabled",0x10001,1
+HKR,,"IdleSuspendEnabled",0x10001,0
+
+[BROADUSB.NTx86.5.1.hw]
+AddReg=BROADUSB.hw.reg
+
+[BROADUSB.NTx86.5.1]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[BROADUSB.NTx86.5.1.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+
+;
+; Special sections for Widcomm Smart Dongle
+;
+[WDSMARTUSB]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles, BTWUSB.inf.CopyFiles
+
+[WDSMARTUSB.hw]
+AddReg=WDSMARTUSB.hw.reg
+
+[WDSMARTUSB.NT.hw]
+AddReg=WDSMARTUSB.hw.reg
+
+[WDSMARTUSB.NT]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[WDSMARTUSB.NT.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[WDSMARTUSB.hw.reg]
+HKR,,"SmartDongleType",0x10001,1
+HKR,,"IdleSuspendEnabled",0x10001,1
+
+[WDSMARTUSB.NTx86.5.1.hw]
+AddReg=WDSMARTUSB.hw.reg
+
+[WDSMARTUSB.NTx86.5.1]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[WDSMARTUSB.NTx86.5.1.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+;
+; Special sections for Broadcom Smart Dongle
+;
+[BRSMARTUSB]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles, BTWUSB.inf.CopyFiles
+
+[BRSMARTUSB.hw]
+AddReg=BRSMARTUSB.hw.reg
+
+[BRSMARTUSB.NT.hw]
+AddReg=BRSMARTUSB.hw.reg
+
+[BRSMARTUSB.NT]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[BRSMARTUSB.NT.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[BRSMARTUSB.hw.reg]
+HKR,,"SmartDongleType",0x10001,2
+HKR,,"RemoteWakeupDisabled",0x10001,0
+HKR,,"IdleSuspendEnabled",0x10001,1
+
+[BRSMARTUSB.NTx86.5.1.hw]
+AddReg=BRSMARTUSB.hw.reg
+
+[BRSMARTUSB.NTx86.5.1]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[BRSMARTUSB.NTx86.5.1.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+;
+; Special sections for the Dell and other 
+; "selectively suspendable" dongles
+;
+[SUSPENDUSB]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles, BTWUSB.inf.CopyFiles
+
+[SUSPENDUSB.hw]
+AddReg=SUSPENDUSB.hw.reg
+
+[SUSPENDUSB.NT.hw]
+AddReg=SUSPENDUSB.hw.reg
+
+[SUSPENDUSB.NT]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[SUSPENDUSB.NT.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[SUSPENDUSB.hw.reg]
+HKR,,"RemoteWakeupDisabled",0x10001,0
+HKR,,"IdleSuspendEnabled",0x10001,1
+
+[SUSPENDUSB.NTx86.5.1.hw]
+AddReg=SUSPENDUSB.hw.reg
+
+[SUSPENDUSB.NTx86.5.1]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[SUSPENDUSB.NTx86.5.1.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+;
+; Special sections for "selectively suspendable"
+; dongles not supporting remote wakeup when the
+; whole machine is suspended
+;
+[SUSP1USB]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles, BTWUSB.inf.CopyFiles
+
+[SUSP1USB.hw]
+AddReg=SUSP1USB.hw.reg
+
+[SUSP1USB.NT.hw]
+AddReg=SUSP1USB.hw.reg
+
+[SUSP1USB.NT]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[SUSP1USB.NT.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[SUSP1USB.hw.reg]
+HKR,,"RemoteWakeupInSuspendDisabled",0x10001,1
+HKR,,"IdleSuspendEnabled",0x10001,1
+
+[SUSP1USB.NTx86.5.1.hw]
+AddReg=SUSP1USB.hw.reg
+
+[SUSP1USB.NTx86.5.1]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[SUSP1USB.NTx86.5.1.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+;
+; Standard sections
+;
+[BTWUSB]
+AddReg=BTWUSB.reg 
+CopyFiles=BTWUSB.CopyFiles, BTWUSB.inf.CopyFiles
+
+[BTWUSB.hw]
+AddReg=BTWUSB.hw.reg
+
+[BTWUSB.NT.hw]
+AddReg=BTWUSB.hw.reg
+
+[BTWUSB.NT]
+AddReg=BTWUSB.reg 
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[BTWUSB.NT.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[BTWUSB.hw.reg]
+HKR,,"IdleSuspendEnabled",0x10001,0
+
+[BTWUSB.NTx86.5.1.hw]
+AddReg=BTWUSB.hw.reg
+
+[BTWUSB.NTx86.5.1]
+AddReg=BTWUSB.reg
+CopyFiles=BTWUSB.CopyFiles.NT, BTWUSB.inf.CopyFiles
+
+[BTWUSB.NTx86.5.1.Services]
+Addservice = BTWUSB, 0x00000002, BTWUSB.AddService
+
+[BTWUSB.AddService]
+DisplayName    = %BTWUSB.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\btwusb.sys
+LoadOrderGroup = Base
+
+[BTWUSB.reg]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,btwusb.sys
+
+[BTWUSB.CopyFiles]
+btwusb.sys
+
+[BTWUSB.CopyFiles.NT]
+btwusb.sys
+
+[BTWUSB.inf.CopyFiles]
+;btwusb.inf
+
+[DestinationDirs]
+DefaultDestDir             =11
+BTWUSB.CopyFiles           =11
+BTWUSB.CopyFiles.NT        =12
+BTWUSB.inf.CopyFiles       =10,INF
+BTW.NT.CopyFiles           =11
+
+[strings]
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth Devices"
+Source_Description="WIDCOMM Installation Media"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0404] ; Chinese Traditional
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="¬≈™ﬁ∏À∏m"
+Source_Description="WIDCOMM ¶w∏À¥C≈È"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0406] ; Danish
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-enheder"
+Source_Description="WIDCOMM-installationsmedie"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0407] ; German
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-Ger‰te"
+Source_Description="WIDCOMM-Installationsmedien"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.040a] ; Spanish
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Dispositivos Bluetooth"
+Source_Description="Medios de instalaciÛn de WIDCOMM"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.040b] ; Finnish
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-laitteet"
+Source_Description="WIDCOMM-asennuslevy"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.040c] ; French
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="PÈriphÈriques Bluetooth"
+Source_Description="Support d'installation WIDCOMM"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0410] ; Italian
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Periferiche Bluetooth"
+Source_Description="Supporto di installazione WIDCOMM"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0411] ; Japanese
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth ÉfÉoÉCÉX"
+Source_Description="WIDCOMM ÉCÉìÉXÉgÅ[Éã ÉÅÉfÉBÉA"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0412] ; Korean
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth ¿Âƒ°"
+Source_Description="WIDCOMM º≥ƒ° πÃµæÓ"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0413] ; Dutch
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-apparaten"
+Source_Description="WIDCOMM-installatiemedia"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0416] ; Brazilian Portuguese
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Dispositivos Bluetooth"
+Source_Description="MÌdia de instalaÁ„o WIDCOMM"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.041d] ; Swedish
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-enheter"
+Source_Description="WIDCOMM-installationsskiva"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0415] ; Polish
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Urzπdzenia Bluetooth"
+Source_Description="Noúnik instalacyjny WIDCOMM"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0419] ; Russian
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="”ÒÚÓÈÒÚ‚‡ Bluetooth"
+Source_Description="ÕÓÒËÚÂÎ¸ ‰Îˇ ÛÒÚ‡ÌÓ‚ÍË WIDCOMM"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0414] ; Norwegian
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-enheter"
+Source_Description="WIDCOMM-installasjonsmedier"
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"
+
+[Strings.0804] ; ChineseSimplified
+ABOCOMDFU.DeviceDesc="Bluetooth dongle firmware upgrade"
+BRCMANYCOMUHE.DeviceDesc="ANYCOM Blue USB-UHE 200/250"
+BRCMANYCOM.DeviceDesc="ANYCOM Blue USB-200/250"
+ABOCOM.DeviceDesc="BCM92045DG-Flash"
+FORMOSA4.DeviceDesc="Formosa 4"
+FORMOSA3.DeviceDesc="Formosa 3"
+FORMOSA2.DeviceDesc="Formosa 2"
+FORMOSA1.DeviceDesc="Formosa 1"
+KENSINGTONEDR.DeviceDesc="Kensington Bluetooth EDR Dongle"
+BARCODA.DeviceDesc="Bluetooth COM One Device"
+SITECOM.DeviceDesc="Sitecom USB Bluetooth Dongle"
+LINKSYS.DeviceDesc="Linksys Bluetooth USB Adapter"
+V_WIDCOMM="Broadcom"
+BTWClassName="¿∂—¿…Ë±∏"
+Source_Description="WIDCOMM ∞≤◊∞ΩÈ÷ "
+ERICSSONUSB.DeviceDesc= "Ericsson USB Bluetooth Device"
+CSR.DeviceDesc= "CSR USB Bluetooth Device"
+BROADCOM.DeviceDesc= "Broadcom USB Bluetooth Device"
+BTWUSB.SvcDesc= "WIDCOMM USB Bluetooth Driver"
+ERICMN.DeviceDesc= " Ericsson BV USB Bluetooth Device"
+ERICMP.DeviceDesc= "Ericsson USB Bluetooth Device 1.2"
+IBM.DeviceDesc= " Bluetooth Ultraport Module from IBM"
+TDK.DeviceDesc= "TDK Bluetooth USB Adaptor"
+IBMBDC.DeviceDesc= "IBM Integrated Bluetooth"
+COMPAQ.DeviceDesc= "Bluetooth Multiport Module by Compaq"
+ALPS.DeviceDesc= "Alps Bluetooth Device"
+ZEEVO.DeviceDesc= "Zeevo Bluetooth Device"
+SIWAVE.DeviceDesc= "Silicon Wave Bluetooth Device"
+SAMSUNG.DeviceDesc="Samsung Bluetooth Device"
+DELL.DeviceDesc="Dell TrueMobile Bluetooth Module"
+DELLU2.DeviceDesc="Dell Wireless 350 Bluetooth Internal Card"
+IBMBM.DeviceDesc="IBM Integrated Bluetooth II"
+IBMBM3.DeviceDesc="IBM Integrated Bluetooth III"
+MICROTUNE.DeviceDesc="Microtune USB Bluetooth Device"
+MSI.DeviceDesc="MSI USB Bluetooth Device"
+MSFT.DeviceDesc="Microsoft Bluetooth Device"
+NSCEVAL.DeviceDesc="National Semiconductor Bluetooth Board"
+STM.DeviceDesc="STMicroeletronics USB Bluetooth Device"
+TI.DeviceDesc="TI Mistral Bluetooth Device"
+SONY.DeviceDesc="Sony Bluetooth Device"
+FORMOSA.DeviceDesc="Formosa Bluetooth Device"
+LOGITECH.DeviceDesc="Bluetooth wireless hub"
+BLUETHUMB.DeviceDesc="Bluetooth by hp"
+GIANT.DeviceDesc="GIANT Bluetooth Device"
+BELKIN.DeviceDesc="Belkin Bluetooth Device"
+PANASONIC.DeviceDesc="Panasonic Bluetooth Device"
+ICSI.DeviceDesc="ICSI Bluetooth USB Device"
+PHILIPS.DeviceDesc="Philips BluePearl Bluetooth USB Device"
+ITRONIX.DeviceDesc="Itronix Bluetooth Device"
+DELLELWOOD.DeviceDesc="Dell Bluetooth USB adapter"
+BROADCOMHP.DeviceDesc="HP integrated module with Bluetooth wireless technology"
+BROADCOM2045HP.DeviceDesc="HP Integrated Module with Bluetooth 2.0 Wireless Technology"
+BRCMHPPRINT.DeviceDesc="HP Bluetooth Wireless Print and PC Adapter"
+BRCM2045UHE.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB-UHE Device"
+BRCM2045.DeviceDesc="Broadcom 2045 Bluetooth 2.0 USB Device"
+ISSC.DeviceDesc="ISSC USB Bluetooth Device"
+AIR2UBRCM.DeviceDesc="Broadcom ROM dongle"
+AIR2U.DeviceDesc="Air2U Bluetooth Device"
+FCS.DeviceDesc="Fujitsu Siemens USB Device"
+ACTIONTEC.DeviceDesc="Actiontec USB Bluetooth Device BTM200"
+SAMSUNGTY.DeviceDesc="Samsung Bluetooth Device"
+TAIYOYUDEN.DeviceDesc="Taiyo Yuden Bluetooth Device"
+TAIYOYUDEN2.DeviceDesc="Taiyo Yuden Bluetooth Device2"
+MICROLINK.DeviceDesc="Microlink-Foxlink Bluetooth Device"
+BCHPTransceiver.DeviceDesc="HP USB BT Transceiver [1.2]"
+BROADIBM.DeviceDesc="ThinkPad Integrated Bluetooth IV"
+BROADIBMEDR.DeviceDesc="ThinkPad Bluetooth with Enhanced Data Rate"
+DELLPHISH.DeviceDesc="Dell Wireless 3xx Bluetooth Internal Card"
+BELKIN.DeviceDesc="Belkin Bluetooth 2.0 USB Adapter"
+TECOM.DeviceDesc="TECOM Bluetooth Device"
+KENSINGTON.DeviceDesc="Kensington Bluetooth Device"
+BRCMMOTO.DeviceDesc="Motorola USB Bluetooth Device"

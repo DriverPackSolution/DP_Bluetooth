@@ -1,0 +1,190 @@
+; TOSDBT.INF
+;
+; TOSHIBA SD Bluetooth Transport install information file.
+;
+; (c) Copyright 2001-2007 Toshiba Corporation
+;
+;
+
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature   = "$Windows NT$"
+Class=SDHost
+ClassGUID={a0a588a4-c46f-4b37-b7ea-c82fe89870c6}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %ProviderName%
+DriverPackageDisplayName = %SDBT.SVCDESC%
+DriverVer=07/01/2007, 5.0.1901.0
+CatalogFile=tosdbt.cat
+
+
+;--------- SourceDisksNames Section ------------------------------------------
+
+[SourceDisksNames]
+3426=windows cd
+
+[SourceDisksNames.x86]
+3426=windows cd
+
+
+;--------- SourceDisksFiles Section ------------------------------------------
+
+[SourceDisksFiles]
+tosdbt.sys = 3426
+
+[SourceDisksFiles.x86]
+tosdbt.sys = 3426
+
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+SDBT.copy.files.NT = 12 ; DIRID_DRIVERS
+                        ; == \System32\Drivers on Windows NT platforms
+                        ; == \System\IoSubsys on Win9x platforms
+
+
+;--------- Manufacturer Section ----------------------------------------------
+
+[Manufacturer]
+%ProviderName% = SDBluetooth, NTamd64
+
+;--------- Models Section ----------------------------------------------------
+
+[SDBluetooth]
+%DeviceDescA% = SDBT_DDI_A, SD\CLASS_02
+%DeviceDescB% = SDBT_DDI_B, SD\CLASS_03
+%DeviceDescTOS% = SDBT_DDI_TOS, SD\VID_0098&PID_0002
+%DeviceDescTOS3% = SDBT_DDI_TOS, SD\VID_0098&PID_0003
+%DeviceDescSocket% = SDBT_DDI_TOS, SD\VID_0104&PID_00C5
+
+;--------- Models Section ----------------------------------------------------
+
+[SDBluetooth.NTamd64]
+%DeviceDescA% = SDBT_DDI_A, SD\CLASS_02
+%DeviceDescB% = SDBT_DDI_B, SD\CLASS_03
+%DeviceDescTOS% = SDBT_DDI_TOS, SD\VID_0098&PID_0002
+%DeviceDescTOS3% = SDBT_DDI_TOS, SD\VID_0098&PID_0003
+%DeviceDescSocket% = SDBT_DDI_TOS, SD\VID_0104&PID_00C5
+
+;--------- ControlFlags Section ----------------------------------------------
+
+[ControlFlags]
+ExcludeFromSelect = SD\CLASS_02
+ExcludeFromSelect = SD\CLASS_03
+ExcludeFromSelect = SD\VID_0098&PID_0002
+ExcludeFromSelect = SD\VID_0098&PID_0003
+ExcludeFromSelect = SD\VID_0104&PID_00C5
+
+;--------- DDInstall Section -------------------------------------------------
+
+[SDBT_DDI_A.NT]
+CopyFiles = SDBT.copy.files.NT
+AddReg = SDBT_A.addregs
+
+[SDBT_DDI_B.NT]
+CopyFiles = SDBT.copy.files.NT
+AddReg = SDBT_B.addregs
+
+[SDBT_DDI_TOS.NT]
+CopyFiles = SDBT.copy.files.NT
+AddReg = SDBT_TOS.addregs
+
+
+;--------- CopyFIles Section -------------------------------------------------
+
+[SDBT.copy.files.NT]
+tosdbt.sys,,,2
+
+
+;--------- AddReg Section ----------------------------------------------------
+
+[SDBT_A.addregs]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,tosdbt.sys
+HKLM,"Software\Toshiba\BluetoothStack","NotInternalUSBDevice",0x10001,2
+
+[SDBT_B.addregs]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,tosdbt.sys
+HKLM,"Software\Toshiba\BluetoothStack","NotInternalUSBDevice",0x10001,2
+
+[SDBT_TOS.addregs]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,tosdbt.sys
+HKR,, SdbusIoReadyDelay, 0x00010001, 8
+HKLM,"Software\Toshiba\BluetoothStack","NotInternalUSBDevice",0x10001,2
+
+
+;--------- DDInstall.Service Section -----------------------------------------
+
+[SDBT_DDI_A.NT.Services]
+AddService = tosdbt, %SVCINST_ASSOCSERVICE%, SDBT_AService_Inst
+
+[SDBT_DDI_B.NT.Services]
+AddService = tosdbt, %SVCINST_ASSOCSERVICE%, SDBT_BService_Inst
+
+[SDBT_DDI_TOS.NT.Services]
+AddService = tosdbt, %SVCINST_ASSOCSERVICE%, SDBT_TService_Inst
+
+;--------- AddService Section ------------------------------------------------
+
+[SDBT_AService_Inst]
+DisplayName    = %SvcDesc%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tosdbt.sys
+AddReg = sdbt_AService_Inst_AddReg
+
+[sdbt_AService_Inst_AddReg]
+HKR,Parameters,"BreakOnEntry", 0x00010001, 0
+HKR,Parameters,"DebugLevel", 0x00010001, 0x00777777
+HKR,Parameters,"CardType", 0x00010001, 0
+HKR,Parameters,"D0Timeout", 0x00010001, 4000
+
+[SDBT_BService_Inst]
+DisplayName    = %SvcDesc%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tosdbt.sys
+AddReg = sdbt_BService_Inst_AddReg
+
+[sdbt_BService_Inst_AddReg]
+HKR,Parameters,"BreakOnEntry", 0x00010001, 0
+HKR,Parameters,"DebugLevel", 0x00010001, 0x00777777
+HKR,Parameters,"CardType", 0x00010001, 1
+HKR,Parameters,"D0Timeout", 0x00010001, 4000
+
+[SDBT_TService_Inst]
+DisplayName    = %SvcDesc%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\tosdbt.sys
+AddReg = sdbt_TService_Inst_AddReg
+
+[sdbt_TService_Inst_AddReg]
+HKR,Parameters,"BreakOnEntry", 0x00010001, 0
+HKR,Parameters,"DebugLevel", 0x00010001, 0x00777777
+HKR,Parameters,"CardType", 0x00010001, 1
+HKR,Parameters,"D0Timeout", 0x00010001, 4000
+HKR,Parameters,"DelayedInit", 0x00010001, 0
+
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+SVCINST_ASSOCSERVICE= 0x00000002
+ProviderName     = "TOSHIBA"
+DeviceDescA      = "SDA Standard SD Bluetooth Card Type A"
+DeviceDescB      = "SDA Standard SD Bluetooth Card Type B"
+DeviceDescTOS    = "TOSHIBA SDA Standard SD Bluetooth Card"
+DeviceDescTOS3   = "TOSHIBA SDA Standard SD Bluetooth Card"
+DeviceDescSocket = "Socket SDA Standard SD Bluetooth Card"
+SvcDesc          = "SD Bluetooth Transport from TOSHIBA"
+SDBT.SVCDESC     = "Bluetooth SD"
+

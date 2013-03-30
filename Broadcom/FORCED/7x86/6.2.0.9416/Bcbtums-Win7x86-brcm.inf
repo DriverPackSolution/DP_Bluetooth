@@ -1,0 +1,328 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Bluetooth
+ClassGuid={e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider="Broadcom"
+DriverVer=01/06/2010, 6.2.0.9416
+CatalogFile=Bcbtums-Win7x86-brcm.CAT
+
+[SourceDisksNames]
+1 = %DISK_1%,,,
+
+[SourceDisksFiles]
+btusbflt.sys = 1
+
+
+ 
+[ControlFlags]
+
+ExcludeFromSelect = USB\VID_03F0&PID_D404
+ExcludeFromSelect = USB\Vid_044e&Pid_3017
+ExcludeFromSelect = USB\Vid_0930&Pid_0200
+ExcludeFromSelect = USB\VID_413C&PID_8156
+ExcludeFromSelect = USB\VID_413C&PID_8160
+ExcludeFromSelect = USB\VID_413C&PID_8187
+ExcludeFromSelect = USB\VID_0A5C&PID_2145
+ExcludeFromSelect = USB\VID_0A5C&PID_2150
+ExcludeFromSelect = USB\VID_0A5C&PID_2151
+ExcludeFromSelect = USB\VID_413C&PID_02B0
+ExcludeFromSelect = USB\VID_03F0&PID_231D
+ExcludeFromSelect = USB\VID_0489&PID_E011
+ExcludeFromSelect = USB\Vid_0930&Pid_020F
+ExcludeFromSelect = USB\Vid_044E&Pid_301B
+ExcludeFromSelect = USB\Vid_03F0&Pid_2A1D
+ExcludeFromSelect = USB\Vid_0A5C&Pid_217F
+ExcludeFromSelect = USB\Vid_0A5C&Pid_21B1
+ExcludeFromSelect = USB\Vid_0489&Pid_E012
+ExcludeFromSelect = USB\Vid_0489&Pid_E013
+ExcludeFromSelect = USB\Vid_18E8&Pid_6260
+ExcludeFromSelect = USB\Vid_13D3&Pid_3286
+ExcludeFromSelect = USB\Vid_0A5C&Pid_219B
+ExcludeFromSelect = USB\Vid_0A5C&Pid_218C
+ExcludeFromSelect = USB\Vid_0A5C&Pid_2184
+ExcludeFromSelect = USB\Vid_0A5C&Pid_2185
+ExcludeFromSelect = USB\Vid_0489&Pid_E00D
+ExcludeFromSelect = USB\Vid_0489&Pid_E00E
+ExcludeFromSelect = USB\Vid_0489&Pid_E010
+ExcludeFromSelect = USB\Vid_0DB0&Pid_689A
+ExcludeFromSelect = USB\Vid_15A9&Pid_0016
+ExcludeFromSelect = USB\Vid_10AB&Pid_0816
+ExcludeFromSelect = USB\Vid_1690&Pid_0737
+ExcludeFromSelect = USB\Vid_1690&Pid_0742
+ExcludeFromSelect = USB\Vid_0A5C&Pid_2198
+ExcludeFromSelect = USB\Vid_0DB0&Pid_6898
+ExcludeFromSelect = USB\Vid_0A5C&Pid_21B0
+ExcludeFromSelect = USB\Vid_13D3&Pid_3286
+ExcludeFromSelect = USB\Vid_0B05&Pid_1789
+ExcludeFromSelect = USB\Vid_13D3&Pid_3300
+ExcludeFromSelect = USB\Vid_0B05&Pid_1788
+ExcludeFromSelect = USB\Vid_13D3&Pid_3295
+ExcludeFromSelect = USB\Vid_0B05&Pid_178A
+ExcludeFromSelect = USB\Vid_13D3&Pid_3301
+ExcludeFromSelect = USB\Vid_0B05&Pid_178B
+ExcludeFromSelect = USB\Vid_0A5C&Pid_219A
+ExcludeFromSelect = USB\Vid_0489&Pid_E00F
+ExcludeFromSelect = USB\Vid_0A5C&Pid_214D
+ExcludeFromSelect = USB\Vid_13D3&Pid_3302 
+ExcludeFromSelect = USB\Vid_13D3&Pid_3303	  
+ExcludeFromSelect = USB\Vid_0A5C&Pid_2119
+ExcludeFromSelect = USB\Vid_0930&Pid_0747
+ExcludeFromSelect = USB\Vid_0489&Pid_E014
+ExcludeFromSelect = USB\Vid_0A5C&Pid_21B4
+ExcludeFromSelect = USB\VID_0930&Pid_0214 
+ExcludeFromSelect = USB\VID_1D4D&Pid_0004 
+
+[Manufacturer]
+Broadcom=Broadcom, NTx86...1
+[Broadcom.NTx86...1]       	 
+%BluetootUsb2045B3HpROMDgl.DeviceDesc%=BCBTUsbBlueflame, USB\VID_03F0&PID_D404  
+%BluetootUsb2046A0SonyNonUHE.DeviceDesc% =BCBTUsbDriverInstallXP, USB\Vid_044E&Pid_3017         ; ALPS-UGPZ9-BCM2046
+%BluetootUsb2046A0ToshibaNonUHE.DeviceDesc% =BCBTUsbDriverInstallXP, USB\Vid_0930&Pid_0200    	; TAIYO YUDEN Bluetooth Controller EYTFEBSAX-A
+%BluetootUsb2046B1DellLittelRock.DeviceDesc% =BCBTUsbDriverInstallWin7, USB\Vid_413C&PID_8156   ; Dell Wireless 370 Bluetooth Mini-card
+%BluetootUsb2046B1DellLittleStone.DeviceDesc% =BCBTUsbDriverInstallWin7, USB\Vid_413C&PID_8160  ; Dell Wireless 365 Bluetooth Module
+%BluetootUsb2070B1DellBlarneyStone.DeviceDesc%=BCBTBLPMInstall, USB\Vid_413C&Pid_8187		; Dell Wireless 375 Bluetooth Module
+%BluetootUsb2046B1Helike.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_0A5C&PID_2145             ; ThinkPad Bluetooth 2.1 with Enhanced Data Rate
+%BluetootUsb2046B1LenovoChinaModule.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&PID_2150  	; BCM2046 Bluetooth Module
+%BluetootUsb2046B1GatewayModule.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_0A5C&PID_2151      ; BCM2046 Bluetooth Module
+%BluetootUsb2046B1DellCompal.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_413C&PID_02B0         ; BCM2046 Bluetooth Device
+%BluetootUsb2070B1HPSoftBreeze.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_03F0&PID_231D       ; HP Integrated Module with Bluetooth 2.1 Wireless Technology
+%BluetootUsb2046A0ToshibaNonUHEAskey.DeviceDesc% =BCBTUsbDriverInstallXP, USB\Vid_0930&Pid_020F ; ASKEY Bluetooth Controller BTU1030
+%BluetootUsb2046B1AcerBLPMModule.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&PID_E011            ; Broadcom 2046 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2046A0DellALPS.DeviceDesc% =BCBTUsbDriverInstallXP, USB\Vid_044E&Pid_301B           ; ALPS-UGPZ9-BCM2046
+%BluetootUsb2070B1HPCuvee.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_03F0&PID_2A1D            ; HP Integrated module with Bluetooth 2.1 Wireless Technology
+%BluetootUsb2070B1Lenovo.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_217F                    ; ThinkPad Bluetooth 2.1 with Enhanced Data Rate II
+%BluetootUsb2070B1HPHawk.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_0A5C&PID_21B1             ; HP Integrated Module with Bluetooth 2.1 + EDR Wireless Technology
+%BluetootUsb43225Acer.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E012                       ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb4312Acer.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E013                        ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1QCOM.DeviceDesc% =BCBTBLPMInstall, USB\Vid_18E8&Pid_6260                      ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Azurewave.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3286                 ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Gen3.3V01.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_219B                 ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Gen3.3V02.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_218C                 ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Gen3.3V0IT.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_2184                ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Gen3.3V0ITSec.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_2185             ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1LenovoChina.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E00D               ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1SECWBSamsung.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E00E              ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Acer.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E010                      ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1MSI3.3V.DeviceDesc% =BCBTBLPMInstall, USB\VID_0DB0&Pid_689A                   ; Bluetooth 2.1 + EDR USB Device
+%BluetootUsb2070B1Gemtek.DeviceDesc% =BCBTBLPMInstall, USB\VID_15A9&Pid_0016                    ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1USI.DeviceDesc% =BCBTBLPMInstall, USB\VID_10AB&Pid_0816                       ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1FujitsuIT.DeviceDesc% =BCBTBLPMInstall, USB\VID_1690&Pid_0737                 ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1FujitsuITSec.DeviceDesc% =BCBTBLPMInstall, USB\VID_1690&Pid_0742              ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Gen5.0V01.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_2198                 ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1MSI5.0V.DeviceDesc% =BCBTBLPMInstall, USB\VID_0DB0&Pid_6898                   ; Bluetooth 2.1 + EDR USB Device
+%BluetootUsb2070B1HPFlicker.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_0A5C&Pid_21B0          ; HP Integrated Module with Bluetooth 2.1 + EDR Wireless Technology
+%BluetootUsb2070B1Azurewave3286.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3286             ; Bluetooth module
+%BluetootUsb2070B1Azurewave1789.DeviceDesc% =BCBTBLPMInstall, USB\VID_0B05&Pid_1789             ; BT-270
+%BluetootUsb2070B1Azurewave3300.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3300             ; Bluetooth module
+%BluetootUsb2070B1Azurewave1788.DeviceDesc% =BCBTBLPMInstall, USB\VID_0B05&Pid_1788             ; BT-270
+%BluetootUsb43225Azurewave3295.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3295              ; Bluetooth module
+%BluetootUsb43225Azurewave178A.DeviceDesc% =BCBTBLPMInstall, USB\VID_0B05&Pid_178A              ; NB-290
+%BluetootUsb43225Azurewave3301.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3301              ; Bluetooth module
+%BluetootUsb43225Azurewave178B.DeviceDesc% =BCBTBLPMInstall, USB\VID_0B05&Pid_178B              ; NB-290
+%BluetootUsb43225Azurewave219A.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_219A              ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1Foxcon.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E00F                    ; FOXCONN-T77H114-BCM2070
+%BluetootUsb2046B1LenovoChina.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_214D               ; BCM2046 Bluetooth Device
+%BluetootUsb2070B1ComboAzurewave3302.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3302        ; Bluetooth module
+%BluetootUsb2070B1ComboAzurewave3303.DeviceDesc% =BCBTBLPMInstall, USB\VID_13D3&Pid_3303        ; Bluetooth module
+%BluetootUsb2070B1ComboGeneric2119.DeviceDesc% =BCBTBLPMInstall, USB\VID_0A5C&Pid_2119          ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb2070B1ComboToshibaAskey.DeviceDesc% =BCBTBLPMInstall, USB\VID_0930&Pid_0747         ; Askey BT Slim Module
+%BluetootUsb2070B1ComboLenovoChina.DeviceDesc% =BCBTBLPMInstall, USB\VID_0489&Pid_E014          ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device
+%BluetootUsb4313HPMetador.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_0A5C&Pid_21B4                   ; Broadcom 2070 Bluetooth
+%BluetootUsb4313Toshiba.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_0930&Pid_0214              ; Broadcom BCM2070 Bluetooth 2.1+EDR USB Device 
+%BluetootUsb2046B1ROMPegatron.DeviceDesc% =BCBTUsbDriverInstallXP, USB\VID_1D4D&Pid_0004        ; Broadcom 2046B1 Bluetooth 2.1 + EDR USB Device 
+
+[DestinationDirs]
+BTUSBFLT.CopyList=10,system32\drivers
+
+[BTUSBFLT.CopyList]
+btusbflt.sys
+
+[BCBTUsbDriverInstallWin7.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[BCBTUsbDriverInstallWin7.NT.HW]
+AddReg=BCBTUsbDriverInstallWin7.NT.HW.AddReg
+Needs=BthUsb.NT.HW
+
+[BCBTUsbDriverInstallWin7.NT.Services]
+AddReg=BCBTUsb.NT.Services.AddReg
+needs=BthUsb.NT.Services
+
+[BCBTUsbDriverInstallWin7.NT.HW.AddReg]
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+HKR,,"RemovableOverride",0x10001,1
+
+
+[BCBTUsbDriverInstallXP.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[BCBTUsbDriverInstallXP.NT.HW]
+AddReg=BCBTUsbDriverInstallXP.NT.HW.AddReg
+Needs=BthUsb.NT.HW
+
+[BCBTUsbDriverInstallXP.NT.Services]
+AddReg=BCBTUsb.NT.Services.AddReg
+needs=BthUsb.NT.Services
+
+[BCBTUsbDriverInstallXP.NT.HW.AddReg]
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+
+
+[BCBTBLPMInstall.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+CopyFiles=BTUSBFLT.CopyList
+
+[BCBTBLPMInstall.NT.HW]
+AddReg=BCBTBLPMInstall.NT.HW.AddReg
+Needs=BthUsb.NT.HW
+
+[BCBTBLPMInstall.NT.Services]
+AddReg=BCBTUsb.NT.Services.AddReg
+Addservice = BTHUSB, 0x00000002, BthUsb_Service_Inst, BthUsb_EventLog_Inst
+Addservice = BTHPORT, , BthPort_Service_Inst, BthPort_EventLog_Inst
+AddService=btusbflt,,BTUSBFLT_Service_Inst
+
+[BCBTBLPMInstall.NT.HW.AddReg]
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+HKR,,LowerFilters, 0x00010000, "btusbflt"
+
+[BTUSBFLT_Service_Inst]
+DisplayName=%BTUSBFLT.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\btusbflt.sys
+LoadOrderGroup = PNP Filter
+
+
+[BCBTUsbBlueflame.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[BCBTUsbBlueflame.NT.HW]
+AddReg=BCBTUsb.NT.HW.AddReg
+Needs=BthUsb.NT.HW
+
+[BCBTUsbBlueflame.NT.Services]
+AddReg=BCBTUsb.NT.Services.AddReg
+needs=BthUsb.NT.Services
+
+[BCBTUsb.NT.HW.AddReg]
+HKR,,%PageScanWindow%,0x00010001,24
+HKR,,%PageScanInterval%,0x00010001,2048
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+
+
+
+[BCBTUsbBlueflameWin7.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[BCBTUsbBlueflameWin7.NT.HW]
+AddReg=BCBTUsbWin7.NT.HW.AddReg
+Needs=BthUsb.NT.HW
+
+[BCBTUsbBlueflameWin7.NT.Services]
+AddReg=BCBTUsb.NT.Services.AddReg
+needs=BthUsb.NT.Services
+
+[BCBTUsbWin7.NT.HW.AddReg]
+HKR,,%PageScanWindow%,0x00010001,24
+HKR,,%PageScanInterval%,0x00010001,2048
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+HKR,,"RemovableOverride",0x10001,1
+
+
+
+[BCBTUsb.NT.Services.AddReg]
+; HAS NOT WORKED IN TESTING YET BUT THAT'S WHAT WE SHOULD SET
+; HKR,"Bthport\Parameters","SystemRemoteWakeSupported",0x00010001,0x00000001
+
+[BCBTUsbDriverInstallWiFi.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[BCBTUsbDriverInstallWiFi.NT.HW]
+Needs=BthUsb.NT.HW
+
+[BCBTUsbDriverInstallWiFi.NT.Services]
+AddReg=BCBTUsbDriverInstallWiFi.NT.Services.AddReg
+needs=BthUsb.NT.Services
+
+[BCBTUsbDriverInstallWiFi.NT.Services.AddReg]
+HKR,"BthServ\Parameters","ChannelAvoidanceRange",0x00010001,0x00000020
+
+; HAS NOT WORKED IN TESTING YET BUT THAT'S WHAT WE SHOULD SET
+; HKR,"Bthport\Parameters","SystemRemoteWakeSupported",0x00010001,0x00000001
+
+[Strings]
+BluetootUsb2045B3HpROMDgl.DeviceDesc=     		"HP Bluetooth Wireless Print and PC Adapter"
+BluetootUsb2046A0SonyNonUHE.DeviceDesc=			"ALPS-UGPZ9-BCM2046"
+BluetootUsb2046A0ToshibaNonUHE.DeviceDesc=		"TAIYO YUDEN Bluetooth Controller EYTFEBSAX-A"
+BluetootUsb2046B1DellLittelRock.DeviceDesc=		"Dell Wireless 370 Bluetooth Mini-card"
+BluetootUsb2046B1DellLittleStone.DeviceDesc=    "Dell Wireless 365 Bluetooth Module"
+BluetootUsb2046B1Helike.DeviceDesc=				"ThinkPad Bluetooth 2.1 with Enhanced Data Rate"
+BluetootUsb2046B1LenovoChinaModule.DeviceDesc=  "BCM2046 Bluetooth Module"
+BluetootUsb2046B1GatewayModule.DeviceDesc=      "BCM2046 Bluetooth Module"
+BluetootUsb2046B1DellCompal.DeviceDesc=         "BCM2046 Bluetooth Device"
+BluetootUsb2070B1HPSoftBreeze.DeviceDesc=       "HP Integrated Module with Bluetooth 2.1 Wireless Technology"
+BluetootUsb2046A0ToshibaNonUHEAskey.DeviceDesc= "ASKEY Bluetooth Controller BTU1030"
+BluetootUsb2046B1AcerBLPMModule.DeviceDesc=     "Broadcom 2046 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2046A0DellALPS.DeviceDesc=			"ALPS-UGPZ9-BCM2046"
+BluetootUsb2070B1HPCuvee.DeviceDesc=            "HP Integrated module with Bluetooth 2.1 wireless technology"
+BluetootUsb2070B1Lenovo.DeviceDesc=             "ThinkPad Bluetooth 2.1 with Enhanced Data Rate II"
+BluetootUsb2070B1HPHawk.DeviceDesc=             "HP Integrated Module with Bluetooth 2.1 + EDR Wireless Technology"
+BluetootUsb43225Acer.DeviceDesc=                "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb4312Acer.DeviceDesc=                 "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1QCOM.DeviceDesc=               "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Azurewave.DeviceDesc=			"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Gen3.3V01.DeviceDesc=			"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Gen3.3V02.DeviceDesc=			"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Gen3.3V0IT.DeviceDesc=			"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Gen3.3V0ITSec.DeviceDesc=		"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1LenovoChina.DeviceDesc=		"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1SECWBSamsung.DeviceDesc=		"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Acer.DeviceDesc=				"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1MSI3.3V.DeviceDesc=            "Bluetooth 2.1 + EDR USB Device"
+BluetootUsb2070B1Gemtek.DeviceDesc=			    "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1USI.DeviceDesc=				"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1FujitsuIT.DeviceDesc=			"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1FujitsuITSec.DeviceDesc=		"Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Gen5.0V01.DeviceDesc=          "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1MSI5.0V.DeviceDesc=            "Bluetooth 2.1 + EDR USB Device"
+BluetootUsb2070B1HPFlicker.DeviceDesc=          "HP Integrated Module with Bluetooth 2.1 + EDR Wireless Technology"
+BluetootUsb2070B1Azurewave3286.DeviceDesc=      "Bluetooth module"
+BluetootUsb2070B1Azurewave1789.DeviceDesc=      "BT-270"
+BluetootUsb2070B1Azurewave3300.DeviceDesc=      "Bluetooth module"
+BluetootUsb2070B1Azurewave1788.DeviceDesc=      "BT-270"
+BluetootUsb43225Azurewave3295.DeviceDesc=       "Bluetooth module"
+BluetootUsb43225Azurewave178A.DeviceDesc=       "NB-290"
+BluetootUsb43225Azurewave3301.DeviceDesc=       "Bluetooth module"
+BluetootUsb43225Azurewave178B.DeviceDesc=       "NB-290"
+BluetootUsb43225Azurewave219A.DeviceDesc=       "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1Foxcon.DeviceDesc=             "FOXCONN-T77H114-BCM2070"
+BluetootUsb2046B1LenovoChina.DeviceDesc=        "BCM2046 Bluetooth Device"
+BluetootUsb2070B1ComboAzurewave3302.DeviceDesc= "Bluetooth module"
+BluetootUsb2070B1ComboAzurewave3303.DeviceDesc= "Bluetooth module"
+BluetootUsb2070B1ComboGeneric2119.DeviceDesc=   "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1ComboToshibaAskey.DeviceDesc=  "Askey BT Slim Module"
+BluetootUsb2070B1ComboLenovoChina.DeviceDesc=   "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2070B1DellBlarneyStone.DeviceDesc=	"Dell Wireless 375 Bluetooth Module"
+BluetootUsb4313HPMetador.DeviceDesc=            "Broadcom 2070 Bluetooth"
+BluetootUsb4313Toshiba.DeviceDesc=              "Broadcom BCM2070 Bluetooth 2.1+EDR USB Device"
+BluetootUsb2046B1ROMPegatron.DeviceDesc=        "Broadcom 2046B1 Bluetooth 2.1 + EDR USB Device"
+
+PageScanWindow = "Page Scan Window"
+PageScanInterval = "Page Scan Interval"
+DeviceRemoteWakeSupported = "DeviceRemoteWakeSupported"
+RemoteWakeEnabled = "RemoteWakeEnabled"
+DISK_1="Broadcom Installation Media"
+BTUSBFLT.SvcDesc="Bluetooth USB Filter"

@@ -1,0 +1,72 @@
+;************************************************************************
+;* Copyright 2011 Motorola Solutions, Inc. All rights reserved.         *
+;*                                                                      *
+;* Installation inf for Bluetooth Serial Port                           *
+;*                                                                      *
+;************************************************************************;
+[Version]
+signature="$CHICAGO$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%MfgName%
+DriverVer= 03/10/2011,1.0.33.301
+CatalogFile=btmcom.cat
+
+[ControlFlags]
+ExcludeFromSelect=BTMUSB\BTMCOM
+
+[SourceDisksNames]
+1=%Disk_Description%,,,\Win32
+
+[SourceDisksNames.x86]
+1=%Disk_Description%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%Disk_Description%,,,\Win64
+
+[SourceDisksFiles]
+btmcom.sys = 1
+
+[Manufacturer]
+%MfgName%=Intel, NTx86, NTamd64
+
+[Intel]
+%BTMCOM.DeviceDesc% = BTMCOM, BTMUSB\BTMCOM
+
+[Intel.NTx86]
+%BTMCOM.DeviceDesc% = BTMCOM, BTMUSB\BTMCOM
+
+[Intel.NTamd64]
+%BTMCOM.DeviceDesc% = BTMCOM, BTMUSB\BTMCOM
+
+[DestinationDirs]
+DriversDir = 10,System32\Drivers
+
+[DriversDir]
+btmcom.sys,,,2
+
+[BTMCOM]
+CopyFiles = DriversDir
+AddReg = BTMCOM.AddReg
+
+[BTMCOM.AddReg]
+HKR,,PortSubClass,1,01
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[BTMCOM.Services]
+AddService = BTMCOM, 0x00000002, BTMCOM.AddService
+
+[BTMCOM.AddService]
+DisplayName    = %BTMCOM.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\btmcom.sys
+
+;---------------------------------------------------------------;
+
+[Strings]
+MfgName="Intel Corporation"
+Disk_Description  = "Bluetooth Installation Disk"
+BTMCOM.SvcDesc    = "Bluetooth Serial Port"
+BTMCOM.DeviceDesc = "Bluetooth Serial Port"

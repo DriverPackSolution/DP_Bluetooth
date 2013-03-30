@@ -1,0 +1,992 @@
+; 64-Bit WDM audio (PortCls) Bluetooth Audio Driver
+;
+; Copyright (c) 2004-2009, Broadcom Corp.
+;
+[Version]
+CatalogFile=btaudio.cat
+Signature="$CHICAGO$"
+Class=Media
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%WDCM%
+DriverVer=06/02/2011,5.6.0.7100
+
+[SourceDisksNames]
+1 = %DISK_1%,,,
+
+[SourceDisksFiles]
+btaudio.sys = 1
+
+[Manufacturer]
+%MfgName%=WIDCOMM, NTamd64
+
+[WIDCOMM.NTamd64]
+%BTAUDIO.DeviceDesc%=BTAUDIO,{95C7A0A0-3094-11D7-A202-00508B9D7D5A}\BTAUDIO
+
+[DestinationDirs]
+BTAUDIO.CopyList=10,system32\drivers
+
+
+;======================================================
+; BTAUDIO
+;======================================================
+
+[BTAUDIO.CopyList]
+btaudio.sys
+
+[BTAUDIO.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,btaudio.sys
+HKR,,NTMPDriver,,"btaudio.sys,sbemul.sys"
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%BTAUDIO.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%BTAUDIO_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%BTAUDIO.DeviceDesc%
+
+HKLM,%MediaCategories%\%BTAUDIO.NameGuid%,Name,,%BTAUDIO.Name%
+
+;======================================================
+; COMMON
+;======================================================
+[BTAUDIO.I.Wave]
+AddReg=BTAUDIO.I.Wave.AddReg
+[BTAUDIO.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTAUDIO.Wave.szPname%
+
+[BTAUDIO.I.Topo]
+AddReg=BTAUDIO.I.Topo.AddReg
+[BTAUDIO.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%BTAUDIO.Topo.szPname%
+
+;======================================================
+; BTAUDIO
+;======================================================
+[BTAUDIO.NTamd64]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=BTAUDIO.CopyList
+AddReg=BTAUDIO.AddReg
+
+[BTAUDIO.NTamd64.hw]
+AddReg=BTAUDIO.NTamd64.hw.reg
+
+[BTAUDIO.NTamd64.hw.reg]
+HKR,,"BitsPerSample",0x10001,16
+HKR,,"Channels",0x10001,2
+HKR,,"SamplesPerSec",0x10001,44100
+HKR,,"LineSpeed",0x10001,328
+HKR,,"LineSpeed1",0x10001,229
+HKR,,"LineSpeed2",0x10001,229
+;HKR,,"LineSpeed2",0x10001,126
+
+[BTAUDIO.NTamd64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,BTAUDIO.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,BTAUDIO.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,BTAUDIO.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,BTAUDIO.I.Topo
+
+[BTAUDIO.NTamd64.Services]
+AddService=btaudio,0x00000002,btaudio_Service_Inst
+
+[btaudio_Service_Inst]
+DisplayName=%btaudio.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\btaudio.sys
+
+;======================================================
+; COMMON
+;======================================================
+
+[Strings]
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth Hands-free Audio"
+BTWAUDIO.DeviceDesc="Bluetooth Stereo Audio"
+DISK_1="WIDCOMM Installation Media"
+
+BTAUDIO.Wave.szPname="Bluetooth Hands-free Audio"
+BTAUDIO.Topo.szPname="Bluetooth Hands-free Audio Topology"
+BTWAUDIO.Wave.szPname="Bluetooth Stereo Audio"
+BTWAUDIO.Topo.szPname="Bluetooth Stereo Audio Topology"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth Audio Device"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0404] ; Chinese Traditional
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="ÂÅªÞ­µ®Ä"
+BTWAUDIO.DeviceDesc="ÂÅªÞ°ª«~½è­µ®Ä"
+DISK_1="WIDCOMM ¦w¸Ë´CÅé"
+
+BTAUDIO.Wave.szPname="ÂÅªÞ­µ®Ä"
+BTAUDIO.Topo.szPname="ÂÅªÞ­µ®Ä©Ý¾ë"
+BTWAUDIO.Wave.szPname="ÂÅªÞ°ª«~½è­µ®Ä"
+BTWAUDIO.Topo.szPname="ÂÅªÞ°ª«~½è­µ®Ä©Ý¾ë"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="ÂÅªÞ­µ®Ä¸Ë¸m"
+; btaudio.SvcDesc="ÂÅªÞ°ª«~½è­µ®Ä¸Ë¸m"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0406] ; Danish
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth-audio"
+BTWAUDIO.DeviceDesc="Bluetooth-højkvalitetsaudio"
+DISK_1="WIDCOMM-installationsmedie"
+
+BTAUDIO.Wave.szPname="Bluetooth-audio"
+BTAUDIO.Topo.szPname="Topologi over Bluetooth-audio"
+BTWAUDIO.Wave.szPname="Bluetooth-højkvalitetsaudio"
+BTWAUDIO.Topo.szPname="Topologi over Bluetooth-højkvalitetsaudio"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth-audioenhed"
+; btaudio.SvcDesc="Bluetooth-højkvalitets-audioenhed"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0407] ; German
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth-Audio"
+BTWAUDIO.DeviceDesc="Hochwertiges Bluetooth-Audio"
+DISK_1="WIDCOMM-Installationsmedien"
+
+BTAUDIO.Wave.szPname="Bluetooth-Audio"
+BTAUDIO.Topo.szPname="Topologie für Bluetooth-Audio"
+BTWAUDIO.Wave.szPname="Hochwertiges Bluetooth-Audio"
+BTWAUDIO.Topo.szPname="Topologie für hochwertiges Bluetooth-Audio"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth-Audiogerät"
+; btaudio.SvcDesc="Hochwertiges Bluetooth-Audiogerät"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.040a] ; Spanish
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Audio Bluetooth"
+BTWAUDIO.DeviceDesc="Audio de alta calidad Bluetooth"
+DISK_1="Medios de instalación de WIDCOMM"
+
+BTAUDIO.Wave.szPname="Audio Bluetooth"
+BTAUDIO.Topo.szPname="Topología de audio Bluetooth"
+BTWAUDIO.Wave.szPname="Audio de alta calidad Bluetooth"
+BTWAUDIO.Topo.szPname="Topología de audio de alta calidad Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Dispositivo de audio Bluetooth"
+; btaudio.SvcDesc="Dispositivo de audio de alta calidad Bluetooth"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.040b] ; Finnish
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth-ääni"
+BTWAUDIO.DeviceDesc="Laadukas Bluetooth-ääni"
+DISK_1="WIDCOMM-asennuslevy"
+
+BTAUDIO.Wave.szPname="Bluetooth-ääni"
+BTAUDIO.Topo.szPname="Bluetooth-äänirakenne"
+BTWAUDIO.Wave.szPname="Laadukas Bluetooth-ääni"
+BTWAUDIO.Topo.szPname="Laadukas Bluetooth-äänirakenne"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth-äänilaite"
+; btaudio.SvcDesc="Laadukas Bluetooth-äänilaite"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.040c] ; French
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Audio Bluetooth"
+BTWAUDIO.DeviceDesc="Audio de haute qualité Bluetooth"
+DISK_1="Support d'installation WIDCOMM"
+
+BTAUDIO.Wave.szPname="Audio Bluetooth"
+BTAUDIO.Topo.szPname="Topologie audio Bluetooth"
+BTWAUDIO.Wave.szPname="Audio de haute qualité Bluetooth"
+BTWAUDIO.Topo.szPname="Topologie audio de haute qualité Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Périphérique audio Bluetooth"
+; btaudio.SvcDesc="Périphérique audio de haute qualité Bluetooth"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0410] ; Italian
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Audio Bluetooth"
+BTWAUDIO.DeviceDesc="Audio Bluetooth di alta qualità"
+DISK_1="Supporto di installazione WIDCOMM"
+
+BTAUDIO.Wave.szPname="Audio Bluetooth"
+BTAUDIO.Topo.szPname="Topologia audio Bluetooth"
+BTWAUDIO.Wave.szPname="Audio Bluetooth di alta qualità"
+BTWAUDIO.Topo.szPname="Topologia audio Bluetooth di alta qualità"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Periferica audio Bluetooth"
+; btaudio.SvcDesc="Periferica audio Bluetooth di alta qualità"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0411] ; Japanese
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth ƒI[ƒfƒBƒI"
+BTWAUDIO.DeviceDesc="Bluetooth ‚•iŽ¿ƒI[ƒfƒBƒI"
+DISK_1="WIDCOMM ƒCƒ“ƒXƒg[ƒ‹ ƒƒfƒBƒA"
+
+BTAUDIO.Wave.szPname="Bluetooth ƒI[ƒfƒBƒI"
+BTAUDIO.Topo.szPname="Bluetooth ƒI[ƒfƒBƒI‹Zp"
+BTWAUDIO.Wave.szPname="Bluetooth ‚•iŽ¿ƒI[ƒfƒBƒI"
+BTWAUDIO.Topo.szPname="Bluetooth ‚•iŽ¿ƒI[ƒfƒBƒI‹Zp"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth ƒI[ƒfƒBƒI ƒfƒoƒCƒX"
+; btaudio.SvcDesc="Bluetooth ‚•iŽ¿ƒI[ƒfƒBƒI ƒfƒoƒCƒX"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0412] ; Korean
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth ¿Àµð¿À"
+BTWAUDIO.DeviceDesc="Bluetooth °íÇ°Áú ¿Àµð¿À"
+DISK_1="WIDCOMM ¼³Ä¡ ¹Ìµð¾î"
+
+BTAUDIO.Wave.szPname="Bluetooth ¿Àµð¿À"
+BTAUDIO.Topo.szPname="Bluetooth ¿Àµð¿À ÅäÆú·ÎÁö"
+BTWAUDIO.Wave.szPname="Bluetooth °íÇ°Áú ¿Àµð¿À"
+BTWAUDIO.Topo.szPname="Bluetooth °íÇ°Áú ¿Àµð¿À ÅäÆú·ÎÁö"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth ¿Àµð¿À ÀåÄ¡"
+; btaudio.SvcDesc="Bluetooth °íÇ°Áú ¿Àµð¿À ÀåÄ¡"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0413] ; Dutch
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth-audio"
+BTWAUDIO.DeviceDesc="Bluetooth-audio van hoge kwaliteit"
+DISK_1="WIDCOMM-installatiemedia"
+
+BTAUDIO.Wave.szPname="Bluetooth-audio"
+BTAUDIO.Topo.szPname="Bluetooth-audiotopologie"
+BTWAUDIO.Wave.szPname="Bluetooth-audio van hoge kwaliteit"
+BTWAUDIO.Topo.szPname="Bluetooth-audiotopologie van hoge kwaliteit"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth-audioapparaat"
+; btaudio.SvcDesc="Bluetooth-audioapparaat van hoge kwaliteit"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0416] ; Brazilian Portuguese
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Áudio Bluetooth"
+BTWAUDIO.DeviceDesc="Áudio Bluetooth de alta qualidade"
+DISK_1="Mídia de instalação WIDCOMM"
+
+BTAUDIO.Wave.szPname="Áudio Bluetooth"
+BTAUDIO.Topo.szPname="Topologia de áudio Bluetooth"
+BTWAUDIO.Wave.szPname="Áudio Bluetooth de alta qualidade"
+BTWAUDIO.Topo.szPname="Topologia de áudio Bluetooth de alta qualidade"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Dispositivo de áudio Bluetooth"
+; btaudio.SvcDesc="Dispositivo de áudio Bluetooth de alta qualidade"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.041d] ; Swedish
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth-ljud"
+BTWAUDIO.DeviceDesc="Bluetooth-ljud med hög kvalitet"
+DISK_1="WIDCOMM-installationsskiva"
+
+BTAUDIO.Wave.szPname="Bluetooth-ljud"
+BTAUDIO.Topo.szPname="Topologi för Bluetooth-ljud"
+BTWAUDIO.Wave.szPname="Bluetooth-ljud med hög kvalitet"
+BTWAUDIO.Topo.szPname="Topologi för Bluetooth-ljud med hög kvalitet"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth-ljudenhet"
+; btaudio.SvcDesc="Bluetooth-ljudenhet med hög kvalitet"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0415] ; Polish
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="DŸwiêk Bluetooth"
+BTWAUDIO.DeviceDesc="Wysokiej jakoœci dŸwiêk Bluetooth"
+DISK_1="Noœnik instalacyjny WIDCOMM"
+
+BTAUDIO.Wave.szPname="DŸwiêk Bluetooth"
+BTAUDIO.Topo.szPname="Topologia dŸwiêku Bluetooth"
+BTWAUDIO.Wave.szPname="Wysokiej jakoœci dŸwiêk Bluetooth"
+BTWAUDIO.Topo.szPname="Wysokiej jakoœci topologia dŸwiêku Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Urz¹dzenie dŸwiêkowe Bluetooth"
+; btaudio.SvcDesc="Wysokiej jakoœci urz¹dzenie dŸwiêkowe Bluetooth"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0419] ; Russian
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Àóäèî Bluetooth"
+BTWAUDIO.DeviceDesc="Âûñîêîêà÷åñòâåííîå àóäèî Bluetooth"
+DISK_1="Íîñèòåëü äëÿ óñòàíîâêè WIDCOMM"
+
+BTAUDIO.Wave.szPname="Àóäèî Bluetooth"
+BTAUDIO.Topo.szPname="Àóäèîòîïîëîãèÿ Bluetooth"
+BTWAUDIO.Wave.szPname="Âûñîêîêà÷åñòâåííîå àóäèî Bluetooth"
+BTWAUDIO.Topo.szPname="Âûñîêîêà÷åñòâåííîå àóäèîòîïîëîãèÿ Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Àóäèîóñòðîéñòâî Bluetooth"
+; btaudio.SvcDesc="Âûñîêîêà÷åñòâåííîå àóäèîóñòðîéñòâî Bluetooth"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0414] ; Norwegian
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth-lyd"
+BTWAUDIO.DeviceDesc="Bluetooth-lyd med høy kvalitet"
+DISK_1="WIDCOMM-installasjonsmedier"
+
+BTAUDIO.Wave.szPname="Bluetooth-lyd"
+BTAUDIO.Topo.szPname="Bluetooth-lydtopologi"
+BTWAUDIO.Wave.szPname="Bluetooth-lyd med høy kvalitet"
+BTWAUDIO.Topo.szPname="Bluetooth-lydtopologi med høy kvalitet"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth-lydenhet"
+; btaudio.SvcDesc="Bluetooth-lydenhet med høy kvalitet"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0804] ; ChineseSimplified
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="À¶ÑÀÒôÆµ"
+BTWAUDIO.DeviceDesc="À¶ÑÀ¸ßÖÊÁ¿ÒôÆµ"
+DISK_1="WIDCOMM °²×°½éÖÊ"
+
+BTAUDIO.Wave.szPname="À¶ÑÀÒôÆµ"
+BTAUDIO.Topo.szPname="À¶ÑÀÒôÆµÍØÆË"
+BTWAUDIO.Wave.szPname="À¶ÑÀ¸ßÖÊÁ¿ÒôÆµ"
+BTWAUDIO.Topo.szPname="À¶ÑÀ¸ßÖÊÁ¿ÒôÆµÍØÆË"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="À¶ÑÀÒôÆµÉè±¸"
+; btaudio.SvcDesc="À¶ÑÀÒôÆµÉè±¸"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0401] ; Arabic
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="ÕæÊ ÚÏøÉ áÇíÏæí Bluetooth"
+BTWAUDIO.DeviceDesc="ÕæÊ ÓÊíÑíæ Bluetooth"
+DISK_1="æÓÇÆØ ÊËÈíÊ WIDCOMM"
+
+BTAUDIO.Wave.szPname="ÕæÊ ÚÏøÉ áÇíÏæí Bluetooth"
+BTAUDIO.Topo.szPname="ØÈæáæÌíÇ ÕæÊ áÚÏøÉ áÇíÏæí Bluetooth"
+BTWAUDIO.Wave.szPname="ÕæÊ ÓÊíÑíæ Bluetooth"
+BTWAUDIO.Topo.szPname="ØÈæáæÌíÇ ÕæÊ ÓÊíÑíæ Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="ÌåÇÒ ÕæÊ Bluetooth"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0405] ; Czech
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Zvukové Bluetooth handsfree"
+BTWAUDIO.DeviceDesc="Stereofonní zvukové Bluetooth"
+DISK_1="Instalaèní média WIDCOMM"
+
+BTAUDIO.Wave.szPname="Zvukové Bluetooth handsfree"
+BTAUDIO.Topo.szPname="Topologie zvukového Bluetooth handsfree"
+BTWAUDIO.Wave.szPname="Stereofonní zvukové Bluetooth"
+BTWAUDIO.Topo.szPname="Topologie stereofonního zvuku Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Zvukové zaøízení Bluetooth"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0408] ; Greek
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="¹÷ïò áíïéêôÞò áêñüáóçò Bluetooth"
+BTWAUDIO.DeviceDesc="Óôåñåïöùíéêüò Þ÷ïò Bluetooth"
+DISK_1="ÐïëõìÝóá åãêáôÜóôáóçò WIDCOMM"
+
+BTAUDIO.Wave.szPname="¹÷ïò áíïéêôÞò áêñüáóçò Bluetooth"
+BTAUDIO.Topo.szPname="Ôïðïëïãßá Þ÷ïõ áíïéêôÞò áêñüáóçò Bluetooth"
+BTWAUDIO.Wave.szPname="Óôåñåïöùíéêüò Þ÷ïò Bluetooth"
+BTWAUDIO.Topo.szPname="Ôïðïëïãßá óôåñåïöùíéêïý Þ÷ïõ Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="ÓõóêåõÞ Þ÷ïõ Bluetooth"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.040D] ; Hebrew
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="ùîò ãéáåøéú Bluetooth"
+BTWAUDIO.DeviceDesc="ùîò ñèøéàåôåðé Bluetooth"
+DISK_1="îãéú äú÷ðä WIDCOMM"
+
+BTAUDIO.Wave.szPname="ùîò ãéáåøéú Bluetooth"
+BTAUDIO.Topo.szPname="èåôåìåâéä ùì ùîò ãéáåøéú Bluetooth"
+BTWAUDIO.Wave.szPname="ùîò ñèøéàåôåðé Bluetooth"
+BTWAUDIO.Topo.szPname="èåôåìåâéä ùì ùîò ñèøéàåôåðé Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="äú÷ï ùîò Bluetooth"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.041A] ; Croatian
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth handsfree audio"
+BTWAUDIO.DeviceDesc="Bluetooth stereo audio"
+DISK_1="WIDCOMM mediji za instalaciju"
+
+BTAUDIO.Wave.szPname="Bluetooth handsfree audio"
+BTAUDIO.Topo.szPname="Bluetooth handsfree audio topologija"
+BTWAUDIO.Wave.szPname="Bluetooth stereo audio"
+BTWAUDIO.Topo.szPname="Bluetooth stereo audio topologija"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth audio ureðaj"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.040E] ; Hungarian
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth hands-free audió"
+BTWAUDIO.DeviceDesc="Bluetooth sztereó audió"
+DISK_1="WIDCOMM Installation Media"
+
+BTAUDIO.Wave.szPname="Bluetooth hands-free audió"
+BTAUDIO.Topo.szPname="Bluetooth hands-free audió topológia"
+BTWAUDIO.Wave.szPname="Bluetooth sztereó audió"
+BTWAUDIO.Topo.szPname="Bluetooth sztereó audió topológia"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth audioeszköz"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0816] ; Iberian Portuguese
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Áudio mãos-livres Bluetooth"
+BTWAUDIO.DeviceDesc="Áudio estéreo Bluetooth"
+DISK_1="Suporte de instalação WIDCOMM"
+
+BTAUDIO.Wave.szPname="Áudio mãos-livres Bluetooth"
+BTAUDIO.Topo.szPname="Topologia do áudio mãos-livres Bluetooth"
+BTWAUDIO.Wave.szPname="Áudio estéreo Bluetooth"
+BTWAUDIO.Topo.szPname="Topologia do áudio estéreo Bluetooth"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Dispositivo de áudio Bluetooth"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.0418] ; Romanian
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Dispozitiv Bluetooth Hands-free audio"
+BTWAUDIO.DeviceDesc="Dispozitiv Bluetooth audio stereo"
+DISK_1="Suport de instalare WIDCOMM"
+
+BTAUDIO.Wave.szPname="Dispozitiv Bluetooth Hands-free audio"
+BTAUDIO.Topo.szPname="Topologie dispozitiv Bluetooth Hands-free audio"
+BTWAUDIO.Wave.szPname="Dispozitiv Bluetooth audio stereo"
+BTWAUDIO.Topo.szPname="Topologie dispozitiv Bluetooth audio stereo"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Dispozitiv audio Bluetooth"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"
+
+[Strings.041F] ; Turkish
+WDCM="Broadcom Corp."
+MfgName="Broadcom"
+BTAUDIO.DeviceDesc="Bluetooth Ahizesiz Kullaným Sesi"
+BTWAUDIO.DeviceDesc="Bluetooth Stereo Ses"
+DISK_1="WIDCOMM Yükleme Ortamý"
+
+BTAUDIO.Wave.szPname="Bluetooth Ahizesiz Kullaným Sesi"
+BTAUDIO.Topo.szPname="Bluetooth Ahizesiz Kullaným Ses Topolojisi"
+BTWAUDIO.Wave.szPname="Bluetooth Stereo Ses"
+BTWAUDIO.Topo.szPname="Bluetooth Stereo Ses Topolojisi"
+BTAUDIO_MIDI="BTAUDIO -> WDM Midi Device"
+BTWAUDIO_MIDI="BTWAUDIO -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+;KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+btaudio.SvcDesc="Bluetooth Ses Aygýtý"
+; btaudio.SvcDesc="Bluetooth High Quality Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+BTAUDIO.NameGuid="{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}"
+BTAUDIO.Name="BTAUDIO"
+BTWAUDIO.NameGuid="{946A7B1B-EBBC-422a-A81F-F07C8D40D3B4}"
+BTWAUDIO.Name="BTWAUDIO"

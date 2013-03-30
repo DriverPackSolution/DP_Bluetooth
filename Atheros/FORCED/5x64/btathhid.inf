@@ -1,0 +1,87 @@
+;-------------------------------------------------------------------------------
+; btathhid.INF
+;
+; Bluetooth HID Device
+;
+; Copyright (c) Atheros , Inc.  All rights reserved.
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%VENDOR%
+LayoutFile=layout.inf
+DriverVer=01/04/2011,6.11.0104.0102
+CatalogFile=btathhid.cat
+
+;
+;   Layout.inf (etc.) list all files shipped with the operating system so the 
+;   source description sections are only needed if other files are needed.
+;
+
+[SourceDisksFiles]
+btathhid.sys = 99
+
+[SourceDisksNames.AMD64]
+99 = %DISK_NAME%,,,.
+
+[DestinationDirs]
+CopyFilesSYS = 12     
+
+[Manufacturer]
+%VENDOR%=Atheros,NTAMD64
+
+; For Win2K
+[Atheros]
+%BTAthHidDevice%    = BTAthHidDevice.Inst, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathhid
+
+; For XP and later
+[Atheros.NTAMD64]
+%BTAthHidDevice%    = BTAthHidDevice.Inst, {1B340A07-550B-456d-ABF3-0B8AC6B212CA}\btathhid
+
+
+;===============================================================
+;   (Root Enumerated Hid Device) install section
+;===============================================================
+[BTAthHidDevice.Inst.NT]
+CopyFiles = CopyFilesSYS
+
+[BTAthHidDevice.Inst.NT.Services]
+AddService = btathhid,0x00000002,BTAthHidDevice_Service_Inst,
+
+[CopyFilesSYS]
+btathhid.sys
+
+
+[BTAthHidDevice_Service_Inst]
+DisplayName    = %BTAthHidDevice%
+ServiceType    = %SERVICE_KERNEL_DRIVER% 
+StartType      = %SERVICE_DEMAND_START% 
+ErrorControl   = %SERVICE_ERROR_IGNORE% 
+ServiceBinary  = %12%\btathhid.sys 
+
+;================================================================
+[Strings] 
+;  *******Localizable Strings******* 
+VENDOR         = "Atheros" 
+BTAthHidDevice    = "Bluetooth HID Host Control Device" 
+DISK_NAME      = "Bluetooth Install Disk"
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START     = 0x0 
+SERVICE_SYSTEM_START   = 0x1 
+SERVICE_AUTO_START     = 0x2 
+SERVICE_DEMAND_START   = 0x3 
+SERVICE_DISABLED       = 0x4 
+
+SERVICE_KERNEL_DRIVER  = 0x1 
+SERVICE_ERROR_IGNORE   = 0x0 
+SERVICE_ERROR_NORMAL   = 0x1 
+SERVICE_ERROR_SEVERE   = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ          = 0x00020000 
+REG_DWORD              = 0x00010001 
+REG_MULTI_SZ           = 0x00010000
+REG_BINARY             = 0x00000001
+REG_SZ                 = 0x00000000

@@ -1,0 +1,95 @@
+;/*++
+;
+;Copyright (c) 2009-2013 Realtek Semiconductor Corporation All rights Reserved
+;
+;Module Name:
+;
+;    Rtkfilter.INF
+;--*/
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %REALTEK%
+CLASS = Bluetooth
+CatalogFile= RtkFilter.cat
+DriverPackageType = ClassFilter
+DriverVer=10/19/2012,1.3.663.0
+
+;*************************
+; Source file information
+;*************************
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+RtkBtfilter.sys         = 1,,
+
+;*************************
+; Destination information
+;*************************
+[DestinationDirs]
+RsBthFilter.CopyList = 12 ;DIRID_DRIVER
+
+[RsBthFilter.CopyList]
+RtkBtfilter.sys
+
+
+;**********************************
+; Bluetooth Filter Install Section
+;**********************************
+[DefaultInstall.NT]
+CopyFiles=RsBthFilter.CopyList
+AddReg=RsBthFilter.AddReg
+
+[RsBthFilter.AddReg]
+HKLM, System\CurrentControlSet\Control\Class\{E0CBF06C-CD8B-4647-BB8A-263B43F0F974}, LowerFilters, 0x00010008, RtkBtFilter
+;HKR, ,"RemoteWakeEnabled",0x00010001,1
+;HKR, ,"DeviceRemoteWakeSupported",0x00010001,1
+;HKLM, SYSTEM\CurrentControlSet\services\BTHPORT\Parameters, "SystemRemoteWakeSupported", 0x00010001,1
+
+;******************************************
+; Bluetooth Filter Service Install Section
+;******************************************
+[DefaultInstall.NT.Services]
+AddService = RtkBtFilter, , RtkBtFilter_Service_Inst
+
+[RtkBtFilter_Service_Inst]
+DisplayName     = %BtFilt.SvcDesc%                            
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\RtkBtfilter.sys     
+
+[RsBthFilterService.AddReg]
+;HKR, "Parameters", "LeEnable", 0x10001, 0
+
+[RsBthFilterService.DelReg]
+HKLM,System\CurrentControlSet\services\BTHPORT\Parameters\UnsupportedServices,{00001105-0000-1000-8000-00805f9b34fb} ;OPP
+HKLM,System\CurrentControlSet\services\BTHPORT\Parameters\UnsupportedServices,{00001106-0000-1000-8000-00805f9b34fb} ;FTP
+HKLM,System\CurrentControlSet\services\BTHPORT\Parameters\UnsupportedServices,{00001104-0000-1000-8000-00805f9b34fb} ;Sync
+
+;**********************************
+; Bluetooth Filter UnInstall Section
+;**********************************
+[DefaultUninstall.NT]
+DelFiles = RsBthFilter.CopyList;
+DelReg = RsBthFilter.DelReg
+
+[RsBthFilter.DelReg]
+HKLM, System\CurrentControlSet\Control\Class\{E0CBF06C-CD8B-4647-BB8A-263B43F0F974}, LowerFilters, 0x00010008, RtkBtFilter
+
+[DefaultUninstall.NT.Services]
+DelService = RtkBtFilter, 0x200
+
+;*****************************************
+; Bluetooth Filter String Section
+;*****************************************
+[Strings]
+REALTEK                  = "Realtek Semiconductor Corp."
+DiskId1                  = "Realtek Bluetooth Filter Installation Disk #1"
+BtFilt.SvcDesc 		 = "Realtek Bluetooth Filter Driver"
+RTK.DeviceDesc		 = "Realtek Bluetooth 4.0+HS"
+
+
+
+

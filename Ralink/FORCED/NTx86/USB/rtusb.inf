@@ -1,0 +1,73 @@
+;****************************************************************************************
+;
+; rtusb.inf
+;
+;   Ralink Bluetooth installation file.
+;
+;   Copyright (c)2002-2010 , Ralink Technology Corp., All Rights Reserved.
+;   Developed by RaLink Technology, Corp. -- http://www.ralinktech.com
+;
+;****************************************************************************************
+
+[Version]
+Signature        = "$WINDOWS NT$"
+Class            = Bluetooth
+ClassGuid        = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider         = "Ralink"
+DriverVer        = 10/30/2012, 2.1.1.0000
+CatalogFile.ntx86 = rtmsbt.cat
+CatalogFile.ntamd64 = rtmsbtx.cat
+ 
+[ControlFlags]
+ExcludeFromSelect = USB\VID_148F&PID_3000
+ExcludeFromSelect = USB\VID_04C5&PID_1312
+ExcludeFromSelect = USB\VID_148F&PID_4000
+ExcludeFromSelect = USB\VID_148F&PID_30B0
+ExcludeFromSelect = USB\VID_148F&PID_3298
+ExcludeFromSelect = USB\VID_0A5C&PID_21E8
+ExcludeFromSelect = USB\VID_0A12&PID_0001
+ExcludeFromSelect = USB\VID_0E8D&PID_3001&REV_0100
+
+[Manufacturer]
+%Ralink%        = Ralink, NTx86, NTamd64
+
+[Ralink.NTx86]
+; DisplayName               Section                 DeviceID
+; -----------               -------                 --------
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_04C5&PID_1312
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_0A5C&PID_21E8
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_0A12&PID_0001
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_0E8D&PID_3001&REV_0100
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_3000
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_4000
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_30B0
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_3298
+
+[Ralink.NTamd64]
+; DisplayName               Section                 DeviceID
+; -----------               -------                 --------
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_04C5&PID_1312
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_0A5C&PID_21E8
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_0A12&PID_0001
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_0E8D&PID_3001&REV_0100
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_3000
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_4000
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_30B0
+%Generic.DeviceDesc%        = RTUSB.ndi,            USB\VID_148F&PID_3298
+
+[RTUSB.ndi.NT]
+Include	=	Bth.inf
+Needs	=	BthUsb.NT
+BusType	=	15
+
+[RTUSB.ndi.NT.HW]
+Needs=BthUsb.NT.HW
+
+[RTUSB.ndi.NT.Services]
+needs=BthUsb.NT.Services
+
+[Strings]
+Ralink                      = "Ralink Technology, Corp."
+
+Generic.DeviceDesc          = "Ralink Bluetooth Adapter"
+

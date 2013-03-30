@@ -1,0 +1,30 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Bluetooth
+ClassGuid={e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+DriverVer=02/27/2007, 5.1.2535.0
+Provider=Integrated System Solution Corp.
+CatalogFile=ISSC.CAT
+ 
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+ISSC=ISSC
+ 
+[ISSC]
+%ISSCBT.DeviceDesc%=ISSCUsbDriverInstallXP, USB\Vid_1131&Pid_1004
+ 
+[ISSCUsbDriverInstallXP.NT]
+Include=Bth.inf
+Needs=BthUsb.NT
+
+[ISSCUsbDriverInstallXP.NT.HW]
+Needs=BthUsb.NT.HW
+
+[ISSCUsbDriverInstallXP.NT.Services]
+Needs=BthUsb.NT.Services
+
+[Strings]
+ISSC="Integrated System Solution Corp."
+ISSCBT.DeviceDesc="ISSC Bluetooth EDR Adapter"

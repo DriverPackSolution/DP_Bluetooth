@@ -1,0 +1,95 @@
+; File Name: IvtUrbBtFlt.inf
+; Install information file for IvtUrbBtFlt Filter Driver
+;
+; Copyright (c) 2000-2011, Ralink Corporation.
+; http://www.Ralinktech.com
+;
+;---------------------------------------------------------------------
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = Bluetooth
+ClassGUID   = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider    = %ProviderName%
+CatalogFile = IvtUrbBtFlt.cat
+DriverVer   = 11/06/2012,9.02.10.0018
+
+[SourceDisksNames]
+1 = %DiskName%, "",,,
+
+[SourceDisksFiles]
+IvtUrbBtFlt.sys = 1,,
+
+[DestinationDirs]
+DefaultDestDir = 10, system32\drivers
+IvtUrbBtFlt.CopyList = 10, system32\drivers
+
+[Manufacturer]
+%ProviderName% = Ralink, NTamd64
+
+;******************************************************
+; The VID & PID list in this section is identical to that in section of [Ralink.NTamd64].
+; The list order is going along with , VID increment first, and PID increment then.
+; Please follow the order increment rule, when a new VID & PID inserted.
+; When a new VID & PID is added, both this section and [Ralink.NTamd64] section are inserted.
+
+[Ralink]
+%FLT_DeviceDesc_3290LE%   = IvtUrbBtFltInstall, USB\VID_04C5&PID_1312
+%FLT_DeviceDesc_7630%     = IvtUrbBtFltInstall, USB\VID_0E8D&PID_3001&REV_0100
+%FLT_DeviceDesc%          = IvtUrbBtFltInstall, USB\VID_148F&PID_3000
+%FLT_DeviceDesc_3290LE%   = IvtUrbBtFltInstall, USB\VID_148F&PID_30B0
+%FLT_DeviceDesc_3298%     = IvtUrbBtFltInstall, USB\VID_148F&PID_3298
+
+;******************************************************
+; The VID & PID list in this section is identical to that in section of [Ralink].
+; The list order is going along with , VID increment first, and PID increment then.
+; Please follow the order increment rule, when a new VID & PID added.
+; When a new VID & PID is added, both this section and [Ralink] section  are inserted.
+
+[Ralink.NTamd64]
+%FLT_DeviceDesc_3290LE%   = IvtUrbBtFltInstall, USB\VID_04C5&PID_1312
+%FLT_DeviceDesc_7630%     = IvtUrbBtFltInstall, USB\VID_0E8D&PID_3001&REV_0100
+%FLT_DeviceDesc%          = IvtUrbBtFltInstall, USB\VID_148F&PID_3000
+%FLT_DeviceDesc_3290LE%   = IvtUrbBtFltInstall, USB\VID_148F&PID_30B0
+%FLT_DeviceDesc_3298%     = IvtUrbBtFltInstall, USB\VID_148F&PID_3298
+
+;======================================================
+; IvtUrbBtFlt x86
+;======================================================
+[IvtUrbBtFltInstall.NT]
+Include		= bth.inf
+Needs		= BthUsb.NT
+CopyFiles 	= IvtUrbBtFlt.CopyList
+
+[IvtUrbBtFltInstall.NT.Services]
+Needs 		= BthUSB.NT.Services
+Addservice 	= btUrbFilterDrv,, IvtUrbBtFlt_Driver_Inst
+
+[IvtUrbBtFlt_Driver_Inst]
+DisplayName   = "IVT URB Bluetooth Filter Driver Service"
+ServiceType   = 1
+StartType     = 3
+ErrorControl  = 1
+ServiceBinary = %10%\System32\Drivers\IvtUrbBtFlt.sys
+LoadOrderGroup = Extended Base
+
+
+[IvtUrbBtFltInstall.NT.HW]
+Needs	= BthUsb.NT.HW
+AddReg	= IvtUrbBtFltInstall.NT.HW.AddReg
+
+[IvtUrbBtFltInstall.NT.HW.AddReg]
+HKR,,"LowerFilters",0x00010000,"btUrbFilterDrv"
+
+
+[IvtUrbBtFlt.CopyList]
+IvtUrbBtFlt.sys
+
+;--------- Strings Section ---------------------------------------------------
+[Strings]
+ProviderName 		= "Ralink Corporation"
+DiskName		= "Ralink Bluetooth Filter Driver Disk"
+FLT_DeviceDesc	        = "Bluetooth Filter Driver"
+FLT_DeviceDesc_3290LE	= "Ralink RT3290LE Bluetooth Device"
+FLT_DeviceDesc_3298     = "Ralink Bluetooth 4.0 Adapter"
+FLT_DeviceDesc_7630     = "Mediatek Bluetooth 4.0 Adapter"

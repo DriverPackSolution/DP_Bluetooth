@@ -1,0 +1,107 @@
+;/*++
+;
+;Copyright (c) Microsoft Corporation.  All rights reserved.
+;
+;
+;Module Name:
+;
+;    ibtusbbl.INF
+;
+;Abstract:
+;    Installation inf iBT USB Bootloader Device driver
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Bluetooth
+ClassGuid={e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider=Intel
+DriverVer=11/01/2012,12.1.24.576
+CatalogFile=ibtusbbl.cat
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=BTClassReg     
+
+[BTClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Device section =====================
+
+[Manufacturer]
+GenericAdapter=GenericAdapter, NTamd64
+
+[GenericAdapter]
+iBT USB Bootloader Device = ibtusbbl, USB\VID_FFFF&PID_B0B0
+
+[GenericAdapter.NTamd64]
+iBT USB Bootloader Device = ibtusbbl, USB\VID_FFFF&PID_B0B0
+
+[ibtusbbl.NT]
+CopyFiles=ibtusbbl.Files.Ext
+
+[ibtusbbl.NT.Services]
+Addservice = ibtusbbl, 0x00000002, ibtusbbl.AddService
+
+[ibtusbbl.AddService]
+DisplayName    = %ibtusbbl.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\ibtusbbl.sys
+AddReg         = ibtusbbl.AddReg
+LoadOrderGroup = Base
+
+[ibtusbbl.AddReg]
+HKR,"Parameters","MaximumTransferSize",0x10001,65536
+HKR,"Parameters","DebugLevel",0x10001,2
+HKR,"Parameters","Verbosity",0x10001,2
+HKR,"Parameters","HciTimeout",0x10001,500
+HKR,"Parameters","BootloadTimeout",0x10001,400000
+HKR,"Parameters","DisableBootload",0x10001,0
+
+[ibtusbbl.Files.Ext]
+ibtusbbl.sys
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+ibtusbbl.sys = 1
+
+; ================= WDF Coinstaller section =====================
+
+[DestinationDirs]
+CoInstaller_CopyFiles = 11
+
+[ibtusbbl.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[CoInstaller_CopyFiles]
+WdfCoInstaller01011.dll
+
+[SourceDisksFiles]
+WdfCoInstaller01011.dll=1
+
+[CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01011.dll,WdfCoInstaller"
+
+[ibtusbbl.NT.Wdf]
+KmdfService = ibtusbbl, ibtusbbl_wdfsect
+
+[ibtusbbl_wdfsect]
+KmdfLibraryVersion = 1.11
+
+; ================= Strings section =====================
+
+[Strings]
+Disk_Description= "iBT USB Bootloader Device Installation Disk"
+ibtusbbl.SvcDesc = "iBT USB Bootloader Device"
+ClassName       = "Bluetooth"

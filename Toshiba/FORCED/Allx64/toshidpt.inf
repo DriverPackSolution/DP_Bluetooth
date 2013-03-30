@@ -1,0 +1,118 @@
+; TOSHIDPT.INF
+;
+; Toshiba Bluetooth HID Mini Port Driver
+;
+; Copyright (c) 2002-2009 TOSHIBA Corporation
+[Version]
+Signature = "$WINDOWS NT$"
+Class = HIDCLASS
+ClassGUID = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+DriverPackageType = PlugAndPlay
+; Windows Driver Package - Provider DriverPackageDisplayName DriverVer
+Provider = %TSB%
+DriverPackageDisplayName = %SvcDesc%
+DriverVer = 05/20/2009,6.00.0520.0
+CatalogFile = toshidpt.cat
+
+[SourceDisksNames]
+3426 = windows cd
+
+[SourceDisksNames.x86]
+3426 = windows cd
+
+[SourceDisksFiles]
+Toshidpt.sys = 3426
+hidclass.sys = 3426
+hidparse.sys = 3426
+hid.dll      = 3426
+
+[SourceDisksFiles.x86]
+Toshidpt.sys = 3426
+hidclass.sys = 3426
+hidparse.sys = 3426
+hid.dll      = 3426
+
+[DestinationDirs]
+DefaultDestDir = 12  ; DIRID_DRIVERS
+                     ; == \System32\Drivers on Windows NT platforms
+                     ; == \System\IoSubsys on Win9x platforms
+CopySYS        = 12
+
+[DestinationDirs.x86]
+;;DefaultDestDir = 10,system32\drivers
+;;CopySYS = 10,system32\drivers  ;%SystemRoot%\system32\drivers
+;;CopyDLL = 11                   ;%SystemRoot%\system or system32 - 98 or Win2000
+DefaultDestDir = 12                               
+Drivers_Dir    = 12
+
+[Manufacturer]
+%StdMfg%=TOSHIBA, NTamd64
+
+[SignatureAttributes]
+Toshidpt.sys = SignatureAttributes.DRM
+Hid.dll = SignatureAttributes.DRM
+
+[TOSHIBA]
+; DisplayName       Section         DeviceId
+; -----------       -------         --------
+;%BtHID%=           BtHID.Inst,      Bluetooth\0004&0005
+%BtHID%=           BtHID.Inst,      Bluetooth\0004&0005, Bluetooth\0004&0005
+
+[TOSHIBA.NTamd64]
+; DisplayName           Section   DeviceId
+; -----------           -------   --------
+%BtHID%=           BtHID.Inst,      Bluetooth\0004&0005, Bluetooth\0004&0005
+
+[ControlFlags]
+;ExcludeFromSelect = Bluetooth\0004&0005
+ExcludeFromSelect = *
+
+
+[BtHID.Inst]
+CopyFiles = CopySYS
+AddReg    = AddReg.Vendor_Driver
+
+[BtHID.Inst.NT]
+CopyFiles=CopySYS,CopyDLL
+Include=input.inf
+
+[CopySYS]
+;;HidClass.sys,,,2
+;;HidParse.sys,,,2
+Toshidpt.sys,,,2
+;;Toshidpt.sys,,,0x100
+
+[CopyDLL]
+;;Hid.dll,,,2
+;;Hid.dll,,,0x100
+
+[SignatureAttributes.DRM]
+DRMLevel=1200
+
+[AddReg.Vendor_Driver]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,"Toshidpt.sys"
+
+
+[BtHID.Inst.NT.Services]
+AddService = toshidpt, %SPSVCINST_ASSOCSERVICE%, Toshidpt_Service_Inst
+
+[Toshidpt_Service_Inst]
+DisplayName     = %SvcDesc%
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %10%\system32\drivers\Toshidpt.sys
+LoadOrderGroup  = Extended Base
+
+
+[Strings]
+; non localized strings
+SPSVCINST_ASSOCSERVICE= 0x00000002
+
+
+;localized strings
+TSB       = "TOSHIBA"
+StdMfg       = "TOSHIBA"
+SvcDesc      = "Bluetooth HID Port"
+BtHID        = "Bluetooth HID Port"

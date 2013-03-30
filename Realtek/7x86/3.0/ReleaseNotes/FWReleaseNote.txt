@@ -1,0 +1,44 @@
+Version: 0x4239(HCI_REVISION), 0x38DE(LMP_SUBVERSION)
+1. erase the trash data in fifo to avoid ring noise after receive hci reset command
+
+Version: 0x4239(HCI_REVISION), 0xD38C(LMP_SUBVERSION)
+1. fixed an issue with ring noise of HFP/HSP application
+   *  send mute code in SCO/eSCO channel when controller does not receive any hci isochronous data packets from upstream
+
+Version: 0x423B(HCI_REVISION), 0xBD88(LMP_SUBVERSION)
+1. enhance acl downlink throughput in USB 2.0
+
+Version: 0x423C(HCI_REVISION), 0x0DAA (LMP_SUBVERSION)
+1. correct the gpio settings
+2. fixed an issue with afh channel map generator deadlock
+
+Version: 0x423D(HCI_REVISION), 0x1BFB(LMP_SUBVERSION)
+1. fixed an issue with missing radio off indication in cpu boot time
+
+Version: 0x424B(HCI_REVISION), 0x4E4C(LMP_SUBVERSION)
+1. fixed some IOT issues with some bt devices
+2. reset duplicated filter after disable le scan
+
+Version: 0x201E(HCI_REVISION), 0xD3DD(LMP_SUBVERSION)
+1. fixed some IOT issues with some bt devices
+2. improve the performance of multi-links and co-existence
+
+Version: 0x201E(HCI_REVISION), 0xD701(LMP_SUBVERSION)
+1. fixed an issue with power control after download patch code when reboot the system
+
+Version: 0x201E(HCI_REVISION), 0xFC81(LMP_SUBVERSION)
+----------------------------------------------------------------------
+1. Improve the processing time and flow in feature exchange procedure
+
+Details :
+When local device and remote device initate feature exchange simultaneous in noisy environment,
+local device has probability to finish one feature exchange procedure too late or reject the 
+response pdu from remote device at wrong state. 
+When the feature exchange is triggered from the driver via hci read remote features command,
+it can cause the driver timeout. This patch can fix the issue and speed up orignal procedure.
+
+Related Operations/Tests :
+local device and remote device initate feature exchange simultaneous
+
+Affected Devices :
+----------------------------------------------------------------------

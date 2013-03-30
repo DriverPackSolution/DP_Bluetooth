@@ -1,0 +1,143 @@
+;/*++
+;
+;Copyright (c) 1990-1999 Microsoft Corporation All rights Reserved
+;
+;Module Name:
+;
+;    iBtFltCoex.INF
+;
+;Abstract:
+;    INF file for installing coexistance filter driver
+;    This file is dependant on bth.inf
+;
+;--*/
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Bluetooth
+ClassGuid   = {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+Provider    = %PROVIDER_NAME%
+DriverVer=09/17/2012,2.6.23.40059
+CatalogFile = iBtFltCoex_WP8.cat
+CatalogFile.ntamd64 = iBtFltCoex_WP8.cat
+
+
+[SourceDisksNames]
+1=%SOURCEDISK1%,,,\Win32
+
+[SourceDisksNames.amd64]
+1=%SOURCEDISK1%,,,\Win64
+
+[SourceDisksFiles]
+btmhsf.sys=1
+ibtusb.sys=1
+WdfCoInstaller01011.dll = 1
+
+[DestinationDirs]
+btmhsf.Copy = 12                    ;DIRID_DRIVERS
+btmhsf_CoInstaller_CopyFiles = 11
+
+
+[Manufacturer]
+%COMPANY_NAME% = Device, NTx86.6.2, NTamd64.6.2
+
+
+[Device.NTx86.6.2]
+%USB\VID_8087&PID_07DC% = Install_HighSpeed_WP, USB\VID_8087&PID_07DC
+
+[Device.NTamd64.6.2]
+%USB\VID_8087&PID_07DC% = Install_HighSpeed_WP, USB\VID_8087&PID_07DC
+
+
+; --------------Start filter Driver WP install section (W8)
+
+[Install_HighSpeed_WP]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=btmhsf.Copy
+
+[Install_HighSpeed_WP.HW]
+Needs=BthUsb.NT.HW
+AddReg=btmhsf.HW.AddReg.Filters
+AddReg=btmhsf.HW.AddReg.HubSelectiveSuspendWorkAround
+
+[Install_HighSpeed_WP.Services]
+Needs=BthUSB.NT.Services
+AddService = ibtusb,, ibtusb_iBT_Service_Inst
+AddService = btmhsf,, BTMHSF.ServiceInst_W8
+
+[Install_HighSpeed_WP.CoInstallers]
+AddReg          = btmhsf_CoInstaller_AddReg
+CopyFiles       = btmhsf_CoInstaller_CopyFiles
+
+[Install_HighSpeed_WP.Wdf]
+KmdfService              = btmhsf, btmhsf_wdfsect
+
+; --------------End filter Driver WP install section (W8)
+
+
+
+[btmhsf.Copy]
+ibtusb.sys 
+btmhsf.sys
+
+
+[btmhsf.HW.AddReg.Filters]
+HKR,,"LowerFilters",0x00010008,"ibtusb"
+HKR,,"LowerFilters", 0x00010008, "btmhsf" 
+
+
+[btmhsf.HW.AddReg.HubSelectiveSuspendWorkAround]
+HKLM, System\CurrentControlSet\Control\usbflags\808700240000, NoClearTTBufferOnCancel, 0x00000001, 1
+HKLM, System\CurrentControlSet\Control\usbflags\808700200000, NoClearTTBufferOnCancel, 0x00000001, 1
+
+
+[btmhsf_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01011.dll,WdfCoInstaller"
+
+[btmhsf_CoInstaller_CopyFiles]
+WdfCoInstaller01011.dll
+
+[btmhsf_wdfsect]
+KmdfLibraryVersion       = 1.11
+
+[BTMHSF.ServiceInst_W8]
+;DisplayName=%BTMHSF.ServiceDesc%
+ServiceType=1					; SERVICE_KERNEL_DRIVER
+StartType=3					; SERVICE_DEMAND_START 
+ErrorControl=1					; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btmhsf.sys
+LoadOrderGroup = PNP Filter
+AddReg=BTMHSF.ServiceInst.EnableHS
+
+[BTMHSF.ServiceInst.EnableHS]
+HKR,Parameters,{2AF3B5F3-9F38-4936-9349-CFA669E16FE2},0x00010001,3
+HKR,Parameters,OBEXIntervalAMP,0x00010001,0x00000004
+HKR,Parameters,MaxAMPSwitches,0x00010001,0x0000000a
+HKR,Parameters,SwitchSpeedAMP,0x00010001,0x00001f40
+HKR,Parameters,SwitchSpeedBR,0x00010001,0x00000bb8
+HKR,Parameters,{BAB01B31-6527-4e92-9888-1402E21A0107},0x00010001,1
+HKR,Parameters,{E9D88F82-245A-4381-A254-6D7BF0BBB0EC},0x00010001,0x000003e8
+HKR,Parameters,{58BFF5B4-A56E-4c77-ADD9-912809F89933},0x00010001,1
+HKR,Parameters,{57EDBF10-60FA-448a-B4FE-DA8B153F7A67},0x00010001,1
+
+[ibtusb_iBT_Service_Inst]
+DisplayName    = %ibtusb.SVCDESC_IBT%
+ServiceType    = 1 ;SERVICE_KERNEL_DRIVER
+StartType      = 3 ;SERVICE_DEMAND_START
+ErrorControl   = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ibtusb.sys
+LoadOrderGroup = PNP Filter
+AddReg=ibtusb_iBT_Service_Inst.Parameters
+
+[ibtusb_iBT_Service_Inst.Parameters]
+HKR,Parameters,OverrideInquiry,0x00010001,0x00000001
+HKR,Parameters,InquiryLength,0x00010001,0x00000005
+
+[Strings]
+PROVIDER_NAME ="Intel"
+COMPANY_NAME  = "Intel Corporation"
+ibtusb.SVCDESC_IBT = "Intel(R) iBT USB Filter"
+USB\VID_8087&PID_07DC = "Intel(R) iBT USB Filter (iBT WP)"
+SOURCEDISK1 = "Intel(R) iBT USB Filter Install Disk"
+

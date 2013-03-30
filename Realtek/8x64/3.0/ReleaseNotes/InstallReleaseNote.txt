@@ -1,0 +1,32 @@
+<29/8/2012>
+Remove BtDevMgr service
+Update Driver passed WHCK
+
+<09/8/2012>
+Update BtDevMgr service
+
+<06/8/2012>
+Update BtDevMgr service
+
+<02/8/2012>
+change patch code
+
+<30/7/2012>
+use version 1.2.2 package,add BtDevManager service for Windows 8
+
+<06/20/2012>
+use version 1.2.2 package, add maintance UI 
+
+<03/08/2012>
+Add support for Win8
+
+<02/09/2012>
+Don't add LowerFilter Registry Key under TSB Stack
+
+<01/09/2012>
+Install main function will not exit until all copy things done for check mechanism
+
+<12/7/2011>
+Adjust directory structure to follow Spec
+Add support of silent install/uninstall with command "install /q" 
+

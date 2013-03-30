@@ -1,0 +1,84 @@
+;/*************************************************************************
+;**                                                                      **
+;**                  I N T E L ( MWG ) P R O P R I E T A R Y          	**
+;**                                                                      **
+;**     COPYRIGHT (c)  2010 BY  INTEL  CORPORATION.  ALL RIGHTS          **
+;**     RESERVED.   NO  PART  OF THIS PROGRAM  OR  PUBLICATION  MAY      **
+;**     BE  REPRODUCED,   TRANSMITTED,   TRANSCRIBED,   STORED  IN  A    **
+;**     RETRIEVAL SYSTEM, OR TRANSLATED INTO ANY LANGUAGE OR COMPUTER    **
+;**     LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC, MECHANICAL,    **
+;**     MAGNETIC,  OPTICAL,  CHEMICAL, MANUAL, OR OTHERWISE,  WITHOUT    **
+;**     THE PRIOR WRITTEN PERMISSION OF INTEL  CORPORATION.              **
+;**                                                                      **
+;*************************************************************************/
+;/*++
+;
+;Module Name:
+;
+;    ibtusbrk.INF
+;
+;Abstract:
+;    INF file for installing Intel BT USB HW RFKILL Driver.
+;
+;--*/
+
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%MSFT%
+DriverVer=11/01/2012,12.1.36.966
+CatalogFile=ibtusbrk.cat
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+ibtusbrk.sys  = 1,,
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+;*****************************************
+; iBT USB RFKill Driver Install Section
+;*****************************************
+
+[Manufacturer]
+%INTL%=Intel,NTamd64
+
+[Intel.NTamd64]
+%DeviceDesc%=DriverInstall,ACPI\INT3420
+
+[DriverInstall.NT]
+CopyFiles=DriverInstall_Copy
+
+[DriverInstall.NT.Services]
+AddService = ibtusbrk,2,DriverInstall_Service
+
+[DriverInstall_Copy]
+ibtusbrk.sys,,,0x100
+
+[DriverInstall_Service]
+DisplayName    = %SvcDesc%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\ibtusbrk.sys
+LoadOrderGroup = Extended Base
+
+[Strings]
+;Non-Localizable Strings
+SERVICE_KERNEL_DRIVER = 1
+SERVICE_DEMAND_START  = 3
+SERVICE_ERROR_NORMAL  = 1
+
+;Localizable Strings
+MSFT       = "Microsoft"
+INTL       = "Intel Corporation"
+SvcDesc    = "Intel Bluetooth USB HW RFKill Service"
+DeviceDesc = "Intel Bluetooth USB HW RFKill Device"
+DiskName   = "Intel Bluetooth USB HW RFKill Driver Installation Disk #1"

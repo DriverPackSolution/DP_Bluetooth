@@ -1,0 +1,82 @@
+;------------------------------------------------------------------------
+; btcomport.INF
+; Bluetooth serial port Installation Script
+; For Win2k/XP/Win2003/Vista/Win7
+; For Platform x86/Amd64
+;
+; Copyright (c) 2000-2011, IVT Corporation.
+; http://www.ivtcorporation.com
+; http://www.bluesoleil.com
+;
+;------------------------------------------------------------------------
+
+[version]
+signature="$CHICAGO$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%IVT%
+CatalogFile=btcomport.cat
+DriverVer=07/27/2011,6.2.82.241
+
+[SourceDisksNames]
+1 = %SourceDisk%,,,
+
+[SourceDisksFiles]
+btcomport.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 11      ;LDID_SYS
+ComPort.Copy = 12        ;DIRID_DRIVERS
+
+[ClassInstall32.NT]
+AddReg=PortsClass.NT.AddReg
+
+[PortsClass.NT.AddReg]
+HKR,,,,%PortsClassName%
+HKR,,Icon,,"-23"
+HKR,,Installer32,,"MsPorts.Dll,PortsClassInstaller"
+
+[Manufacturer]
+%IVT%=IVT, NTamd64
+
+[IVT]
+%*BTCOM.DeviceDesc% = ComPort, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\comport; Communications Port
+
+[IVT.NTamd64]
+%*BTCOM.DeviceDesc% = ComPort, {F12D3CF8-B11D-457e-8641-BE2AF2D6D204}\comport; Communications Port
+
+[ComPort]
+CopyFiles=ComPort.Copy
+AddReg=ComPort.AddReg
+
+[ComPort.Copy]
+btcomport.sys
+
+[ComPort.AddReg]
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+;-------------- Service installation
+[ComPort.Services]
+AddService = BTCOM, 0x00000002, BTCOM_Service_Inst, Serial_EventLog_Inst
+
+[BTCOM_Service_Inst]
+DisplayName    = %BTCOM.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\btcomport.sys
+LoadOrderGroup = Extended base
+
+[Serial_EventLog_Inst]
+AddReg = Serial_EventLog_AddReg
+
+[Serial_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\serial.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[Strings]
+IVT = "IVT Corporation"
+*BTCOM.DeviceDesc = "Bluetooth Serial Port"
+BTCOM.SVCDESC = "Bluetooth Serial port driver"
+SourceDisk = "BlueSoleil Installation Disk"
+PortsClassName = "PORT (COM & LPT)"

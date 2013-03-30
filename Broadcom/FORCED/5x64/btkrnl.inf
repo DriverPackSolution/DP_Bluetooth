@@ -1,0 +1,272 @@
+;
+; WIDCOMM Bluetooth Bus Enumerator Installation
+; for 64-Bit Windows
+;
+; Copyright (c) 2004, Broadcom Corp.
+;
+[Version]
+Signature="$WINDOWS NT$"
+Class=BTW
+ClassGUID={95C7A0A0-3094-11D7-A202-00508B9D7D5A}
+Provider=%V_WIDCOMM%
+CatalogFile=btw.cat
+DriverVer=02/13/2013,5.6.0.8800
+
+[SourceDisksNames]
+1 = %Source_Description%,,,
+
+[SourceDisksFiles]
+btkrnl.sys  = 1
+btw_ci.dll = 1
+
+[ClassInstall32]
+AddReg=BTW.NT.AddReg
+CopyFiles=BTW.NT.CopyFiles
+
+[BTW.NT.AddReg]
+HKR,,,0,%BTWClassName%
+HKR,,Icon,,100
+HKR,,Installer32,,"btw_ci.dll,BTWClassInstaller"
+
+[BTW.NT.CopyFiles]
+btw_ci.dll
+
+[DestinationDirs]
+DefaultDestDir   = 12
+BTW.NT.CopyFiles = 11
+Drivers_Dir      = 12
+
+[Manufacturer]
+%V_WIDCOMM%=WIDCOMM, NTamd64
+
+[WIDCOMM.NTamd64]
+%Btkrnl.DeviceDesc%=Btkrnl_Device, {95C7A0A0-3094-11D7-A202-00508B9D7D5A}\BTKRNL
+
+[Btkrnl_Device.NTamd64]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+btkrnl.sys
+
+[Btkrnl_Device.NTamd64.Services]
+AddService = btkrnl,%SPSVCINST_ASSOCSERVICE%, btkrnl_Service_Inst
+
+[btkrnl_Service_Inst]
+DisplayName    = %btkrnl.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\btkrnl.sys
+LoadOrderGroup = Extended Base
+
+
+[Strings]
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth Devices"
+Source_Description="WIDCOMM Installation Media"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth Bus Enumerator"
+btkrnl.SVCDESC = "Bluetooth Bus Enumerator"
+
+[Strings.0404] ; Chinese Traditional
+V_WIDCOMM="Broadcom"
+BTWClassName="¬≈™ﬁ∏À∏m"
+Source_Description="WIDCOMM ¢X2°—¢X?eOE"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "A?NA°—UIsA??UA°“"
+btkrnl.SVCDESC = "A?NA°—UIsA??UA°“"
+
+[Strings.0406] ; Danish
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-enheder"
+Source_Description="WIDCOMM-installationsmedie"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth-busoptÊller"
+btkrnl.SVCDESC = "Bluetooth-busoptÊller"
+
+[Strings.0407] ; German
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-Ger‰te"
+Source_Description="WIDCOMM-Installationsmedien"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth-Bus-Enumerator"
+btkrnl.SVCDESC = "Bluetooth-Bus-Enumerator"
+
+[Strings.040a] ; Spanish
+V_WIDCOMM="Broadcom"
+BTWClassName="Dispositivos Bluetooth"
+Source_Description="Medios de instalaciÛn de WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Enumerador de bus Bluetooth"
+btkrnl.SVCDESC = "Enumerador de bus Bluetooth"
+
+[Strings.040b] ; Finnish
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-laitteet"
+Source_Description="WIDCOMM-asennuslevy"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth-v‰yl‰luetteloija"
+btkrnl.SVCDESC = "Bluetooth-v‰yl‰luetteloija"
+
+[Strings.040c] ; French
+V_WIDCOMM="Broadcom"
+BTWClassName="PÈriphÈriques Bluetooth"
+Source_Description="Support d'installation WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "EnumÈrateur de bus Bluetooth"
+btkrnl.SVCDESC = "EnumÈrateur de bus Bluetooth"
+
+[Strings.0410] ; Italian
+V_WIDCOMM="Broadcom"
+BTWClassName="Periferiche Bluetooth"
+Source_Description="Supporto di installazione WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Enumeratore bus Bluetooth"
+btkrnl.SVCDESC = "Enumeratore bus Bluetooth"
+
+[Strings.0411] ; Japanese
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth ÉfÉoÉCÉX"
+Source_Description="WIDCOMM ÉCÉìÉXÉgÅ[Éã ÉÅÉfÉBÉA"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth ÉoÉXóÒãìéq"
+btkrnl.SVCDESC = "Bluetooth ÉoÉXóÒãìéq"
+
+[Strings.0412] ; Korean
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth ¿Âƒ°"
+Source_Description="WIDCOMM º≥ƒ° πÃµæÓ"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth πˆΩ∫ ∞Ëºˆ±‚"
+btkrnl.SVCDESC = "Bluetooth πˆΩ∫ ∞Ëºˆ±‚"
+
+[Strings.0413] ; Dutch
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-apparaten"
+Source_Description="WIDCOMM-installatiemedia"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth bus-enumerator"
+btkrnl.SVCDESC = "Bluetooth bus-enumerator"
+
+[Strings.0416] ; Brazilian Portuguese
+V_WIDCOMM="Broadcom"
+BTWClassName="Dispositivos Bluetooth"
+Source_Description="MÌdia de instalaÁ„o WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Enumerador de barramento Bluetooth"
+btkrnl.SVCDESC = "Enumerador de barramento Bluetooth"
+
+[Strings.041d] ; Swedish
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-enheter"
+Source_Description="WIDCOMM-installationsskiva"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth-bussr‰knare"
+btkrnl.SVCDESC = "Bluetooth-bussr‰knare"
+
+[Strings.0415] ; Polish
+V_WIDCOMM="Broadcom"
+BTWClassName="Urzπdzenia Bluetooth"
+Source_Description="Noúnik instalacyjny WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Licznik magistrali Bluetooth"
+btkrnl.SVCDESC = "Licznik magistrali Bluetooth"
+
+[Strings.0419] ; Russian
+V_WIDCOMM="Broadcom"
+BTWClassName="”ÒÚÓÈÒÚ‚‡ Bluetooth"
+Source_Description="ÕÓÒËÚÂÎ¸ ‰Îˇ ÛÒÚ‡ÌÓ‚ÍË WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "ÕÛÏÂ‡ÚÓ ¯ËÌ˚ Bluetooth"
+btkrnl.SVCDESC = "ÕÛÏÂ‡ÚÓ ¯ËÌ˚ Bluetooth"
+
+[Strings.0414] ; Norwegian
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-enheter"
+Source_Description="WIDCOMM-installasjonsmedier"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth-bussenumerator"
+btkrnl.SVCDESC = "Bluetooth-bussenumerator"
+
+[Strings.0804] ; ChineseSimplified
+V_WIDCOMM="Broadcom"
+BTWClassName="¿∂—¿…Ë±∏"
+Source_Description="WIDCOMM ∞≤◊∞ΩÈ÷ "
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "¿∂—¿◊‹œﬂ√∂æŸ∆˜"
+btkrnl.SVCDESC = "¿∂—¿◊‹œﬂ√∂æŸ∆˜"
+
+[Strings.0401] ; Arabic
+V_WIDCOMM="Broadcom"
+BTWClassName="√ÃÂ“… Bluetooth"
+Source_Description="Ê”«∆ÿ  À»Ì  WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = " ⁄œ«œ ‰«ﬁ· Bluetooth"
+btkrnl.SVCDESC = " ⁄œ«œ ‰«ﬁ· Bluetooth"
+
+[Strings.0405] ; Czech
+V_WIDCOMM="Broadcom"
+BTWClassName="Za¯ÌzenÌ Bluetooth"
+Source_Description="InstalaËnÌ mÈdia WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Enumen·tor sbÏrnice Bluetooth"
+btkrnl.SVCDESC = "Enumen·tor sbÏrnice Bluetooth"
+
+[Strings.0408] ; Greek
+V_WIDCOMM="Broadcom"
+BTWClassName="”ıÛÍÂı›Ú Bluetooth"
+Source_Description="–ÔÎıÏ›Û· Â„Í·Ù‹ÛÙ·ÛÁÚ WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "¡·ÒﬂËÏÁÛÁ ‰È·˝ÎÔı Bluetooth"
+btkrnl.SVCDESC = "¡·ÒﬂËÏÁÛÁ ‰È·˝ÎÔı Bluetooth"
+
+[Strings.040D] ; Hebrew
+V_WIDCOMM="Broadcom"
+BTWClassName="‰˙˜È Bluetooth"
+Source_Description="Ó„È˙ ‰˙˜‰ WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "ÓÂ‰ ‡ÙÈ˜ Bluetooth"
+btkrnl.SVCDESC = "ÓÂ‰ ‡ÙÈ˜ Bluetooth"
+
+[Strings.041A] ; Croatian
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth ureaji"
+Source_Description="WIDCOMM mediji za instalaciju"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth identifikator sabirnice"
+btkrnl.SVCDESC = "Bluetooth identifikator sabirnice"
+
+[Strings.040E] ; Hungarian
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth-eszkˆzˆk"
+Source_Description="WIDCOMM Installation Media"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth busz enumer·tor"
+btkrnl.SVCDESC = "Bluetooth busz enumer·tor"
+
+[Strings.0816] ; Iberian Portuguese
+V_WIDCOMM="Broadcom"
+BTWClassName="Dispositivos Bluetooth"
+Source_Description="Suporte de instalaÁ„o WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Enumerador de barramento Bluetooth"
+btkrnl.SVCDESC = "Enumerador de barramento Bluetooth"
+
+[Strings.0418] ; Romanian
+V_WIDCOMM="Broadcom"
+BTWClassName="Dispozitive Bluetooth"
+Source_Description="Suport de instalare WIDCOMM"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Enumerator de bus Bluetooth"
+btkrnl.SVCDESC = "Enumerator de bus Bluetooth"
+
+[Strings.041F] ; Turkish
+V_WIDCOMM="Broadcom"
+BTWClassName="Bluetooth Ayg˝tlar˝"
+Source_Description="WIDCOMM Y¸kleme Ortam˝"
+SPSVCINST_ASSOCSERVICE= 0x00000002
+Btkrnl.DeviceDesc = "Bluetooth Veri Yolu Numaraland˝r˝c˝s˝"
+btkrnl.SVCDESC = "Bluetooth Veri Yolu Numaraland˝r˝c˝s˝"
+
+
+
